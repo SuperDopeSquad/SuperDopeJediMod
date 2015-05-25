@@ -1,0 +1,7 @@
+package tutorial.generic;
+
+import net.minecraft.block.Block;
+
+public class GenericOre extends Block {
+
+}
