@@ -1,0 +1,33 @@
+[13:42:33] [Client thread/INFO]: Setting user: Player265
+[13:42:49] [Client thread/INFO]: LWJGL Version: 2.9.1
+[13:42:59] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
+[13:43:02] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[13:43:02] [Thread-7/INFO]: Initializing LWJGL OpenAL
+[13:43:02] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[13:43:02] [Thread-7/INFO]: OpenAL initialized.
+[13:43:02] [Sound Library Loader/INFO]: Sound engine started
+[13:43:13] [Client thread/INFO]: Created: 512x512 textures-atlas
+[13:43:17] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
+[13:43:17] [Client thread/INFO]: SoundSystem shutting down...
+[13:43:17] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[13:43:17] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[13:43:17] [Thread-9/INFO]: Initializing LWJGL OpenAL
+[13:43:17] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[13:43:18] [Thread-9/INFO]: OpenAL initialized.
+[13:43:18] [Sound Library Loader/INFO]: Sound engine started
+[13:43:27] [Client thread/INFO]: Created: 512x512 textures-atlas
+[13:43:48] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[13:43:48] [Server thread/INFO]: Generating keypair
+[13:43:49] [Server thread/INFO]: Preparing start region for level 0
+[13:43:50] [Server thread/INFO]: Preparing spawn area: 28%
+[13:43:51] [Server thread/INFO]: Changing view distance to 12, from 10
+[13:43:52] [Server thread/INFO]: Player265[local:E:2c7e3c63] logged in with entity id 583 at (-200.5, 70.0, 252.5)
+[13:43:52] [Server thread/INFO]: Player265 joined the game
+[13:43:53] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2342ms behind, skipping 46 tick(s)
+[13:43:56] [Client thread/INFO]: Warning: Clientside chunk ticking took 121 ms
+[13:43:57] [Server thread/INFO]: Player265 has just earned the achievement [Taking Inventory]
+[13:43:58] [Client thread/INFO]: [CHAT] Player265 has just earned the achievement [Taking Inventory]
+[13:44:22] [Client thread/INFO]: Stopping!
+[13:44:23] [Client thread/INFO]: SoundSystem shutting down...
+[13:44:23] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[13:44:23] [Client Shutdown Thread/INFO]: Stopping server
