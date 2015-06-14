@@ -33,10 +33,14 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Item brownSteelIngot = new BrownSteelIngot("brownSteelIngot");    
     public static Block brownSteelOre = new BrownSteelOre("brownSteelOre");
     public static Block vehicleSeat = new VehicleSeat("vehicleSeat");
-    public static Item lightSaberRed = new LightSaber("lightSaber", "Red"); 
-    public static Item lightSaberBlue = new LightSaber("lightSaber", "Blue");
-    public static Item lightSaberGreen = new LightSaber("lightSaber", "Green");
-    public static Item lightSaberPurple = new LightSaber("lightSaber", "Purple");
+    public static Item lightSaberRed = new LightSaber("lightSaberRed", "Red"); 
+    public static Item lightSaberBlue = new LightSaber("lightSaberBlue", "Blue");
+    public static Item lightSaberGreen = new LightSaber("lightSaberGreen", "Green");
+    public static Item lightSaberPurple = new LightSaber("lightSaberPurple", "Purple");
+    public static Item doubleLightSaberRed = new DoubleLightSaber("doubleLightSaberRed", "Red");
+    public static Item doubleLightSaberBlue = new DoubleLightSaber("doubleLightSaberBlue", "Blue");
+    public static Item doubleLightSaberGreen = new DoubleLightSaber("doubleLightSaberGreen", "Green");
+    public static Item doubleLightSaberPurple = new DoubleLightSaber("doubleLightSaberPurple", "Purple");
     
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
     //        serverSide="tutorial.generic.CommonProxy")
@@ -60,7 +64,13 @@ public class SuperDopeJediMod //Start the class Declaration
         this.registerItem(this.lightSaberBlue, "Blue Lightsaber");
         this.registerItem(this.lightSaberGreen, "Green Lightsaber");
         this.registerItem(this.lightSaberPurple, "Purple Lightsaber");
-    }	
+        this.registerItem(this.doubleLightSaberRed, "Red Double Lightsaber");
+        this.registerItem(this.doubleLightSaberBlue, "Blue Double Lightsaber");
+        this.registerItem(this.doubleLightSaberGreen, "Green Double Lightsaber");
+        this.registerItem(this.doubleLightSaberPurple, "Purple Double Lightsaber");
+      
+    }
+     
      
     
     @EventHandler
