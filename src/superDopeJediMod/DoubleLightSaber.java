@@ -12,6 +12,8 @@ public class DoubleLightSaber extends BaseItem {
 		
 		super(unlocalizedName);
 		
+		this.setMaxStackSize(1);
+		
 		this.color = colorInput;
 		
 		this.setCreativeTab(CreativeTabs.tabCombat);
