@@ -33,6 +33,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Item brownSteelIngot = new BrownSteelIngot("brownSteelIngot");    
     public static Block brownSteelOre = new BrownSteelOre("brownSteelOre");
     public static Block vehicleSeat = new VehicleSeat("vehicleSeat");
+    public static Item nourishmentCapsule = new NourishmentCapsule();
     
     
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
@@ -53,6 +54,7 @@ public class SuperDopeJediMod //Start the class Declaration
         this.registerItem(this.brownSteelIngot, "Brown Steel Ingot");
         this.registerBlock(this.brownSteelOre);
         this.registerBlock(this.vehicleSeat);
+        this.registerItem(this.nourishmentCapsule, "Nourishment Capsule");
     
     }
      
