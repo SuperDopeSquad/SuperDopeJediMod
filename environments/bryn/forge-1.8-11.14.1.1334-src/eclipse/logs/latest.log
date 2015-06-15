@@ -1,0 +1,42 @@
+[19:30:35] [Client thread/INFO]: Setting user: Player290
+[19:30:51] [Client thread/INFO]: LWJGL Version: 2.9.1
+[19:31:01] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
+[19:31:03] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:31:04] [Thread-7/INFO]: Initializing LWJGL OpenAL
+[19:31:04] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:31:04] [Thread-7/INFO]: OpenAL initialized.
+[19:31:04] [Sound Library Loader/INFO]: Sound engine started
+[19:31:16] [Client thread/INFO]: Created: 512x512 textures-atlas
+[19:31:20] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
+[19:31:20] [Client thread/INFO]: SoundSystem shutting down...
+[19:31:20] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[19:31:20] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:31:21] [Thread-9/INFO]: Initializing LWJGL OpenAL
+[19:31:21] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:31:21] [Thread-9/INFO]: OpenAL initialized.
+[19:31:21] [Sound Library Loader/INFO]: Sound engine started
+[19:31:29] [Client thread/INFO]: Created: 512x512 textures-atlas
+[19:31:44] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[19:31:44] [Server thread/INFO]: Generating keypair
+[19:31:46] [Server thread/INFO]: Preparing start region for level 0
+[19:31:47] [Server thread/INFO]: Preparing spawn area: 0%
+[19:31:48] [Server thread/INFO]: Preparing spawn area: 4%
+[19:31:49] [Server thread/INFO]: Preparing spawn area: 12%
+[19:31:50] [Server thread/INFO]: Preparing spawn area: 17%
+[19:31:51] [Server thread/INFO]: Preparing spawn area: 33%
+[19:31:52] [Server thread/INFO]: Preparing spawn area: 59%
+[19:31:53] [Server thread/INFO]: Preparing spawn area: 87%
+[19:31:55] [Server thread/INFO]: Changing view distance to 12, from 10
+[19:31:56] [Server thread/INFO]: Player290[local:E:67f66792] logged in with entity id 417 at (-225.04174365092996, 64.0, 276.21927382015593)
+[19:31:56] [Server thread/INFO]: Player290 joined the game
+[19:32:03] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 8082ms behind, skipping 161 tick(s)
+[19:32:08] [Server thread/INFO]: Player290 has just earned the achievement [Taking Inventory]
+[19:32:09] [Client thread/INFO]: [CHAT] Player290 has just earned the achievement [Taking Inventory]
+[19:32:26] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 10379ms behind, skipping 207 tick(s)
+[19:32:34] [Client thread/INFO]: Stopping!
+[19:32:35] [Client thread/INFO]: SoundSystem shutting down...
+[19:32:35] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[19:32:36] [Client Shutdown Thread/INFO]: Stopping server
+[19:32:36] [Client Shutdown Thread/INFO]: Saving players
+[19:32:36] [Client Shutdown Thread/INFO]: Saving worlds
+[19:32:36] [Client Shutdown Thread/INFO]: Saving chunks for level 'New World'/Overworld

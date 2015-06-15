@@ -33,7 +33,26 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Item brownSteelIngot = new BrownSteelIngot("brownSteelIngot");    
     public static Block brownSteelOre = new BrownSteelOre("brownSteelOre");
     public static Block vehicleSeat = new VehicleSeat("vehicleSeat");
+<<<<<<< HEAD
     public static Item nourishmentCapsule = new NourishmentCapsule();
+=======
+    public static Item lightSaberRed = new LightSaber("lightSaberRed", "Red"); 
+    public static Item lightSaberBlue = new LightSaber("lightSaberBlue", "Blue");
+    public static Item lightSaberGreen = new LightSaber("lightSaberGreen", "Green");
+    public static Item lightSaberPurple = new LightSaber("lightSaberPurple", "Purple");
+    public static Item doubleLightSaberRed = new DoubleLightSaber("doubleLightSaberRed", "Red");
+    public static Item doubleLightSaberBlue = new DoubleLightSaber("doubleLightSaberBlue", "Blue");
+    public static Item doubleLightSaberGreen = new DoubleLightSaber("doubleLightSaberGreen", "Green");
+    public static Item doubleLightSaberPurple = new DoubleLightSaber("doubleLightSaberPurple", "Purple");
+    public static Item redPowerCrystal = new PowerCrystal("redPowerCrystal", "Red");
+    public static Item bluePowerCrystal = new PowerCrystal("bluePowerCrystal", "Blue");
+    public static Item greenPowerCrystal = new PowerCrystal("greenPowerCrystal", "Green");
+    public static Item purplePowerCrystal = new PowerCrystal("purplePowerCrystal", "Purple");
+    public static Block redPowerCrystalOre = new PowerCrystalOre("redPowerCrystalOre", "Red");
+    public static Block bluePowerCrystalOre = new PowerCrystalOre("bluePowerCrystalOre", "Blue");
+    public static Block greenPowerCrystalOre = new PowerCrystalOre("greenPowerCrystalOre", "Green");
+    public static Block purplePowerCrystalOre = new PowerCrystalOre("purplePowerCrystalOre", "Purple");
+>>>>>>> origin/master
     
     
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
@@ -54,9 +73,30 @@ public class SuperDopeJediMod //Start the class Declaration
         this.registerItem(this.brownSteelIngot, "Brown Steel Ingot");
         this.registerBlock(this.brownSteelOre);
         this.registerBlock(this.vehicleSeat);
+<<<<<<< HEAD
         this.registerItem(this.nourishmentCapsule, "Nourishment Capsule");
     
+=======
+        this.registerItem(this.lightSaberRed, "Red Lightsaber");
+        this.registerItem(this.lightSaberBlue, "Blue Lightsaber");
+        this.registerItem(this.lightSaberGreen, "Green Lightsaber");
+        this.registerItem(this.lightSaberPurple, "Purple Lightsaber");
+        this.registerItem(this.doubleLightSaberRed, "Red Double Lightsaber");
+        this.registerItem(this.doubleLightSaberBlue, "Blue Double Lightsaber");
+        this.registerItem(this.doubleLightSaberGreen, "Green Double Lightsaber");
+        this.registerItem(this.doubleLightSaberPurple, "Purple Double Lightsaber");
+        this.registerItem(this.redPowerCrystal, "Red Power Crystal");
+        this.registerItem(this.bluePowerCrystal, "Blue Power Crystal");
+        this.registerItem(this.greenPowerCrystal, "Green Power Crystal");
+        this.registerItem(this.purplePowerCrystal, "Purple Power Crystal");
+        this.registerBlock(this.redPowerCrystalOre);
+        this.registerBlock(this.bluePowerCrystalOre);
+        this.registerBlock(this.greenPowerCrystalOre);
+        this.registerBlock(this.purplePowerCrystalOre);
+      
+>>>>>>> origin/master
     }
+     
      
     
     @EventHandler

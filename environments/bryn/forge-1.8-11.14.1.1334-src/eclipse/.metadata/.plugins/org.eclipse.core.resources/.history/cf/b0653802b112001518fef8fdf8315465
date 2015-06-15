@@ -1,0 +1,13 @@
+package superDopeJediMod;
+
+import net.minecraft.item.Item;
+
+public class LightSaber extends BaseItem {
+
+	public LightSaber(String unlocalizedName) {
+		super(unlocalizedName);
+		//this.setMaxStackSize(64);
+		//this.setCreativeTab(CreativeTabs.tabMisc);
+		//this.setUnlocalizedName(unlocalizedName);
+	}
+}
