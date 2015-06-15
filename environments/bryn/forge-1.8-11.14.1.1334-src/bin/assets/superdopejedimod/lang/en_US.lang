@@ -11,3 +11,12 @@ item.doubleLightSaberRed.name=Red Double Lightsaber
 item.doubleLightSaberBlue.name=Blue Double Lightsaber
 item.doubleLightSaberGreen.name=Green Double Lightsaber
 item.doubleLightSaberPurple.name=Purple Double Lightsaber
+item.redPowerCrystal.name=Red Power Crystal
+item.bluePowerCrystal.name=Blue Power Crystal
+item.greenPowerCrystal.name=Green Power Crystal
+item.purplePowerCrystal.name=Purple Power Crystal
+tile.redPowerCrystalOre.name=Red Power Crystal Ore
+tile.bluePowerCrystalOre.name=Blue Power Crystal Ore
+tile.greenPowerCrystalOre.name=Green Power Crystal Ore
+tile.purplePowerCrystalOre.name=Purple Power Crystal Ore
+

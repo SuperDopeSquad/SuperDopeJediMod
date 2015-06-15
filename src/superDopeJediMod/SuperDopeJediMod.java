@@ -41,6 +41,15 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Item doubleLightSaberBlue = new DoubleLightSaber("doubleLightSaberBlue", "Blue");
     public static Item doubleLightSaberGreen = new DoubleLightSaber("doubleLightSaberGreen", "Green");
     public static Item doubleLightSaberPurple = new DoubleLightSaber("doubleLightSaberPurple", "Purple");
+    public static Item redPowerCrystal = new PowerCrystal("redPowerCrystal", "Red");
+    public static Item bluePowerCrystal = new PowerCrystal("bluePowerCrystal", "Blue");
+    public static Item greenPowerCrystal = new PowerCrystal("greenPowerCrystal", "Green");
+    public static Item purplePowerCrystal = new PowerCrystal("purplePowerCrystal", "Purple");
+    public static Block redPowerCrystalOre = new PowerCrystalOre("redPowerCrystalOre", "Red");
+    public static Block bluePowerCrystalOre = new PowerCrystalOre("bluePowerCrystalOre", "Blue");
+    public static Block greenPowerCrystalOre = new PowerCrystalOre("greenPowerCrystalOre", "Green");
+    public static Block purplePowerCrystalOre = new PowerCrystalOre("purplePowerCrystalOre", "Purple");
+    
     
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
     //        serverSide="tutorial.generic.CommonProxy")
@@ -68,6 +77,14 @@ public class SuperDopeJediMod //Start the class Declaration
         this.registerItem(this.doubleLightSaberBlue, "Blue Double Lightsaber");
         this.registerItem(this.doubleLightSaberGreen, "Green Double Lightsaber");
         this.registerItem(this.doubleLightSaberPurple, "Purple Double Lightsaber");
+        this.registerItem(this.redPowerCrystal, "Red Power Crystal");
+        this.registerItem(this.bluePowerCrystal, "Blue Power Crystal");
+        this.registerItem(this.greenPowerCrystal, "Green Power Crystal");
+        this.registerItem(this.purplePowerCrystal, "Purple Power Crystal");
+        this.registerBlock(this.redPowerCrystalOre);
+        this.registerBlock(this.bluePowerCrystalOre);
+        this.registerBlock(this.greenPowerCrystalOre);
+        this.registerBlock(this.purplePowerCrystalOre);
       
     }
      
