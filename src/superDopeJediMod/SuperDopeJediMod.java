@@ -33,6 +33,9 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Item brownSteelIngot = new BrownSteelIngot("brownSteelIngot");    
     public static Block brownSteelOre = new BrownSteelOre("brownSteelOre");
     public static Block vehicleSeat = new VehicleSeat("vehicleSeat");
+<<<<<<< HEAD
+    public static Item nourishmentCapsule = new NourishmentCapsule();
+=======
     public static Item lightSaberRed = new LightSaber("lightSaberRed", "Red"); 
     public static Item lightSaberBlue = new LightSaber("lightSaberBlue", "Blue");
     public static Item lightSaberGreen = new LightSaber("lightSaberGreen", "Green");
@@ -49,6 +52,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Block bluePowerCrystalOre = new PowerCrystalOre("bluePowerCrystalOre", "Blue");
     public static Block greenPowerCrystalOre = new PowerCrystalOre("greenPowerCrystalOre", "Green");
     public static Block purplePowerCrystalOre = new PowerCrystalOre("purplePowerCrystalOre", "Purple");
+>>>>>>> origin/master
     
     
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
@@ -69,6 +73,10 @@ public class SuperDopeJediMod //Start the class Declaration
         this.registerItem(this.brownSteelIngot, "Brown Steel Ingot");
         this.registerBlock(this.brownSteelOre);
         this.registerBlock(this.vehicleSeat);
+<<<<<<< HEAD
+        this.registerItem(this.nourishmentCapsule, "Nourishment Capsule");
+    
+=======
         this.registerItem(this.lightSaberRed, "Red Lightsaber");
         this.registerItem(this.lightSaberBlue, "Blue Lightsaber");
         this.registerItem(this.lightSaberGreen, "Green Lightsaber");
@@ -86,6 +94,7 @@ public class SuperDopeJediMod //Start the class Declaration
         this.registerBlock(this.greenPowerCrystalOre);
         this.registerBlock(this.purplePowerCrystalOre);
       
+>>>>>>> origin/master
     }
      
      
