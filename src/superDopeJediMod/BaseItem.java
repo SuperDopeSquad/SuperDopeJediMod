@@ -15,4 +15,9 @@ public abstract class BaseItem extends Item {
 		this.setCreativeTab(CreativeTabs.tabMisc);
 		this.setUnlocalizedName(unlocalizedName);
 	}
+	
+	
+	public void registerRecipe() {
+		return;
+	}
 }
