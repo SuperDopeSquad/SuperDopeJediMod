@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "normal": { "model": "superdopejedimod:brownSteel" },
+        "boolean=false": { "model": "superdopejedimod:brownSteel" },
+        "boolean=true": { "model": "superdopejedimod:brownSteel" },
+        "inventory": { "model": "superdopejedimod:brownSteel" }
+    }
+}  
+  
