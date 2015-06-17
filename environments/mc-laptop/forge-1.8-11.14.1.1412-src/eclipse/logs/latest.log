@@ -1,2 +1,43 @@
-[19:40:07] [Client thread/INFO]: Setting user: Player184
-[19:40:12] [Client thread/INFO]: LWJGL Version: 2.9.1
+[19:42:27] [Client thread/INFO]: Setting user: Player60
+[19:42:30] [Client thread/INFO]: LWJGL Version: 2.9.1
+[19:42:34] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
+[19:42:34] [Client thread/WARN]: ResourcePack: ignored non-lowercase namespace: superDopeJediMod/ in C:\dev\SuperDopeJediMod\environments\mc-laptop\forge-1.8-11.14.1.1412-src\bin
+[19:42:34] [Client thread/WARN]: ResourcePack: ignored non-lowercase namespace: superDopeJediMod/ in C:\dev\SuperDopeJediMod\environments\mc-laptop\forge-1.8-11.14.1.1412-src\bin
+[19:42:34] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:42:35] [Thread-9/INFO]: Initializing LWJGL OpenAL
+[19:42:35] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:42:35] [Thread-9/INFO]: OpenAL initialized.
+[19:42:35] [Sound Library Loader/INFO]: Sound engine started
+[19:42:41] [Client thread/INFO]: Created: 512x512 textures-atlas
+[19:42:42] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
+[19:42:42] [Client thread/WARN]: ResourcePack: ignored non-lowercase namespace: superDopeJediMod/ in C:\dev\SuperDopeJediMod\environments\mc-laptop\forge-1.8-11.14.1.1412-src\bin
+[19:42:42] [Client thread/WARN]: ResourcePack: ignored non-lowercase namespace: superDopeJediMod/ in C:\dev\SuperDopeJediMod\environments\mc-laptop\forge-1.8-11.14.1.1412-src\bin
+[19:42:42] [Client thread/INFO]: SoundSystem shutting down...
+[19:42:42] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[19:42:42] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:42:43] [Thread-11/INFO]: Initializing LWJGL OpenAL
+[19:42:43] [Thread-11/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:42:43] [Thread-11/INFO]: OpenAL initialized.
+[19:42:43] [Sound Library Loader/INFO]: Sound engine started
+[19:42:44] [Client thread/INFO]: Created: 512x512 textures-atlas
+[19:42:57] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[19:42:57] [Server thread/INFO]: Generating keypair
+[19:42:57] [Server thread/INFO]: Preparing start region for level 0
+[19:42:58] [Server thread/INFO]: Preparing spawn area: 12%
+[19:42:59] [Server thread/ERROR]: Chunk file at -20,0 is in the wrong location; relocating. (Expected -20, 0, got -15, 6)
+[19:42:59] [Server thread/ERROR]: Chunk file at -18,6 is in the wrong location; relocating. (Expected -18, 6, got -17, 7)
+[19:43:00] [Server thread/INFO]: Preparing spawn area: 67%
+[19:43:00] [Server thread/INFO]: Changing view distance to 12, from 10
+[19:43:02] [Server thread/INFO]: Player60[local:E:a229b185] logged in with entity id 286 at (-196.1172679262592, 74.0, 145.629357362616)
+[19:43:02] [Server thread/INFO]: Player60 joined the game
+[19:43:15] [Client thread/INFO]: Stopping!
+[19:43:16] [Client thread/INFO]: SoundSystem shutting down...
+[19:43:16] [Server thread/INFO]: Stopping server
+[19:43:16] [Server thread/INFO]: Saving players
+[19:43:16] [Server thread/INFO]: Saving worlds
+[19:43:16] [Server thread/INFO]: Saving chunks for level 'test-creative'/Overworld
+[19:43:16] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[19:43:16] [Client Shutdown Thread/INFO]: Stopping server
+[19:43:16] [Client Shutdown Thread/INFO]: Saving players
+[19:43:16] [Client Shutdown Thread/INFO]: Saving worlds
+[19:43:16] [Client Shutdown Thread/INFO]: Saving chunks for level 'test-creative'/Overworld
