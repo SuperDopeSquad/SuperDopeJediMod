@@ -5,8 +5,16 @@ INDEX VERSION 1.127+C:\dev\SuperDopeJediMod\environments\mc-laptop\forge-1.8-11.
 3034781230.index
 323251068.index
 3216994237.index
+<<<<<<< HEAD
 1343673233.index
 3675772942.index
+=======
+3675772942.index
+<<<<<<< HEAD
+=======
+1343673233.index
+>>>>>>> origin/master
+>>>>>>> origin/master
 3152974476.index
 3717802512.index
 3718890162.index
@@ -30,11 +38,26 @@ INDEX VERSION 1.127+C:\dev\SuperDopeJediMod\environments\mc-laptop\forge-1.8-11.
 2581281899.index
 2350946392.index
 4084522934.index
+<<<<<<< HEAD
+=======
+355369697.index
+<<<<<<< HEAD
+1089095643.index
+2087205653.index
+4257325822.index
+=======
+1391085616.index
+>>>>>>> origin/master
 3451848030.index
 1391085616.index
 355369697.index
 1089095643.index
+<<<<<<< HEAD
 2087205653.index
+=======
+>>>>>>> origin/master
+3800797053.index
+>>>>>>> origin/master
 4257325822.index
 3800797053.index
 1113272480.index
@@ -46,8 +69,18 @@ INDEX VERSION 1.127+C:\dev\SuperDopeJediMod\environments\mc-laptop\forge-1.8-11.
 597176926.index
 2656750735.index
 1058243007.index
+<<<<<<< HEAD
 533208796.index
 2613480851.index
+=======
+<<<<<<< HEAD
+533208796.index
+2613480851.index
+=======
+2613480851.index
+2656750735.index
+>>>>>>> origin/master
+>>>>>>> origin/master
 1337478678.index
 3340257701.index
 894876402.index
