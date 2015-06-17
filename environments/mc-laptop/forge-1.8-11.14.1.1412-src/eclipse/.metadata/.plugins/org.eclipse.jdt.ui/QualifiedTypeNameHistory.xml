@@ -1,17 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="net.minecraft.item.ItemFood"/>
-<fullyQualifiedTypeName name="net.minecraft.block.properties.PropertyBool"/>
-<fullyQualifiedTypeName name="net.minecraft.block.properties.IProperty"/>
-<<<<<<< HEAD
-=======
-<fullyQualifiedTypeName name="net.minecraft.item.ItemStack"/>
-<fullyQualifiedTypeName name="net.minecraft.item.crafting.CraftingManager"/>
-<fullyQualifiedTypeName name="net.minecraft.item.crafting.FurnaceRecipes"/>
-<fullyQualifiedTypeName name="net.minecraft.init.Items"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
->>>>>>> origin/master
-</qualifiedTypeNameHistroy>
+<qualifiedTypeNameHistroy/>

@@ -35,13 +35,10 @@
 			<type>2</type>
 			<location>C:/dev/SuperDopeJediMod/src/resources/assets</location>
 		</link>
-<<<<<<< HEAD
-=======
 		<link>
 			<name>src/main/resources/lang</name>
 			<type>2</type>
 			<location>C:/dev/SuperDopeJediMod/src/assets/superdopejedimod/lang</location>
 		</link>
->>>>>>> origin/master
 	</linkedResources>
 </projectDescription>

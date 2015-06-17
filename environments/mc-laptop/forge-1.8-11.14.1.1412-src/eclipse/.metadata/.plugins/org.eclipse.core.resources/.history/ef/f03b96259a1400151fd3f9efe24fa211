@@ -13,11 +13,15 @@ public class GaffiStick extends BaseItem {
 	public GaffiStick(String unlocalizedName) {
 		
 		super(unlocalizedName);
-
+		
+<<<<<<< HEAD
+		
 		
 		//this.setTextureName("superDopeJediMod:gaffiStick");
 		
-
+=======
+		//this.setTextureName("superDopeJediMod:gaffiStick");
+>>>>>>> origin/master
 		//this.setMaxStackSize(64);
 		//this.setCreativeTab(CreativeTabs.tabMisc);
 		//this.setUnlocalizedName(unlocalizedName);
