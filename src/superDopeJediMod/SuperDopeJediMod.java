@@ -1,5 +1,7 @@
 package superDopeJediMod;
 
+import java.util.Set;
+import java.util.HashSet;
 
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -9,33 +11,44 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 //import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+//import net.minecraftforge.common.MinecraftForge;
 
 
 @Mod(modid=SuperDopeJediMod.MODID, name=SuperDopeJediMod.MODNAME, version=SuperDopeJediMod.MODVER) //Tell forge "Oh hey, there's a new mod here to load."
 public class SuperDopeJediMod //Start the class Declaration
 {
-    //Set the metadata of the mod.
+    // Set the metadata of the mod.
     public static final String MODID = "superDopeJediMod";
     public static final String MODNAME = "SuperDopeJediMod";
     public static final String MODVER = "0.0.1";
 
+    // This is the collection of custom objects we will maintain.
+    public static Set<BaseItem> customObjects = new HashSet<BaseItem>();
+    
     // instance variable.
     @Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
     public static SuperDopeJediMod instance;
     
     // Custom items.
-    public static Item gaffiStick = new GaffiStick("gaffiStick");
+    public static BaseItem gaffiStick = new GaffiStick("gaffiStick");  
     public static Block brownSteel = new BrownSteel("brownSteel");
     public static Item brownSteelIngot = new BrownSteelIngot("brownSteelIngot");    
     public static Block brownSteelOre = new BrownSteelOre("brownSteelOre");
     public static Block vehicleSeat = new VehicleSeat("vehicleSeat");
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static Item nourishmentCapsule = new NourishmentCapsule();
 =======
+=======
+    public static Item nourishmentCapsule = new NourishmentCapsule();
+>>>>>>> origin/master
     public static Item lightSaberRed = new LightSaber("lightSaberRed", "Red"); 
     public static Item lightSaberBlue = new LightSaber("lightSaberBlue", "Blue");
     public static Item lightSaberGreen = new LightSaber("lightSaberGreen", "Green");
@@ -52,9 +65,13 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Block bluePowerCrystalOre = new PowerCrystalOre("bluePowerCrystalOre", "Blue");
     public static Block greenPowerCrystalOre = new PowerCrystalOre("greenPowerCrystalOre", "Green");
     public static Block purplePowerCrystalOre = new PowerCrystalOre("purplePowerCrystalOre", "Purple");
+<<<<<<< HEAD
 >>>>>>> origin/master
     
     
+=======
+ 
+>>>>>>> origin/master
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
     //        serverSide="tutorial.generic.CommonProxy")
     
@@ -62,21 +79,25 @@ public class SuperDopeJediMod //Start the class Declaration
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+    	this.customObjects.add(this.gaffiStick);
+    	
     	// A note on GameRegistry.registerItem ...
         // The second parameter is an unique registry identifier (not the displayed name)
         // Please don't use item1.getUnlocalizedName(), or you will make Lex sad
      
-        //GameRegistry.registerItem(this.gaffiStick, "gaffiStick");
-        //GameRegistry.registerItem(this.gaffiStick, this.gaffiStick.getUnlocalizedName());
         this.registerItem(this.gaffiStick, "Gaffi Stick");
         this.registerBlock(this.brownSteel);
         this.registerItem(this.brownSteelIngot, "Brown Steel Ingot");
         this.registerBlock(this.brownSteelOre);
         this.registerBlock(this.vehicleSeat);
 <<<<<<< HEAD
+<<<<<<< HEAD
         this.registerItem(this.nourishmentCapsule, "Nourishment Capsule");
     
 =======
+=======
+        this.registerItem(this.nourishmentCapsule, "Nourishment Capsule");
+>>>>>>> origin/master
         this.registerItem(this.lightSaberRed, "Red Lightsaber");
         this.registerItem(this.lightSaberBlue, "Blue Lightsaber");
         this.registerItem(this.lightSaberGreen, "Green Lightsaber");
@@ -93,7 +114,11 @@ public class SuperDopeJediMod //Start the class Declaration
         this.registerBlock(this.bluePowerCrystalOre);
         this.registerBlock(this.greenPowerCrystalOre);
         this.registerBlock(this.purplePowerCrystalOre);
+<<<<<<< HEAD
       
+>>>>>>> origin/master
+=======
+     
 >>>>>>> origin/master
     }
      
@@ -107,6 +132,15 @@ public class SuperDopeJediMod //Start the class Declaration
     
     @EventHandler
     public void init(FMLInitializationEvent event) {
+    	
+    	// Iterate through all our custom objects, 
+    	// and see if we have any recipes to register.
+    	for (BaseItem baseItem : this.customObjects) {
+    		baseItem.registerRecipe();
+    	}
+    	
+    	// MC-to-delete
+    	//this.gaffiStick.registerRecipe();
     }
     
  

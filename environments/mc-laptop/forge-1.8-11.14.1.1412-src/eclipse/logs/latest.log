@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [01:12:51] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 10799862ms behind, skipping 215997 tick(s)
 [01:12:58] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 7101ms behind, skipping 142 tick(s)
 [06:21:27] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 18491449ms behind, skipping 369828 tick(s)
@@ -15,3 +16,30 @@
 [06:22:22] [Client Shutdown Thread/INFO]: Saving players
 [06:22:22] [Client Shutdown Thread/INFO]: Saving worlds
 [06:22:22] [Client Shutdown Thread/INFO]: Saving chunks for level 'test-creative'/Overworld
+=======
+[09:10:31] [Client thread/INFO]: Setting user: Player401
+[09:10:38] [Client thread/INFO]: LWJGL Version: 2.9.1
+[09:10:43] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
+[09:10:43] [Client thread/WARN]: ResourcePack: ignored non-lowercase namespace: superDopeJediMod/ in C:\dev\SuperDopeJediMod\environments\mc-laptop\forge-1.8-11.14.1.1412-src\bin
+[09:10:43] [Client thread/WARN]: ResourcePack: ignored non-lowercase namespace: superDopeJediMod/ in C:\dev\SuperDopeJediMod\environments\mc-laptop\forge-1.8-11.14.1.1412-src\bin
+[09:10:44] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[09:10:44] [Thread-9/INFO]: Initializing LWJGL OpenAL
+[09:10:44] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[09:10:44] [Thread-9/INFO]: OpenAL initialized.
+[09:10:44] [Sound Library Loader/INFO]: Sound engine started
+[09:10:52] [Client thread/INFO]: Created: 512x512 textures-atlas
+[09:10:53] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
+[09:10:53] [Client thread/WARN]: ResourcePack: ignored non-lowercase namespace: superDopeJediMod/ in C:\dev\SuperDopeJediMod\environments\mc-laptop\forge-1.8-11.14.1.1412-src\bin
+[09:10:53] [Client thread/WARN]: ResourcePack: ignored non-lowercase namespace: superDopeJediMod/ in C:\dev\SuperDopeJediMod\environments\mc-laptop\forge-1.8-11.14.1.1412-src\bin
+[09:10:53] [Client thread/INFO]: SoundSystem shutting down...
+[09:10:53] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[09:10:53] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[09:10:54] [Thread-11/INFO]: Initializing LWJGL OpenAL
+[09:10:54] [Thread-11/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[09:10:54] [Thread-11/INFO]: OpenAL initialized.
+[09:10:54] [Sound Library Loader/INFO]: Sound engine started
+[09:10:57] [Client thread/INFO]: Created: 512x512 textures-atlas
+[09:10:59] [Client thread/INFO]: Stopping!
+[09:10:59] [Client thread/INFO]: SoundSystem shutting down...
+[09:11:00] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+>>>>>>> origin/master
