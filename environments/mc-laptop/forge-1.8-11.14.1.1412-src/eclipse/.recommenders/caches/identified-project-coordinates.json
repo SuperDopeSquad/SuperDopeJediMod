@@ -1,9 +1,1 @@
-<<<<<<< HEAD
-[[{"location":"C:\\dev\\SuperDopeJediMod\\environments\\mc-laptop\\forge-1.8-11.14.1.1412-src","type":"PROJECT","hints":{"PROJECT_NAME":"Minecraft"}},"ABSENT"],[{"location":"C:\\Program Files\\Java\\jre1.8.0_45","type":"JRE","hints":{}},"jre:jre:1.8.0"]]
-=======
-<<<<<<< HEAD
-{}
-=======
-[[{"location":"C:\\Program Files\\Java\\jre1.8.0_45","type":"JRE","hints":{}},"jre:jre:1.8.0"],[{"location":"C:\\dev\\SuperDopeJediMod\\environments\\mc-laptop\\forge-1.8-11.14.1.1412-src","type":"PROJECT","hints":{"PROJECT_NAME":"Minecraft"}},"ABSENT"]]
->>>>>>> origin/master
->>>>>>> origin/master
+[[{"location":"C:\\dev\\SuperDopeJediMod\\environments\\mc-laptop\\forge-1.8-11.14.1.1412-src","type":"PROJECT","hints":{"PROJECT_NAME":"Minecraft"}},"ABSENT"]]

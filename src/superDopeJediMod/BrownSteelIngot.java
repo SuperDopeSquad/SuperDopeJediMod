@@ -1,4 +1,4 @@
-package superDopeJediMod;
+package superdopejedimod;
 
 //import SuperDopeJediMode;
 import net.minecraft.creativetab.CreativeTabs;

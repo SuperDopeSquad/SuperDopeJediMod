@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "items/gaffiStick"
+        "layer0": "superdopejedimod:items/gaffiStick"
     },
     "display": {
         "thirdperson": {

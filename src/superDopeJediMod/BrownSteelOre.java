@@ -1,4 +1,4 @@
-package superDopeJediMod;
+package superdopejedimod;
 
 import java.util.Random;
 

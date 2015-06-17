@@ -1,6 +1,4 @@
-package superDopeJediMod;
-
-import java.util.Random;
+package superdopejedimod;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.block.Block;
@@ -13,15 +11,5 @@ public class VehicleSeat extends BaseBlock {
 	public VehicleSeat(String unlocalizedName) {
 		
 		super(Material.rock, unlocalizedName);
-		
-		//this.setMaxStackSize(64);
-		//this.setCreativeTab(CreativeTabs.tabMisc);
-		//this.setUnlocalizedName("genericBlock");
 	}
-	
-	
-  
-    
-
-
 }

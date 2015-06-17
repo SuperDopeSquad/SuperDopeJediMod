@@ -16,29 +16,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>blockstates</name>
+			<name>src/main/java/superdopejedimod</name>
 			<type>2</type>
-			<location>C:/dev/SuperDopeJediMod/src/resources/assets/superdopejedimod/blockstates</location>
-		</link>
-		<link>
-			<name>models</name>
-			<type>2</type>
-			<location>C:/dev/SuperDopeJediMod/src/resources/assets/superdopejedimod/models</location>
-		</link>
-		<link>
-			<name>src/main/java/superDopeJediMod</name>
-			<type>2</type>
-			<location>C:/dev/SuperDopeJediMod/src/superDopeJediMod</location>
+			<location>C:/dev/SuperDopeJediMod/src/superdopejedimod</location>
 		</link>
 		<link>
 			<name>src/main/resources/assets</name>
 			<type>2</type>
 			<location>C:/dev/SuperDopeJediMod/src/resources/assets</location>
-		</link>
-		<link>
-			<name>src/main/resources/lang</name>
-			<type>2</type>
-			<location>C:/dev/SuperDopeJediMod/src/assets/superdopejedimod/lang</location>
 		</link>
 	</linkedResources>
 </projectDescription>

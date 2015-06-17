@@ -1,4 +1,4 @@
-package superDopeJediMod;
+package superdopejedimod;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -13,23 +13,8 @@ public class GaffiStick extends BaseItem {
 	public GaffiStick(String unlocalizedName) {
 		
 		super(unlocalizedName);
-
 		
-		//this.setTextureName("superDopeJediMod:gaffiStick");
-		
-
-		//this.setMaxStackSize(64);
-		//this.setCreativeTab(CreativeTabs.tabMisc);
-		//this.setUnlocalizedName(unlocalizedName);
-	}
-	
-	
-	public void registerItem() {
-		 //this.registerItem(this.gaffiStick, "Gaffi Stick");	
-		 //String foo = i.getUnlocalizedName();
-		System.out.println("MC-COMMENT:" + this.getUnlocalizedName());
-		// this prints out "item.gaffiStick"
-	    GameRegistry.registerItem(this, "Gaffi Stick");
+		setCreativeTab(CreativeTabs.tabCombat);
 	}
 	
 	

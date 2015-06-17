@@ -1,0 +1,79 @@
+---- Minecraft Crash Report ----
+// Hi. I'm Minecraft, and I'm a crashaholic.
+
+Time: 6/17/15 6:37 AM
+Description: There was a severe problem during mod loading that has caused the game to fail
+
+net.minecraftforge.fml.common.LoaderException: java.lang.IllegalArgumentException: The name superDopeJediMod:tile.null has been registered twice, for superDopeJediMod.BrownSteelOre@509d999c and superDopeJediMod.VehicleSeat@1b472cad.
+	at net.minecraftforge.fml.common.registry.GameRegistry.registerBlock(GameRegistry.java:225)
+	at net.minecraftforge.fml.common.registry.GameRegistry.registerBlock(GameRegistry.java:182)
+	at net.minecraftforge.fml.common.registry.GameRegistry.registerBlock(GameRegistry.java:171)
+	at superDopeJediMod.SuperDopeJediMod.registerBlock(SuperDopeJediMod.java:166)
+	at superDopeJediMod.SuperDopeJediMod.preInit(SuperDopeJediMod.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraftforge.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:537)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74)
+	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47)
+	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322)
+	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304)
+	at com.google.common.eventbus.EventBus.post(EventBus.java:275)
+	at net.minecraftforge.fml.common.LoadController.sendEventToModContainer(LoadController.java:212)
+	at net.minecraftforge.fml.common.LoadController.propogateStateMessage(LoadController.java:190)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74)
+	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47)
+	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322)
+	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304)
+	at com.google.common.eventbus.EventBus.post(EventBus.java:275)
+	at net.minecraftforge.fml.common.LoadController.distributeStateMessage(LoadController.java:119)
+	at net.minecraftforge.fml.common.Loader.preinitializeMods(Loader.java:527)
+	at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:246)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:446)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:356)
+	at net.minecraft.client.main.Main.main(Main.java:117)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+	at GradleStart.main(Unknown Source)
+Caused by: java.lang.IllegalArgumentException: The name superDopeJediMod:tile.null has been registered twice, for superDopeJediMod.BrownSteelOre@509d999c and superDopeJediMod.VehicleSeat@1b472cad.
+	at net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry.add(FMLControlledNamespacedRegistry.java:433)
+	at net.minecraftforge.fml.common.registry.GameData.registerBlock(GameData.java:826)
+	at net.minecraftforge.fml.common.registry.GameData.registerBlock(GameData.java:801)
+	at net.minecraftforge.fml.common.registry.GameRegistry.registerBlock(GameRegistry.java:214)
+	... 43 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8
+	Operating System: Windows 8.1 (amd64) version 6.3
+	Java Version: 1.8.0_45, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 700045824 bytes (667 MB) / 1038876672 bytes (990 MB) up to 1038876672 bytes (990 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.10 FML v8.99.8.1412 Minecraft Forge 11.14.1.1412 5 mods loaded, 5 mods active
+	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized
+	FML{8.99.8.1412} [Forge Mod Loader] (forgeSrc-1.8-11.14.1.1412.jar) Unloaded->Constructed->Pre-initialized
+	Forge{11.14.1.1412} [Minecraft Forge] (forgeSrc-1.8-11.14.1.1412.jar) Unloaded->Constructed->Pre-initialized
+	examplemod{1.0} [Example Mod] (bin) Unloaded->Constructed->Pre-initialized
+	superDopeJediMod{0.0.1} [SuperDopeJediMod] (bin) Unloaded->Constructed->Errored
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'Intel' Version: '4.3.0 - Build 10.18.10.3947' Renderer: 'Intel(R) HD Graphics 5500'
