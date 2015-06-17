@@ -24,9 +24,7 @@ public class GaffiStick extends BaseItem {
 	public void registerItem() {
 		 //this.registerItem(this.gaffiStick, "Gaffi Stick");	
 		 //String foo = i.getUnlocalizedName();
-		System.out.println("MC-COMMENT:" + this.getUnlocalizedName());
-		// this prints out "item.gaffiStick"
-	    GameRegistry.registerItem(this, "Gaffi Stick");
+	     GameRegistry.registerItem(this, "Gaffi Stick");
 	}
 	
 	

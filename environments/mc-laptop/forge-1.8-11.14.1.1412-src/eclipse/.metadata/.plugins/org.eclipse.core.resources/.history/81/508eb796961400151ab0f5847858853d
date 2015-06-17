@@ -18,6 +18,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+//import net.minecraftforge.common.MinecraftForge;
 
 
 @Mod(modid=SuperDopeJediMod.MODID, name=SuperDopeJediMod.MODNAME, version=SuperDopeJediMod.MODVER) //Tell forge "Oh hey, there's a new mod here to load."
@@ -70,12 +71,7 @@ public class SuperDopeJediMod //Start the class Declaration
     	
     	// A note on GameRegistry.registerItem ...
         // The second parameter is an unique registry identifier (not the displayed name)
-        // Please don't use item1.getUnlocalizedName(), or you will make Lex sad.
-    	
-    	// New way to register items!
-    	for (BaseItem baseItem : this.customObjects) {
-    		baseItem.registerItem();
-    	}
+        // Please don't use item1.getUnlocalizedName(), or you will make Lex sad
      
         this.registerItem(this.gaffiStick, "Gaffi Stick");
         this.registerBlock(this.brownSteel);

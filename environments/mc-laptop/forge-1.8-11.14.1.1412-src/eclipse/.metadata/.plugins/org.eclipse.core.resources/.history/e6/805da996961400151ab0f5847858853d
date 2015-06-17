@@ -20,14 +20,4 @@ public abstract class BaseItem extends Item {
 	public void registerRecipe() {
 		return;
 	}
-	
-	
-	public void registerItem() {
-		return;
-	}
-	
-	
-	public void registerBlock() {
-		return;
-	}
 }
