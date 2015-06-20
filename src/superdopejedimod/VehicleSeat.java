@@ -1,4 +1,4 @@
-package superdopejedimod;
+package superdopesquad.superdopejedimod;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.block.Block;

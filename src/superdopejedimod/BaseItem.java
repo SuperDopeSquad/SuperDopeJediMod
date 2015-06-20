@@ -1,4 +1,4 @@
-package superdopejedimod;
+package superdopesquad.superdopejedimod;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
