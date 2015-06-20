@@ -1,0 +1,37 @@
+package superdopesquad.superdopejedimod;
+
+import java.util.Random;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+
+public class BaseBlock extends Block {
+	
+	protected String name = "";
+	
+	
+	public BaseBlock(Material materialIn, String nameInput) {
+		
+		super(materialIn);
+		
+		this.name = nameInput;
+		GameRegistry.registerBlock(this, name);
+		//this.setUnlocalizedName(SuperDopeJediMod.MODID + "_" + name);
+		this.setUnlocalizedName(name);
+		this.setCreativeTab(CreativeTabs.tabBlock);
+		
+		//this.setMaxStackSize(64);
+//		this.setCreativeTab(CreativeTabs.tabBlock);
+//		this.setUnlocalizedName(unlocalizedName);
+	}
+	
+	
+  
+    
+
+
+}

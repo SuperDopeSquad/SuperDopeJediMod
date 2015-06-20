@@ -3,4 +3,8 @@ item.brownSteelIngot.name=Brown Steel Ingot
 tile.brownSteelOre.name=Brown Steel Ore
 item.gaffiStick.name=Gaffi Stick
 tile.vehicleSeat.name=Vehicle Seat
+<<<<<<< HEAD:src/resources/assets/superDopeJediMod/lang/en_US.lang
+item.nourishmentCapsule.name=Nourishment Capsule
+=======
 item.lightSaber.name=Lightsaber
+>>>>>>> origin/master:environments/bryn/forge-1.8-11.14.1.1334-src/eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/9e/1019aea3b312001518fef8fdf8315465
