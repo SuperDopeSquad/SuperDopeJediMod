@@ -1,18 +1,38 @@
-[19:32:15] [Client thread/INFO]: Setting user: Player867
-[19:32:32] [Client thread/INFO]: LWJGL Version: 2.9.1
-[19:32:45] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
-[19:32:50] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[19:32:50] [Thread-7/INFO]: Initializing LWJGL OpenAL
-[19:32:50] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[19:32:51] [Thread-7/INFO]: OpenAL initialized.
-[19:32:51] [Sound Library Loader/INFO]: Sound engine started
-[19:33:02] [Client thread/INFO]: Created: 512x512 textures-atlas
-[19:33:08] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
-[19:33:08] [Client thread/INFO]: SoundSystem shutting down...
-[19:33:08] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[19:33:08] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[19:33:08] [Thread-9/INFO]: Initializing LWJGL OpenAL
-[19:33:08] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[19:33:08] [Thread-9/INFO]: OpenAL initialized.
-[19:33:09] [Sound Library Loader/INFO]: Sound engine started
-[19:33:16] [Client thread/INFO]: Created: 512x512 textures-atlas
+[12:33:37] [Client thread/INFO]: Setting user: Player112
+[12:33:48] [Client thread/INFO]: LWJGL Version: 2.9.1
+[12:34:17] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge
+[12:34:23] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[12:34:23] [Thread-7/INFO]: Initializing LWJGL OpenAL
+[12:34:23] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[12:34:31] [Thread-7/INFO]: OpenAL initialized.
+[12:34:31] [Sound Library Loader/INFO]: Sound engine started
+[12:34:56] [Client thread/INFO]: Created: 512x512 textures-atlas
+[12:34:59] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge
+[12:34:59] [Client thread/INFO]: SoundSystem shutting down...
+[12:34:59] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[12:34:59] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[12:34:59] [Thread-9/INFO]: Initializing LWJGL OpenAL
+[12:34:59] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[12:34:59] [Thread-9/INFO]: OpenAL initialized.
+[12:35:00] [Sound Library Loader/INFO]: Sound engine started
+[12:35:07] [Client thread/INFO]: Created: 512x512 textures-atlas
+[12:35:17] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[12:35:17] [Server thread/INFO]: Generating keypair
+[12:35:37] [Server thread/INFO]: Preparing start region for level 0
+[12:35:39] [Server thread/INFO]: Preparing spawn area: 0%
+[12:35:40] [Server thread/INFO]: Preparing spawn area: 21%
+[12:35:41] [Server thread/INFO]: Preparing spawn area: 49%
+[12:35:43] [Server thread/INFO]: Changing view distance to 12, from 10
+[12:35:44] [Server thread/INFO]: Player112[local:E:62d5c836] logged in with entity id 164 at (623.8161266369232, 4.0, 1580.8356723683123)
+[12:35:45] [Server thread/INFO]: Player112 joined the game
+[12:35:48] [Server thread/INFO]: Player112 has just earned the achievement [Taking Inventory]
+[12:35:48] [Client thread/INFO]: [CHAT] Player112 has just earned the achievement [Taking Inventory]
+[12:36:21] [Client thread/INFO]: Stopping!
+[12:36:21] [Client thread/INFO]: SoundSystem shutting down...
+[12:36:22] [Server thread/INFO]: Stopping server
+[12:36:22] [Server thread/INFO]: Saving players
+[12:36:22] [Server thread/INFO]: Saving worlds
+[12:36:22] [Server thread/INFO]: Saving chunks for level 'Bryn's testing world'/Overworld
+[12:36:22] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[12:36:22] [Server thread/INFO]: Saving chunks for level 'Bryn's testing world'/Nether
+[12:36:22] [Server thread/INFO]: Saving chunks for level 'Bryn's testing world'/The End

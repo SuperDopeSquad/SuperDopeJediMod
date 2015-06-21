@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>forge-1.8-11.14.3.1446-src</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>src/main/java/superDopeJediMod</name>
+			<type>2</type>
+			<location>C:/dev/SuperDopeJediMod/src/superDopeJediMod</location>
+		</link>
+		<link>
+			<name>src/main/resources/resources</name>
+			<type>2</type>
+			<location>C:/dev/SuperDopeJediMod/src/resources</location>
+		</link>
+	</linkedResources>
+</projectDescription>
