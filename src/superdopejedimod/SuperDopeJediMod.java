@@ -34,8 +34,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static final String MODVER = "0.0.1";
 
     // This is the collection of custom objects we will maintain.
-    public static Set<BaseItem> customItems = new HashSet<BaseItem>();
-    public static Set<BaseBlock> customBlocks = new HashSet<BaseBlock>();
+    public static Set<SuperDopeObject> customObjects = new HashSet<SuperDopeObject>();
     
     // instance variable.
     //@Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
@@ -47,7 +46,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static BaseItem brownSteelIngot = new BrownSteelIngot("brownSteelIngot");    
     public static BaseBlock brownSteelOre = new BrownSteelOre("brownSteelOre");
     public static BaseBlock vehicleSeat = new VehicleSeat("vehicleSeat");
-    public static Item nourishmentCapsule = new NourishmentCapsule();
+    public static BaseItemFood nourishmentCapsule = new NourishmentCapsule("nourishmentCapsule");
     public static BaseItem lightSaberRed = new LightSaber("lightSaberRed", "Red"); 
     public static BaseItem lightSaberBlue = new LightSaber("lightSaberBlue", "Blue");
     public static BaseItem lightSaberGreen = new LightSaber("lightSaberGreen", "Green");
@@ -71,16 +70,11 @@ public class SuperDopeJediMod //Start the class Declaration
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-    	
-    	//this.customItems.add(this.gaffiStick);
-    	
+    	   	
     	// Iterate through all our custom blocks and items, and
     	// register them all.
-    	for (BaseBlock baseBlock : this.customBlocks) {
-    		baseBlock.registerBlock();
-    	}
-    	for (BaseItem baseItem : this.customItems) {
-    		baseItem.registerItem();
+    	for (SuperDopeObject superDopeObject : this.customObjects) {
+    		superDopeObject.registerObject();
     	}
     }
      
@@ -96,11 +90,8 @@ public class SuperDopeJediMod //Start the class Declaration
     	
     	// Iterate through all our custom blocks and items, 
     	// and see if we have any recipes to register.
-    	for (BaseBlock baseBlock : this.customBlocks) {
-    		baseBlock.registerRecipe();
-    	}
-    	for (BaseItem baseItem : this.customItems) {
-    		baseItem.registerRecipe();
+    	for (SuperDopeObject superDopeObject : this.customObjects) {
+    		superDopeObject.registerRecipe();
     	}
     	
     	// All model and texture rendering has to be client-side only.
@@ -108,11 +99,8 @@ public class SuperDopeJediMod //Start the class Declaration
     	     
     		// Iterate through all our custom objects, and
         	// see if we have any models to render.
-        	for (BaseBlock baseBlock : this.customBlocks) {
-        		baseBlock.registerModel();
-        	}
-        	for (BaseItem baseItem : this.customItems) {
-        		baseItem.registerModel();
+        	for (SuperDopeObject superDopeObject : this.customObjects) {
+        		superDopeObject.registerModel();
         	}
     	}
     }

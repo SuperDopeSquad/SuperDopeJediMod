@@ -6,23 +6,25 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public abstract class BaseItem extends Item implements SuperDopeObject {
+public abstract class BaseItemFood extends ItemFood implements SuperDopeObject {
 
 	protected String name = "";
 	
 	
-	public BaseItem(String unlocalizedName) {
+	public BaseItemFood(String name, int amount, 
+			float saturation, boolean isWolfFood) {
 		
-		super();
+		super(5, 5, false);
 	
-		this.name = unlocalizedName;
+		this.name = name;
 		this.setMaxStackSize(64);
-		this.setUnlocalizedName(unlocalizedName);
-		this.setCreativeTab(CreativeTabs.tabMisc);
+		this.setUnlocalizedName(name);
+		this.setCreativeTab(CreativeTabs.tabFood);
 		
 		// Insert this item into our collection of custom items, so we 
 		// can send separate events to it for lifecycle management.
@@ -60,6 +62,6 @@ public abstract class BaseItem extends Item implements SuperDopeObject {
 	public void registerModel() {
 	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseItem) this).getName(), "inventory"));
+	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseItemFood) this).getName(), "inventory"));
 	}
 }

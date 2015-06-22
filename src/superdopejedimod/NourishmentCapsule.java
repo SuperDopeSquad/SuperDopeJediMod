@@ -9,13 +9,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public class NourishmentCapsule extends ItemFood {
+public class NourishmentCapsule extends BaseItemFood {
 
 	
-	public NourishmentCapsule() {
+	public NourishmentCapsule(String name) {
 		
-		//public ItemFood(int amount, float saturation, boolean isWolfFood)
-		super(5, 5, false);
+		// String name, int amount, float saturation, boolean isWolfFood
+		super(name, 20, 20, false);
 		
 		this.setCreativeTab(CreativeTabs.tabFood);
 		this.setUnlocalizedName("nourishmentCapsule");
@@ -24,17 +24,23 @@ public class NourishmentCapsule extends ItemFood {
 	
 	public void registerRecipe() {
 	
-		// potato, carrots, bread, sugar, mushroom, apple
-		
 		// Recipe for creating a Nourishment Capsule.
 		ItemStack potatoStack = new ItemStack(Items.potato);
 		ItemStack carrotStack = new ItemStack(Items.carrot);
 		ItemStack breadStack = new ItemStack(Items.bread);
 		ItemStack sugarStack = new ItemStack(Items.sugar);
-		//ItemStack mushroomStack = new ItemStack();
-		ItemStack appleStack = new ItemStack(Items.potato);
-		ItemStack stoneButtonStack = new ItemStack(Blocks.stone_button);
-		ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
-		//GameRegistry.addRecipe(new ItemStack(this), " x", " y", " z", 'x', redPowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
+		ItemStack mushroomStack = new ItemStack(Blocks.brown_mushroom);
+		ItemStack appleStack = new ItemStack(Items.apple);
+
+		GameRegistry.addRecipe(new ItemStack(this, 6), 
+				"AB", 
+				"CD", 
+				"EF", 
+				'A', potatoStack, 
+				'B', carrotStack, 
+				'C', breadStack,
+				'D', sugarStack, 
+				'E', mushroomStack, 
+				'F', appleStack);
 	}
 }

@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public class BaseBlock extends Block {
+public class BaseBlock extends Block implements SuperDopeObject {
 	
 	protected String name = "";
 	
@@ -25,9 +25,6 @@ public class BaseBlock extends Block {
 		// Stash our internal name that we'll use for this block.
 		this.name = nameInput;
 		
-		// Register the block with the game.
-		//GameRegistry.registerBlock(this, name);
-		
 		// I don't know what happens if you don't call this, but it is in every tutorial :-)
 		this.setUnlocalizedName(name);
 		
@@ -36,7 +33,7 @@ public class BaseBlock extends Block {
 		
 		// Insert this object into our collection of custom blocks, so we 
 		// can send separate events to it for lifecycle management.
-		SuperDopeJediMod.customBlocks.add(this);
+		SuperDopeJediMod.customObjects.add(this);
 	}
 	
 	
@@ -45,7 +42,8 @@ public class BaseBlock extends Block {
 	}
 	
 	
-	public void registerBlock() {
+	public void registerObject() {
+		
 		// Register the block with the game.
 		GameRegistry.registerBlock(this, name);
 	}
