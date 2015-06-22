@@ -1,12 +1,12 @@
-[19:44:19] [Client thread/INFO]: Setting user: Player652
-[19:44:23] [Client thread/INFO]: LWJGL Version: 2.9.1
-[19:44:28] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
-[19:44:28] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[19:44:29] [Thread-7/INFO]: Initializing LWJGL OpenAL
-[19:44:29] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[19:44:29] [Thread-7/INFO]: OpenAL initialized.
-[19:44:29] [Sound Library Loader/INFO]: Sound engine started
-[19:44:32] [Client thread/WARN]: Unable to load definition superdopejedimod:brownSteel#normal
+[20:20:15] [Client thread/INFO]: Setting user: Player525
+[20:20:20] [Client thread/INFO]: LWJGL Version: 2.9.1
+[20:20:24] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
+[20:20:25] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[20:20:25] [Thread-7/INFO]: Initializing LWJGL OpenAL
+[20:20:25] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[20:20:25] [Thread-7/INFO]: OpenAL initialized.
+[20:20:25] [Sound Library Loader/INFO]: Sound engine started
+[20:20:28] [Client thread/WARN]: Unable to load definition superdopejedimod:brownSteel#normal
 java.lang.RuntimeException: Encountered an exception when loading model definition of 'superdopejedimod:brownSteel#normal' from: 'superdopejedimod:blockstates/brownSteel.json' in resourcepack: 'FMLFileResourcePack:Example Mod'
 	at net.minecraft.client.resources.model.ModelBakery.getModelBlockDefinition(ModelBakery.java:167) ~[ModelBakery.class:?]
 	at net.minecraft.client.resources.model.ModelBakery.loadVariants(ModelBakery.java:118) [ModelBakery.class:?]
@@ -47,16 +47,16 @@ Caused by: com.google.gson.stream.MalformedJsonException: Expected name at line 
 	at net.minecraft.client.renderer.block.model.ModelBlockDefinition.parseFromReader(ModelBlockDefinition.java:35) ~[ModelBlockDefinition.class:?]
 	at net.minecraft.client.resources.model.ModelBakery.getModelBlockDefinition(ModelBakery.java:162) ~[ModelBakery.class:?]
 	... 16 more
-[19:44:33] [Client thread/INFO]: Created: 512x512 textures-atlas
-[19:44:34] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
-[19:44:34] [Client thread/INFO]: SoundSystem shutting down...
-[19:44:35] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[19:44:35] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[19:44:35] [Thread-9/INFO]: Initializing LWJGL OpenAL
-[19:44:35] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[19:44:35] [Thread-9/INFO]: OpenAL initialized.
-[19:44:35] [Sound Library Loader/INFO]: Sound engine started
-[19:44:37] [Client thread/WARN]: Unable to load definition superdopejedimod:brownSteel#normal
+[20:20:29] [Client thread/INFO]: Created: 512x512 textures-atlas
+[20:20:30] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod, FMLFileResourcePack:SuperDopeJediMod
+[20:20:30] [Client thread/INFO]: SoundSystem shutting down...
+[20:20:30] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[20:20:30] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[20:20:30] [Thread-9/INFO]: Initializing LWJGL OpenAL
+[20:20:30] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[20:20:30] [Thread-9/INFO]: OpenAL initialized.
+[20:20:31] [Sound Library Loader/INFO]: Sound engine started
+[20:20:33] [Client thread/WARN]: Unable to load definition superdopejedimod:brownSteel#normal
 java.lang.RuntimeException: Encountered an exception when loading model definition of 'superdopejedimod:brownSteel#normal' from: 'superdopejedimod:blockstates/brownSteel.json' in resourcepack: 'FMLFileResourcePack:Example Mod'
 	at net.minecraft.client.resources.model.ModelBakery.getModelBlockDefinition(ModelBakery.java:167) ~[ModelBakery.class:?]
 	at net.minecraft.client.resources.model.ModelBakery.loadVariants(ModelBakery.java:118) [ModelBakery.class:?]
@@ -100,7 +100,18 @@ Caused by: com.google.gson.stream.MalformedJsonException: Expected name at line 
 	at net.minecraft.client.renderer.block.model.ModelBlockDefinition.parseFromReader(ModelBlockDefinition.java:35) ~[ModelBlockDefinition.class:?]
 	at net.minecraft.client.resources.model.ModelBakery.getModelBlockDefinition(ModelBakery.java:162) ~[ModelBakery.class:?]
 	... 19 more
-[19:44:37] [Client thread/INFO]: Created: 512x512 textures-atlas
-[19:44:54] [Client thread/INFO]: Stopping!
-[19:44:54] [Client thread/INFO]: SoundSystem shutting down...
-[19:44:55] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[20:20:33] [Client thread/INFO]: Created: 512x512 textures-atlas
+[20:20:37] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[20:20:37] [Server thread/INFO]: Generating keypair
+[20:20:38] [Server thread/INFO]: Preparing start region for level 0
+[20:20:39] [Server thread/INFO]: Preparing spawn area: 57%
+[20:20:40] [Server thread/INFO]: Changing view distance to 12, from 10
+[20:20:41] [Server thread/INFO]: Player525[local:E:aba01dbf] logged in with entity id 167 at (622.33762425151, 4.0, 1572.9046736984324)
+[20:20:41] [Server thread/INFO]: Player525 joined the game
+[20:20:44] [Server thread/INFO]: Player525 has just earned the achievement [Taking Inventory]
+[20:20:45] [Client thread/INFO]: [CHAT] Player525 has just earned the achievement [Taking Inventory]
+[20:21:35] [Server thread/INFO]: Saving and pausing game...
+[20:21:35] [Server thread/INFO]: Saving chunks for level 'Bryn's testing world'/Overworld
+[20:21:36] [Server thread/INFO]: Saving chunks for level 'Bryn's testing world'/Nether
+[20:21:36] [Server thread/INFO]: Saving chunks for level 'Bryn's testing world'/The End
+[20:28:31] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 33424ms behind, skipping 668 tick(s)
