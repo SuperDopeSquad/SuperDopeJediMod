@@ -16,14 +16,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>src/main/resources/superdopejedimod</name>
-			<type>2</type>
-			<location>C:/dev/SuperDopeJediMod/src/resources/assets/superdopejedimod</location>
-		</link>
-		<link>
-			<name>src/main/java/superdopesquad/superdopejedimod</name>
+			<name>src/main/java/superDopeJediMod</name>
 			<type>2</type>
 			<location>C:/dev/SuperDopeJediMod/src/superDopeJediMod</location>
+		</link>
+		<link>
+			<name>src/main/resources/resources</name>
+			<type>2</type>
+			<location>C:/dev/SuperDopeJediMod/src/resources</location>
 		</link>
 	</linkedResources>
 </projectDescription>
