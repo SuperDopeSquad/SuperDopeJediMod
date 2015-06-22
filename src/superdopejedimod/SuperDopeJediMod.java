@@ -64,6 +64,8 @@ public class SuperDopeJediMod //Start the class Declaration
     public static BaseBlock bluePowerCrystalOre = new PowerCrystalOre("bluePowerCrystalOre", "Blue");
     public static BaseBlock greenPowerCrystalOre = new PowerCrystalOre("greenPowerCrystalOre", "Green");
     public static BaseBlock purplePowerCrystalOre = new PowerCrystalOre("purplePowerCrystalOre", "Purple");
+    
+    public static BaseItem credit = new Credit("credit"); 
 
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
     //        serverSide="tutorial.generic.CommonProxy")
