@@ -36,8 +36,7 @@ public class LightSaber extends BaseItem {
 			// Recipe for creating a LightSaber.
 			ItemStack powerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
     		ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
-    		ItemStack stoneButtonStack = new ItemStack(Blocks.stone_button);
-    		GameRegistry.addRecipe(new ItemStack(this), "x", " z", " y", 'x', powerCrystalStack, 'y', ironIngotStack, 'z', stoneButtonStack);
+    		GameRegistry.addRecipe(new ItemStack(this), "x", " y", " x", 'x', powerCrystalStack, 'y', ironIngotStack);
 		}
 	}
 
