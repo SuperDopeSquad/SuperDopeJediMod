@@ -33,11 +33,40 @@ public class LightSaber extends BaseItem {
 		
 		if (this.color == "Red") {
 		
-			// Recipe for creating a LightSaber.
-			ItemStack powerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
+			// Recipe for creating a redLightSaber.
+			ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
     		ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
     		ItemStack stoneButtonStack = new ItemStack(Blocks.stone_button);
-    		GameRegistry.addRecipe(new ItemStack(this), "x", " z", " y", 'x', powerCrystalStack, 'y', ironIngotStack, 'z', stoneButtonStack);
+    		GameRegistry.addRecipe(new ItemStack(this), "x", "y", "z", 'x', redPowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
+		}
+		
+		if (this.color == "Blue") {
+			
+			// Recipe for creating a blueLightSaber.
+			ItemStack bluePowerCrystalStack = new ItemStack(SuperDopeJediMod.bluePowerCrystal);
+    		ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
+    		ItemStack stoneButtonStack = new ItemStack(Blocks.stone_button);
+    		GameRegistry.addRecipe(new ItemStack(this), "x", "y", "z", 'x', bluePowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
+		}
+		
+		if (this.color == "Green") {
+			
+			// Recipe for creating a greenLightSaber.
+			ItemStack greenPowerCrystalStack = new ItemStack(SuperDopeJediMod.greenPowerCrystal);
+    		ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
+    		ItemStack stoneButtonStack = new ItemStack(Blocks.stone_button);
+    		GameRegistry.addRecipe(new ItemStack(this), "x", "y", "z", 'x', greenPowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
+    		
+		}
+		
+		if (this.color == "Purple") {
+			
+			// Recipe for creating a purpleLightSaber.
+			ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
+    		ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
+    		ItemStack stoneButtonStack = new ItemStack(Blocks.stone_button);
+    		GameRegistry.addRecipe(new ItemStack(this), "x", "y", "z", 'x', purplePowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
+    		
 		}
 	}
 
