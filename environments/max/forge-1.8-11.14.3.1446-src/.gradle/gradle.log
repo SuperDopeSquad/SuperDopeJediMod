@@ -6,6 +6,7 @@
  MCP Data version : snapshot_20141130
 ****************************
 :eclipseClasspath
+<<<<<<< HEAD
 Download https://libraries.minecraft.net/net/minecraft/launchwrapper/1.11/launchwrapper-1.11-sources.jar
 Download http://repo1.maven.org/maven2/org/ow2/asm/asm-debug-all/5.0.3/asm-debug-all-5.0.3-sources.jar
 Download http://repo1.maven.org/maven2/com/typesafe/akka/akka-actor_2.11/2.3.3/akka-actor_2.11-2.3.3-sources.jar
@@ -46,10 +47,16 @@ Download http://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.0-b
 Download http://repo1.maven.org/maven2/org/lwjgl/lwjgl/lwjgl/2.9.1/lwjgl-2.9.1-sources.jar
 Download http://repo1.maven.org/maven2/org/lwjgl/lwjgl/lwjgl_util/2.9.1/lwjgl_util-2.9.1-sources.jar
 Download http://repo1.maven.org/maven2/org/scala-lang/scala-actors/2.11.0/scala-actors-2.11.0-sources.jar
+=======
+>>>>>>> b6b04be650e4ec6f37ea8d43ce53f4124be31865
 :eclipseJdt
 :eclipseProject
 :eclipse
 
 BUILD SUCCESSFUL
 
+<<<<<<< HEAD
 Total time: 1 mins 30.559 secs
+=======
+Total time: 18.325 secs
+>>>>>>> b6b04be650e4ec6f37ea8d43ce53f4124be31865

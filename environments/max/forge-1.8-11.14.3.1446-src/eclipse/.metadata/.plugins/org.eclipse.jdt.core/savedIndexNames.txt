@@ -1,9 +1,23 @@
 INDEX VERSION 1.127+C:\dev\SuperDopeJediMod\environments\max\forge-1.8-11.14.3.1446-src\eclipse\.metadata\.plugins\org.eclipse.jdt.core
+<<<<<<< HEAD
 1337478678.index
 3693358056.index
 4187470955.index
 220177953.index
 1045485630.index
+=======
+2977094355.index
+78921463.index
+460486261.index
+1541050395.index
+3588916751.index
+932876792.index
+803961782.index
+1949930526.index
+2384448346.index
+355369697.index
+2739972201.index
+>>>>>>> b6b04be650e4ec6f37ea8d43ce53f4124be31865
 1017853417.index
 2384448346.index
 4018213801.index
@@ -24,10 +38,26 @@ INDEX VERSION 1.127+C:\dev\SuperDopeJediMod\environments\max\forge-1.8-11.14.3.1
 803961782.index
 115418958.index
 1887188403.index
+<<<<<<< HEAD
 3824277198.index
 1787405673.index
 1774857340.index
 2674037006.index
+=======
+424517832.index
+2535676096.index
+1914111315.index
+2847088469.index
+3824277198.index
+1616763793.index
+2645933780.index
+3604769962.index
+1969487960.index
+115418958.index
+605290374.index
+323251068.index
+2328269416.index
+>>>>>>> b6b04be650e4ec6f37ea8d43ce53f4124be31865
 622718381.index
 1502454419.index
 484281912.index
@@ -66,6 +96,7 @@ INDEX VERSION 1.127+C:\dev\SuperDopeJediMod\environments\max\forge-1.8-11.14.3.1
 2972437630.index
 3478938726.index
 4038435932.index
+<<<<<<< HEAD
 1364702178.index
 912800629.index
 2725768415.index
@@ -73,3 +104,20 @@ INDEX VERSION 1.127+C:\dev\SuperDopeJediMod\environments\max\forge-1.8-11.14.3.1
 1949930526.index
 355369697.index
 3656756579.index
+=======
+2984975980.index
+3045053200.index
+308941102.index
+3739566052.index
+2725768415.index
+2556442530.index
+3060461192.index
+1364702178.index
+3478938726.index
+3282645511.index
+4018213801.index
+4187470955.index
+1502454419.index
+1202624014.index
+3716007315.index
+>>>>>>> b6b04be650e4ec6f37ea8d43ce53f4124be31865

@@ -28,5 +28,15 @@ public class LightSaber extends BaseItem {
 		
 	}
 	
+	
+	public void registerRecipe() {
+		
+		if (this.PowerCrystal == "Red")
+		
+		// Recipe for creating a LightSaber.
+    	ItemStack powerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
+    	ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
+    	GameRegistry.addRecipe(new ItemStack(this), "x", " y", " x", 'x', powerCrystalStack, 'y', ironIngotStack);
+	}
 
 }

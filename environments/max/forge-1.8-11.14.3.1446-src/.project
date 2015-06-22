@@ -16,7 +16,16 @@
 	</natures>
 	<linkedResources>
 		<link>
+<<<<<<< HEAD
 			<name>src/main/java/superDopeJediMod</name>
+=======
+			<name>.link1</name>
+			<type>2</type>
+			<location>C:/Users/max_000/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1446/start</location>
+		</link>
+		<link>
+			<name>src/main/resources/superdopejedimod</name>
+>>>>>>> b6b04be650e4ec6f37ea8d43ce53f4124be31865
 			<type>2</type>
 			<location>C:/dev/SuperDopeJediMod/src/superDopeJediMod</location>
 		</link>
