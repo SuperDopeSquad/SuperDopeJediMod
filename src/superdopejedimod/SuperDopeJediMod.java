@@ -65,8 +65,10 @@ public class SuperDopeJediMod //Start the class Declaration
     public static BaseBlock purplePowerCrystalOre = new PowerCrystalOre("purplePowerCrystalOre", "Purple");
     
     public static BaseItem credit = new Credit("credit"); 
+    public static Blaster blaster = new Blaster("blaster");
     public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
-
+    public static Zapper zapper = new Zapper("zapper");
+    
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
     //        serverSide="tutorial.generic.CommonProxy")
     
