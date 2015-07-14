@@ -1,8 +1,7 @@
 package superdopesquad.superdopejedimod;
 
-import java.util.Set;
-import java.util.HashSet;
 
+import java.util.ArrayList;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -34,7 +33,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static final String MODVER = "0.0.1";
 
     // This is the collection of custom objects we will maintain.
-    public static Set<SuperDopeObject> customObjects = new HashSet<SuperDopeObject>();
+    public static ArrayList<SuperDopeObject> customObjects = new ArrayList<SuperDopeObject>();
     
     // instance variable.
     //@Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
