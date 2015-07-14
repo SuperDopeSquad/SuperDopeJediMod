@@ -40,13 +40,18 @@ public class SuperDopeJediMod //Start the class Declaration
     //@Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
     //public static SuperDopeJediMod instance;
     
-    // Custom blocks items.
+    // Miscellaneous hand-held weapons.
     public static BaseItem gaffiStick = new GaffiStick("gaffiStick");  
+    
+    // Brown Steel, used to create vehicles.
     public static BaseBlock brownSteel = new BrownSteel("brownSteel");
     public static BaseItem brownSteelIngot = new BrownSteelIngot("brownSteelIngot");    
     public static BaseBlock brownSteelOre = new BrownSteelOre("brownSteelOre");
+    
+    // Vehicle parts.
     public static BaseBlock vehicleSeat = new VehicleSeat("vehicleSeat");
-    public static BaseItemFood nourishmentCapsule = new NourishmentCapsule("nourishmentCapsule");
+    
+    // Lightsaber stuff!
     public static BaseItem lightSaberRed = new LightSaber("lightSaberRed", "Red"); 
     public static BaseItem lightSaberBlue = new LightSaber("lightSaberBlue", "Blue");
     public static BaseItem lightSaberGreen = new LightSaber("lightSaberGreen", "Green");
@@ -64,15 +69,25 @@ public class SuperDopeJediMod //Start the class Declaration
     public static BaseBlock greenPowerCrystalOre = new PowerCrystalOre("greenPowerCrystalOre", "Green");
     public static BaseBlock purplePowerCrystalOre = new PowerCrystalOre("purplePowerCrystalOre", "Purple");
     
+    // Miscellaneous items.
+    public static BaseItemFood nourishmentCapsule = new NourishmentCapsule("nourishmentCapsule");
     public static BaseItem credit = new Credit("credit"); 
+    
+    // Ranged weapons.
     public static Blaster blaster = new Blaster("blaster");
     public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
     public static Zapper zapper = new Zapper("zapper");
     
+    // Mandalorian Iron, used to create weapons.
+    public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
+    public static MandalorianIronOre mandalorianIronOre = new MandalorianIronOre("mandalorianIronOre");
+    public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
+    
+    
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
     //        serverSide="tutorial.generic.CommonProxy")
     
-    
+ 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	   	
