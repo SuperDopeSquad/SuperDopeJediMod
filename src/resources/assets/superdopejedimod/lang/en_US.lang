@@ -22,5 +22,9 @@ tile.purplePowerCrystalOre.name=Purple Power Crystal Ore
 item.credit.name=Credit
 item.nourishmentCapsule.name=Nourishment Capsule
 item.bossBlaster.name=Boss Blaster
-
+item.zapper.name=Zapper
+item.blaster.name=Blaster
+tile.mandalorianIron.name=Mandalorian Iron
+tile.mandalorianIronOre.name=Mandalorian Iron Ore
+item.mandalorianIronIngot.name=Mandalorian Iron Ingot
 
