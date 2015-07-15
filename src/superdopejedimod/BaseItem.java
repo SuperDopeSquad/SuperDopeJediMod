@@ -51,7 +51,8 @@ public abstract class BaseItem extends Item implements SuperDopeObject {
     	//  GameRegistry.addRecipe(new ItemStack(this), "xx", " y", " x", 'x', ironIngotStack, 'y', stickStack);
 
 		// Example of registering a smelting/furnace recipe.
-		//GameRegistry.addSmelting(new ItemStack(Items.dye, 1, 1), new ItemStack(Items.dye, 1, 11), 0.1F);
+		// GameRegistry.addSmelting(Items.diamond, new ItemStack(Items.apple), 1.0F);		
+		// Translation: smelt one diamond and you get one apple, and the player gets 1 experience point.
 
 		return;
 	}
