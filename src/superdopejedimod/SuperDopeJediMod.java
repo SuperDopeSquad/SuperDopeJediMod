@@ -62,6 +62,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static BaseBlock bluePowerCrystalOre = new PowerCrystalOre("bluePowerCrystalOre", "Blue");
     public static BaseBlock greenPowerCrystalOre = new PowerCrystalOre("greenPowerCrystalOre", "Green");
     public static BaseBlock purplePowerCrystalOre = new PowerCrystalOre("purplePowerCrystalOre", "Purple");
+    public static BaseBlock sithMark = new SithMark("sithMark");
     
     // Miscellaneous items.
     public static BaseItemFood nourishmentCapsule = new NourishmentCapsule("nourishmentCapsule");

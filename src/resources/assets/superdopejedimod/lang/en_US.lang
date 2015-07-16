@@ -27,3 +27,7 @@ item.blaster.name=Blaster
 tile.mandalorianIron.name=Mandalorian Iron
 tile.mandalorianIronOre.name=Mandalorian Iron Ore
 item.mandalorianIronIngot.name=Mandalorian Iron Ingot
+<<<<<<< HEAD
+=======
+tile.sithMark.name=Sith Mark
+>>>>>>> d7f2613daced07eeb5af75da1f8d976bbd788dd9
