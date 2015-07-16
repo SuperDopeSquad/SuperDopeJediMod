@@ -1,5 +1,6 @@
 package superdopesquad.superdopejedimod;
 
+
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -10,6 +11,7 @@ public class MandalorianIron extends BaseBlock {
 
 	
 	public MandalorianIron(String unlocalizedName) {
+		
 		super(Material.iron, unlocalizedName);
 	}
 	
