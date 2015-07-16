@@ -88,16 +88,15 @@ public class SuperDopeJediMod //Start the class Declaration
     public static MandalorianIronOre mandalorianIronOre = new MandalorianIronOre("mandalorianIronOre");
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
     
-<<<<<<< HEAD
-    // Mobs
-    //public static TuskanRaider tuskanRaider = new TuskanRaider();
-    //public static BaseMob baseMob = new BaseMob()
-=======
     // Quadanium Steel, used to create vehicles.
     public static BaseBlock quadaniumSteel = new QuadaniumSteel("quadaniumSteel");
     public static BaseItem quadaniumSteelIngot = new QuadaniumSteelIngot("quadaniumSteelIngot");    
     public static BaseBlock quadaniumSteelOre = new QuadaniumSteelOre("quadaniumSteelOre");
->>>>>>> 40cc43666a95c43afdd94602972a2dd8282423c9
+    
+    // Mobs
+    //public static TuskanRaider tuskanRaider = new TuskanRaider();
+    //public static BaseMob baseMob = new BaseMob()
+
     
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
     //        serverSide="tutorial.generic.CommonProxy")
