@@ -2,11 +2,13 @@ package superdopesquad.superdopejedimod;
 
 
 import java.util.ArrayList;
+
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 //import net.minecraftforge.fml.common.Mod.Instance;
 //import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -16,12 +18,18 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+//import net.minecraft.entity.EntityEggInfo;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.projectile.EntityEgg;
 
 
 @Mod(modid=SuperDopeJediMod.MODID, name=SuperDopeJediMod.MODNAME, version=SuperDopeJediMod.MODVER) //Tell forge "Oh hey, there's a new mod here to load."
@@ -34,6 +42,8 @@ public class SuperDopeJediMod //Start the class Declaration
 
     // This is the collection of custom objects we will maintain.
     public static ArrayList<SuperDopeObject> customObjects = new ArrayList<SuperDopeObject>();
+    
+    static int startEntityId = 300;
     
     // instance variable.
     //@Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
@@ -82,6 +92,9 @@ public class SuperDopeJediMod //Start the class Declaration
     public static MandalorianIronOre mandalorianIronOre = new MandalorianIronOre("mandalorianIronOre");
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
     
+    // Mobs
+    //public static TuskanRaider tuskanRaider = new TuskanRaider();
+    //public static BaseMob baseMob = new BaseMob()
     
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
     //        serverSide="tutorial.generic.CommonProxy")
@@ -101,6 +114,12 @@ public class SuperDopeJediMod //Start the class Declaration
     
     @EventHandler
     public void load(FMLInitializationEvent event) {
+    	
+    	EntityRegistry.registerModEntity(TuskanRaider.class, "foo", 1, this, 80, 3, true);
+    	EntityRegistry.addSpawn(TuskanRaider.class, 10, 2, 4, EnumCreatureType.MONSTER, BiomeGenBase.desert,
+    			BiomeGenBase.desertHills, BiomeGenBase.forest);
+    	
+    	this.registerEntityEgg(TuskanRaider.class, 0xfffffff, 0x000000);
     }
       
     
@@ -129,5 +148,25 @@ public class SuperDopeJediMod //Start the class Declaration
     public void postInit(FMLPostInitializationEvent event) {
     }
     
+    
+    public static int getUniqueEntityId() {
+    	do {
+    		startEntityId++;
+    	}
+    	while (EntityList.getStringFromID(startEntityId) != null);
+    	
+    	return startEntityId;
+    }
+    
+    
+    public static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor) {
+    	
+    	int id = getUniqueEntityId();
+    	EntityList.addMapping(entity, "foo", id, 113213, 3523523);
+    	//EntityList.idToClassMapping.put(id, entity);
+    	//EntityList.entityEggs.put(id,  new EntityEgg(id, primaryColor, secondaryColor));
+    	
+    	
+    }
 }
 
