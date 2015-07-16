@@ -42,11 +42,6 @@ public class SuperDopeJediMod //Start the class Declaration
     // Miscellaneous hand-held weapons.
     public static BaseItem gaffiStick = new GaffiStick("gaffiStick");  
     
-    // Brown Steel, used to create vehicles.
-    public static BaseBlock brownSteel = new BrownSteel("brownSteel");
-    public static BaseItem brownSteelIngot = new BrownSteelIngot("brownSteelIngot");    
-    public static BaseBlock brownSteelOre = new BrownSteelOre("brownSteelOre");
-    
     // Vehicle parts.
     public static BaseBlock vehicleSeat = new VehicleSeat("vehicleSeat");
     
@@ -82,6 +77,10 @@ public class SuperDopeJediMod //Start the class Declaration
     public static MandalorianIronOre mandalorianIronOre = new MandalorianIronOre("mandalorianIronOre");
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
     
+    // Quadanium Steel, used to create vehicles.
+    public static BaseBlock quadaniumSteel = new QuadaniumSteel("quadaniumSteel");
+    public static BaseItem quadaniumSteelIngot = new QuadaniumSteelIngot("quadaniumSteelIngot");    
+    public static BaseBlock quadaniumSteelOre = new QuadaniumSteelOre("quadaniumSteelOre");
     
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
     //        serverSide="tutorial.generic.CommonProxy")
