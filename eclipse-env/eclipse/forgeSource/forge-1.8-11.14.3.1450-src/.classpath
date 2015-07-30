@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry kind="lib" path="E:/comics/dev/SuperDopeJediMod/eclipse-env/eclipse/forgeSource/forge-1.8-11.14.3.1450-src/unresolved dependency -  forgeBin 1.8-11.14.3.1450" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/Kevin/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1450/start" exported="true"/>
+</classpath>
