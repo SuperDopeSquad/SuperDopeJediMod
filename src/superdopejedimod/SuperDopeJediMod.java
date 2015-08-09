@@ -50,33 +50,33 @@ public class SuperDopeJediMod //Start the class Declaration
     //public static SuperDopeJediMod instance;
     
     // Miscellaneous hand-held weapons.
-    public static BaseItem gaffiStick = new GaffiStick("gaffiStick");  
+    public static GaffiStick gaffiStick = new GaffiStick("gaffiStick");  
     
     // Vehicle parts.
-    public static BaseBlock vehicleSeat = new VehicleSeat("vehicleSeat");
+    public static VehicleSeat vehicleSeat = new VehicleSeat("vehicleSeat");
     
     // Lightsaber stuff!
-    public static BaseItem lightSaberRed = new LightSaber("lightSaberRed", "Red"); 
-    public static BaseItem lightSaberBlue = new LightSaber("lightSaberBlue", "Blue");
-    public static BaseItem lightSaberGreen = new LightSaber("lightSaberGreen", "Green");
-    public static BaseItem lightSaberPurple = new LightSaber("lightSaberPurple", "Purple");
-    public static BaseItem doubleLightSaberRed = new DoubleLightSaber("doubleLightSaberRed", "Red");
-    public static BaseItem doubleLightSaberBlue = new DoubleLightSaber("doubleLightSaberBlue", "Blue");
-    public static BaseItem doubleLightSaberGreen = new DoubleLightSaber("doubleLightSaberGreen", "Green");
-    public static BaseItem doubleLightSaberPurple = new DoubleLightSaber("doubleLightSaberPurple", "Purple");
-    public static BaseItem redPowerCrystal = new PowerCrystal("redPowerCrystal", "Red");
-    public static BaseItem bluePowerCrystal = new PowerCrystal("bluePowerCrystal", "Blue");
-    public static BaseItem greenPowerCrystal = new PowerCrystal("greenPowerCrystal", "Green");
-    public static BaseItem purplePowerCrystal = new PowerCrystal("purplePowerCrystal", "Purple");
-    public static BaseBlock redPowerCrystalOre = new PowerCrystalOre("redPowerCrystalOre", "Red");
-    public static BaseBlock bluePowerCrystalOre = new PowerCrystalOre("bluePowerCrystalOre", "Blue");
-    public static BaseBlock greenPowerCrystalOre = new PowerCrystalOre("greenPowerCrystalOre", "Green");
-    public static BaseBlock purplePowerCrystalOre = new PowerCrystalOre("purplePowerCrystalOre", "Purple");
-    public static BaseBlock sithMark = new SithMark("sithMark");
+    public static LightSaber lightSaberRed = new LightSaber("lightSaberRed", "Red"); 
+    public static LightSaber lightSaberBlue = new LightSaber("lightSaberBlue", "Blue");
+    public static LightSaber lightSaberGreen = new LightSaber("lightSaberGreen", "Green");
+    public static LightSaber lightSaberPurple = new LightSaber("lightSaberPurple", "Purple");
+    public static DoubleLightSaber doubleLightSaberRed = new DoubleLightSaber("doubleLightSaberRed", "Red");
+    public static DoubleLightSaber doubleLightSaberBlue = new DoubleLightSaber("doubleLightSaberBlue", "Blue");
+    public static DoubleLightSaber doubleLightSaberGreen = new DoubleLightSaber("doubleLightSaberGreen", "Green");
+    public static DoubleLightSaber doubleLightSaberPurple = new DoubleLightSaber("doubleLightSaberPurple", "Purple");
+    public static PowerCrystal redPowerCrystal = new PowerCrystal("redPowerCrystal", "Red");
+    public static PowerCrystal bluePowerCrystal = new PowerCrystal("bluePowerCrystal", "Blue");
+    public static PowerCrystal greenPowerCrystal = new PowerCrystal("greenPowerCrystal", "Green");
+    public static PowerCrystal purplePowerCrystal = new PowerCrystal("purplePowerCrystal", "Purple");
+    public static PowerCrystalOre redPowerCrystalOre = new PowerCrystalOre("redPowerCrystalOre", "Red");
+    public static PowerCrystalOre bluePowerCrystalOre = new PowerCrystalOre("bluePowerCrystalOre", "Blue");
+    public static PowerCrystalOre greenPowerCrystalOre = new PowerCrystalOre("greenPowerCrystalOre", "Green");
+    public static PowerCrystalOre purplePowerCrystalOre = new PowerCrystalOre("purplePowerCrystalOre", "Purple");
     
     // Miscellaneous items.
-    public static BaseItemFood nourishmentCapsule = new NourishmentCapsule("nourishmentCapsule");
-    public static BaseItem credit = new Credit("credit"); 
+    public static NourishmentCapsule nourishmentCapsule = new NourishmentCapsule("nourishmentCapsule");
+    public static Credit credit = new Credit("credit"); 
+    public static SithMark sithMark = new SithMark("sithMark");
     
     // Ranged weapons.
     public static Blaster blaster = new Blaster("blaster");
@@ -89,9 +89,9 @@ public class SuperDopeJediMod //Start the class Declaration
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
     
     // Quadanium Steel, used to create vehicles.
-    public static BaseBlock quadaniumSteel = new QuadaniumSteel("quadaniumSteel");
-    public static BaseItem quadaniumSteelIngot = new QuadaniumSteelIngot("quadaniumSteelIngot");    
-    public static BaseBlock quadaniumSteelOre = new QuadaniumSteelOre("quadaniumSteelOre");
+    public static QuadaniumSteel quadaniumSteel = new QuadaniumSteel("quadaniumSteel");
+    public static QuadaniumSteelIngot quadaniumSteelIngot = new QuadaniumSteelIngot("quadaniumSteelIngot");    
+    public static QuadaniumSteelOre quadaniumSteelOre = new QuadaniumSteelOre("quadaniumSteelOre");
     
     // Mobs
     //public static TuskanRaider tuskanRaider = new TuskanRaider();
