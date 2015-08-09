@@ -7,12 +7,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public class GaffiStick extends BaseItem {
+public class GaffiStick extends BaseMeleeWeapon {
 
 	
 	public GaffiStick(String unlocalizedName) {
 		
-		super(unlocalizedName);
+		super(unlocalizedName, ToolMaterial.IRON);
 		
 		setCreativeTab(CreativeTabs.tabCombat);
 	}
