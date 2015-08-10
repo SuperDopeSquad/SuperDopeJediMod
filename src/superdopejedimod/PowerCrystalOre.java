@@ -1,7 +1,6 @@
 package superdopesquad.superdopejedimod;
 
 import java.util.Random;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -28,7 +27,7 @@ public class PowerCrystalOre extends BaseBlock {
 	
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-		
+        
 		Item obj;
 		
 		if (this.color == "Red") {
