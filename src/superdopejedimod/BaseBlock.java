@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public class BaseBlock extends Block implements SuperDopeObject {
+public abstract class BaseBlock extends Block implements SuperDopeObject {
 	
 	protected String name = "";
 	
