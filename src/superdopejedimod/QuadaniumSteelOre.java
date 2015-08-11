@@ -18,7 +18,7 @@ public class QuadaniumSteelOre extends BaseBlock {
 	
     public Item getItemDropped(int metadata, Random random, int fortune) {
         
-    	return Item.getItemFromBlock(SuperDopeJediMod.quadaniumSteel);
+    	return Item.getItemFromBlock(SuperDopeJediMod.quadaniumSteelOre);
     }
   
     
