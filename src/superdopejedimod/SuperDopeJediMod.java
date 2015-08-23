@@ -3,6 +3,7 @@ package superdopesquad.superdopejedimod;
 
 import java.util.ArrayList;
 
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -17,6 +18,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
@@ -45,6 +47,10 @@ public class SuperDopeJediMod //Start the class Declaration
     
     static int startEntityId = 300;
     
+    // Custom ToolMaterials.  For a good tutorial on how to define a ToolMaterial, look here:
+    // http://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-7/custom-tools-swords/
+	public static ToolMaterial gaffiStickMaterial = EnumHelper.addToolMaterial("GaffiStickMaterial", 3, 1000, 15.0F, 4.0F, 30);
+
     // instance variable.
     //@Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
     //public static SuperDopeJediMod instance;
