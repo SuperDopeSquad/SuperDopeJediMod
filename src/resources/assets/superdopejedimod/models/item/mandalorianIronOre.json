@@ -1,5 +1,5 @@
 {
-    "parent": "superdopejedimod:block/mandalorianIron",
+    "parent": "superdopejedimod:block/mandalorianIronOre",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

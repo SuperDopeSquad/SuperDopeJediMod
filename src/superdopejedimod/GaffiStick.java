@@ -4,7 +4,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
 
 
 public class GaffiStick extends BaseMeleeWeapon {
@@ -12,7 +14,7 @@ public class GaffiStick extends BaseMeleeWeapon {
 	
 	public GaffiStick(String unlocalizedName) {
 		
-		super(unlocalizedName, ToolMaterial.IRON);
+		super(unlocalizedName, SuperDopeJediMod.gaffiStickMaterial);
 		
 		setCreativeTab(CreativeTabs.tabCombat);
 	}

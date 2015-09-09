@@ -20,7 +20,7 @@ public class MandalorianIronOre extends BaseBlock {
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {
 	        
-		return Item.getItemFromBlock(SuperDopeJediMod.mandalorianIron);
+		return Item.getItemFromBlock(SuperDopeJediMod.mandalorianIronOre);
 	}
 	
 }
