@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemSword;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
@@ -59,5 +60,20 @@ public abstract class BaseMeleeWeapon extends ItemSword implements SuperDopeObje
 	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseMeleeWeapon) this).getName(), "inventory"));
+	}
+	
+	
+	public void generateEnd(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	public void generateSurface(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	public void generateNether(World world, Random random, int i, int j) {
+		return;
 	}
 }

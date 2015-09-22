@@ -9,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
@@ -61,6 +62,19 @@ public abstract class BaseBlock extends Block implements SuperDopeObject {
 	}
   
     
+	public void generateEnd(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	public void generateSurface(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	public void generateNether(World world, Random random, int i, int j) {
+		return;
+	}
 
 
 }
