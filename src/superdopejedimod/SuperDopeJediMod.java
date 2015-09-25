@@ -54,7 +54,9 @@ public class SuperDopeJediMod //Start the class Declaration
     // Custom ToolMaterials.  For a good tutorial on how to define a ToolMaterial, look here:
     // http://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-7/custom-tools-swords/
 	public static ToolMaterial gaffiStickMaterial = EnumHelper.addToolMaterial("GaffiStickMaterial", 3, 1000, 15.0F, 4.0F, 30);
-
+	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 2000, 15.0F, 6.0F, 30);
+	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 2500, 15.0F, 8.0F, 30);
+	
     // instance variable.
     //@Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
     //public static SuperDopeJediMod instance;
@@ -88,10 +90,18 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
     
+    
     // Ranged weapons.
     public static Blaster blaster = new Blaster("blaster");
     public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
     public static Zapper zapper = new Zapper("zapper");
+    
+    // Blocks and Items Used for a Spaceship
+    public static Engine engine = new Engine("engine");
+    public static ChromateOre chromateOre = new ChromateOre("chromateOre");
+    public static ChromateIngot chromateIngot = new ChromateIngot("chromateIngot");
+    public static CompressedMetalPlate compressedMetalPlate = new CompressedMetalPlate("compressedMetalPlate");
+    public static CompressedMetalBits compressedMetalBits = new CompressedMetalBits("compressedMetalBits");
     
     // Mandalorian Iron, used to create weapons.
     public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
