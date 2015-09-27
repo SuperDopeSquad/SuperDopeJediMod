@@ -14,7 +14,7 @@ public class LightSaber extends BaseMeleeWeapon {
 
 	public LightSaber(String unlocalizedName, String colorInput) {
 		
-		super(unlocalizedName, ToolMaterial.IRON);
+		super(unlocalizedName, SuperDopeJediMod.powerCrystalMaterial);
 		
 		this.setMaxStackSize(1);
 		

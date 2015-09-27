@@ -28,4 +28,10 @@ tile.mandalorianIron.name=Mandalorian Iron
 tile.mandalorianIronOre.name=Mandalorian Iron Ore
 item.mandalorianIronIngot.name=Mandalorian Iron Ingot
 tile.sithMark.name=Sith Mark
+tile.engine.name=Engine
+item.compressedMetalPlate.name=Compressed Metal Ingot
+item.compressedMetalBits.name=Compressed Metal Bits
+tile.chromateOre.name=Chromate Ore
+item.chromateIngot.name=Chromate Ingot
+
 
