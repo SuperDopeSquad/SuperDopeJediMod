@@ -1,5 +1,7 @@
 package superdopesquad.superdopejedimod;
 
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -60,5 +62,19 @@ public class BaseMob extends EntityAnimal implements SuperDopeObject {
 	    //renderItem.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseBlock) this).getName(), "inventory"));
 	}
   
+	
+	public void generateEnd(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	public void generateSurface(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	public void generateNether(World world, Random random, int i, int j) {
+		return;
+	}
     
 }

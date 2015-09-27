@@ -7,6 +7,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -44,6 +45,9 @@ public class SuperDopeJediMod //Start the class Declaration
 
     // This is the collection of custom objects we will maintain.
     public static ArrayList<SuperDopeObject> customObjects = new ArrayList<SuperDopeObject>();
+    
+    // this is the world generator that adds our custom objects to newly spawned world chunks.
+    public static SuperDopeWorldGenerator superDopeWorldGenerator = new SuperDopeWorldGenerator();
     
     static int startEntityId = 300;
     
@@ -120,9 +124,8 @@ public class SuperDopeJediMod //Start the class Declaration
  
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-    	   	
-    	// Iterate through all our custom blocks and items, and
-    	// register them all.
+    	
+    	// Iterate through all our custom blocks and items, and register them all.
     	for (SuperDopeObject superDopeObject : this.customObjects) {
     		superDopeObject.registerObject();
     	}
@@ -143,7 +146,7 @@ public class SuperDopeJediMod //Start the class Declaration
     
     @EventHandler
     public void init(FMLInitializationEvent event) {
-    	
+    		
     	// Iterate through all our custom blocks and items, 
     	// and see if we have any recipes to register.
     	for (SuperDopeObject superDopeObject : this.customObjects) {
@@ -159,6 +162,9 @@ public class SuperDopeJediMod //Start the class Declaration
         		superDopeObject.registerModel();
         	}
     	}
+    	
+    	// Register our custom world generator, so our ore gets generated.
+    	GameRegistry.registerWorldGenerator(SuperDopeJediMod.superDopeWorldGenerator, 0);
     }
     
  
