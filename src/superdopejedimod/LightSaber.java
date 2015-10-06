@@ -7,14 +7,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class LightSaber extends BaseItem {
+public class LightSaber extends BaseMeleeWeapon {
 	
 	String color;
 	
 
 	public LightSaber(String unlocalizedName, String colorInput) {
 		
-		super(unlocalizedName);
+		super(unlocalizedName, SuperDopeJediMod.powerCrystalMaterial);
 		
 		this.setMaxStackSize(1);
 		

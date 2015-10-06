@@ -1,6 +1,6 @@
-tile.brownSteel.name=Brown Steel
-item.brownSteelIngot.name=Brown Steel Ingot
-tile.brownSteelOre.name=Brown Steel Ore
+tile.quadaniumSteel.name=Quadanium Steel
+item.quadaniumSteelIngot.name=Quadanium Steel Ingot
+tile.quadaniumSteelOre.name=Quadanium Steel Ore
 item.gaffiStick.name=gaffiStick
 tile.vehicleSeat.name=Vehicle Seat
 item.lightSaberRed.name=Red Lightsaber
@@ -27,4 +27,11 @@ item.blaster.name=Blaster
 tile.mandalorianIron.name=Mandalorian Iron
 tile.mandalorianIronOre.name=Mandalorian Iron Ore
 item.mandalorianIronIngot.name=Mandalorian Iron Ingot
+tile.sithMark.name=Sith Mark
+tile.engine.name=Engine
+item.compressedMetalPlate.name=Compressed Metal Ingot
+item.compressedMetalBits.name=Compressed Metal Bits
+tile.chromateOre.name=Chromate Ore
+item.chromateIngot.name=Chromate Ingot
+
 
