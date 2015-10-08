@@ -20,10 +20,13 @@ public Generator(String unlocalizedName){
 	this.setCreativeTab(CreativeTabs.tabRedstone);
 	
 }
+
 public Item getItemDropped(int metadata, Random random, int fortune) {
     
 	return Item.getItemFromBlock(SuperDopeJediMod.generator);
 }
+
+
 
 public void registerRecipe() {
 	
