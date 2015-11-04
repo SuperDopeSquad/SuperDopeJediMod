@@ -107,7 +107,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static ElectricTransmitter electricTransmitter = new ElectricTransmitter("electricTransmitter");
     public static ElectricFluxIngot electricFluxIngot = new ElectricFluxIngot("electricFluxIngot");
     public static ElectricFluxOre electricFluxOre = new ElectricFluxOre("electricFluxOre");
-    
+    public static ControlPanel controlPanel = new ControlPanel("controlPanel");
     
     // Mandalorian Iron, used to create weapons.
     public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
