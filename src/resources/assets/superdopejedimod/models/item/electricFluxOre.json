@@ -1,5 +1,5 @@
-{
-    "parent": "superdopejedimod:block/chromateOre",
+{ 
+    "parent": "superdopejedimod:block/electricFluxOre",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],
