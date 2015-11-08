@@ -13,13 +13,13 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public class BaseMob extends EntityAnimal implements SuperDopeObject {
+public class BaseEntity extends EntityAnimal implements SuperDopeObject {
 
 	protected String name = "";
 	//protected Object mod = null;
 	
 	
-	public BaseMob(World worldIn) {
+	public BaseEntity(World worldIn) {
 		super(worldIn);
 		
 		//this.mod = modIn;
