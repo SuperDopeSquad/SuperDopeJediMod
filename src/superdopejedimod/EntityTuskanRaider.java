@@ -2,9 +2,9 @@ package superdopesquad.superdopejedimod;
 
 import net.minecraft.world.World;
 
-public class TuskanRaider extends BaseMob {
+public class EntityTuskanRaider extends BaseEntity {
 
-	public TuskanRaider(World worldIn) {
+	public EntityTuskanRaider(World worldIn) {
 		super(worldIn);
 		// TODO Auto-generated constructor stub
 	}
