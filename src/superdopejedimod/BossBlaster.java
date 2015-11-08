@@ -10,7 +10,7 @@ public class BossBlaster extends BaseRangedWeapon {
 	
 	public BossBlaster(String unlocalizedName) {
 		super(unlocalizedName);
-
+		
 	}
 
 	
