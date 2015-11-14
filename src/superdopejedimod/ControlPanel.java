@@ -2,6 +2,8 @@ package superdopesquad.superdopejedimod;
 
 import java.util.Random;
 
+import javax.swing.Icon;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -18,9 +20,13 @@ public class ControlPanel extends BaseBlock{
 		
 	}
 
+		
 	public Item getItemDropped(int metadata, Random random, int fortune) {
         
 		return Item.getItemFromBlock(SuperDopeJediMod.controlPanel);
+		
+	
+		
 	}
 	
 }
