@@ -52,10 +52,12 @@ public class SuperDopeJediMod //Start the class Declaration
     static int startEntityId = 300;
     
     // Custom ToolMaterials.  For a good tutorial on how to define a ToolMaterial, look here:
+    // The order of those #'s at the end: harvestLevel, durability, miningSpeed, damageVsEntities, enchantability
     // http://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-7/custom-tools-swords/
 	public static ToolMaterial gaffiStickMaterial = EnumHelper.addToolMaterial("GaffiStickMaterial", 3, 1000, 15.0F, 4.0F, 30);
 	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 2000, 15.0F, 9.0F, 30);
 	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 2500, 15.0F, 12.0F, 30);
+	public static ToolMaterial brynsAwesomeSwordMaterial = EnumHelper.addToolMaterial("BrynsAwesomeSwordMaterial", 3, 2000, 15.0F, 8.0F, 30);
 	
     // instance variable.
     //@Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
@@ -118,6 +120,13 @@ public class SuperDopeJediMod //Start the class Declaration
     public static QuadaniumSteel quadaniumSteel = new QuadaniumSteel("quadaniumSteel");
     public static QuadaniumSteelIngot quadaniumSteelIngot = new QuadaniumSteelIngot("quadaniumSteelIngot");    
     public static QuadaniumSteelOre quadaniumSteelOre = new QuadaniumSteelOre("quadaniumSteelOre");
+    
+    // Peoples Custom Items
+    public static BrynsAwesomeSword brynsAwesomeSword = new BrynsAwesomeSword("brynsAwesomeSword");
+    
+    //Items for Custom Items
+    public static Ruby ruby = new Ruby("ruby");
+    public static RubyOre rubyOre = new RubyOre("rubyOre");
     
     // Mobs
     //public static TuskanRaider tuskanRaider = new TuskanRaider();
