@@ -15,11 +15,12 @@ public class BrynsAwesomeSword extends BaseMeleeWeapon{
 	
 		this.setMaxStackSize(1);
 	
-		this.setCreativeTab(CreativeTabs.tabCombat);
-	
-	
-	
+		this.setCreativeTab(CreativeTabs.tabCombat);		
+		
 	}
+	
+	
+	
 	
 public void registerRecipe() {
 	
