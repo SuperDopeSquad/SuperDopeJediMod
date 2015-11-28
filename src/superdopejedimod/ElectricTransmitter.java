@@ -12,39 +12,38 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public class Engine extends BaseBlock {
+public class ElectricTransmitter extends BaseBlock{
 
-public Engine(String unlocalizedName) {
+	public ElectricTransmitter(String unlocalizedName) {
 		
 		super(Material.iron, unlocalizedName);
+		
 		this.setCreativeTab(CreativeTabs.tabRedstone);
+		
 	}
-
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-	        
-		return Item.getItemFromBlock(SuperDopeJediMod.engine);
+        
+		return Item.getItemFromBlock(SuperDopeJediMod.electricTransmitter);
 	}
 	
-	public void registerRecipe() {
+public void registerRecipe() {
 		
-		// Recipe for creating an Engine.
+		// Recipe for creating an ElectricTransmitter.
 		ItemStack chromateIngotStack = new ItemStack(SuperDopeJediMod.chromateIngot);
-		ItemStack electricFluxIngotStack = new ItemStack(SuperDopeJediMod.electricFluxIngot);
+		ItemStack redstoneStack = new ItemStack(Items.redstone);
 		ItemStack compressedMetalPlateStack = new ItemStack(SuperDopeJediMod.compressedMetalPlate);
-		ItemStack quadaniumSteelStack = new ItemStack(SuperDopeJediMod.quadaniumSteel);
+		ItemStack diamondStack = new ItemStack(Items.diamond);
 		
 		GameRegistry.addRecipe(new ItemStack(this, 1), 
 				"ADA", 
 				"CBC", 
 				"ADA", 
 				'A', compressedMetalPlateStack, 
-				'B', electricFluxIngotStack, 
-				'C', quadaniumSteelStack,
+				'B', redstoneStack, 
+				'C', diamondStack,
 				'D', chromateIngotStack);
 				
 	}
 	
 }
-	
-

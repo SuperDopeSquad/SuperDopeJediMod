@@ -52,10 +52,12 @@ public class SuperDopeJediMod //Start the class Declaration
     static int startEntityId = 300;
     
     // Custom ToolMaterials.  For a good tutorial on how to define a ToolMaterial, look here:
+    // The order of those #'s at the end: harvestLevel, durability, miningSpeed, damageVsEntities, enchantability
     // http://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-7/custom-tools-swords/
 	public static ToolMaterial gaffiStickMaterial = EnumHelper.addToolMaterial("GaffiStickMaterial", 3, 1000, 15.0F, 4.0F, 30);
-	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 2000, 15.0F, 6.0F, 30);
-	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 2500, 15.0F, 8.0F, 30);
+	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 2000, 15.0F, 9.0F, 30);
+	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 2500, 15.0F, 12.0F, 30);
+	public static ToolMaterial brynsAwesomeSwordMaterial = EnumHelper.addToolMaterial("BrynsAwesomeSwordMaterial", 3, 2000, 15.0F, 8.0F, 30);
 	
     // instance variable.
     //@Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
@@ -102,6 +104,14 @@ public class SuperDopeJediMod //Start the class Declaration
     public static ChromateIngot chromateIngot = new ChromateIngot("chromateIngot");
     public static CompressedMetalPlate compressedMetalPlate = new CompressedMetalPlate("compressedMetalPlate");
     public static CompressedMetalBits compressedMetalBits = new CompressedMetalBits("compressedMetalBits");
+    public static Generator generator = new Generator("generator");
+    public static ChromateShard chromateShard = new ChromateShard("chromateShard");
+    public static ElectricTransmitter electricTransmitter = new ElectricTransmitter("electricTransmitter");
+    public static ElectricFluxIngot electricFluxIngot = new ElectricFluxIngot("electricFluxIngot");
+    public static ElectricFluxOre electricFluxOre = new ElectricFluxOre("electricFluxOre");
+    public static ControlPanel controlPanel = new ControlPanel("controlPanel");
+    public static CompressedMetalMesh compressedMetalMesh = new CompressedMetalMesh("compressedMetalMesh");
+    public static BitsOfCompressedMetalMesh bitsOfCompressedMetalMesh = new BitsOfCompressedMetalMesh("bitsOfCompressedMetalMesh");
     
     // Mandalorian Iron, used to create weapons.
     public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
@@ -112,6 +122,13 @@ public class SuperDopeJediMod //Start the class Declaration
     public static QuadaniumSteel quadaniumSteel = new QuadaniumSteel("quadaniumSteel");
     public static QuadaniumSteelIngot quadaniumSteelIngot = new QuadaniumSteelIngot("quadaniumSteelIngot");    
     public static QuadaniumSteelOre quadaniumSteelOre = new QuadaniumSteelOre("quadaniumSteelOre");
+    
+    // Peoples Custom Items
+    public static BrynsAwesomeSword brynsAwesomeSword = new BrynsAwesomeSword("brynsAwesomeSword");
+    
+    //Items for Custom Items
+    public static Ruby ruby = new Ruby("ruby");
+    public static RubyOre rubyOre = new RubyOre("rubyOre");
     
     // Mobs
     //public static TuskanRaider tuskanRaider = new TuskanRaider();

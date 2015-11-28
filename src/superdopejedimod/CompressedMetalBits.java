@@ -24,29 +24,31 @@ public CompressedMetalBits(String unlocalizedName) {
 
 public void registerRecipe() {
 	
-	// Recipe for creating an Engine.
+	// Recipe for creating a Compressed metal bit.
 	ItemStack chromateIngotStack = new ItemStack(SuperDopeJediMod.chromateIngot);
 	ItemStack mandalorianIronIngotStack = new ItemStack(SuperDopeJediMod.mandalorianIronIngot);
 	ItemStack quadaniumSteelIngotStack = new ItemStack(SuperDopeJediMod.quadaniumSteelIngot);
 	GameRegistry.addRecipe(new ItemStack(this, 1), 
 			"***", 
-			"AA*", 
-			"AA*", 
+			"*A*", 
+			"***", 
 			'A', chromateIngotStack);
+	
 	GameRegistry.addRecipe(new ItemStack(this, 1), 
 			"***", 
-			"BB*", 
-			"BB*", 
+			"*B*", 
+			"***", 
 			'B', mandalorianIronIngotStack);
+	
 	GameRegistry.addRecipe(new ItemStack(this, 1), 
 			"***", 
-			"CC*", 
-			"CC*", 
+			"*C*", 
+			"***", 
 			'C', quadaniumSteelIngotStack);
 	
 	
-		// Smelting a CompressedMetalBit will create 1 CompressedMetalPlate
-				GameRegistry.addSmelting(SuperDopeJediMod.compressedMetalBits, new ItemStack(SuperDopeJediMod.compressedMetalPlate), 1.0F);
+
+	
 		}
 			
 }
