@@ -1,5 +1,7 @@
 package superdopesquad.superdopejedimod;
 
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -7,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
@@ -62,5 +65,20 @@ public abstract class BaseItem extends Item implements SuperDopeObject {
 	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseItem) this).getName(), "inventory"));
+	}
+	
+	
+	public void generateEnd(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	public void generateSurface(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	public void generateNether(World world, Random random, int i, int j) {
+		return;
 	}
 }
