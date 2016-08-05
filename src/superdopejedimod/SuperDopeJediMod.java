@@ -4,6 +4,7 @@ package superdopesquad.superdopejedimod;
 import java.util.ArrayList;
 
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -25,13 +26,17 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelChicken;
+import net.minecraft.client.renderer.entity.RenderChicken;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 //import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.projectile.EntityEgg;
 
 
@@ -48,6 +53,8 @@ public class SuperDopeJediMod //Start the class Declaration
     
     // this is the world generator that adds our custom objects to newly spawned world chunks.
     public static SuperDopeWorldGenerator superDopeWorldGenerator = new SuperDopeWorldGenerator();
+    
+    public static RenderManager renderManager = new RenderManager(null, null);
     
     static int startEntityId = 300;
     
@@ -131,7 +138,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static RubyOre rubyOre = new RubyOre("rubyOre");
     
     // Mobs
-    //public static TuskanRaider tuskanRaider = new TuskanRaider();
+    public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
     //public static BaseMob baseMob = new BaseMob()
 
     
@@ -146,6 +153,12 @@ public class SuperDopeJediMod //Start the class Declaration
     	for (SuperDopeObject superDopeObject : this.customObjects) {
     		superDopeObject.registerObject();
     	}
+    	
+    	// temporary hack to get my mob working!
+        //this.entityRenderMap.put(EntityChicken.class, new RenderChicken(this, new ModelChicken(), 0.3F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTuskanRaider.class, 
+        	      new RenderChicken(renderManager, new ModelChicken(), 0.3F));
+
     }
      
      
@@ -153,11 +166,11 @@ public class SuperDopeJediMod //Start the class Declaration
     @EventHandler
     public void load(FMLInitializationEvent event) {
     	
-    	EntityRegistry.registerModEntity(TuskanRaider.class, "foo", 1, this, 80, 3, true);
-    	EntityRegistry.addSpawn(TuskanRaider.class, 10, 2, 4, EnumCreatureType.MONSTER, BiomeGenBase.desert,
+    	EntityRegistry.registerModEntity(EntityTuskanRaider.class, "foo", 1, this, 80, 3, true);
+    	EntityRegistry.addSpawn(EntityTuskanRaider.class, 10, 2, 4, EnumCreatureType.MONSTER, BiomeGenBase.desert,
     			BiomeGenBase.desertHills, BiomeGenBase.forest);
     	
-    	this.registerEntityEgg(TuskanRaider.class, 0xfffffff, 0x000000);
+    	this.registerEntityEgg(EntityTuskanRaider.class, 0xfffffff, 0x000000);
     }
       
     
@@ -200,12 +213,21 @@ public class SuperDopeJediMod //Start the class Declaration
     }
     
     
+    public void registerModEntityWithEgg(Class parEntityClass, String parEntityName, 
+    	      int parEggColor, int parEggSpotsColor) {
+    	    EntityRegistry.registerModEntity(parEntityClass, parEntityName, getUniqueEntityId(), 
+    	          this, 80, 3, false);
+    	    registerEntityEgg(parEntityClass, parEggColor, parEggSpotsColor);
+    }
+
+    
     public static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor) {
     	
     	int id = getUniqueEntityId();
     	EntityList.addMapping(entity, "foo", id, 113213, 3523523);
     	//EntityList.idToClassMapping.put(id, entity);
     	//EntityList.entityEggs.put(id,  new EntityEgg(id, primaryColor, secondaryColor));
+    	
     	
     	
     }
