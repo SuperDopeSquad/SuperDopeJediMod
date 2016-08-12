@@ -8,18 +8,13 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class MandalorianIronIngot extends BaseItem {
 
-	
 	public MandalorianIronIngot(String unlocalizedName) {
 		super(unlocalizedName);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
 	}
 	
-	
-	public void registerRecipe() {
-		
+	public void registerRecipe() {	
 	}
-	
-	
 }
 
 

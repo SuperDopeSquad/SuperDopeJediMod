@@ -3,8 +3,8 @@ package superdopesquad.superdopejedimod;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -29,7 +29,7 @@ public abstract class BaseBlock extends Block implements SuperDopeObject {
 		this.setUnlocalizedName(name);
 		
 		// By default, we'll put all new blocks in the blocks tab.
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 		
 		// Insert this object into our collection of custom blocks, so we 
 		// can send separate events to it for lifecycle management.
@@ -55,12 +55,9 @@ public abstract class BaseBlock extends Block implements SuperDopeObject {
 	
 	
 	public void registerModel() {
-	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-	    renderItem.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseBlock) this).getName(), "inventory"));
+		String location = SuperDopeJediMod.MODID + ":" + ((BaseBlock) this).getName();
+		System.out.println("BaseBlock: registering model: " + location);
+	    renderItem.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new ModelResourceLocation(location, "inventory"));
 	}
-  
-    
-
-
 }

@@ -1,8 +1,8 @@
 package superdopesquad.superdopejedimod;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -22,7 +22,7 @@ public abstract class BaseItem extends Item implements SuperDopeObject {
 		this.name = unlocalizedName;
 		this.setMaxStackSize(64);
 		this.setUnlocalizedName(unlocalizedName);
-		this.setCreativeTab(CreativeTabs.tabMisc);
+		this.setCreativeTab(CreativeTabs.MISC);
 		
 		// Insert this item into our collection of custom items, so we 
 		// can send separate events to it for lifecycle management.

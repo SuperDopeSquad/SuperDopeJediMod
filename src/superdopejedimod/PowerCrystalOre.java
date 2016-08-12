@@ -13,7 +13,7 @@ public class PowerCrystalOre extends BaseBlock {
 	
 	protected PowerCrystalOre(String unlocalizedName, String colorInput) {
 		
-		super(Material.rock, unlocalizedName);
+		super(Material.ROCK, unlocalizedName);
 		
 		this.color = colorInput;
 		
@@ -28,7 +28,7 @@ public class PowerCrystalOre extends BaseBlock {
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {
         
-		Item obj;
+		Item obj = null;
 		
 		if (this.color == "Red") {
 			obj = SuperDopeJediMod.redPowerCrystal;
@@ -41,17 +41,11 @@ public class PowerCrystalOre extends BaseBlock {
 		}
 		else if (this.color == "Purple") {
 			obj = SuperDopeJediMod.purplePowerCrystal;
-		}
+		} 
 		else {
 			obj = SuperDopeJediMod.greenPowerCrystal;
 		}
 		
-    	return obj;
-    	
-    	
+    	return obj;	
     }
-	
-	
-	
-
 }
