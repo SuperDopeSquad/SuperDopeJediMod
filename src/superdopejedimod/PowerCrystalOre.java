@@ -13,7 +13,7 @@ public class PowerCrystalOre extends BaseBlock {
 	
 	protected PowerCrystalOre(String unlocalizedName, String colorInput) {
 		
-		super(Material.rock, unlocalizedName);
+		super(Material.ROCK, unlocalizedName);
 		
 		this.color = colorInput;
 		

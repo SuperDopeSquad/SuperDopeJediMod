@@ -11,7 +11,7 @@ public class MandalorianIronIngot extends BaseItem {
 	
 	public MandalorianIronIngot(String unlocalizedName) {
 		super(unlocalizedName);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
 	}
 	
 	

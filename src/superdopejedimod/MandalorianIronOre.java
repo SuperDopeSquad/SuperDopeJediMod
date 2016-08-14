@@ -10,7 +10,7 @@ public class MandalorianIronOre extends BaseBlock {
 
 	
 	public MandalorianIronOre(String unlocalizedName) {
-		super(Material.iron, unlocalizedName);
+		super(Material.IRON, unlocalizedName);
 	}
 	
 	

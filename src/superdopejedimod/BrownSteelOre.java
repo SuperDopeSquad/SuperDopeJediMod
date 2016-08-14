@@ -12,7 +12,7 @@ public class BrownSteelOre extends BaseBlock {
 
 	protected BrownSteelOre(String unlocalizedName) {
 		
-		super(Material.rock, unlocalizedName);
+		super(Material.ROCK, unlocalizedName);
 	}
 	
 	

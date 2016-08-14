@@ -11,6 +11,6 @@ public class BrownSteel extends BaseBlock {
 	
 	public BrownSteel(String name) {
 		
-		super(Material.rock, name);
+		super(Material.ROCK, name);
 	}
 }

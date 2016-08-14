@@ -3,8 +3,7 @@ package superdopesquad.superdopejedimod;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -29,7 +28,7 @@ public abstract class BaseRangedWeapon extends ItemBow implements SuperDopeObjec
 		this.setUnlocalizedName(this.name);
 				
 		// By default, we'll put all new blocks in the combat tab.
-		this.setCreativeTab(CreativeTabs.tabCombat);
+		this.setCreativeTab(CreativeTabs.COMBAT);
 				
 		// Insert this object into our collection of custom blocks, so we 
 		// can send separate events to it for lifecycle management.
@@ -57,6 +56,6 @@ public abstract class BaseRangedWeapon extends ItemBow implements SuperDopeObjec
 	public void registerModel() {
 	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseRangedWeapon) this).getName(), "inventory"));
+	    renderItem.getItemModelMesher().register(this, 0, new net.minecraft.client.renderer.block.model.ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseRangedWeapon) this).getName(), "inventory"));
 	}
 }

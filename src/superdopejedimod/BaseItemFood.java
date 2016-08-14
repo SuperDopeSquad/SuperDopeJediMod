@@ -1,8 +1,7 @@
 package superdopesquad.superdopejedimod;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -24,7 +23,7 @@ public abstract class BaseItemFood extends ItemFood implements SuperDopeObject {
 		this.name = name;
 		this.setMaxStackSize(64);
 		this.setUnlocalizedName(name);
-		this.setCreativeTab(CreativeTabs.tabFood);
+		this.setCreativeTab(CreativeTabs.FOOD);
 		
 		// Insert this item into our collection of custom items, so we 
 		// can send separate events to it for lifecycle management.
@@ -62,6 +61,6 @@ public abstract class BaseItemFood extends ItemFood implements SuperDopeObject {
 	public void registerModel() {
 	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseItemFood) this).getName(), "inventory"));
+	    renderItem.getItemModelMesher().register(this, 0, new net.minecraft.client.renderer.block.model.ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseItemFood) this).getName(), "inventory"));
 	}
 }
