@@ -14,3 +14,4 @@ public class BrownSteel extends BaseBlock {
 		super(Material.ROCK, name);
 	}
 }
+

@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
@@ -58,5 +59,20 @@ public abstract class BaseRangedWeapon extends ItemBow implements SuperDopeObjec
 	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseRangedWeapon) this).getName(), "inventory"));
+	}
+	
+	
+	public void generateEnd(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	public void generateSurface(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	public void generateNether(World world, Random random, int i, int j) {
+		return;
 	}
 }

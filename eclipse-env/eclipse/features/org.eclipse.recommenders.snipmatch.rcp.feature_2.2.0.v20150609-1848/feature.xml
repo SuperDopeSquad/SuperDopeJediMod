@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.recommenders.snipmatch.rcp.feature"
+      label="%label"
+      version="2.2.0.v20150609-1848"
+      provider-name="%provider-name">
+
+   <description url="http://www.eclipse.org/recommenders/">
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.recommenders.rcp.feature" version="2.2.0" match="equivalent"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.recommenders.snipmatch"
+         download-size="56"
+         install-size="113"
+         version="2.2.0.v20150609-1848"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.recommenders.snipmatch.rcp"
+         download-size="287"
+         install-size="636"
+         version="2.2.0.v20150609-1848"
+         unpack="false"/>
+
+</feature>

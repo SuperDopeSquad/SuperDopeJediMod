@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "parent": "block/cube_all",
     "textures": {
         "all": "superdopejedimod:blocks/mandalorianIronOre"
@@ -14,5 +15,10 @@
             "translation": [ 0, 4, 2 ],
             "scale": [ 0.8, 0.8, 0.8 ]
         }
+=======
+    "parent": "block/cube_all";
+    "textures": {
+        "all": "superdopejedimod:blocks/mandalorianIronOre"
+>>>>>>> SuperDopeSquad/master
     }
 }
