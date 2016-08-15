@@ -3,7 +3,10 @@ package superdopesquad.superdopejedimod;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -42,15 +45,101 @@ public class SithMark extends BaseBlock
         if (worldIn.isRemote)
             return true;
         
-        /* Make sure the block above is empty, and the user clicked on one of the sides. */
-        BlockPos targetPos = pos.up();
-        if (!worldIn.isAirBlock(targetPos) || (side == EnumFacing.UP) || (side == EnumFacing.DOWN)) {
+        /* Only by clicking on the sides do we blow up. */
+        if ((side == EnumFacing.UP) || (side == EnumFacing.DOWN))
         	return false;
-        }
+        
+        /* Make sure the block above is empty, and the user clicked on one of the sides. */
+        BlockPos triggerPos = pos.up();
+        if (!worldIn.isAirBlock(triggerPos))
+        	return false;
         
         /* Create our new block directly above the clicked block. */
-        System.out.println("SithMark: creating extension, pos=" + targetPos);
-        worldIn.setBlockState(targetPos, Blocks.TORCH.getDefaultState());
+        BlockPos startPos = pos.south().west();
+        System.out.println("SithMark: creating extension, pos=" + startPos);
+        BlockPos nextPos = startPos;
+        nextPos = Stairs_BuildOneFloor(worldIn, nextPos);
+        
+        /* add the birch pillar up the middle. */
+		BlockPos centerPos = pos;
+		for (int i = 0 ; i < 8 ; ++i) {
+			IBlockState bstate = Blocks.LOG.getDefaultState();
+			//state.withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.BIRCH);
+			worldIn.setBlockState(centerPos, bstate);
+			centerPos = centerPos.up();
+		}
         return true;
     }
+	
+	/*
+	 */
+	protected BlockPos Stairs_BuildOneFloor(World worldIn, BlockPos startPos) {
+		/* two spirals will bring us eight blocks up. */
+		BlockPos nextPos = startPos;
+		for (int i = 0 ; i < 2 ; ++i) {
+			nextPos = Stairs_BuildOneSpiral(worldIn, nextPos);
+		}
+		return nextPos;
+	}
+	
+	/*
+	 */
+	protected BlockPos Stairs_BuildOneSpiral(World worldIn, BlockPos startPos) {
+		
+		/* one spiral up will bring up 4 blocks up. */
+		BlockPos nextPos = startPos;
+		for (int i = 0 ; i < 4 ; ++i) {
+			{
+				IBlockState state = Blocks.WOODEN_SLAB.getDefaultState();
+				worldIn.setBlockState(nextPos, state);
+			}
+			nextPos = Stairs_IncrementPos(nextPos, i);
+			
+			{
+				IBlockState state = Blocks.BIRCH_STAIRS.getDefaultState();
+				state = state.withProperty(BlockStairs.FACING, Stairs_GetCurrentFacing(i));
+				worldIn.setBlockState(nextPos, state);
+			}
+			nextPos = Stairs_IncrementPos(nextPos, i).up();
+		}
+		return nextPos;
+	}
+	
+	/*
+	 */
+	protected BlockPos Stairs_IncrementPos(BlockPos pos, int state) {
+		switch (state) {
+		case 0:
+			return pos.north();
+		case 1:
+			return pos.east();
+		case 2:
+			return pos.south();
+		case 3:
+			return pos.west();
+		default:
+			throw new IllegalStateException();
+    	}
+	}
+	
+	/*
+	 */
+	protected EnumFacing Stairs_GetCurrentFacing(int state) {
+		switch (state) {
+		case 0:
+			System.out.println("SithMark: stairs are going north");
+			return EnumFacing.NORTH;
+		case 1:
+			System.out.println("SithMark: stairs are going east");
+			return EnumFacing.EAST;
+		case 2:
+			System.out.println("SithMark: stairs are going south");
+			return EnumFacing.SOUTH;
+		case 3:
+			System.out.println("SithMark: stairs are going west");
+			return EnumFacing.WEST;
+		default:
+			throw new IllegalStateException();
+    	}
+	}
 }
