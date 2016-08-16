@@ -167,7 +167,6 @@ public class SuperDopeJediMod //Start the class Declaration
     }
      
      
-    
     @EventHandler
     public void load(FMLInitializationEvent event) {
     	
