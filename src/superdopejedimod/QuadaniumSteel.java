@@ -16,7 +16,7 @@ public class QuadaniumSteel extends BaseBlock {
 	
 	public QuadaniumSteel(String name) {
 		
-		super(Material.iron, name);
+		super(Material.IRON, name);
 	}
 	
 	

@@ -3,8 +3,8 @@ package superdopesquad.superdopejedimod;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -27,7 +27,7 @@ public abstract class BaseItemFood extends ItemFood implements SuperDopeObject {
 		this.name = name;
 		this.setMaxStackSize(64);
 		this.setUnlocalizedName(name);
-		this.setCreativeTab(CreativeTabs.tabFood);
+		this.setCreativeTab(CreativeTabs.FOOD);
 		
 		// Insert this item into our collection of custom items, so we 
 		// can send separate events to it for lifecycle management.

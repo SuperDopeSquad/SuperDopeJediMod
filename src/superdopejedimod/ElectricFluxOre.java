@@ -17,14 +17,14 @@ public class ElectricFluxOre extends BaseBlock{
 
 	public ElectricFluxOre(String unlocalizedName) {
 		
-		super(Material.rock, unlocalizedName);
+		super(Material.ROCK, unlocalizedName);
 		
 		this.setHardness(15.0F);
 		
 		this.setHarvestLevel("pickaxe", 2);
 		
-		this.setStepSound(soundTypeStone);
-		
+		//this.setStepSound(soundTypeStone);
+		this.setSoundType(blockSoundType.STONE);
 	}
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {

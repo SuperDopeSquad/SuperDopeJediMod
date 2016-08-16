@@ -16,9 +16,9 @@ public class RubyOre extends BaseBlock{
 	
 	public RubyOre(String unlocalizedName) {
 		
-		super(Material.rock, unlocalizedName);
+		super(Material.ROCK, unlocalizedName);
 		
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 		
 	}
 
