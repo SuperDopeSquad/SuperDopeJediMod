@@ -1,6 +1,5 @@
 package superdopesquad.superdopejedimod;
 
-
 import java.util.ArrayList;
 
 import net.minecraftforge.common.util.EnumHelper;
@@ -40,8 +39,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 //<<<<<<< HEAD
 //import net.minecraft.entity.EntityEggInfo;
-//=======
-//>>>>>>> bb585345c7066c8133bcad5aa5d5942bdfe77676
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntityChicken;
@@ -170,7 +167,6 @@ public class SuperDopeJediMod //Start the class Declaration
     }
      
      
-    
     @EventHandler
     public void load(FMLInitializationEvent event) {
     	

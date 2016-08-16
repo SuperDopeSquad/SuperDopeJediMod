@@ -17,9 +17,8 @@ public class ElectricTransmitter extends BaseBlock{
 	public ElectricTransmitter(String unlocalizedName) {
 		
 		super(Material.IRON, unlocalizedName);
-		
+
 		this.setCreativeTab(CreativeTabs.REDSTONE);
-		
 	}
 	
 	
