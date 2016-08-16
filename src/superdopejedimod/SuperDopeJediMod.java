@@ -1,6 +1,5 @@
 package superdopesquad.superdopejedimod;
 
-
 import java.util.ArrayList;
 
 import net.minecraftforge.common.util.EnumHelper;
@@ -35,6 +34,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+//import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntityChicken;
