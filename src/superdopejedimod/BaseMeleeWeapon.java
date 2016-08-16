@@ -31,7 +31,7 @@ public abstract class BaseMeleeWeapon extends ItemSword implements SuperDopeObje
 		this.setUnlocalizedName(this.name);
 						
 		// By default, we'll put all new blocks in the combat tab.
-		this.setCreativeTab(CreativeTabs.tabCombat);
+		this.setCreativeTab(CreativeTabs.COMBAT);
 						
 		// Insert this object into our collection of custom blocks, so we 
 		// can send separate events to it for lifecycle management.

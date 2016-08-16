@@ -17,7 +17,7 @@ public class ElectricFluxOre extends BaseBlock{
 
 	public ElectricFluxOre(String unlocalizedName) {
 		
-		super(Material.rock, unlocalizedName);
+		super(Material.ROCK, unlocalizedName);
 		
 		this.setHardness(15.0F);
 		

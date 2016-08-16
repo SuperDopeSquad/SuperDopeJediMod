@@ -15,20 +15,16 @@ public class BrynsAwesomeSword extends BaseMeleeWeapon{
 	
 		this.setMaxStackSize(1);
 	
-		this.setCreativeTab(CreativeTabs.tabCombat);		
-		
+		this.setCreativeTab(CreativeTabs.COMBAT);		
 	}
 	
-	
-	
-	
+
 public void registerRecipe() {
 	
-		
 			// Recipe for creating a BrynsAwesomeSword.
 			ItemStack rubyStack = new ItemStack(SuperDopeJediMod.ruby);
     		ItemStack electricFluxIngotStack = new ItemStack(SuperDopeJediMod.electricFluxIngot);
-    		ItemStack stickStack = new ItemStack(Items.stick);
+    		ItemStack stickStack = new ItemStack(Items.STICK);
     		GameRegistry.addRecipe(new ItemStack(this), "x", "y", "z", 'x', rubyStack, 'z', stickStack, 'y', electricFluxIngotStack);
 		}
 		

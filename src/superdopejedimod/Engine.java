@@ -16,8 +16,8 @@ public class Engine extends BaseBlock {
 
 public Engine(String unlocalizedName) {
 		
-		super(Material.iron, unlocalizedName);
-		this.setCreativeTab(CreativeTabs.tabRedstone);
+		super(Material.IRON, unlocalizedName);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
 	}
 
 	
