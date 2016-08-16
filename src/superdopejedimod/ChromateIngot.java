@@ -12,7 +12,7 @@ public ChromateIngot(String unlocalizedName) {
 		
 		super(unlocalizedName);
 		
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
 	}
 	
 public void registerRecipe() {

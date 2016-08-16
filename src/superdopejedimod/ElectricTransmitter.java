@@ -16,24 +16,26 @@ public class ElectricTransmitter extends BaseBlock{
 
 	public ElectricTransmitter(String unlocalizedName) {
 		
-		super(Material.iron, unlocalizedName);
+		super(Material.IRON, unlocalizedName);
 		
-		this.setCreativeTab(CreativeTabs.tabRedstone);
+		this.setCreativeTab(CreativeTabs.REDSTONE);
 		
 	}
+	
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {
         
 		return Item.getItemFromBlock(SuperDopeJediMod.electricTransmitter);
 	}
 	
-public void registerRecipe() {
+	
+	public void registerRecipe() {
 		
 		// Recipe for creating an ElectricTransmitter.
 		ItemStack chromateIngotStack = new ItemStack(SuperDopeJediMod.chromateIngot);
-		ItemStack redstoneStack = new ItemStack(Items.redstone);
+		ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
 		ItemStack compressedMetalPlateStack = new ItemStack(SuperDopeJediMod.compressedMetalPlate);
-		ItemStack diamondStack = new ItemStack(Items.diamond);
+		ItemStack diamondStack = new ItemStack(Items.DIAMOND);
 		
 		GameRegistry.addRecipe(new ItemStack(this, 1), 
 				"ADA", 

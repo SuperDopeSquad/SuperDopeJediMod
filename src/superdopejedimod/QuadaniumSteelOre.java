@@ -14,7 +14,7 @@ public class QuadaniumSteelOre extends BaseBlock {
 
 	protected QuadaniumSteelOre(String unlocalizedName) {
 		
-		super(Material.rock, unlocalizedName);
+		super(Material.ROCK, unlocalizedName);
 	}
 	
 	
