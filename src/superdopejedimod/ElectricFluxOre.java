@@ -23,8 +23,8 @@ public class ElectricFluxOre extends BaseBlock{
 		
 		this.setHarvestLevel("pickaxe", 2);
 		
-		this.setStepSound(soundTypeStone);
-		
+		//this.setStepSound(soundTypeStone);
+		this.setSoundType(blockSoundType.STONE);
 	}
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {

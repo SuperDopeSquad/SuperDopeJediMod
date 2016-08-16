@@ -14,6 +14,7 @@ public class MandalorianIron extends BaseBlock {
 
 	
 	public MandalorianIron(String unlocalizedName) {
+
 		super(Material.IRON, unlocalizedName);
 	}
 	

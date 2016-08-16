@@ -18,7 +18,6 @@ public Generator(String unlocalizedName){
 	
 	super(Material.IRON, unlocalizedName);
 	this.setCreativeTab(CreativeTabs.MATERIALS);
-	
 }
 
 public Item getItemDropped(int metadata, Random random, int fortune) {

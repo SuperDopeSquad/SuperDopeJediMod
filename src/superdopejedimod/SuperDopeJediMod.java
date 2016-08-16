@@ -21,7 +21,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.world.biome.BiomeGenBase;
+//import net.minecraft.world.biome.BiomeCache;
+//import net.minecraft.world.biome.BiomeGenBase;
+//import net.minecraft.world.biome.*;
+//import net.minecraft.world.biome.BiomeForest;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -29,11 +32,12 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.model.ModelChicken;
 import net.minecraft.client.renderer.entity.RenderChicken;
-import net.minecraft.client.renderer.entity.RenderItem;
+//import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+//import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+//<<<<<<< HEAD
 //import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
@@ -167,11 +171,11 @@ public class SuperDopeJediMod //Start the class Declaration
     @EventHandler
     public void load(FMLInitializationEvent event) {
     	
-    	EntityRegistry.registerModEntity(EntityTuskanRaider.class, "foo", 1, this, 80, 3, true);
-    	EntityRegistry.addSpawn(EntityTuskanRaider.class, 10, 2, 4, EnumCreatureType.MONSTER, BiomeGenBase.desert,
-    			BiomeGenBase.desertHills, BiomeGenBase.forest);
-    	
-    	this.registerEntityEgg(EntityTuskanRaider.class, 0xfffffff, 0x000000);
+//    	// In order to properly merge our files, temporarily commenting out the proto spawn work.
+//    	EntityRegistry.registerModEntity(EntityTuskanRaider.class, "foo", 1, this, 80, 3, true);
+//    	//EntityRegistry.addSpawn(EntityTuskanRaider.class, 10, 2, 4, EnumCreatureType.MONSTER, BiomeGenBase.desert,
+//    	//		Biome.desertHills, Biome.BiomeForest);
+//    	this.registerEntityEgg(EntityTuskanRaider.class, 0xfffffff, 0x000000);
     }
       
     
@@ -204,33 +208,33 @@ public class SuperDopeJediMod //Start the class Declaration
     }
     
     
-    public static int getUniqueEntityId() {
-    	do {
-    		startEntityId++;
-    	}
-    	while (EntityList.getStringFromID(startEntityId) != null);
-    	
-    	return startEntityId;
-    }
+//    public static int getUniqueEntityId() {
+//    	do {
+//    		startEntityId++;
+//    	}
+//    	while (EntityList.getStringFromID(startEntityId) != null);
+//    	
+//    	return startEntityId;
+//    }
     
     
-    public void registerModEntityWithEgg(Class parEntityClass, String parEntityName, 
-    	      int parEggColor, int parEggSpotsColor) {
-    	    EntityRegistry.registerModEntity(parEntityClass, parEntityName, getUniqueEntityId(), 
-    	          this, 80, 3, false);
-    	    registerEntityEgg(parEntityClass, parEggColor, parEggSpotsColor);
-    }
-
-    
-    public static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor) {
-    	
-    	int id = getUniqueEntityId();
-    	EntityList.addMapping(entity, "foo", id, 113213, 3523523);
-    	//EntityList.idToClassMapping.put(id, entity);
-    	//EntityList.entityEggs.put(id,  new EntityEgg(id, primaryColor, secondaryColor));
-    	
-    	
-    	
-    }
+//    public void registerModEntityWithEgg(Class parEntityClass, String parEntityName, 
+//    	      int parEggColor, int parEggSpotsColor) {
+//    	    EntityRegistry.registerModEntity(parEntityClass, parEntityName, getUniqueEntityId(), 
+//    	          this, 80, 3, false);
+//    	    registerEntityEgg(parEntityClass, parEggColor, parEggSpotsColor);
+//    }
+//
+//    
+//    public static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor) {
+//    	
+//    	int id = getUniqueEntityId();
+//    	EntityList.addMapping(entity, "foo", id, 113213, 3523523);
+//    	//EntityList.idToClassMapping.put(id, entity);
+//    	//EntityList.entityEggs.put(id,  new EntityEgg(id, primaryColor, secondaryColor));
+//    	
+//    	
+//    	
+//    }
 }
 

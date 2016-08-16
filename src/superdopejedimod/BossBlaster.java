@@ -11,6 +11,7 @@ public class BossBlaster extends BaseRangedWeapon {
 		super(unlocalizedName);
 	}
 
+	
 	public void registerRecipe() {
 		// Recipe for creating a GaffiStick.
     	ItemStack stickStack = new ItemStack(Items.STICK);

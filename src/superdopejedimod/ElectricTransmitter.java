@@ -17,17 +17,18 @@ public class ElectricTransmitter extends BaseBlock{
 	public ElectricTransmitter(String unlocalizedName) {
 		
 		super(Material.IRON, unlocalizedName);
-		
-		this.setCreativeTab(CreativeTabs.MATERIALS);
-		
+
+		this.setCreativeTab(CreativeTabs.REDSTONE);
 	}
+	
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {
         
 		return Item.getItemFromBlock(SuperDopeJediMod.electricTransmitter);
 	}
 	
-public void registerRecipe() {
+	
+	public void registerRecipe() {
 		
 		// Recipe for creating an ElectricTransmitter.
 		ItemStack chromateIngotStack = new ItemStack(SuperDopeJediMod.chromateIngot);
