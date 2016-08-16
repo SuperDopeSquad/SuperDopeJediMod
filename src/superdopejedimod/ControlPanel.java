@@ -16,7 +16,7 @@ public class ControlPanel extends BaseBlock{
 	
 	public ControlPanel(String unlocalizedName) {
 		
-		super(Material.iron, unlocalizedName);
+		super(Material.IRON, unlocalizedName);
 		
 	}
 

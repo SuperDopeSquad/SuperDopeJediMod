@@ -13,7 +13,7 @@ public class ChromateShard extends BaseItem{
 		
 		super(unlocalizedName);
 		
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
 		
 	}
 
