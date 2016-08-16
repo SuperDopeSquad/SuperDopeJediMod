@@ -17,7 +17,7 @@ public class NourishmentCapsule extends BaseItemFood {
 		// String name, int amount, float saturation, boolean isWolfFood
 		super(name, 20, 20, false);
 		
-		this.setCreativeTab(CreativeTabs.tabFood);
+		this.setCreativeTab(CreativeTabs.FOOD);
 		this.setUnlocalizedName("nourishmentCapsule");
 	}
 	
@@ -25,12 +25,12 @@ public class NourishmentCapsule extends BaseItemFood {
 	public void registerRecipe() {
 	
 		// Recipe for creating a Nourishment Capsule.
-		ItemStack potatoStack = new ItemStack(Items.potato);
-		ItemStack carrotStack = new ItemStack(Items.carrot);
-		ItemStack breadStack = new ItemStack(Items.bread);
-		ItemStack sugarStack = new ItemStack(Items.sugar);
-		ItemStack mushroomStack = new ItemStack(Blocks.brown_mushroom);
-		ItemStack appleStack = new ItemStack(Items.apple);
+		ItemStack potatoStack = new ItemStack(Items.POTATO);
+		ItemStack carrotStack = new ItemStack(Items.CARROT);
+		ItemStack breadStack = new ItemStack(Items.BREAD);
+		ItemStack sugarStack = new ItemStack(Items.SUGAR);
+		ItemStack mushroomStack = new ItemStack(Blocks.BROWN_MUSHROOM);
+		ItemStack appleStack = new ItemStack(Items.APPLE);
 
 		GameRegistry.addRecipe(new ItemStack(this, 6), 
 				"AB", 

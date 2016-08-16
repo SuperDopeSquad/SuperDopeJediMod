@@ -1,5 +1,5 @@
 {
-    "parent": "superdopejedimod:block/quadaniumSteel",
+    "parent": "superdopejedimod:block/quadaniumSteelOre",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

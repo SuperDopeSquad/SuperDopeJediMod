@@ -1,7 +1,10 @@
 package superdopesquad.superdopejedimod;
 
 
+import java.util.Random;
+
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -13,8 +16,14 @@ public class QuadaniumSteel extends BaseBlock {
 	
 	public QuadaniumSteel(String name) {
 		
-		super(Material.iron, name);
+		super(Material.IRON, name);
 	}
+	
+	
+	 public Item getItemDropped(int metadata, Random random, int fortune) {
+	        
+	    return Item.getItemFromBlock(SuperDopeJediMod.quadaniumSteel);
+	 }
 	
 	
 	public void registerRecipe() {
