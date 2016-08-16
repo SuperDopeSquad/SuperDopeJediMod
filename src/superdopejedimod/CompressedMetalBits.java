@@ -16,7 +16,7 @@ public CompressedMetalBits(String unlocalizedName) {
 		
 		super(unlocalizedName);
 		
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
 	}
 
 
