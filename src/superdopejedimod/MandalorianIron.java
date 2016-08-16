@@ -39,7 +39,3 @@ public class MandalorianIron extends BaseBlock {
 	}
 }
 
-
-
-
-

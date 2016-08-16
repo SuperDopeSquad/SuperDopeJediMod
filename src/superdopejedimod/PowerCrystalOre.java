@@ -66,6 +66,16 @@ public void registerRecipe() {
 	}
 	
 	
+public void registerRecipe() {
+		
+		// Smelting a PowerCrystalOre will create 1 PowerCrystal
+		GameRegistry.addSmelting(SuperDopeJediMod.redPowerCrystalOre, new ItemStack(SuperDopeJediMod.redPowerCrystal), 1.0F);
+		GameRegistry.addSmelting(SuperDopeJediMod.bluePowerCrystalOre, new ItemStack(SuperDopeJediMod.bluePowerCrystal), 1.0F);
+		GameRegistry.addSmelting(SuperDopeJediMod.greenPowerCrystalOre, new ItemStack(SuperDopeJediMod.greenPowerCrystal), 1.0F);
+		GameRegistry.addSmelting(SuperDopeJediMod.purplePowerCrystalOre, new ItemStack(SuperDopeJediMod.purplePowerCrystal), 1.0F);
+	}
+	
+	
 public void generateSurface(World world, Random random, int i, int j) {
 	
 	int maxVeinSize = 3;

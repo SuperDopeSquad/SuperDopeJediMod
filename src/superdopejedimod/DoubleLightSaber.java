@@ -20,11 +20,7 @@ public class DoubleLightSaber extends BaseMeleeWeapon {
 		
 		this.color = colorInput;
 		
-
 		this.setCreativeTab(CreativeTabs.COMBAT);
-		//this.setMaxStackSize(64);
-		//this.setCreativeTab(CreativeTabs.tabMisc);
-		//this.setUnlocalizedName(unlocalizedName);
 	}
 
 public void registerRecipe() {

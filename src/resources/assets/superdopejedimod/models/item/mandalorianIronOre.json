@@ -1,15 +1,19 @@
 {
     "parent": "superdopejedimod:block/mandalorianIronOre",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "textures": {
         "all": "superdopejedimod:blocks/mandalorianIronOre"
     },
 =======
 >>>>>>> SuperDopeSquad/master
+=======
+>>>>>>> 27cd57b16cb5de47d2e2c54d51b2e8c2fe11e96d
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],
             "translation": [ 0, 1.5, -2.75 ],
+<<<<<<< HEAD
 <<<<<<< HEAD
             "scale": [ 0.375, 0.375, 0.375 ]
         },
@@ -20,6 +24,9 @@
 =======
             "scale": [ 0.175, 0.175, 0.175 ]
 >>>>>>> SuperDopeSquad/master
+=======
+            "scale": [ 0.175, 0.175, 0.175 ]
+>>>>>>> 27cd57b16cb5de47d2e2c54d51b2e8c2fe11e96d
         }
     }
 }

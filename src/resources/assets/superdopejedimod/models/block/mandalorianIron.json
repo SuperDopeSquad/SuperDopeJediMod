@@ -1,5 +1,6 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "parent": "block/cube_all",
     "textures": {
         "all": "superdopejedimod:blocks/mandalorianIron"
@@ -20,5 +21,10 @@
     "textures": {
         "all": "superdopejedimod:blocks/mandalorianIron"
 >>>>>>> SuperDopeSquad/master
+=======
+    "parent": "block/cube_all";
+    "textures": {
+        "all": "superdopejedimod:blocks/mandalorianIron"
+>>>>>>> 27cd57b16cb5de47d2e2c54d51b2e8c2fe11e96d
     }
 }
