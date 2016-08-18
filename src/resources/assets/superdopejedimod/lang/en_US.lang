@@ -28,6 +28,7 @@ tile.mandalorianIron.name=Mandalorian Iron
 tile.mandalorianIronOre.name=Mandalorian Iron Ore
 item.mandalorianIronIngot.name=Mandalorian Iron Ingot
 tile.sithMark.name=Sith Mark
+tile.jediMark.name=Jedi Mark
 tile.engine.name=Engine
 item.compressedMetalPlate.name=Compressed Metal Plate
 item.compressedMetalBits.name=Compressed Metal Bits
