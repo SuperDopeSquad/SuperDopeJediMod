@@ -7,14 +7,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class LightSaber extends BaseItem {
+public class LightSaber extends BaseMeleeWeapon {
 	
 	String color;
 	
 
 	public LightSaber(String unlocalizedName, String colorInput) {
 		
-		super(unlocalizedName);
+		super(unlocalizedName, SuperDopeJediMod.powerCrystalMaterial);
 		
 		this.setMaxStackSize(1);
 		
@@ -31,14 +31,14 @@ public class LightSaber extends BaseItem {
 	
 	public void registerRecipe() {
 		
-		if (this.color == "Red") {
+		/*if (this.color == "Red") {
 		
 			// Recipe for creating a redLightSaber.
 			ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
     		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     		ItemStack stoneButtonStack = new ItemStack(Blocks.STONE_BUTTON);
     		GameRegistry.addRecipe(new ItemStack(this), "x", "y", "z", 'x', redPowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
-		}
+		} */
 		
 		if (this.color == "Blue") {
 			
@@ -59,7 +59,7 @@ public class LightSaber extends BaseItem {
     		
 		}
 		
-		if (this.color == "Purple") {
+		/*if (this.color == "Purple") {
 			
 			// Recipe for creating a purpleLightSaber.
 			ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
@@ -67,7 +67,7 @@ public class LightSaber extends BaseItem {
     		ItemStack stoneButtonStack = new ItemStack(Blocks.STONE_BUTTON);
     		GameRegistry.addRecipe(new ItemStack(this), "x", "y", "z", 'x', purplePowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
     		
-		}
+		} */
 	}
 
 }

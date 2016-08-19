@@ -1,7 +1,11 @@
 package superdopesquad.superdopejedimod;
 
+
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -10,7 +14,14 @@ public class MandalorianIron extends BaseBlock {
 
 	
 	public MandalorianIron(String unlocalizedName) {
+
 		super(Material.IRON, unlocalizedName);
+	}
+	
+	
+	public Item getItemDropped(int metadata, Random random, int fortune) {
+        
+		return Item.getItemFromBlock(SuperDopeJediMod.mandalorianIron);
 	}
 	
 	
@@ -26,13 +37,6 @@ public class MandalorianIron extends BaseBlock {
 		
 		// Smelting a MandalorianIronOre will create 1 MandalorianIronIngot
 		GameRegistry.addSmelting(SuperDopeJediMod.mandalorianIronOre, new ItemStack(SuperDopeJediMod.mandalorianIronIngot), 1.0F);		
-	
 	}
-	
-	
 }
-
-
-
-
 
