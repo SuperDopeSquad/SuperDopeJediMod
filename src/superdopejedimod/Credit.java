@@ -17,16 +17,16 @@ public class Credit extends BaseItem {
 		
 		super(unlocalizedName);
 		
-		setCreativeTab(CreativeTabs.tabMisc);
+		setCreativeTab(CreativeTabs.MISC);
 	}
 	
 	
 	public void registerRecipe() {
 		
 		// Recipe for creating a Credit.
-    	ItemStack spiderEyeStack = new ItemStack(Items.spider_eye);
-    	ItemStack rottenFleshStack = new ItemStack(Items.rotten_flesh);
-    	ItemStack boneStack = new ItemStack(Items.bone);
+    	ItemStack spiderEyeStack = new ItemStack(Items.SPIDER_EYE);
+    	ItemStack rottenFleshStack = new ItemStack(Items.ROTTEN_FLESH);
+    	ItemStack boneStack = new ItemStack(Items.BONE);
     	
     	GameRegistry.addRecipe(new ItemStack(this), 
     			"x", 

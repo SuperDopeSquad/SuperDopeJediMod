@@ -16,15 +16,15 @@ public class GaffiStick extends BaseMeleeWeapon {
 		
 		super(unlocalizedName, SuperDopeJediMod.gaffiStickMaterial);
 		
-		setCreativeTab(CreativeTabs.tabCombat);
+		setCreativeTab(CreativeTabs.COMBAT);
 	}
 	
 	
 	public void registerRecipe() {
 		
 		// Recipe for creating a GaffiStick.
-    	ItemStack stickStack = new ItemStack(Items.stick);
-    	ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
+    	ItemStack stickStack = new ItemStack(Items.STICK);
+    	ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     	GameRegistry.addRecipe(new ItemStack(this), "xx", " y", " x", 'x', ironIngotStack, 'y', stickStack);
 	}
 	

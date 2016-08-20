@@ -15,7 +15,7 @@ public class CompressedMetalMesh extends BaseItem{
 		
 			super(unlocalizedName);
 		
-			this.setCreativeTab(CreativeTabs.tabMaterials);
+			this.setCreativeTab(CreativeTabs.MATERIALS);
 	}
 	
 public void registerRecipe() {

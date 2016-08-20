@@ -16,9 +16,9 @@ public class ChromateOre extends BaseBlock{
 	
 	public ChromateOre(String unlocalizedName) {
 		
-		super(Material.iron, unlocalizedName);
+		super(Material.IRON, unlocalizedName);
 		
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 	}
 
 	
