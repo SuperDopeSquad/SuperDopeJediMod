@@ -103,6 +103,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static NourishmentCapsule nourishmentCapsule = new NourishmentCapsule("nourishmentCapsule");
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
+    public static JediMark jediMark = new JediMark("jediMark");
     
     
     // Ranged weapons.
