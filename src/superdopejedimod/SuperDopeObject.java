@@ -1,8 +1,8 @@
 package superdopesquad.superdopejedimod;
 
 import java.util.Random;
-
 import net.minecraft.world.World;
+
 
 public interface SuperDopeObject {
 
