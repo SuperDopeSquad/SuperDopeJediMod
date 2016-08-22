@@ -12,6 +12,6 @@ public class QuadaniumSteelIngot extends BaseItem {
 		
 		super(unlocalizedName);
 		
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
 	}
 }

@@ -13,70 +13,50 @@ public class ChromateShard extends BaseItem{
 		
 		super(unlocalizedName);
 		
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
 		
 	}
 
 	public void registerRecipe() {
 		
-		// Recipe for creating an Generator.
-		ItemStack chromateIngotStack = new ItemStack(SuperDopeJediMod.chromateIngot);
+		// Recipe for creating a Chromate Shard.
+		ItemStack compressedMetalBitsStack = new ItemStack(SuperDopeJediMod.compressedMetalBits);
 		
 		GameRegistry.addRecipe(new ItemStack(this, 1), 
 				"***", 
 				"*A*", 
-				"***", 
-				'A', chromateIngotStack);
+				"*A*", 
+				'A', compressedMetalBitsStack);
 			
-		
-		GameRegistry.addRecipe(new ItemStack(this, 1), 
-				"***", 
-				"***", 
-				"*A*", 
-				'A', chromateIngotStack);
-		
-		GameRegistry.addRecipe(new ItemStack(this, 1), 
-				"***", 
-				"***", 
-				"A**", 
-				'A', chromateIngotStack);
-		
-		GameRegistry.addRecipe(new ItemStack(this, 1), 
-				"***", 
-				"***", 
-				"**A", 
-				'A', chromateIngotStack);
-		
 		GameRegistry.addRecipe(new ItemStack(this, 1), 
 				"***", 
 				"**A", 
-				"***", 
-				'A', chromateIngotStack);
-		
-		GameRegistry.addRecipe(new ItemStack(this, 1), 
-				"***", 
-				"A**", 
-				"***", 
-				'A', chromateIngotStack);
-		
-		GameRegistry.addRecipe(new ItemStack(this, 1), 
-				"A**", 
-				"***", 
-				"***", 
-				'A', chromateIngotStack);
+				"**A", 
+				'A', compressedMetalBitsStack);
 		
 		GameRegistry.addRecipe(new ItemStack(this, 1), 
 				"*A*", 
+				"*A*", 
 				"***", 
-				"***", 
-				'A', chromateIngotStack);
+				'A', compressedMetalBitsStack);
 		
 		GameRegistry.addRecipe(new ItemStack(this, 1), 
 				"**A", 
+				"**A", 
 				"***", 
-				"***", 
-				'A', chromateIngotStack);
+				'A', compressedMetalBitsStack);
 		
+		GameRegistry.addRecipe(new ItemStack(this, 1), 
+				"A**", 
+				"A**", 
+				"***", 
+				'A', compressedMetalBitsStack);
+		
+		GameRegistry.addRecipe(new ItemStack(this, 1), 
+				"***", 
+				"A**", 
+				"A**", 
+				'A', compressedMetalBitsStack);
 		
 	}	
 	

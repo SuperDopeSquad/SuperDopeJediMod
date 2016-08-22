@@ -16,9 +16,8 @@ public class Generator extends BaseBlock{
 	
 public Generator(String unlocalizedName){
 	
-	super(Material.iron, unlocalizedName);
-	this.setCreativeTab(CreativeTabs.tabRedstone);
-	
+	super(Material.IRON, unlocalizedName);
+	this.setCreativeTab(CreativeTabs.MATERIALS);
 }
 
 public Item getItemDropped(int metadata, Random random, int fortune) {

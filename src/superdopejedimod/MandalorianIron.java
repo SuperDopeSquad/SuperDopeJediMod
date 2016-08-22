@@ -14,8 +14,8 @@ public class MandalorianIron extends BaseBlock {
 
 	
 	public MandalorianIron(String unlocalizedName) {
-		
-		super(Material.iron, unlocalizedName);
+
+		super(Material.IRON, unlocalizedName);
 	}
 	
 	
@@ -37,13 +37,6 @@ public class MandalorianIron extends BaseBlock {
 		
 		// Smelting a MandalorianIronOre will create 1 MandalorianIronIngot
 		GameRegistry.addSmelting(SuperDopeJediMod.mandalorianIronOre, new ItemStack(SuperDopeJediMod.mandalorianIronIngot), 1.0F);		
-	
 	}
-	
-	
 }
-
-
-
-
 
