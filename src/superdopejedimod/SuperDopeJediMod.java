@@ -15,11 +15,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.model.ModelChicken;
-import net.minecraft.client.renderer.entity.RenderChicken;
-import net.minecraft.client.renderer.entity.RenderManager;
+//import net.minecraft.client.renderer.RenderItem;
+//import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+//import net.minecraft.client.model.ModelChicken;
+//import net.minecraft.client.renderer.entity.RenderChicken;
+//import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -49,7 +49,7 @@ public class SuperDopeJediMod //Start the class Declaration
     // this is the world generator that adds our custom objects to newly spawned world chunks.
     public static SuperDopeWorldGenerator superDopeWorldGenerator = new SuperDopeWorldGenerator();
     
-    public static RenderManager renderManager = new RenderManager(null, null);
+    //public static RenderManager renderManager = new RenderManager(null, null);
     
     static int startEntityId = 300;
     
@@ -169,8 +169,8 @@ public class SuperDopeJediMod //Start the class Declaration
     	
     	// temporary hack to get my mob working!
         //this.entityRenderMap.put(EntityChicken.class, new RenderChicken(this, new ModelChicken(), 0.3F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityTuskanRaider.class, 
-        	      new RenderChicken(renderManager, new ModelChicken(), 0.3F));
+        //RenderingRegistry.registerEntityRenderingHandler(EntityTuskanRaider.class, 
+       // 	      new RenderChicken(renderManager, new ModelChicken(), 0.3F));
 
     }
      
