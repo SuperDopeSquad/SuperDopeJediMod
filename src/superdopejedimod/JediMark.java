@@ -161,11 +161,6 @@ public class JediMark extends BaseBlock
             return true;
         
         System.out.println("JediMark: activated, remote=" + worldIn.isRemote + ", pos=" + pos);
-        
-        /* Make sure the block above is empty. If it not empty, then quit out right now, and do nothing.. */
-        // BlockPos startPos = pos.up();
-        //if (!worldIn.isAirBlock(startPos))
-        //	return false;
        
         /* default material. */
         IBlockState blockState = DEFAULT_BLOCK;
@@ -175,11 +170,8 @@ public class JediMark extends BaseBlock
         if ((gotItem != null) && (gotItem instanceof ItemBlock)) {
         	ItemBlock gotItemBlock = (ItemBlock) gotItem;
         	Block heldBlock = gotItemBlock.getBlock();
-        	/* TODO: we don't want default state, we want exact state. */
-        	blockState = heldBlock.getDefaultState();
-        	
-        	int blockId = Block.getIdFromBlock(heldBlock);
-        	blockState = Block.getStateById(blockId);
+        	int meta = heldItem.getMetadata();
+        	blockState = heldBlock.getStateFromMeta(meta);
         }
         
         /* lets see what side they touched, and build something different based on that. */
@@ -195,19 +187,26 @@ public class JediMark extends BaseBlock
         }
         
         if (side == EnumFacing.UP) {
-        	 //PlaceColumn(worldIn, startPos);
+        	
         	
         	/* Now lets try a dome. */
             PlaceDome(worldIn, pos, 15, blockState);
             return true;
         }
         
+        /* TODO(coolguybri): build these structures as well. Instead of the simple algorithm of doing a different structure
+         * based on the side that was pressed, consider making structures based on the neighbor bricks; for example, if there
+         * is a jedimark stacked on top of 3 stones, then we make a column.
+         */
         /* This is a cool exploding arc. TODO(coolguybri): sneak this back in somehow.
         BlockPos arcPos = startPos.add(0, 0, 3);
         for (int radius = 1 ; radius < 50 ; radius++) {
         	PlaceArc(worldIn, arcPos.down(), radius, columnBlock);
         	arcPos = arcPos.add(0, 0, 1);
         } */
+        
+        /* This is a column. */
+        //PlaceColumn(worldIn, startPos);
         
         /* We are now done. We leave this function by calling "return", this time with "true", to tell minecraft that we actually did something. */
         return true;
