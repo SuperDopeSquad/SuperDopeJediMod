@@ -102,6 +102,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static SithMark sithMark = new SithMark("sithMark");
     public static JediMark jediMark = new JediMark("jediMark");
     public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
+    public static StarBlock starBlock = new StarBlock("StarBlock");
     
     // Ranged weapons.
     public static Blaster blaster = new Blaster("blaster");
