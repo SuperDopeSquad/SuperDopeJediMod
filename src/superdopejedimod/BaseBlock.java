@@ -30,7 +30,7 @@ public abstract class BaseBlock extends Block implements SuperDopeObject {
 		this.setUnlocalizedName(name);
 		
 		// By default, we'll put all new blocks in the blocks tab.
-		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+		this.setCreativeTab(CreativeTabs.tabBlock);
 		
 		// Insert this object into our collection of custom blocks, so we 
 		// can send separate events to it for lifecycle management.
