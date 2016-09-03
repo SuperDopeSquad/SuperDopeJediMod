@@ -47,7 +47,7 @@ public class SithMark extends BaseBlock
 	 */
 	public SithMark(String localName) 
 	{
-		super(Material.iron, localName);
+		super(Material.IRON, localName);
 		this.setLightLevel(1.0F);
 	}
 	

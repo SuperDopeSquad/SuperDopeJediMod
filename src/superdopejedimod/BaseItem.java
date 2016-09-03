@@ -25,7 +25,7 @@ public abstract class BaseItem extends Item implements SuperDopeObject {
 		this.name = unlocalizedName;
 		this.setMaxStackSize(64);
 		this.setUnlocalizedName(unlocalizedName);
-		this.setCreativeTab(CreativeTabs.tabMisc);
+		this.setCreativeTab(CreativeTabs.MISC);
 		
 		// Insert this item into our collection of custom items, so we 
 		// can send separate events to it for lifecycle management.
