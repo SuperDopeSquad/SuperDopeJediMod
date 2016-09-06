@@ -29,33 +29,7 @@ import net.minecraft.world.World;
 
 
 /*
- * NOTE:
- * 		This JediMark java class depends at run-time on the following other files:
- * 
- * 			The blockstate JSON file, which lists all the model variants (the different forms the block can take)
- * 			superdopejedimod/src/resources/assets/superdopejedimod/blockstates/jediMark.json
- * 		
- * 			The model JSON file that describes the 3D geometry for when the block is displayed in the world.
- * 			superdopejedimod/src/resources/assets/superdopejedimod/models/block/jediMark.json
- * 
- * 			The model JSON file that describes the 3D geometry for when the block is displayed in your hand.
- * 			superdopejedimod/src/resources/assets/superdopejedimod/models/item/jediMark.json
- * 
- * 			The PNG graphics file that will be displayed on each side of the block (note that we could change it
- *          to have different image son each side, but for now we have the same image repeated on all sides.
- * 			superdopejedimod/src/resources/assets/superdopejedimod/textures/blocks/jediMark.json
- * 
- * 		PNG files should be made with Photoshop or Gimp.
- * 
- * 		JSON files can be edited in any text editor, like Notepad, or Eclipse. But remember that JSON files have a 
- * 			specific and strict syntax (rules for how the text needs to be formatted), so each ({[ character is 
- * 			actually important!
- * 
- * 		SuperDopeSquad: Use this class as a template for creating other blocks. Duplicate this file, rename "JediMark" everywhere you
- * 			see it to a new name, and then duplicate all the above files, making sure to name the files the same name as
- * 			your new class.
- * 
- * 		READ all the comments below to see what each section of code is doing.
+ * 		This block summons in a dome made of iron with a iron door ad some buttons. a work in progress. PEACE OUT HOMIES!
 */
 public class OHUMBlock extends BaseBlock 
 {
@@ -135,7 +109,50 @@ public class OHUMBlock extends BaseBlock
 		worldIn.setBlockState(buttonPos, MATERIAL_BUTTON.withProperty(BlockDirectional.FACING, side));
 		buttonPos = doorPos.up().offset(side.getOpposite(), 1).offset(side.rotateY(), 1);
 		worldIn.setBlockState(buttonPos, MATERIAL_BUTTON.withProperty(BlockDirectional.FACING, side.getOpposite()));
+		
+		/* build the tunnel to the basement. */
+		BlockPos tunnelPos = pos.down(1).north(5).west(4);
+		worldIn.setBlockState(tunnelPos, MATERIAL_AIR);
+		for (int i=0 ; i < 5 ; ++i) {
+			tunnelPos = tunnelPos.down(1);
+			worldIn.setBlockState(tunnelPos, MATERIAL_AIR);
+		}
+		
+		////bUilD BaSEmENt!!!!!
+		BlockPos basementPos = tunnelPos;
+		ClearPrism(worldIn, basementPos, 10, 4, 3);
+		
 	}
+	
+	
+	public void SetBlockToAir(World world, BlockPos pos) {
+		world.setBlockState(pos, MATERIAL_AIR);
+	}
+	
+	public void ClearRow(World world, BlockPos pos, int length) {
+		for (int i = 0; i < length ; i++ ) {
+			SetBlockToAir(world, pos);
+			pos = pos.south(1);	
+		}
+	}
+	
+	
+	public void ClearPlain(World world, BlockPos pos, int length, int width) {
+		for (int i = 0; i < width ; i++ ) {
+			ClearRow(world, pos, length);
+			pos = pos.west(1);	
+		}
+	}
+	
+	
+	public void ClearPrism(World world, BlockPos pos, int length, int width, int height) {
+		for (int i = 0; i < height ; i++ ) {
+			ClearPlain(world, pos, length, width);
+			pos = pos.up(1);	
+		}
+	}
+	
+	
 	
 	
 	/*
