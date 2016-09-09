@@ -58,7 +58,7 @@ public abstract class BaseBlock extends Block implements SuperDopeObject {
 	public void registerModel() {
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		String location = SuperDopeJediMod.MODID + ":" + ((BaseBlock) this).getName();
-		System.out.println("BaseBlock: registering model: " + location);
+		System.out.println("SuperDopeSquad: registering block: " + location);
 	    renderItem.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new ModelResourceLocation(location, "inventory"));
 	}
     

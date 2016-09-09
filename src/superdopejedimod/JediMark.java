@@ -187,8 +187,6 @@ public class JediMark extends BaseBlock
         }
         
         if (side == EnumFacing.UP) {
-        	
-        	
         	/* Now lets try a dome. */
             PlaceDome(worldIn, pos, 15, blockState);
             return true;

@@ -63,7 +63,7 @@ public class SuperDopeJediMod //Start the class Declaration
 	public static ToolMaterial brynsAwesomeSwordMaterial = EnumHelper.addToolMaterial("BrynsAwesomeSwordMaterial", 3, 2000, 15.0F, 8.0F, 30);
 	public static ToolMaterial mandalorianIronToolMaterial = EnumHelper.addToolMaterial("MandalorianIronToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
 	public static ToolMaterial quadaniumSteelToolMaterial = EnumHelper.addToolMaterial("QuadaniumSteelToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
-	
+
 	// Custom ArmorMaterial's.  
 	// EnumHelper.addArmorMaterial("NAME", textureName, durability, reductionAmounts, enchantability, soundOnEquip, toughness)
 	//		Durability: 5 - leather; 7 - gold; 15 - chain and iron; 33 - diamond
@@ -105,6 +105,8 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
     public static JediMark jediMark = new JediMark("jediMark");
+    public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
+    public static StarBlock starBlock = new StarBlock("StarBlock");
     
     // Ranged weapons.
     public static Blaster blaster = new Blaster("blaster");
