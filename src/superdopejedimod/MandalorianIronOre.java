@@ -15,8 +15,8 @@ public class MandalorianIronOre extends BaseBlock {
 
 	
 	public MandalorianIronOre(String unlocalizedName) {
-		
-		super(Material.iron, unlocalizedName);
+
+		super(Material.IRON, unlocalizedName);
 	}
 
 	
@@ -36,11 +36,5 @@ public class MandalorianIronOre extends BaseBlock {
 		SuperDopeJediMod.superDopeWorldGenerator.addOreSpawn(this, world, random, i, j, 16, 16, maxVeinSize, chancesPerChunk, minY, maxY); 
 	}
 }
-
-
-
-
-
-
 
 

@@ -3,8 +3,8 @@ package superdopesquad.superdopejedimod;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,19 +19,18 @@ public abstract class BaseMeleeWeapon extends ItemSword implements SuperDopeObje
 
 	protected String name = "";
 	
-	public BaseMeleeWeapon(String name, ToolMaterial material) {
+	
+	public BaseMeleeWeapon(String nameIn, ToolMaterial material) {
 		
 		// Call our super class constructor, "Block".
 		super(material);
 		
 		// Stash our internal name that we'll use for this block.
-		this.name = name;
-		
-		// I don't know what happens if you don't call this, but it is in every tutorial :-)
+		this.name = nameIn;
 		this.setUnlocalizedName(this.name);
 						
 		// By default, we'll put all new blocks in the combat tab.
-		this.setCreativeTab(CreativeTabs.tabCombat);
+		this.setCreativeTab(CreativeTabs.COMBAT);
 						
 		// Insert this object into our collection of custom blocks, so we 
 		// can send separate events to it for lifecycle management.

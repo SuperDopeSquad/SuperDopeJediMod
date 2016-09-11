@@ -7,12 +7,13 @@ import net.minecraft.init.Items;
 
 public class MandalorianIronIngot extends BaseItem {
 
-	
 	public MandalorianIronIngot(String unlocalizedName) {
 		
-		super(unlocalizedName);
-		
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+        super(unlocalizedName);
+        this.setCreativeTab(CreativeTabs.MATERIALS);
+	}
+	
+	public void registerRecipe() {
 	}
 }
 
