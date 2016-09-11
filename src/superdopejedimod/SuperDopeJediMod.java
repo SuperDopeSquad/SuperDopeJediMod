@@ -15,11 +15,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-//import net.minecraft.client.renderer.RenderItem;
-//import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-//import net.minecraft.client.model.ModelChicken;
-//import net.minecraft.client.renderer.entity.RenderChicken;
-//import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -28,12 +23,15 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.crafting.FurnaceRecipes;
-
+import net.minecraft.util.SoundEvent;
+import net.minecraftforge.common.DimensionManager;
 
 @Mod(modid=SuperDopeJediMod.MODID, name=SuperDopeJediMod.MODNAME, version=SuperDopeJediMod.MODVER) //Tell forge "Oh hey, there's a new mod here to load."
 public class SuperDopeJediMod //Start the class Declaration
@@ -67,6 +65,7 @@ public class SuperDopeJediMod //Start the class Declaration
 	//		Reduction Amounts: 1,3,2,1 - leather; 2,5,3,1 - gold; 2,5,4,1 - chain; 2,6,5,2 - iron; 3,8,6,3 - diamond
 	//		Enchantability: 15 - leather; 12 - chain; 9 - iron; 25 - gold; 10 - diamond
 	public static ArmorMaterial mandalorianIronArmorMaterial = EnumHelper.addArmorMaterial("MandalorianIronArmorMaterial", "", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
+	public static ArmorMaterial sithCapeMaterial = EnumHelper.addArmorMaterial("SithCapeMaterial", "", 100, new int[]{}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
 	
     // instance variable.
     //@Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
@@ -101,6 +100,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
     public static JediMark jediMark = new JediMark("jediMark");
+    public static Faction faction = new Faction("faction");
     
     // Ranged weapons.
     public static Blaster blaster = new Blaster("blaster");
@@ -127,10 +127,17 @@ public class SuperDopeJediMod //Start the class Declaration
     public static MandalorianIronOre mandalorianIronOre = new MandalorianIronOre("mandalorianIronOre");
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
    // public static MandalorianIronArmor mandalorianIronArmorHelmet = new MandalorianIronArmor("")
-    public static Item tutorialChestplate;
-    public static Item tutorialLeggings;
-    public static Item tutorialBoots;
+    public static Item MandalorianIronHelmet;
+    public static Item MandalorianIronChestplate;
+    public static Item MandalorianIronLegs;
+    public static Item MandalorianIronBoots;
+    
 
+    
+    //Capes
+    
+    public static Item SithCape;
+    
    // [...]
 
    // GameRegistry.registerItem(tutorialHelmet = new ItemModArmor("tutorial_helmet", ARMOR, "tutorial", 0), "tutorial_helmet"); //0 for helmet
@@ -153,7 +160,6 @@ public class SuperDopeJediMod //Start the class Declaration
     // Mobs
     public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
     //public static BaseMob baseMob = new BaseMob()
-
     
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
     //        serverSide="tutorial.generic.CommonProxy")
