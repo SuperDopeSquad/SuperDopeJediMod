@@ -15,11 +15,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.model.ModelChicken;
-import net.minecraft.client.renderer.entity.RenderChicken;
-import net.minecraft.client.renderer.entity.RenderManager;
+//import net.minecraft.client.renderer.RenderItem;
+//import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+//import net.minecraft.client.model.ModelChicken;
+//import net.minecraft.client.renderer.entity.RenderChicken;
+//import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -28,6 +28,7 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
@@ -49,7 +50,7 @@ public class SuperDopeJediMod //Start the class Declaration
     // this is the world generator that adds our custom objects to newly spawned world chunks.
     public static SuperDopeWorldGenerator superDopeWorldGenerator = new SuperDopeWorldGenerator();
     
-    public static RenderManager renderManager = new RenderManager(null, null);
+    //public static RenderManager renderManager = new RenderManager(null, null);
     
     static int startEntityId = 300;
     
@@ -60,13 +61,16 @@ public class SuperDopeJediMod //Start the class Declaration
 	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 2000, 15.0F, 9.0F, 30);
 	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 2500, 15.0F, 12.0F, 30);
 	public static ToolMaterial brynsAwesomeSwordMaterial = EnumHelper.addToolMaterial("BrynsAwesomeSwordMaterial", 3, 2000, 15.0F, 8.0F, 30);
-	
+	public static ToolMaterial mandalorianIronToolMaterial = EnumHelper.addToolMaterial("MandalorianIronToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
+	public static ToolMaterial quadaniumSteelToolMaterial = EnumHelper.addToolMaterial("QuadaniumSteelToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
+
 	// Custom ArmorMaterial's.  
 	// EnumHelper.addArmorMaterial("NAME", textureName, durability, reductionAmounts, enchantability, soundOnEquip, toughness)
 	//		Durability: 5 - leather; 7 - gold; 15 - chain and iron; 33 - diamond
 	//		Reduction Amounts: 1,3,2,1 - leather; 2,5,3,1 - gold; 2,5,4,1 - chain; 2,6,5,2 - iron; 3,8,6,3 - diamond
 	//		Enchantability: 15 - leather; 12 - chain; 9 - iron; 25 - gold; 10 - diamond
-	public static ArmorMaterial mandalorianIronArmorMaterial = EnumHelper.addArmorMaterial("MandalorianIronArmorMaterial", "", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
+	public static ArmorMaterial mandalorianIronArmorMaterial = EnumHelper.addArmorMaterial("MandalorianIronArmorMaterial", "superdopejedimod:mandalorianironarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
+	public static ArmorMaterial quadaniumSteelArmorMaterial = EnumHelper.addArmorMaterial("QuadaniumSteelArmorMaterial", "superdopejedimod:quadaniumsteelarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
 	
     // instance variable.
     //@Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
@@ -101,6 +105,8 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
     public static JediMark jediMark = new JediMark("jediMark");
+    public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
+    public static StarBlock starBlock = new StarBlock("StarBlock");
     
     // Ranged weapons.
     public static Blaster blaster = new Blaster("blaster");
@@ -126,22 +132,23 @@ public class SuperDopeJediMod //Start the class Declaration
     public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
     public static MandalorianIronOre mandalorianIronOre = new MandalorianIronOre("mandalorianIronOre");
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
-   // public static MandalorianIronArmor mandalorianIronArmorHelmet = new MandalorianIronArmor("")
-    public static Item tutorialChestplate;
-    public static Item tutorialLeggings;
-    public static Item tutorialBoots;
-
-   // [...]
-
-   // GameRegistry.registerItem(tutorialHelmet = new ItemModArmor("tutorial_helmet", ARMOR, "tutorial", 0), "tutorial_helmet"); //0 for helmet
-   // GameRegistry.registerItem(tutorialChestplate = new ItemModArmor("tutorial_chestplate", ARMOR, "tutorial", 1), "tutorial_chestplate"); // 1 for chestplate
-   // GameRegistry.registerItem(tutorialLeggings = new ItemModArmor("tutorial_leggings", ARMOR, "tutorial", 2), "tutorial_leggings"); // 2 for leggings
-   // GameRegistry.registerItem(tutorialBoots = new ItemModArmor("tutorial_boots", ARMOR, "tutorial", 3), "tutorial_boots"); // 3 for boots
-    
+    public static MandalorianIronArmor mandalorianIronHelmet = new MandalorianIronArmor(EntityEquipmentSlot.HEAD, "mandalorianIronHelmet");
+    public static MandalorianIronArmor mandalorianIronChestplate = new MandalorianIronArmor(EntityEquipmentSlot.CHEST, "mandalorianIronChestplate");
+    public static MandalorianIronArmor mandalorianIronLeggings = new MandalorianIronArmor(EntityEquipmentSlot.LEGS, "mandalorianIronLeggings");
+    public static MandalorianIronArmor mandalorianIronBoots = new MandalorianIronArmor(EntityEquipmentSlot.FEET, "mandalorianIronBoots");
+    public static MandalorianIronSword mandalorianIronSword = new MandalorianIronSword("mandalorianIronSword");
+    //public static MandalorianIronArmor mandalorianIronShield = new MandalorianIronArmor(EntityEquipmentSlot.OFFHAND, "mandalorianIronShield");
+          
     // Quadanium Steel, used to create vehicles.
     public static QuadaniumSteel quadaniumSteel = new QuadaniumSteel("quadaniumSteel");
     public static QuadaniumSteelIngot quadaniumSteelIngot = new QuadaniumSteelIngot("quadaniumSteelIngot");    
     public static QuadaniumSteelOre quadaniumSteelOre = new QuadaniumSteelOre("quadaniumSteelOre");
+    public static QuadaniumSteelArmor quadaniumSteelHelmet = new QuadaniumSteelArmor(EntityEquipmentSlot.HEAD, "quadaniumSteelHelmet");
+    public static QuadaniumSteelArmor quadaniumSteelChestplate = new QuadaniumSteelArmor(EntityEquipmentSlot.CHEST, "quadaniumSteelChestplate");
+    public static QuadaniumSteelArmor quadaniumSteelLeggings = new QuadaniumSteelArmor(EntityEquipmentSlot.LEGS, "quadaniumSteelLeggings");
+    public static QuadaniumSteelArmor quadaniumSteelBoots = new QuadaniumSteelArmor(EntityEquipmentSlot.FEET, "quadaniumSteelBoots");
+    public static QuadaniumSteelSword quadaniumSteelSword = new QuadaniumSteelSword("quadaniumSteelSword");
+    //public static QuadaniumSteelArmor quadaniumSteelShield = new QuadaniumSteelArmor(EntityEquipmentSlot.OFFHAND, "quadaniumSteelShield");
     
     // Peoples Custom Items
     public static BrynsAwesomeSword brynsAwesomeSword = new BrynsAwesomeSword("brynsAwesomeSword");
@@ -169,8 +176,8 @@ public class SuperDopeJediMod //Start the class Declaration
     	
     	// temporary hack to get my mob working!
         //this.entityRenderMap.put(EntityChicken.class, new RenderChicken(this, new ModelChicken(), 0.3F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityTuskanRaider.class, 
-        	      new RenderChicken(renderManager, new ModelChicken(), 0.3F));
+        //RenderingRegistry.registerEntityRenderingHandler(EntityTuskanRaider.class, 
+       // 	      new RenderChicken(renderManager, new ModelChicken(), 0.3F));
 
     }
      
