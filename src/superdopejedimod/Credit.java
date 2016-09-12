@@ -44,6 +44,10 @@ public class Credit extends BaseItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		  
+//		if (worldIn.isRemote) {
+//		// All model and texture rendering has to be client-side only 
+//    		Minecraft.getMinecraft().displayGuiScreen(new CreditGUI(itemStackIn.stackSize));
+//    	}
     	
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
