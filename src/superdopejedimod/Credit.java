@@ -11,6 +11,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 
 
 public class Credit extends BaseItem {
@@ -43,8 +44,7 @@ public class Credit extends BaseItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		  
-		Minecraft.getMinecraft().displayGuiScreen(new CreditGUI(itemStackIn.stackSize));
-		  
-		 return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+    	
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 }
