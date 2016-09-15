@@ -1,6 +1,5 @@
 package superdopesquad.superdopejedimod;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -44,11 +43,8 @@ public class Credit extends BaseItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		  
-//		if (worldIn.isRemote) {
-//		// All model and texture rendering has to be client-side only 
-//    		Minecraft.getMinecraft().displayGuiScreen(new CreditGUI(itemStackIn.stackSize));
-//    	}
-    	
+		SuperDopeJediMod.superDopeCommonProxy.credit_displayCreditGui(itemStackIn.stackSize);
+
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 }
