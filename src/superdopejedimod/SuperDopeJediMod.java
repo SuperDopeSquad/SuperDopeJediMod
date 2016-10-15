@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,6 +45,10 @@ public class SuperDopeJediMod //Start the class Declaration
     public static final String MODNAME = "SuperDopeJediMod";
     public static final String MODVER = "0.0.1";
 
+    // Establish proxy classes, so we can do the right stuff client-side only, if necessary.
+    @SidedProxy(clientSide="superdopesquad.superdopejedimod.SuperDopeClientProxy", serverSide="superdopesquad.superdopejedimod.SuperDopeServerProxy")
+    public static SuperDopeCommonProxy superDopeCommonProxy;
+    
     // This is the collection of custom objects we will maintain.
     public static ArrayList<SuperDopeObject> customObjects = new ArrayList<SuperDopeObject>();
     
@@ -161,13 +166,12 @@ public class SuperDopeJediMod //Start the class Declaration
     public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
     //public static BaseMob baseMob = new BaseMob()
 
-    
-    //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
-    //        serverSide="tutorial.generic.CommonProxy")
-    
  
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+    	
+    	// Call our proxy for any side-specific work.
+    	superDopeCommonProxy.preInit(event);
     	
     	// Iterate through all our custom blocks and items, and register them all.
     	for (SuperDopeObject superDopeObject : this.customObjects) {
@@ -196,21 +200,25 @@ public class SuperDopeJediMod //Start the class Declaration
     @EventHandler
     public void init(FMLInitializationEvent event) {
     		
+    	// Call our proxy for any side-specific work.
+    	// Looking for where we register models?  Check in SuperDopeClientProxy.init(e).
+    	superDopeCommonProxy.init(event);
+    	
     	// Iterate through all our custom blocks and items, 
     	// and see if we have any recipes to register.
     	for (SuperDopeObject superDopeObject : this.customObjects) {
     		superDopeObject.registerRecipe();
     	}
     	
-    	// All model and texture rendering has to be client-side only.
-    	if(event.getSide() == Side.CLIENT) {
-    	     
-    		// Iterate through all our custom objects, and
-        	// see if we have any models to render.
-        	for (SuperDopeObject superDopeObject : this.customObjects) {
-        		superDopeObject.registerModel();
-        	}
-    	}
+//    	// All model and texture rendering has to be client-side only.
+//    	if(event.getSide() == Side.CLIENT) {
+//    	     
+//    		// Iterate through all our custom objects, and
+//        	// see if we have any models to render.
+//        	for (SuperDopeObject superDopeObject : this.customObjects) {
+//        		superDopeObject.registerModel();
+//        	}
+//    	}
     	
     	// Register our custom world generator, so our ore gets generated.
     	GameRegistry.registerWorldGenerator(SuperDopeJediMod.superDopeWorldGenerator, 0);
@@ -219,6 +227,9 @@ public class SuperDopeJediMod //Start the class Declaration
  
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+    	
+    	// Call our proxy for any side-specific work.
+    	superDopeCommonProxy.postInit(event);
     }
     
     

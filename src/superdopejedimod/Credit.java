@@ -1,6 +1,5 @@
 package superdopesquad.superdopejedimod;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -11,6 +10,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 
 
 public class Credit extends BaseItem {
@@ -43,8 +43,8 @@ public class Credit extends BaseItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		  
-		Minecraft.getMinecraft().displayGuiScreen(new CreditGUI(itemStackIn.stackSize));
-		  
-		 return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+		SuperDopeJediMod.superDopeCommonProxy.credit_displayCreditGui(itemStackIn.stackSize);
+
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 }
