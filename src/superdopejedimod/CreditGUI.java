@@ -1,21 +1,18 @@
 package superdopesquad.superdopejedimod;
 
 import java.awt.Color;
-
 import javax.swing.plaf.synth.ColorType;
-
 import org.lwjgl.opengl.GL11;
-
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 
 
-
+@SideOnly(Side.CLIENT)
 public class CreditGUI extends GuiScreen{
 
 	int guiWidth = 148;
