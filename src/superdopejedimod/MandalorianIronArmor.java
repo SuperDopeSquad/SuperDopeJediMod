@@ -8,8 +8,12 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-
 public class MandalorianIronArmor extends BaseArmor {
+		
+		public MandalorianIronArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+			
+			super(materialIn, renderIndexIn, equipmentSlotIn);
+		}
 	
 	
 	public MandalorianIronArmor(EntityEquipmentSlot equipmentSlotIn, String nameInput) {
@@ -32,8 +36,7 @@ public class MandalorianIronArmor extends BaseArmor {
     	GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.mandalorianIronBoots), "x x", "x x", 'x', mandalorianIronIngotStack);
     	// Shield.
     	//GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.mandalorianIronShield), "xxx", "xxx", " x ", 'x', mandalorianIronIngotStack);
-	}
-	
+	}	
 }
 	
 	
