@@ -8,26 +8,20 @@ import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-<<<<<<< HEAD
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-=======
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
->>>>>>> origin/master
 
 
 public class BaseArmor extends ItemArmor implements SuperDopeObject {
 	
-<<<<<<< HEAD
+
 	public BaseArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
 		
 		super(materialIn, renderIndexIn, equipmentSlotIn);
 	}
 
 	
-
-	
-=======
 	protected String name = "";
 
 	
@@ -85,7 +79,6 @@ public class BaseArmor extends ItemArmor implements SuperDopeObject {
 		// TODO Auto-generated method stub
 		
 	}
->>>>>>> origin/master
 
 	
 	@Override

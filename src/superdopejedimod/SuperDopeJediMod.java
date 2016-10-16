@@ -24,11 +24,8 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-<<<<<<< HEAD
 import net.minecraft.init.SoundEvents;
-=======
 import net.minecraft.inventory.EntityEquipmentSlot;
->>>>>>> origin/master
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
@@ -75,13 +72,9 @@ public class SuperDopeJediMod //Start the class Declaration
 	//		Durability: 5 - leather; 7 - gold; 15 - chain and iron; 33 - diamond
 	//		Reduction Amounts: 1,3,2,1 - leather; 2,5,3,1 - gold; 2,5,4,1 - chain; 2,6,5,2 - iron; 3,8,6,3 - diamond
 	//		Enchantability: 15 - leather; 12 - chain; 9 - iron; 25 - gold; 10 - diamond
-<<<<<<< HEAD
-	public static ArmorMaterial mandalorianIronArmorMaterial = EnumHelper.addArmorMaterial("MandalorianIronArmorMaterial", "", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
 	public static ArmorMaterial sithCapeMaterial = EnumHelper.addArmorMaterial("SithCapeMaterial", "", 100, new int[]{}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
-=======
 	public static ArmorMaterial mandalorianIronArmorMaterial = EnumHelper.addArmorMaterial("MandalorianIronArmorMaterial", "superdopejedimod:mandalorianironarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
 	public static ArmorMaterial quadaniumSteelArmorMaterial = EnumHelper.addArmorMaterial("QuadaniumSteelArmorMaterial", "superdopejedimod:quadaniumsteelarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
->>>>>>> origin/master
 	
     // instance variable.
     //@Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
@@ -116,12 +109,9 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
     public static JediMark jediMark = new JediMark("jediMark");
-<<<<<<< HEAD
     public static Faction faction = new Faction("faction");
-=======
     public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
     public static StarBlock starBlock = new StarBlock("StarBlock");
->>>>>>> origin/master
     
     // Ranged weapons.
     public static Blaster blaster = new Blaster("blaster");
@@ -147,7 +137,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
     public static MandalorianIronOre mandalorianIronOre = new MandalorianIronOre("mandalorianIronOre");
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
-<<<<<<< HEAD
+
    // public static MandalorianIronArmor mandalorianIronArmorHelmet = new MandalorianIronArmor("")
     public static Item MandalorianIronHelmet;
     public static Item MandalorianIronChestplate;
@@ -167,7 +157,6 @@ public class SuperDopeJediMod //Start the class Declaration
    // GameRegistry.registerItem(tutorialLeggings = new ItemModArmor("tutorial_leggings", ARMOR, "tutorial", 2), "tutorial_leggings"); // 2 for leggings
    // GameRegistry.registerItem(tutorialBoots = new ItemModArmor("tutorial_boots", ARMOR, "tutorial", 3), "tutorial_boots"); // 3 for boots
     
-=======
     public static MandalorianIronArmor mandalorianIronHelmet = new MandalorianIronArmor(EntityEquipmentSlot.HEAD, "mandalorianIronHelmet");
     public static MandalorianIronArmor mandalorianIronChestplate = new MandalorianIronArmor(EntityEquipmentSlot.CHEST, "mandalorianIronChestplate");
     public static MandalorianIronArmor mandalorianIronLeggings = new MandalorianIronArmor(EntityEquipmentSlot.LEGS, "mandalorianIronLeggings");
@@ -175,7 +164,6 @@ public class SuperDopeJediMod //Start the class Declaration
     public static MandalorianIronSword mandalorianIronSword = new MandalorianIronSword("mandalorianIronSword");
     //public static MandalorianIronArmor mandalorianIronShield = new MandalorianIronArmor(EntityEquipmentSlot.OFFHAND, "mandalorianIronShield");
           
->>>>>>> origin/master
     // Quadanium Steel, used to create vehicles.
     public static QuadaniumSteel quadaniumSteel = new QuadaniumSteel("quadaniumSteel");
     public static QuadaniumSteelIngot quadaniumSteelIngot = new QuadaniumSteelIngot("quadaniumSteelIngot");    
@@ -197,14 +185,10 @@ public class SuperDopeJediMod //Start the class Declaration
     // Mobs
     public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
     //public static BaseMob baseMob = new BaseMob()
-<<<<<<< HEAD
     
     //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
     //        serverSide="tutorial.generic.CommonProxy")
-    
-=======
-
->>>>>>> origin/master
+  
  
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
