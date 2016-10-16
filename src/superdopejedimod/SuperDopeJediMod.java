@@ -241,7 +241,7 @@ public class SuperDopeJediMod //Start the class Declaration
 //        	for (SuperDopeObject superDopeObject : this.customObjects) {
 //        		superDopeObject.registerModel();
 //        	}
-//    	}
+//    	} 
     	
     	// Register our custom world generator, so our ore gets generated.
     	GameRegistry.registerWorldGenerator(SuperDopeJediMod.superDopeWorldGenerator, 0);

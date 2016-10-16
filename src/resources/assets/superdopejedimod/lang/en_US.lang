@@ -54,13 +54,10 @@ tile.electricFluxOre.name=Electric Flux Ore
 tile.controlPanel.name=Control Panel
 item.brynsAwesomeSword.name=Bryn's Awesome Sword
 item.ruby.name=Ruby
-<<<<<<< HEAD
 item.SithCape=Sith Cape
-=======
 tile.rubyOre.name=Ruby Ore
 tile.OHUMBlock.name=OHOLYUNICORNMAN Spawner
 tile.StarBlock.name=Star Block
 
->>>>>>> origin/master
 
 
