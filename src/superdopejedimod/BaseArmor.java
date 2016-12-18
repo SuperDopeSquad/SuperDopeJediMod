@@ -48,7 +48,8 @@ public class BaseArmor extends ItemArmor implements SuperDopeObject {
 	@Override
 	public void registerObject() {
 		
-		GameRegistry.registerItem(this, this.name);
+		//GameRegistry.registerItem(this, this.name);
+		GameRegistry.register(this.setRegistryName(this.name));
 	}
 
 	

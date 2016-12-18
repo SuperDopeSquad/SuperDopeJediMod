@@ -23,11 +23,12 @@ public class Faction extends BaseItem {
 		setCreativeTab(CreativeTabs.MISC);
 	}
 	
+	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		  
 		Minecraft.getMinecraft().displayGuiScreen(new FactionGUI());
 		  
-		 return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+		 return super.onItemRightClick(worldIn, playerIn, hand);
 	}
 }

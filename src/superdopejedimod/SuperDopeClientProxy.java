@@ -3,8 +3,11 @@ package superdopesquad.superdopejedimod;
 
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -16,7 +19,8 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
 	
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
-        super.preInit(e);
+        
+		super.preInit(e);
     }
 
 	

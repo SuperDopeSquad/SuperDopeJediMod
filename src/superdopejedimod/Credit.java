@@ -41,10 +41,19 @@ public class Credit extends BaseItem {
 	
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		  
-		SuperDopeJediMod.superDopeCommonProxy.credit_displayCreditGui(itemStackIn.stackSize);
+	//public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+	public ActionResult<ItemStack> onItemRightClick(World itemStackIn, EntityPlayer worldIn, EnumHand playerIn) {
 
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+//	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+//		
+		ItemStack itemStack = worldIn.getHeldItem(playerIn);
+		//SuperDopeJediMod.superDopeCommonProxy.credit_displayCreditGui(itemStackIn.getMaxStackSize());
+		SuperDopeJediMod.superDopeCommonProxy.credit_displayCreditGui(itemStack.getMaxStackSize());
+
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn);
 	}
+//	  public ActionResult<ItemStack> onItemRightClick(World itemStackIn, EntityPlayer worldIn, EnumHand playerIn)
+//    {
+//        return new ActionResult(EnumActionResult.PASS, worldIn.getHeldItem(playerIn));
+//    }
 }
