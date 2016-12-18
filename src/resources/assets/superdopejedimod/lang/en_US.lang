@@ -58,6 +58,9 @@ item.SithCape=Sith Cape
 tile.rubyOre.name=Ruby Ore
 tile.OHUMBlock.name=OHOLYUNICORNMAN Spawner
 tile.StarBlock.name=Star Block
-
+item.sithLordHelmet.name=Sith Lord Helmet
+item.sithLordChestplate.name=Sith Lord Chestplate
+item.sithLordLeggings.name=Sith Lord Leggings
+item.sithLordBoots.name=Sith Lord Boots
 
 
