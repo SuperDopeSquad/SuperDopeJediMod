@@ -69,7 +69,7 @@ public class StarBlock extends BaseBlock
 	
 	
 	/*
-	 * This function is automatically called by Minecraft whenever anybody right-mouse-clicks on a JediMark block.
+	 * This function is automatically called by Minecraft whenever anybody right-mouse-clicks on this block.
      */
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, 

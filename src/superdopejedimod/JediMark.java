@@ -71,84 +71,6 @@ public class JediMark extends BaseBlock
 		this.setLightLevel(1.0F);
 	}
 	
-	/* computes the distance between two three-dimensional points. */
-	protected int distance(BlockPos pos1, BlockPos pos2) {
-		double d0 = (double)(pos1.getX() - pos2.getX());
-	    double d1 = (double)(pos1.getY() - pos2.getY());
-	    double d2 = (double)(pos1.getZ() - pos2.getZ());
-	    return (int) Math.round(Math.sqrt((d0 * d0) + (d1 * d1) + (d2 * d2)));
-	}
-	
-	/*
-	 * This function will build a column of bricks starting at the coordinates in "pos". You can change how big the column goes by changing the
-	 *  number in the "for" loop below.
-	 */
-	protected void PlaceColumn(World worldIn, BlockPos pos, int height, IBlockState blockState) {
-		/* Here we loop. We create a new block, and then move up one level, then repeat. */
-		for (int level = 0 ; level < height ; ++level) {
-			worldIn.setBlockState(pos, blockState);
-			pos = pos.up();
-		}
-	}
-	
-	/*
-	 * This is based on the equation:
-	 *  x^2 + y^2 = r^2
-	 * NOTE: hardcoded to go along the x-axis.
-	 */
-	protected void PlaceArc(World worldIn, BlockPos pos, int radius, boolean axis_shift, IBlockState blockState) {
-		
-		/* first quarter. */
-		int radius_squared = radius * radius;
-		int last_y = 0;
-		int last_x = -radius;
-		for (int x = -radius ; x <= 0 ; ++x) {
-			double y_d = Math.sqrt(radius_squared - (x * x));
-			int y = (int) Math.round(y_d);
-			for (int py = last_y + 1 ; py < y ; ++py) {
-				worldIn.setBlockState(pos.add(axis_shift ? 0 : last_x, py, axis_shift ? last_x : 0), blockState);
-			}
-			worldIn.setBlockState(pos.add(axis_shift ? 0 : x, y, axis_shift ? x : 0), blockState);
-			last_x = x;
-			last_y = y;
-		}
-		
-		/* second quarter. */
-		for (int x = 1 ; x <= radius ; ++x) {
-			double y_d = Math.sqrt(radius_squared - (x * x));
-			int y = (int) Math.round(y_d);
-			for (int py = last_y - 1 ; py > y ; --py) {
-				worldIn.setBlockState(pos.add(axis_shift ? 0 : x, py, axis_shift ? x : 0), blockState);
-			}
-			worldIn.setBlockState(pos.add(axis_shift ? 0 : x, y, axis_shift ? x : 0), blockState);
-			last_x = x;
-			last_y = y;
-		}	
-	}
-
-
-	/*
-	 * This is not the most efficient algorithm, but it works. I iterate over every block in the 
-	 *  [radius x radius x radius ] cube, and then calculate the distance from the center of that block
-	 *  to pos. If it equals the radius (after rounding), then that block is on the border of the sphere,
-	 *  and should be turned "on".
-	 * 
-	 */
-	protected void PlaceDome(World worldIn, BlockPos pos, int radius, IBlockState block) {
-	
-		for (int x = -radius ; x <= radius ; ++x) {
-			for (int z = -radius ; z <= radius ; ++z) {
-				for (int y = 0 ; y <= radius ; ++y) {
-					BlockPos currpos = pos.add(x, y, z);
-					int d = distance(currpos, pos);
-					if (d == radius) {
-						worldIn.setBlockState(currpos, block);
-					}
-				}
-			}
-		}
-	}
-	
 	
 	/*
 	 * This function is automatically called by Minecraft whenever anybody right-mouse-clicks on a JediMark block.
@@ -182,13 +104,13 @@ public class JediMark extends BaseBlock
         	
         	/* Build an arc on the same axis that it was touched. */
         	boolean axis_shift = (side == EnumFacing.NORTH) ||  (side == EnumFacing.SOUTH);
-        	PlaceArc(worldIn, pos, 30, axis_shift, blockState);
+        	GeometryUtil.buildArc(worldIn, pos, 30, axis_shift, blockState);
         	return true;
         }
         
         if (side == EnumFacing.UP) {
         	/* Now lets try a dome. */
-            PlaceDome(worldIn, pos, 15, blockState);
+        	GeometryUtil.buildSphere(worldIn, pos, 15, blockState, false);
             return true;
         }
         
