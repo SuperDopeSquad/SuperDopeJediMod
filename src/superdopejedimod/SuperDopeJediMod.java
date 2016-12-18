@@ -16,11 +16,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-//import net.minecraft.client.renderer.RenderItem;
-//import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-//import net.minecraft.client.model.ModelChicken;
-//import net.minecraft.client.renderer.entity.RenderChicken;
-//import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -29,13 +24,16 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.crafting.FurnaceRecipes;
-
+import net.minecraft.util.SoundEvent;
+import net.minecraftforge.common.DimensionManager;
 
 @Mod(modid=SuperDopeJediMod.MODID, name=SuperDopeJediMod.MODNAME, version=SuperDopeJediMod.MODVER) //Tell forge "Oh hey, there's a new mod here to load."
 public class SuperDopeJediMod //Start the class Declaration
@@ -74,6 +72,7 @@ public class SuperDopeJediMod //Start the class Declaration
 	//		Durability: 5 - leather; 7 - gold; 15 - chain and iron; 33 - diamond
 	//		Reduction Amounts: 1,3,2,1 - leather; 2,5,3,1 - gold; 2,5,4,1 - chain; 2,6,5,2 - iron; 3,8,6,3 - diamond
 	//		Enchantability: 15 - leather; 12 - chain; 9 - iron; 25 - gold; 10 - diamond
+	public static ArmorMaterial sithCapeMaterial = EnumHelper.addArmorMaterial("SithCapeMaterial", "", 100, new int[]{}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
 	public static ArmorMaterial mandalorianIronArmorMaterial = EnumHelper.addArmorMaterial("MandalorianIronArmorMaterial", "superdopejedimod:mandalorianironarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
 	public static ArmorMaterial quadaniumSteelArmorMaterial = EnumHelper.addArmorMaterial("QuadaniumSteelArmorMaterial", "superdopejedimod:quadaniumsteelarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
 	
@@ -110,6 +109,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
     public static JediMark jediMark = new JediMark("jediMark");
+    public static Faction faction = new Faction("faction");
     public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
     public static StarBlock starBlock = new StarBlock("StarBlock");
     
@@ -137,6 +137,26 @@ public class SuperDopeJediMod //Start the class Declaration
     public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
     public static MandalorianIronOre mandalorianIronOre = new MandalorianIronOre("mandalorianIronOre");
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
+
+   // public static MandalorianIronArmor mandalorianIronArmorHelmet = new MandalorianIronArmor("")
+    public static Item MandalorianIronHelmet;
+    public static Item MandalorianIronChestplate;
+    public static Item MandalorianIronLegs;
+    public static Item MandalorianIronBoots;
+    
+
+    
+    //Capes
+    
+    public static Item SithCape;
+    
+   // [...]
+
+   // GameRegistry.registerItem(tutorialHelmet = new ItemModArmor("tutorial_helmet", ARMOR, "tutorial", 0), "tutorial_helmet"); //0 for helmet
+   // GameRegistry.registerItem(tutorialChestplate = new ItemModArmor("tutorial_chestplate", ARMOR, "tutorial", 1), "tutorial_chestplate"); // 1 for chestplate
+   // GameRegistry.registerItem(tutorialLeggings = new ItemModArmor("tutorial_leggings", ARMOR, "tutorial", 2), "tutorial_leggings"); // 2 for leggings
+   // GameRegistry.registerItem(tutorialBoots = new ItemModArmor("tutorial_boots", ARMOR, "tutorial", 3), "tutorial_boots"); // 3 for boots
+    
     public static MandalorianIronArmor mandalorianIronHelmet = new MandalorianIronArmor(EntityEquipmentSlot.HEAD, "mandalorianIronHelmet");
     public static MandalorianIronArmor mandalorianIronChestplate = new MandalorianIronArmor(EntityEquipmentSlot.CHEST, "mandalorianIronChestplate");
     public static MandalorianIronArmor mandalorianIronLeggings = new MandalorianIronArmor(EntityEquipmentSlot.LEGS, "mandalorianIronLeggings");
@@ -165,7 +185,10 @@ public class SuperDopeJediMod //Start the class Declaration
     // Mobs
     public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
     //public static BaseMob baseMob = new BaseMob()
-
+    
+    //@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
+    //        serverSide="tutorial.generic.CommonProxy")
+  
  
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -218,7 +241,7 @@ public class SuperDopeJediMod //Start the class Declaration
 //        	for (SuperDopeObject superDopeObject : this.customObjects) {
 //        		superDopeObject.registerModel();
 //        	}
-//    	}
+//    	} 
     	
     	// Register our custom world generator, so our ore gets generated.
     	GameRegistry.registerWorldGenerator(SuperDopeJediMod.superDopeWorldGenerator, 0);
