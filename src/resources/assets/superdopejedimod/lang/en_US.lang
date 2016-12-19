@@ -1,6 +1,12 @@
 tile.quadaniumSteel.name=Quadanium Steel
 item.quadaniumSteelIngot.name=Quadanium Steel Ingot
 tile.quadaniumSteelOre.name=Quadanium Steel Ore
+item.quadaniumSteelHelmet.name=Quadanium Steel Helmet
+item.quadaniumSteelChestplate.name=Quadanium Steel Chest Plate
+item.quadaniumSteelLeggings.name=Quadanium Steel Leggings
+item.quadaniumSteelBoots.name=Quadanium Steel Boots
+item.quadaniumSteelSword.name=Quadanium Steel Sword
+item.quadaniumSteelShield.name=Quadanium Steel Shield
 item.gaffiStick.name=gaffiStick
 tile.vehicleSeat.name=Vehicle Seat
 item.lightSaberRed.name=Red Lightsaber
@@ -27,6 +33,12 @@ item.blaster.name=Blaster
 tile.mandalorianIron.name=Mandalorian Iron
 tile.mandalorianIronOre.name=Mandalorian Iron Ore
 item.mandalorianIronIngot.name=Mandalorian Iron Ingot
+item.mandalorianIronHelmet.name=Mandalorian Iron Helmet
+item.mandalorianIronChestplate.name=Mandalorian Iron Chest Plate
+item.mandalorianIronLeggings.name=Mandalorian Iron Leggings
+item.mandalorianIronBoots.name=Mandalorian Iron Boots
+item.mandalorianIronSword.name=Mandalorian Iron Sword
+item.mandalorianIronShield.name=Mandalorian Iron Shield
 tile.sithMark.name=Sith Mark
 tile.jediMark.name=Jedi Mark
 tile.engine.name=Engine
@@ -42,6 +54,10 @@ tile.electricFluxOre.name=Electric Flux Ore
 tile.controlPanel.name=Control Panel
 item.brynsAwesomeSword.name=Bryn's Awesome Sword
 item.ruby.name=Ruby
+item.SithCape=Sith Cape
+tile.rubyOre.name=Ruby Ore
+tile.OHUMBlock.name=OHOLYUNICORNMAN Spawner
+tile.StarBlock.name=Star Block
 
 
 
