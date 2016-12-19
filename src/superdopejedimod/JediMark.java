@@ -87,7 +87,7 @@ public class JediMark extends BaseBlock
         /* default material. */
         IBlockState blockState = DEFAULT_BLOCK;
 
-        /* If there is a brick in the player's hand, then use that material. */
+        /* If there is a brick in the player's hand, then use that material instead of the default material. */
         Item gotItem = heldItem.getItem();
         if ((gotItem != null) && (gotItem instanceof ItemBlock)) {
         	ItemBlock gotItemBlock = (ItemBlock) gotItem;
@@ -125,8 +125,6 @@ public class JediMark extends BaseBlock
         	arcPos = arcPos.add(0, 0, 1);
         } */
         
-        /* This is a column. */
-        //PlaceColumn(worldIn, startPos);
         
         /* We are now done. We leave this function by calling "return", this time with "true", to tell minecraft that we actually did something. */
         return true;
