@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "normal": [ 
-        	{ "model": "superdopejedimod:sithMark" }, 
-        	{ "model": "superdopejedimod:sithMark2" } 
-        ]
-	}
-}
