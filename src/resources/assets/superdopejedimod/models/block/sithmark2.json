@@ -1,0 +1,24 @@
+{
+    "textures": {
+        "up": "superdopejedimod:blocks/sithMark2",
+        "down": "superdopejedimod:blocks/sithMark2",
+        "north": "superdopejedimod:blocks/sithMark2",
+        "south": "superdopejedimod:blocks/sithMark2",
+        "west": "superdopejedimod:blocks/sithMark2",
+        "east": "superdopejedimod:blocks/sithMark2"
+    },
+    "elements": [
+        {   
+        	"from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "texture": "#down", "cullface": "down" },
+                "up":    { "texture": "#up", "cullface": "up" },
+                "north": { "texture": "#north", "cullface": "north" },
+                "south": { "texture": "#south", "cullface": "south" },
+                "west":  { "texture": "#west", "cullface": "west" },
+                "east":  { "texture": "#east", "cullface": "east" }
+            }
+        }
+    ]
+}
