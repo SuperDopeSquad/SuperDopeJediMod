@@ -43,7 +43,8 @@ public abstract class BaseItemFood extends ItemFood implements SuperDopeObject {
 	public void registerObject() {
 		
 		// Register the item with the game.
-		GameRegistry.registerItem(this, name);
+		//GameRegistry.registerItem(this, name);
+		GameRegistry.register(this.setRegistryName(this.name));
 	}
 	
 	

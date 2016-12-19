@@ -72,8 +72,13 @@ public class StarBlock extends BaseBlock
 	 * This function is automatically called by Minecraft whenever anybody right-mouse-clicks on this block.
      */
 	@Override
+	//public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, 
+	//		EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, 
+	////		EnumFacing side, float hitX, float hitY, float hitZ) {
+	//	return false;
+    //}
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, 
-			EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, 
+			EntityPlayer playerIn, EnumHand hand, 
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		return false;
     }

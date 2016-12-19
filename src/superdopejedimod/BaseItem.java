@@ -41,7 +41,8 @@ public abstract class BaseItem extends Item implements SuperDopeObject {
 	public void registerObject() {
 		
 		// Register the item with the game.
-		GameRegistry.registerItem(this, name);
+		//GameRegistry.registerItem(this, name);
+		GameRegistry.register(this.setRegistryName(this.name));
 	}
 	
 	
@@ -66,7 +67,8 @@ public abstract class BaseItem extends Item implements SuperDopeObject {
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		String location = SuperDopeJediMod.MODID + ":" + ((BaseItem) this).getName();
 		System.out.println("SuperDopeSquad: registering item: " + location);
-	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(location, "inventory"));
+	    //renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(location, "inventory"));
+	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(location));
 	}
 	
 	

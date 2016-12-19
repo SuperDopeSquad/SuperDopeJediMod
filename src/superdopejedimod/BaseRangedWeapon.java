@@ -46,7 +46,8 @@ public abstract class BaseRangedWeapon extends ItemBow implements SuperDopeObjec
 	public void registerObject() {
 		
 		// Register the item with the game.
-		GameRegistry.registerItem(this, this.name);
+		//GameRegistry.registerItem(this, this.name);
+		GameRegistry.register(this.setRegistryName(this.name));
 	}
 	
 	
