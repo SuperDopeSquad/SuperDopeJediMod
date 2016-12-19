@@ -16,6 +16,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -25,6 +26,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 /*
@@ -52,6 +54,17 @@ public class SithMark extends BaseBlock
 	public SithMark(String localName) {
 		super(Material.IRON, localName);
 		this.setLightLevel(1.0F);
+	}
+	
+	
+	/*
+	 *
+	 */
+	@Override
+	public void registerRecipe() {
+		ItemStack swordStack = new ItemStack(Items.IRON_SWORD);
+    	ItemStack goldStack = new ItemStack(Items.GOLD_INGOT);
+    	GameRegistry.addRecipe(new ItemStack(this), "x x", " y ", "x x", 'x', swordStack, 'y', goldStack);
 	}
 	
 	

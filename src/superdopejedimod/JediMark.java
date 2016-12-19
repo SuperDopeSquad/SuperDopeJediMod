@@ -13,6 +13,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -24,6 +25,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 /*
@@ -69,6 +71,17 @@ public class JediMark extends BaseBlock
 	{
 		super(Material.IRON, localName);
 		this.setLightLevel(1.0F);
+	}
+	
+	
+	/*
+	 *
+	 */
+	@Override
+	public void registerRecipe() {
+		ItemStack swordStack = new ItemStack(Items.STONE_SWORD);
+		ItemStack arrowStack = new ItemStack(Items.ARROW);
+		GameRegistry.addRecipe(new ItemStack(this), "x x", " y ", "x x", 'x', swordStack, 'y', arrowStack);
 	}
 	
 	
