@@ -14,19 +14,19 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import superdopesquad.superdopejedimod.entity.EntityExample;
-import superdopesquad.superdopejedimod.entity.EntityTuskanRaider;
+//import superdopesquad.superdopejedimod.entity.EntityExample;
+//import superdopesquad.superdopejedimod.entity.EntityTuskanRaider;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
+//import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntitySpawnPlacementRegistry;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.projectile.EntityEgg;
+//import net.minecraft.entity.Entity;
+//import net.minecraft.entity.EntityList;
+//import net.minecraft.entity.EntitySpawnPlacementRegistry;
+//import net.minecraft.entity.EnumCreatureType;
+//import net.minecraft.entity.passive.EntityChicken;
+//import net.minecraft.entity.passive.EntityVillager;
+//import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -190,8 +190,8 @@ public class SuperDopeJediMod //Start the class Declaration
     // figure out later the downside of not having it, and if i need it, figure out the best way to get a handle
     // for it that is server-safe.
     static int startEntityId = 300;
-    public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
-    public static EntityExample entityExample; 
+    //public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
+    //public static EntityExample entityExample; 
  
     
     @EventHandler
