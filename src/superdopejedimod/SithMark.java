@@ -58,9 +58,10 @@ public class SithMark extends BaseBlock
 	/*
 	 *  Minecraft Event Handler, when someone clicks on the block.
 	 */
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, 
-										@Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, 
+									EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	{
 		System.out.println("SithMark: activated, remote=" + world.isRemote + ", pos=" + pos);
 		
 		/* Don't do anything if we are the client. */
@@ -284,7 +285,7 @@ public class SithMark extends BaseBlock
 	 * @param state
 	 * @param force
 	 */
-	public static void buildWall(World world, BlockPos pos, int length, int height, EnumFacing side, IBlockState state, boolean force) {
+	protected static void buildWall(World world, BlockPos pos, int length, int height, EnumFacing side, IBlockState state, boolean force) {
 		for (int l = 0; l < length; ++l) {
 			for (int h = 0 ; h < height ; ++h) {
 				IBlockState currState = ((h == 0) && !force) ? MATERIAL_STONE : state;

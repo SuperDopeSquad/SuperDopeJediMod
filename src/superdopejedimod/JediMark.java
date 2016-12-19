@@ -75,7 +75,9 @@ public class JediMark extends BaseBlock
 	/*
 	 * This function is automatically called by Minecraft whenever anybody right-mouse-clicks on a JediMark block.
     */
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, 
+									EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
 		/* Don't do anything if we are the client. 
 		 * SuperDopeSquad: ignore this for now. Know that if you do any block-creation, then you need this at the beginning of your function. */
@@ -88,7 +90,8 @@ public class JediMark extends BaseBlock
         IBlockState blockState = DEFAULT_BLOCK;
 
         /* If there is a brick in the player's hand, then use that material instead of the default material. */
-        Item gotItem = heldItem.getItem();
+        ItemStack heldItem = player.getHeldItem(hand);
+        Item gotItem = (heldItem != null) ? heldItem.getItem() : null;
         if ((gotItem != null) && (gotItem instanceof ItemBlock)) {
         	ItemBlock gotItemBlock = (ItemBlock) gotItem;
         	Block heldBlock = gotItemBlock.getBlock();
@@ -110,21 +113,16 @@ public class JediMark extends BaseBlock
         
         if (side == EnumFacing.UP) {
         	/* Now lets try a dome. */
-        	GeometryUtil.buildSphere(worldIn, pos, 15, blockState, false);
+        	GeometryUtil.buildDome(worldIn, pos, 15, blockState);
             return true;
         }
         
-        /* TODO(coolguybri): build these structures as well. Instead of the simple algorithm of doing a different structure
-         * based on the side that was pressed, consider making structures based on the neighbor bricks; for example, if there
-         * is a jedimark stacked on top of 3 stones, then we make a column.
-         */
         /* This is a cool exploding arc. TODO(coolguybri): sneak this back in somehow.
         BlockPos arcPos = startPos.add(0, 0, 3);
         for (int radius = 1 ; radius < 50 ; radius++) {
         	PlaceArc(worldIn, arcPos.down(), radius, columnBlock);
         	arcPos = arcPos.add(0, 0, 1);
         } */
-        
         
         /* We are now done. We leave this function by calling "return", this time with "true", to tell minecraft that we actually did something. */
         return true;

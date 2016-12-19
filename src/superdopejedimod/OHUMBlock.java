@@ -55,7 +55,7 @@ public class OHUMBlock extends BaseBlock
 	/**
 	 * 
 	 */
-	public void buildDomeFort(World worldIn, BlockPos pos, EnumFacing side) {
+	protected void buildDomeFort(World worldIn, BlockPos pos, EnumFacing side) {
 		/* Build central dome. */
 		GeometryUtil.buildDome(worldIn, pos, 7, DOME_BLOCK);
 		
@@ -98,7 +98,9 @@ public class OHUMBlock extends BaseBlock
 	/**
 	 * This function is automatically called by Minecraft whenever anybody right-mouse-clicks on a JediMark block.
      */
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, 
+									EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
 		/* Don't do anything if we are the client. 
 		 * SuperDopeSquad: ignore this for now. Know that if you do any block-creation, then you need this at the beginning of your function. */
