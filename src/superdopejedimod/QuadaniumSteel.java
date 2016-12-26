@@ -2,8 +2,8 @@ package superdopesquad.superdopejedimod;
 
 
 import java.util.Random;
-
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.block.Block;
@@ -36,6 +36,10 @@ public class QuadaniumSteel extends BaseBlock {
 		
 		// Smelting a QuadaniumSteelOre will create 1 QuadaniumSteelIngot
 		GameRegistry.addSmelting(SuperDopeJediMod.quadaniumSteelOre, new ItemStack(SuperDopeJediMod.quadaniumSteelIngot), 1.0F);		
-	}
 	
+		// 8 Iron Ingots and an Ink Sac will create 9 Quadanium Steel Ingots.
+    	ItemStack inkSacStack = new ItemStack(Items.DYE, 1, 0);
+    	ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
+    	GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.quadaniumSteelIngot, 9), "xxx", "xyx", "xxx", 'x', ironIngotStack, 'y', inkSacStack);
+	}
 }
