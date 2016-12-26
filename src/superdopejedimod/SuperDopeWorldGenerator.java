@@ -1,7 +1,6 @@
 package superdopesquad.superdopejedimod;
 
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -15,9 +14,13 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class SuperDopeWorldGenerator implements IWorldGenerator {
 
-	public void generate(Random random, int chunkX, int chunkZ, World world,
-			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
+			IChunkProvider chunkProvider) {
 		
+		//System.out.println("SuperDopeSquad: entered SuperDopeWorldGenerator:generate()");
+
 		switch(world.provider.getDimension()){
 		case -1:
 		    generateNether(world, random, chunkX * 16, chunkZ * 16);
@@ -29,8 +32,8 @@ public class SuperDopeWorldGenerator implements IWorldGenerator {
 		    generateEnd(world, random, chunkX * 16, chunkZ * 16);
 		    break;
 		}
-	}
-
+	}	
+	
 	
 	private void generateEnd(World world, Random random, int i, int j) {
 		
@@ -83,6 +86,8 @@ public class SuperDopeWorldGenerator implements IWorldGenerator {
 
 	public void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY) {
 
+		//System.out.println("SuperDopeSquad: entered addOreSpawn with block " + block.getLocalizedName());
+		
 		assert maxY > minY : "The maximum Y must be greater than the Minimum Y";
 		assert maxX > 0 && maxX <= 16 : "addOreSpawn: The Maximum X must be greater than 0 and less than 16";
 		assert minY > 0 : "addOreSpawn: The Minimum Y must be greater than 0";
@@ -102,12 +107,4 @@ public class SuperDopeWorldGenerator implements IWorldGenerator {
 			worldGenMinable.generate(world, random, blockPos);
 		}
 	}
-
-
-	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
-			IChunkProvider chunkProvider) {
-		// TODO Auto-generated method stub
-		
-	}	
 }
