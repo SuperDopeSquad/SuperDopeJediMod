@@ -8,11 +8,19 @@ import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 public class BaseArmor extends ItemArmor implements SuperDopeObject {
+	
+
+	public BaseArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+		
+		super(materialIn, renderIndexIn, equipmentSlotIn);
+	}
+
 	
 	protected String name = "";
 
@@ -40,7 +48,8 @@ public class BaseArmor extends ItemArmor implements SuperDopeObject {
 	@Override
 	public void registerObject() {
 		
-		GameRegistry.registerItem(this, this.name);
+		//GameRegistry.registerItem(this, this.name);
+		GameRegistry.register(this.setRegistryName(this.name));
 	}
 
 	

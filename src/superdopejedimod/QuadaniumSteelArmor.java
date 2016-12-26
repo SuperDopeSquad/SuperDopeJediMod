@@ -30,10 +30,6 @@ public class QuadaniumSteelArmor extends BaseArmor {
     	GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.quadaniumSteelLeggings), "xxx", "x x", "x x", 'x', quadaniumSteelIngotStack);
     	// Boots.
     	GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.quadaniumSteelBoots), "x x", "x x", 'x', quadaniumSteelIngotStack);
-    	// Shield.
-    	//GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.quadaniumSteelShield), "xxx", "xxx", " x ", 'x', quadaniumSteelIngotStack);
 	}
-	
 }
-	
 	
