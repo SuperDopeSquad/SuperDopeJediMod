@@ -28,10 +28,12 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-//public class EntityTuskanRaider extends BaseEntityAnimal implements IRenderFactory<EntityLiving> {
+@SideOnly(Side.CLIENT)
 public class EntityExample extends EntityVillager { //implements IRenderFactory<EntityLiving> {
 
 	//public static String name = "entityTuskanRaider";

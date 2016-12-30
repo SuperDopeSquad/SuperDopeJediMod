@@ -14,19 +14,19 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import superdopesquad.superdopejedimod.entity.EntityExample;
-import superdopesquad.superdopejedimod.entity.EntityTuskanRaider;
+//import superdopesquad.superdopejedimod.entity.EntityExample;
+//import superdopesquad.superdopejedimod.entity.EntityTuskanRaider;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
+//import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntitySpawnPlacementRegistry;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.projectile.EntityEgg;
+//import net.minecraft.entity.Entity;
+//import net.minecraft.entity.EntityList;
+//import net.minecraft.entity.EntitySpawnPlacementRegistry;
+//import net.minecraft.entity.EnumCreatureType;
+//import net.minecraft.entity.passive.EntityChicken;
+//import net.minecraft.entity.passive.EntityVillager;
+//import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -136,37 +136,19 @@ public class SuperDopeJediMod //Start the class Declaration
     public static CompressedMetalMesh compressedMetalMesh = new CompressedMetalMesh("compressedMetalMesh");
     public static BitsOfCompressedMetalMesh bitsOfCompressedMetalMesh = new BitsOfCompressedMetalMesh("bitsOfCompressedMetalMesh");
     
-    // Mandalorian Iron, used to create weapons and armor.
-    public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
-    public static MandalorianIronOre mandalorianIronOre = new MandalorianIronOre("mandalorianIronOre");
-    public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
-
-   // public static MandalorianIronArmor mandalorianIronArmorHelmet = new MandalorianIronArmor("")
-    public static Item MandalorianIronHelmet;
-    public static Item MandalorianIronChestplate;
-    public static Item MandalorianIronLegs;
-    public static Item MandalorianIronBoots;
-    
-
-    
     //Capes
-    
     public static Item SithCape;
     
-   // [...]
-
-   // GameRegistry.registerItem(tutorialHelmet = new ItemModArmor("tutorial_helmet", ARMOR, "tutorial", 0), "tutorial_helmet"); //0 for helmet
-   // GameRegistry.registerItem(tutorialChestplate = new ItemModArmor("tutorial_chestplate", ARMOR, "tutorial", 1), "tutorial_chestplate"); // 1 for chestplate
-   // GameRegistry.registerItem(tutorialLeggings = new ItemModArmor("tutorial_leggings", ARMOR, "tutorial", 2), "tutorial_leggings"); // 2 for leggings
-   // GameRegistry.registerItem(tutorialBoots = new ItemModArmor("tutorial_boots", ARMOR, "tutorial", 3), "tutorial_boots"); // 3 for boots
-    
+    // Mandalorian Iron, used to create weapons and armor.
+    public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
+    public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
+    public static MandalorianIronOre mandalorianIronOre = new MandalorianIronOre("mandalorianIronOre");
     public static MandalorianIronArmor mandalorianIronHelmet = new MandalorianIronArmor(EntityEquipmentSlot.HEAD, "mandalorianIronHelmet");
     public static MandalorianIronArmor mandalorianIronChestplate = new MandalorianIronArmor(EntityEquipmentSlot.CHEST, "mandalorianIronChestplate");
     public static MandalorianIronArmor mandalorianIronLeggings = new MandalorianIronArmor(EntityEquipmentSlot.LEGS, "mandalorianIronLeggings");
     public static MandalorianIronArmor mandalorianIronBoots = new MandalorianIronArmor(EntityEquipmentSlot.FEET, "mandalorianIronBoots");
     public static MandalorianIronSword mandalorianIronSword = new MandalorianIronSword("mandalorianIronSword");
-    //public static MandalorianIronArmor mandalorianIronShield = new MandalorianIronArmor(EntityEquipmentSlot.OFFHAND, "mandalorianIronShield");
-          
+            
     // Quadanium Steel, used to create vehicles.
     public static QuadaniumSteel quadaniumSteel = new QuadaniumSteel("quadaniumSteel");
     public static QuadaniumSteelIngot quadaniumSteelIngot = new QuadaniumSteelIngot("quadaniumSteelIngot");    
@@ -176,7 +158,6 @@ public class SuperDopeJediMod //Start the class Declaration
     public static QuadaniumSteelArmor quadaniumSteelLeggings = new QuadaniumSteelArmor(EntityEquipmentSlot.LEGS, "quadaniumSteelLeggings");
     public static QuadaniumSteelArmor quadaniumSteelBoots = new QuadaniumSteelArmor(EntityEquipmentSlot.FEET, "quadaniumSteelBoots");
     public static QuadaniumSteelSword quadaniumSteelSword = new QuadaniumSteelSword("quadaniumSteelSword");
-    //public static QuadaniumSteelArmor quadaniumSteelShield = new QuadaniumSteelArmor(EntityEquipmentSlot.OFFHAND, "quadaniumSteelShield");
     
     //Sith Armor
     public static SithLordArmor sithLordHelmet = new SithLordArmor(EntityEquipmentSlot.HEAD, "sithLordHelmet");
@@ -197,8 +178,8 @@ public class SuperDopeJediMod //Start the class Declaration
     // figure out later the downside of not having it, and if i need it, figure out the best way to get a handle
     // for it that is server-safe.
     static int startEntityId = 300;
-    public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
-    public static EntityExample entityExample; 
+    //public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
+    //public static EntityExample entityExample; 
  
     
     @EventHandler

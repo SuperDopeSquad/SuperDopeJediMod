@@ -13,6 +13,8 @@ import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
 
@@ -23,6 +25,7 @@ import superdopesquad.superdopejedimod.SuperDopeObject;
 // EntityAnimal is an EntityAgeable that enables breeding by implementing IAnimal.
 // EntityTameable is EntityAnimal that implement IEntityOwnable 
 
+@SideOnly(Side.CLIENT)
 public abstract class BaseEntityTameable extends EntityTameable implements SuperDopeObject {
 	
 	

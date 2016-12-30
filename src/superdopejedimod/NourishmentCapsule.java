@@ -11,11 +11,15 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class NourishmentCapsule extends BaseItemFood {
 
+	static int healAmount = 20;
+	static float saturationModifier = 2;
+	static boolean isWolfFood = false;
+	
 	
 	public NourishmentCapsule(String name) {
 		
 		// String name, int amount, float saturation, boolean isWolfFood
-		super(name, 20, 20, false);
+		super(name, healAmount, saturationModifier, isWolfFood);
 		
 		this.setCreativeTab(CreativeTabs.FOOD);
 		this.setUnlocalizedName("nourishmentCapsule");
@@ -27,20 +31,15 @@ public class NourishmentCapsule extends BaseItemFood {
 		// Recipe for creating a Nourishment Capsule.
 		ItemStack potatoStack = new ItemStack(Items.POTATO);
 		ItemStack carrotStack = new ItemStack(Items.CARROT);
-		ItemStack breadStack = new ItemStack(Items.BREAD);
+		ItemStack wheatStack = new ItemStack(Items.WHEAT);
 		ItemStack sugarStack = new ItemStack(Items.SUGAR);
-		ItemStack mushroomStack = new ItemStack(Blocks.BROWN_MUSHROOM);
-		ItemStack appleStack = new ItemStack(Items.APPLE);
 
-		GameRegistry.addRecipe(new ItemStack(this, 6), 
+		GameRegistry.addRecipe(new ItemStack(this, 4), 
 				"AB", 
 				"CD", 
-				"EF", 
 				'A', potatoStack, 
 				'B', carrotStack, 
-				'C', breadStack,
-				'D', sugarStack, 
-				'E', mushroomStack, 
-				'F', appleStack);
+				'C', wheatStack,
+				'D', sugarStack);
 	}
 }

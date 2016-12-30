@@ -22,7 +22,7 @@ public abstract class BaseItemFood extends ItemFood implements SuperDopeObject {
 	public BaseItemFood(String name, int amount, 
 			float saturation, boolean isWolfFood) {
 		
-		super(5, 5, false);
+		super(amount, saturation, isWolfFood);
 	
 		this.name = name;
 		this.setMaxStackSize(64);
@@ -43,7 +43,6 @@ public abstract class BaseItemFood extends ItemFood implements SuperDopeObject {
 	public void registerObject() {
 		
 		// Register the item with the game.
-		//GameRegistry.registerItem(this, name);
 		GameRegistry.register(this.setRegistryName(this.name));
 	}
 	

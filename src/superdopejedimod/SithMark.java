@@ -16,6 +16,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -25,6 +26,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 /*
@@ -56,11 +58,23 @@ public class SithMark extends BaseBlock
 	
 	
 	/*
+	 *
+	 */
+	@Override
+	public void registerRecipe() {
+		ItemStack swordStack = new ItemStack(Items.IRON_SWORD);
+    	ItemStack goldStack = new ItemStack(Items.GOLD_INGOT);
+    	GameRegistry.addRecipe(new ItemStack(this), "x x", " y ", "x x", 'x', swordStack, 'y', goldStack);
+	}
+	
+	
+	/*
 	 *  Minecraft Event Handler, when someone clicks on the block.
 	 */
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, 
-										@Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, 
+									EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	{
 		System.out.println("SithMark: activated, remote=" + world.isRemote + ", pos=" + pos);
 		
 		/* Don't do anything if we are the client. */
@@ -116,7 +130,7 @@ public class SithMark extends BaseBlock
 			
 			/* Build the wall that connects them. */
 			if (wallLength > 0) {
-				buildWall(world, pos.offset(side.rotateYCCW(), 5), wallLength, (HEIGHT_BLOCKS - 4), side.rotateYCCW(), MATERIAL_CORNERS);
+				buildWall(world, pos.offset(side.rotateYCCW(), 5), wallLength, (HEIGHT_BLOCKS - 4), side.rotateYCCW(), MATERIAL_CORNERS, false);
 			}
 			
 			pos = pos.offset(side.rotateYCCW(), wallLength + 14).offset(side, 5);
@@ -133,7 +147,7 @@ public class SithMark extends BaseBlock
 		System.out.println("SithMark: creating tower, pos=" + pos + ", side=" + side);
 		 
 		 /* Build the pillar up the middle. We go one extra to make it look cool. */
-        buildColumn(world, pos, HEIGHT_BLOCKS + 1, MATERIAL_CLAY);
+        GeometryUtil.buildColumn(world, pos, HEIGHT_BLOCKS + 1, MATERIAL_CLAY);
         
         /* Build spiral staircase. */
         BlockPos stairPos = pos.offset(side.getOpposite(), 1).offset(side.rotateY(), 1);
@@ -143,10 +157,10 @@ public class SithMark extends BaseBlock
         BlockPos wallPos = pos.south(2).west(2);
         EnumFacing wallSide = EnumFacing.NORTH;
         for (int i = 0 ; i < 4 ; ++i) {
-	        buildWall(world, wallPos, 1, HEIGHT_BLOCKS, wallSide, MATERIAL_CORNERS);
-	        buildWall(world, wallPos.offset(wallSide, 1), 3, HEIGHT_BLOCKS, wallSide, MATERIAL_CLAY);
-	        buildWall(world, wallPos.offset(wallSide, 1).offset(wallSide.rotateYCCW(), 1), 3, HEIGHT_BLOCKS, wallSide, MATERIAL_CLAY);
-	        buildWall(world, wallPos.offset(wallSide, 2).offset(wallSide.rotateYCCW(), 2), 1, HEIGHT_BLOCKS, wallSide, MATERIAL_CORNERS);
+	        buildWall(world, wallPos, 1, HEIGHT_BLOCKS, wallSide, MATERIAL_CORNERS, false);
+	        buildWall(world, wallPos.offset(wallSide, 1), 3, HEIGHT_BLOCKS, wallSide, MATERIAL_CLAY, false);
+	        buildWall(world, wallPos.offset(wallSide, 1).offset(wallSide.rotateYCCW(), 1), 3, HEIGHT_BLOCKS, wallSide, MATERIAL_CLAY, false);
+	        buildWall(world, wallPos.offset(wallSide, 2).offset(wallSide.rotateYCCW(), 2), 1, HEIGHT_BLOCKS, wallSide, MATERIAL_CORNERS, false);
 	        
 	        wallPos = wallPos.offset(wallSide, 4);
 	        wallSide = wallSide.rotateY();
@@ -242,8 +256,8 @@ public class SithMark extends BaseBlock
 		EnumFacing poleSide = side.rotateY();
 		for (int i = 0 ; i < 4 ; ++i) {
 			BlockPos polePos = pos.up(HEIGHT_BLOCKS - 1).offset(poleSide, 3).offset(poleSide.rotateY(), 3);
-			BlockPos torchPos = buildColumn(world, polePos, 3, MATERIAL_CORNERS);
-			world.setBlockState(torchPos, Blocks.TORCH.getDefaultState());
+			GeometryUtil.buildColumn(world, polePos, 3, MATERIAL_CORNERS);
+			world.setBlockState(polePos.up(3), Blocks.TORCH.getDefaultState());
 			poleSide = poleSide.rotateY();
 		}
 		
@@ -274,6 +288,26 @@ public class SithMark extends BaseBlock
 		}
     }
 	
+	/**
+	 * 
+	 * @param world
+	 * @param pos
+	 * @param length
+	 * @param height
+	 * @param side
+	 * @param state
+	 * @param force
+	 */
+	protected static void buildWall(World world, BlockPos pos, int length, int height, EnumFacing side, IBlockState state, boolean force) {
+		for (int l = 0; l < length; ++l) {
+			for (int h = 0 ; h < height ; ++h) {
+				IBlockState currState = ((h == 0) && !force) ? MATERIAL_STONE : state;
+				world.setBlockState(pos.offset(side, l).up(h), currState);
+			}
+		}
+	}
+	
+	
 	
 	/*
 	 * 
@@ -302,50 +336,5 @@ public class SithMark extends BaseBlock
 			side = side.rotateY();
 		}
 		return pos;
-	}
-	
-	
-	/*
-	 * 
-	 */
-	protected BlockPos buildColumn(World world, BlockPos pos, int height, IBlockState bstate) {
-		for (int i = 0 ; i < height ; ++i) {
-			world.setBlockState(pos, bstate);
-			pos = pos.up();
-		}
-		return pos;
-	}
-	
-	
-	/*
-	 * 
-	 */
-	protected void buildWall(World world, BlockPos pos, int length, int height, EnumFacing side, IBlockState state) {
-		buildWall(world, pos, length, height, side, state, false);
-	}
-	
-	
-	/*
-	 * 
-	 */
-	protected void buildWall(World world, BlockPos pos, int length, int height, EnumFacing side, IBlockState state, boolean force) {
-		for (int l = 0; l < length; ++l) {
-			for (int h = 0 ; h < height ; ++h) {
-				IBlockState currState = ((h == 0) && !force) ? MATERIAL_STONE : state;
-				world.setBlockState(pos.offset(side, l).up(h), currState);
-			}
-		}
-	}
-	
-	
-	/*
-	 * 
-	 */
-	protected void buildSlab(World world, BlockPos pos, int length, int width, EnumFacing lengthSide, EnumFacing widthSide, IBlockState state) {
-		for (int l = 0; l < length; ++l) {
-			for (int w = 0 ; w < width ; ++w) {
-				world.setBlockState(pos.offset(lengthSide, l).offset(widthSide, w), state);
-			}
-		}
 	}
 }
