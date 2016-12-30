@@ -77,6 +77,7 @@ public class SuperDopeJediMod //Start the class Declaration
 	public static ArmorMaterial sithCapeMaterial = EnumHelper.addArmorMaterial("SithCapeMaterial", "", 100, new int[]{}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
 	public static ArmorMaterial mandalorianIronArmorMaterial = EnumHelper.addArmorMaterial("MandalorianIronArmorMaterial", "superdopejedimod:mandalorianironarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
 	public static ArmorMaterial quadaniumSteelArmorMaterial = EnumHelper.addArmorMaterial("QuadaniumSteelArmorMaterial", "superdopejedimod:quadaniumsteelarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
+	public static ArmorMaterial sithLordArmorMaterial = EnumHelper.addArmorMaterial("SithLordArmorMaterial", "superdopejedimod:sithlordarmormaterial", 30, new int[]{3,8,6,3}, 10, null, (float) 0.0);
 	
     // instance variable.
     @Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
@@ -157,6 +158,12 @@ public class SuperDopeJediMod //Start the class Declaration
     public static QuadaniumSteelArmor quadaniumSteelLeggings = new QuadaniumSteelArmor(EntityEquipmentSlot.LEGS, "quadaniumSteelLeggings");
     public static QuadaniumSteelArmor quadaniumSteelBoots = new QuadaniumSteelArmor(EntityEquipmentSlot.FEET, "quadaniumSteelBoots");
     public static QuadaniumSteelSword quadaniumSteelSword = new QuadaniumSteelSword("quadaniumSteelSword");
+    
+    //Sith Armor
+    public static SithLordArmor sithLordHelmet = new SithLordArmor(EntityEquipmentSlot.HEAD, "sithLordHelmet");
+    public static SithLordArmor sithLordChestplate = new SithLordArmor(EntityEquipmentSlot.CHEST, "sithLordChestplate");
+    public static SithLordArmor sithLordLeggings = new SithLordArmor(EntityEquipmentSlot.LEGS, "sithLordLeggings");
+    public static SithLordArmor sithLordBoots = new SithLordArmor(EntityEquipmentSlot.FEET, "sithLordBoots");
     
     // Peoples Custom Items
     public static BrynsAwesomeSword brynsAwesomeSword = new BrynsAwesomeSword("brynsAwesomeSword");
