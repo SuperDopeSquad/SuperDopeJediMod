@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public class BaseArmor extends ItemArmor implements SuperDopeObject {
+public abstract class BaseArmor extends ItemArmor implements SuperDopeObject {
 	
 
 	public BaseArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {

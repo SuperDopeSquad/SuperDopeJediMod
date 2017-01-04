@@ -14,19 +14,10 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-//import superdopesquad.superdopejedimod.entity.EntityExample;
-//import superdopesquad.superdopejedimod.entity.EntityTuskanRaider;
+import superdopesquad.superdopejedimod.entity.EntityManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-//import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.entity.EntityList;
-//import net.minecraft.entity.EntitySpawnPlacementRegistry;
-//import net.minecraft.entity.EnumCreatureType;
-//import net.minecraft.entity.passive.EntityChicken;
-//import net.minecraft.entity.passive.EntityVillager;
-//import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -166,13 +157,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static RubyOre rubyOre = new RubyOre("rubyOre");
     
     // Entities.
-    // MC-TODO: the first parameter should be a World instance (Minecraft.getMinecraft.theWorld), but i'm concerned
-    // that this will crash on the server side.  Putting in null doesn't seem to have a harmful effect.  I need to
-    // figure out later the downside of not having it, and if i need it, figure out the best way to get a handle
-    // for it that is server-safe.
-    static int startEntityId = 300;
-    //public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
-    //public static EntityExample entityExample; 
+    public static EntityManager entityManager = new EntityManager();
  
     
     @EventHandler
@@ -185,49 +170,6 @@ public class SuperDopeJediMod //Start the class Declaration
     	for (SuperDopeObject superDopeObject : this.customObjects) {
     		superDopeObject.registerObject();
     	}  
-    	
-//    	// mc-temp
-//    	RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
-//    	World world = Minecraft.getMinecraft().theWorld;
-//    	entityExample = new EntityExample(world);
-//    	// mc-temp
-//    	
-//    	// mc-temp
-//		ResourceLocation resourceLocation = new ResourceLocation("entityExample");
-//	  	//EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.name, SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-//	  	EntityRegistry.registerModEntity(resourceLocation, EntityExample.class, "entityExample", SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-//		RenderingRegistry.registerEntityRenderingHandler(EntityExample.class, new RenderVillager(renderManager));
-//    	// mc-temp
-    	
-    	// mc-temp
-	  	//EntityRegistry.registerModEntity(EntityTuskanRaider.class, "entityTuskanRaider2", SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-		//RenderingRegistry.registerEntityRenderingHandler(EntityTuskanRaider.class, entityTuskanRaider2);
-    	// mc-temp
-		
-    	// mc-temp
-	  	//EntityRegistry.registerModEntity(EntityVillager.class, "entityVillager2", SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-		//RenderingRegistry.registerEntityRenderingHandler(EntityVillager.class, entityVillager2);
-		//RenderingRegistry.registerEntityRenderingHandler(EntityVillager.class, new RenderVillager(renderManager));
-    	// mc-temp
-    	
-    	// MC-TODO: 
-      	//EntityRegistry.registerModEntity(EntityExample.class, "entityExample", SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-      	
-      	//RenderingRegistry.registerEntityRenderingHandler(EntityExample.class, this.entityExample);
-    	
-    	//RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
-    	//RenderChicken renderChicken = new RenderChicken(renderManager, new ModelChicken(), 0);
-      	//RenderingRegistry.registerEntityRenderingHandler(EntityExample.class, renderChicken);
-        
-      	//Render
-;
-//    	RenderingRegistry.registerEntityRenderingHandler(EntityExample.class, new RenderChicken(new RenderManager(), ));
-//    	
-//    	  public RenderChicken(RenderManager renderManagerIn, ModelBase modelBaseIn, float shadowSizeIn)
-//    	    {
-//    	        super(renderManagerIn, modelBaseIn, shadowSizeIn);
-//    	    }
-
     }
      
      
@@ -260,11 +202,5 @@ public class SuperDopeJediMod //Start the class Declaration
     	
     	// Call our proxy for any side-specific work.
     	superDopeCommonProxy.postInit(event);
-    }
-    
-    
-    public static int getUniqueEntityId() {
-    	
-    	return startEntityId++;
     }
 }

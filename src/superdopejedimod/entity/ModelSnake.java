@@ -1,7 +1,7 @@
 package superdopesquad.superdopejedimod.entity;
 
-import org.lwjgl.opengl.GL11;
 
+import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 @SideOnly(Side.CLIENT)
-public class ModelTuskanRaider extends ModelBase
+public class ModelSnake extends ModelBase
 {
     public ModelRenderer head;
     public ModelRenderer tongue;
@@ -46,7 +46,7 @@ public class ModelTuskanRaider extends ModelBase
     };
     
     
-    public ModelTuskanRaider()
+    public ModelSnake()
     {   
         
         head = new ModelRenderer(this, 0, 0);
@@ -124,11 +124,12 @@ public class ModelTuskanRaider extends ModelBase
     {
         // best to cast to actual expected entity, to allow access to custom fields 
         // related to animation
-        renderTuskanRaider((EntityTuskanRaider) parEntity, parTime, parSwingSuppress, par4, 
+        renderSnake((EntitySnake) parEntity, parTime, parSwingSuppress, par4, 
               parHeadAngleY, parHeadAngleX, par7);
     }
     
-    public void renderTuskanRaider(EntityTuskanRaider parEntity, float parTime, float parSwingSuppress, 
+    
+    public void renderSnake(EntitySnake parEntity, float parTime, float parSwingSuppress, 
           float par4, float parHeadAngleY, float parHeadAngleX, float par7)
     {
         setRotationAngles(parTime, parSwingSuppress, par4, parHeadAngleY, parHeadAngleX, 
@@ -165,6 +166,7 @@ public class ModelTuskanRaider extends ModelBase
         GL11.glPopMatrix();
     }
 
+    
     @Override
     public void setRotationAngles(float parTime, float parSwingSuppress, float par3, 
           float parHeadAngleY, float parHeadAngleX, float par6, Entity parEntity)
