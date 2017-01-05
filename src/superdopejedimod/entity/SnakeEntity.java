@@ -1,9 +1,6 @@
 package superdopesquad.superdopejedimod.entity;
 
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -33,12 +30,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-public class EntitySnake extends BaseEntityAnimal implements IRenderFactory<EntityLiving> {
-
+public class SnakeEntity extends BaseEntityAnimal {
+	
 	public static String name = "entitySnake";
 			
 	
-	public EntitySnake(World worldIn) {
+	public SnakeEntity(World worldIn) {
 		
 		super(worldIn);
 
@@ -70,16 +67,7 @@ public class EntitySnake extends BaseEntityAnimal implements IRenderFactory<Enti
 		
 		System.out.println("DEBUGGING: Made it into EntitySnake:preInitClientSide() " + this.getClass().getName());
 		
-		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), this);
-	}
-	
-	
-	@Override
-	public Render<? super EntityLiving> createRenderFor(RenderManager manager) {
-
-    	System.out.println("DEBUGGING: Made it into EntitySnake:createRenderFor(..)");
-    	
-        return new RenderSnake(manager, new ModelSnake(), 0.0f);
+		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), new SnakeRenderFactory());
 	}
 	
 	

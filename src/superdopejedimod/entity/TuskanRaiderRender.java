@@ -1,6 +1,5 @@
 package superdopesquad.superdopejedimod.entity;
 
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -13,15 +12,13 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 @SideOnly(Side.CLIENT)
-public class RenderSnake extends RenderLiving {
+public class TuskanRaiderRender extends RenderLiving {
 
-	protected ResourceLocation tuskanRaiderTexture;
+	protected ResourceLocation resourceLocationTexture;
 	
 	
-	public RenderSnake(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {
-//    {
-//		RenderManager renderManager = new RenderManager(null, null);
-//		
+	public TuskanRaiderRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {
+	
         super(renderManager, par1ModelBase, parShadowSize);
         setEntityTexture();        
     }
@@ -30,11 +27,11 @@ public class RenderSnake extends RenderLiving {
     @Override
     protected void preRenderCallback(EntityLivingBase entity, float f)
     {
-        preRenderCallbackSnake((EntitySnake) entity, f);
+        preRenderCallbackTuskanRaider((TuskanRaiderEntity) entity, f);
     }
 
     
-    protected void preRenderCallbackSnake(EntitySnake entity, float f)
+    protected void preRenderCallbackTuskanRaider(TuskanRaiderEntity entity, float f)
     {
         // some people do some G11 transformations or blends here, like you can do
         // GL11.glScalef(2F, 2F, 2F); to scale up the entity
@@ -47,7 +44,7 @@ public class RenderSnake extends RenderLiving {
     
     protected void setEntityTexture()
     {
-        tuskanRaiderTexture = new ResourceLocation(SuperDopeJediMod.MODID+":textures/entity/serpents/python.png");
+        resourceLocationTexture = new ResourceLocation(SuperDopeJediMod.MODID+":textures/entity/serpents/python.png");
     }
 
     
@@ -58,6 +55,6 @@ public class RenderSnake extends RenderLiving {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 	
-		return this.tuskanRaiderTexture;
+		return this.resourceLocationTexture;
 	}
 }

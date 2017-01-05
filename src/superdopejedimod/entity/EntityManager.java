@@ -14,10 +14,10 @@ public class EntityManager {
     // for it that is server-safe.
     private static int _startEntityId = 300;
     
-    public static EntitySnake entitySnake = new EntitySnake(null);    
-    public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
-    public static EntityJawa entityJawa = new EntityJawa(null);
-    public static EntityWookie entityWookie = new EntityWookie(null);
+    public static SnakeEntity snake = new SnakeEntity(null);    
+    public static TuskanRaiderEntity tuskanRaider = new TuskanRaiderEntity(null);
+    public static JawaEntity jawa = new JawaEntity(null);
+    public static WookieEntity wookie = new WookieEntity(null);
     
     
     public EntityManager() {

@@ -1,6 +1,5 @@
 package superdopesquad.superdopejedimod.entity;
 
-
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -10,7 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 @SideOnly(Side.CLIENT)
-public class ModelSnake extends ModelBase
+public class JawaModel extends ModelBase
 {
     public ModelRenderer head;
     public ModelRenderer tongue;
@@ -46,7 +45,7 @@ public class ModelSnake extends ModelBase
     };
     
     
-    public ModelSnake()
+    public JawaModel()
     {   
         
         head = new ModelRenderer(this, 0, 0);
@@ -124,12 +123,12 @@ public class ModelSnake extends ModelBase
     {
         // best to cast to actual expected entity, to allow access to custom fields 
         // related to animation
-        renderSnake((EntitySnake) parEntity, parTime, parSwingSuppress, par4, 
+        renderJawa((JawaEntity) parEntity, parTime, parSwingSuppress, par4, 
               parHeadAngleY, parHeadAngleX, par7);
     }
     
     
-    public void renderSnake(EntitySnake parEntity, float parTime, float parSwingSuppress, 
+    public void renderJawa(JawaEntity parEntity, float parTime, float parSwingSuppress, 
           float par4, float parHeadAngleY, float parHeadAngleX, float par7)
     {
         setRotationAngles(parTime, parSwingSuppress, par4, parHeadAngleY, parHeadAngleX, 
