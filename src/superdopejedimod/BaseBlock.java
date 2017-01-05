@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public abstract class BaseBlock extends Block implements SuperDopeObject {
+public abstract class BaseBlock extends Block implements SuperDopeObjectGeneratable {
 	
 	protected String name = "";
 	
@@ -44,6 +44,7 @@ public abstract class BaseBlock extends Block implements SuperDopeObject {
 	}
 	
 	
+	@Override
 	public void registerObject() {
 		
 		// Register the block with the game.
@@ -53,11 +54,13 @@ public abstract class BaseBlock extends Block implements SuperDopeObject {
 	}
 	
 	
+	@Override
 	public void registerRecipe() {
 		return;
 	}
 	
 	
+	@Override
 	public void registerModel() {
 		
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
@@ -68,16 +71,19 @@ public abstract class BaseBlock extends Block implements SuperDopeObject {
 	}
     
 	
+	@Override
 	public void generateEnd(World world, Random random, int i, int j) {
 		return;
 	}
 	
 	
+	@Override
 	public void generateSurface(World world, Random random, int i, int j) {
 		return;
 	}
 	
 	
+	@Override
 	public void generateNether(World world, Random random, int i, int j) {
 		return;
 	}
