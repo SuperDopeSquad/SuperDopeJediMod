@@ -66,25 +66,4 @@ public abstract class BaseArmor extends ItemArmor implements SuperDopeObject {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-	@Override
-	public void generateEnd(World world, Random random, int i, int j) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	@Override
-	public void generateSurface(World world, Random random, int i, int j) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	@Override
-	public void generateNether(World world, Random random, int i, int j) {
-		// TODO Auto-generated method stub
-		
-	}
 }

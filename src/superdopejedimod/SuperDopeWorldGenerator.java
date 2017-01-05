@@ -40,7 +40,9 @@ public class SuperDopeWorldGenerator implements IWorldGenerator {
 		// Iterate through all our custom blocks and items, 
     	// and see if we have anything to do when generating the End dimension.
     	for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
-    		superDopeObject.generateEnd(world, random, i, j);
+    		if(superDopeObject instanceof SuperDopeObjectGeneratable) {
+    			((SuperDopeObjectGeneratable)superDopeObject).generateEnd(world, random, i, j);
+    		}
     	}
 	}
 
@@ -50,7 +52,9 @@ public class SuperDopeWorldGenerator implements IWorldGenerator {
 		// Iterate through all our custom blocks and items, 
     	// and see if we have anything to do when generating the Surface dimension.
     	for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
-    		superDopeObject.generateSurface(world, random, i, j);
+    		if(superDopeObject instanceof SuperDopeObjectGeneratable) {
+    			((SuperDopeObjectGeneratable)superDopeObject).generateSurface(world, random, i, j);
+    		}
     	}
 	}
 
@@ -60,7 +64,9 @@ public class SuperDopeWorldGenerator implements IWorldGenerator {
 		// Iterate through all our custom blocks and items, 
     	// and see if we have anything to do when generating the Nether dimension.
     	for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
-    		superDopeObject.generateNether(world, random, i, j);
+    		if(superDopeObject instanceof SuperDopeObjectGeneratable) {
+    			((SuperDopeObjectGeneratable)superDopeObject).generateNether(world, random, i, j);
+    		}
     	}
 	}
 

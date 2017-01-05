@@ -87,24 +87,6 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 	public void registerModel() {
 	    return;
 	}
-  
-	
-	@Override
-	public void generateEnd(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	@Override
-	public void generateSurface(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	@Override	
-	public void generateNether(World world, Random random, int i, int j) {
-		return;
-	}
 	
 	
 	@Override
