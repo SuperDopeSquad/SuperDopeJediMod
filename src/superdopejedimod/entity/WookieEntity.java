@@ -38,7 +38,7 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 public class WookieEntity extends BaseEntityTameable {
 	
-	public static String name = "entityWookie";
+	public static String name = "wookieEntity";
 			
 	
 	public WookieEntity(World worldIn) {
@@ -61,8 +61,9 @@ public class WookieEntity extends BaseEntityTameable {
 	
 	@Override
 	public void registerEntityRender() {
-		
-		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), new WookieRenderFactory());
+				
+		EntityRenderFactory factory = new EntityRenderFactory(WookieRender.class, WookieModel.class, 1.0F);
+		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
 	
 	

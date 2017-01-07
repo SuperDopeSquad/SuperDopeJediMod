@@ -32,7 +32,7 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 public class TuskanRaiderEntity extends BaseEntityAnimal {
 
-	public static String name = "entityTuskanRaider";
+	public static String name = "tuskanRaiderEntity";
 			
 	
 	public TuskanRaiderEntity(World worldIn) {
@@ -55,10 +55,9 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	
 	@Override
 	public void registerEntityRender() {
-		
-		System.out.println("DEBUGGING: Made it into EntityTuskanRaider:preInitClientSide() " + this.getClass().getName());
-		
-		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), new TuskanRaiderRenderFactory());
+				
+		EntityRenderFactory factory = new EntityRenderFactory(TuskanRaiderRender.class, TuskanRaiderModel.class, 1.0F);
+		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
 	
 	
