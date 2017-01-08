@@ -58,6 +58,7 @@ item.SithCape=Sith Cape
 tile.rubyOre.name=Ruby Ore
 tile.OHUMBlock.name=OHOLYUNICORNMAN Spawner
 tile.StarBlock.name=Star Block
-
-
-
+entity.wookieEntity.name=Wookie
+entity.jawaEntity.name=Jawa
+entity.snakeEntity.name=Snake
+entity.tuskanRaiderEntity.name=Tuskan Raider
