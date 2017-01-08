@@ -14,6 +14,7 @@ public class Ruby extends BaseItem{
 	public Ruby(String unlocalizedName) {
 		
 		super(unlocalizedName);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
 		
 	}
 	

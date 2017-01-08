@@ -63,12 +63,13 @@ public class SuperDopeJediMod //Start the class Declaration
     // The order of those #'s at the end: harvestLevel, durability, miningSpeed, damageVsEntities, enchantability
     // http://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-7/custom-tools-swords/
 	public static ToolMaterial gaffiStickMaterial = EnumHelper.addToolMaterial("GaffiStickMaterial", 3, 1000, 15.0F, 4.0F, 30);
-	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 2000, 15.0F, 9.0F, 30);
-	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 2500, 15.0F, 12.0F, 30);
-	public static ToolMaterial brynsAwesomeSwordMaterial = EnumHelper.addToolMaterial("BrynsAwesomeSwordMaterial", 3, 2000, 15.0F, 8.0F, 30);
+	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 2000, 0.0F, 9.0F, 30);
+	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 2500, 0.0F, 12.0F, 30);
+	public static ToolMaterial brynsAwesomeSwordMaterial = EnumHelper.addToolMaterial("BrynsAwesomeSwordMaterial", 3, 2000, 0.0F, 8.0F, 30);
 	public static ToolMaterial mandalorianIronToolMaterial = EnumHelper.addToolMaterial("MandalorianIronToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
 	public static ToolMaterial quadaniumSteelToolMaterial = EnumHelper.addToolMaterial("QuadaniumSteelToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
-
+	public static ToolMaterial blasterMaterial = EnumHelper.addToolMaterial("BlasterMaterial", 3, 1000, 0.0F, 7.0F, 30);
+	
 	// Custom ArmorMaterial's.  
 	// EnumHelper.addArmorMaterial("NAME", textureName, durability, reductionAmounts, enchantability, soundOnEquip, toughness)
 	//		Durability: 5 - leather; 7 - gold; 15 - chain and iron; 33 - diamond
@@ -78,6 +79,7 @@ public class SuperDopeJediMod //Start the class Declaration
 	public static ArmorMaterial mandalorianIronArmorMaterial = EnumHelper.addArmorMaterial("MandalorianIronArmorMaterial", "superdopejedimod:mandalorianironarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
 	public static ArmorMaterial quadaniumSteelArmorMaterial = EnumHelper.addArmorMaterial("QuadaniumSteelArmorMaterial", "superdopejedimod:quadaniumsteelarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
 	public static ArmorMaterial sithLordArmorMaterial = EnumHelper.addArmorMaterial("SithLordArmorMaterial", "superdopejedimod:sithlordarmormaterial", 30, new int[]{3,8,6,3}, 10, null, (float) 0.0);
+	public static ArmorMaterial jediArmorMaterial = EnumHelper.addArmorMaterial("JediArmorMaterial", "superdopejedimod:jediarmormaterial", 30, new int[]{3,8,6,3}, 10, null, (float) 0.0);
 	
     // instance variable.
     @Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
@@ -136,8 +138,6 @@ public class SuperDopeJediMod //Start the class Declaration
     public static CompressedMetalMesh compressedMetalMesh = new CompressedMetalMesh("compressedMetalMesh");
     public static BitsOfCompressedMetalMesh bitsOfCompressedMetalMesh = new BitsOfCompressedMetalMesh("bitsOfCompressedMetalMesh");
     
-    //Capes
-    public static Item SithCape;
     
     // Mandalorian Iron, used to create weapons and armor.
     public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
@@ -165,12 +165,20 @@ public class SuperDopeJediMod //Start the class Declaration
     public static SithLordArmor sithLordLeggings = new SithLordArmor(EntityEquipmentSlot.LEGS, "sithLordLeggings");
     public static SithLordArmor sithLordBoots = new SithLordArmor(EntityEquipmentSlot.FEET, "sithLordBoots");
     
+    //Jedi Armor
+    public static JediArmor jediHelmet = new JediArmor(EntityEquipmentSlot.HEAD, "jediHelmet");
+    public static JediArmor jediChestplate = new JediArmor(EntityEquipmentSlot.CHEST, "jediChestplate");
+    public static JediArmor jediLeggings = new JediArmor(EntityEquipmentSlot.LEGS, "jediLeggings");
+    public static JediArmor jediBoots = new JediArmor(EntityEquipmentSlot.FEET, "jediBoots");
+    
     // Peoples Custom Items
     public static BrynsAwesomeSword brynsAwesomeSword = new BrynsAwesomeSword("brynsAwesomeSword");
     
     //Items for Custom Items
     public static Ruby ruby = new Ruby("ruby");
     public static RubyOre rubyOre = new RubyOre("rubyOre");
+    public static SaphireOre saphireOre = new SaphireOre("saphireOre");
+    public static Saphire saphire = new Saphire("saphire");
     
     // Entities.
     // MC-TODO: the first parameter should be a World instance (Minecraft.getMinecraft.theWorld), but i'm concerned
