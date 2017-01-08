@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BossBlaster extends BaseRangedWeapon {
 
 	public BossBlaster(String unlocalizedName) {
+		
 		super(unlocalizedName);
 	}
 
