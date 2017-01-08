@@ -59,8 +59,9 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	public void registerObject() {
 				
 		ResourceLocation resourceLocation = new ResourceLocation(this.name);
+		System.out.println("registerObject's name: " + this.name);
 	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.name, SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-	}
+	};
 	
 	
 	@Override
