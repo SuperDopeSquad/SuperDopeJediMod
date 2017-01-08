@@ -1,6 +1,11 @@
 package superdopesquad.superdopejedimod.entity;
 
 
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelVillager;
+import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderVillager;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -17,6 +22,8 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -42,6 +49,9 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 		this.setupAI();
 		
 		this.setSize(1.0F, 1.0F);
+		
+		// Put a gaffi stick in his mainhand slot.
+		this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(SuperDopeJediMod.gaffiStick));
 	}
 
 	
@@ -55,8 +65,13 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	
 	@Override
 	public void registerEntityRender() {
-				
-		EntityRenderFactory factory = new EntityRenderFactory(TuskanRaiderRender.class, TuskanRaiderModel.class, 1.0F);
+			
+		//Class renderBaseClass = TuskanRaiderRender.class;
+		//Class renderBaseClass = RenderLiving.class;
+		Class renderBaseClass = RenderVillager.class;
+		//Class modelBaseClass = TuskanRaiderModel.class;
+		Class modelBaseClass = ModelVillager.class;
+		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
 	
