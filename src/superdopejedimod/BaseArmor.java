@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public class BaseArmor extends ItemArmor implements SuperDopeObject {
+public abstract class BaseArmor extends ItemArmor implements SuperDopeObject {
 	
 
 	public BaseArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
@@ -63,27 +63,6 @@ public class BaseArmor extends ItemArmor implements SuperDopeObject {
 	
 	@Override
 	public void registerRecipe() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	@Override
-	public void generateEnd(World world, Random random, int i, int j) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	@Override
-	public void generateSurface(World world, Random random, int i, int j) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	@Override
-	public void generateNether(World world, Random random, int i, int j) {
 		// TODO Auto-generated method stub
 		
 	}

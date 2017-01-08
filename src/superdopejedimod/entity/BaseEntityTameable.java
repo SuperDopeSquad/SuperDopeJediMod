@@ -25,8 +25,8 @@ import superdopesquad.superdopejedimod.SuperDopeObject;
 // EntityAnimal is an EntityAgeable that enables breeding by implementing IAnimal.
 // EntityTameable is EntityAnimal that implement IEntityOwnable 
 
-@SideOnly(Side.CLIENT)
-public abstract class BaseEntityTameable extends EntityTameable implements SuperDopeObject {
+
+public abstract class BaseEntityTameable extends EntityTameable implements SuperDopeEntity {
 	
 	
 	public BaseEntityTameable(World worldIn) {
@@ -71,32 +71,26 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 	}
 	
 	
+	@Override
 	public void registerObject() {
 		return;
 	}
 	
 	
+	@Override
 	public void registerRecipe() {
 		return;
 	}
 	
 	
+	@Override
 	public void registerModel() {
 	    return;
 	}
-  
-	
-	public void generateEnd(World world, Random random, int i, int j) {
-		return;
-	}
 	
 	
-	public void generateSurface(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	public void generateNether(World world, Random random, int i, int j) {
+	@Override
+	public void registerEntityRender() {
 		return;
 	}
 }
