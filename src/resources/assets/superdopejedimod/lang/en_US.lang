@@ -62,5 +62,14 @@ item.sithLordHelmet.name=Sith Lord Helmet
 item.sithLordChestplate.name=Sith Lord Chestplate
 item.sithLordLeggings.name=Sith Lord Leggings
 item.sithLordBoots.name=Sith Lord Boots
+item.jediHelmet.name=Jedi Helmet
+item.jediChestplate.name=Jedi Chestplate
+item.jediLeggings.name=Jedi Leggings
+item.jediBoots.name=Jedi Boots
+item.saphire.name=Saphire
+tile.saphireOre.name=Saphire Ore
+item.faction.name=Faction
+
+
 
 

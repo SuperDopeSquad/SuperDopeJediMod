@@ -31,14 +31,14 @@ public class LightSaber extends BaseMeleeWeapon {
 	
 	public void registerRecipe() {
 		
-		/*if (this.color == "Red") {
+		if (this.color == "Red") {
 		
 			// Recipe for creating a redLightSaber.
 			ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
     		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     		ItemStack stoneButtonStack = new ItemStack(Blocks.STONE_BUTTON);
     		GameRegistry.addRecipe(new ItemStack(this), "x", "y", "z", 'x', redPowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
-		} */
+		} 
 		
 		if (this.color == "Blue") {
 			
@@ -59,7 +59,7 @@ public class LightSaber extends BaseMeleeWeapon {
     		
 		}
 		
-		/*if (this.color == "Purple") {
+		if (this.color == "Purple") {
 			
 			// Recipe for creating a purpleLightSaber.
 			ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
@@ -67,7 +67,7 @@ public class LightSaber extends BaseMeleeWeapon {
     		ItemStack stoneButtonStack = new ItemStack(Blocks.STONE_BUTTON);
     		GameRegistry.addRecipe(new ItemStack(this), "x", "y", "z", 'x', purplePowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
     		
-		} */
+		} 
 	}
 
 }
