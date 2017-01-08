@@ -38,7 +38,7 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 public class JawaEntity extends BaseEntityAnimal {
 	
-	public static String name = "entityJawa";
+	public static String name = "jawaEntity";
 			
 	
 	public JawaEntity(World worldIn) {
@@ -62,7 +62,8 @@ public class JawaEntity extends BaseEntityAnimal {
 	@Override
 	public void registerEntityRender() {
 		
-		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), new JawaRenderFactory());
+		EntityRenderFactory factory = new EntityRenderFactory(JawaRender.class, JawaModel.class, 1.0F);
+		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
 	
 	
