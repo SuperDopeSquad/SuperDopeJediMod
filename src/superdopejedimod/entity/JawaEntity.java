@@ -37,32 +37,24 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 public class JawaEntity extends BaseEntityAnimal {
-	
-	public static String name = "jawaEntity";
-			
+				
 	
 	public JawaEntity(World worldIn) {
 		
-		super(worldIn);
+		super(worldIn, "jawaEntity");
 
 		this.setupAI();
 		
 		this.setSize(1.0F, 0.5F);
-	}
-
-	
-	@Override
-	public void registerObject() {
-				
-		ResourceLocation resourceLocation = new ResourceLocation(this.name);
-	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.name, SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
 	}
 	
 	
 	@Override
 	public void registerEntityRender() {
 		
-		EntityRenderFactory factory = new EntityRenderFactory(JawaRender.class, JawaModel.class, 1.0F);
+		Class renderBaseClass = JawaRender.class;
+		Class modelBaseClass = JawaModel.class;
+		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
 	

@@ -128,8 +128,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static ControlPanel controlPanel = new ControlPanel("controlPanel");
     public static CompressedMetalMesh compressedMetalMesh = new CompressedMetalMesh("compressedMetalMesh");
     public static BitsOfCompressedMetalMesh bitsOfCompressedMetalMesh = new BitsOfCompressedMetalMesh("bitsOfCompressedMetalMesh");
-    
-    
+     
     // Mandalorian Iron, used to create weapons and armor.
     public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");

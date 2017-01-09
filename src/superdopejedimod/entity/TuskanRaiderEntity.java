@@ -38,40 +38,28 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 public class TuskanRaiderEntity extends BaseEntityAnimal {
-
-	public static String name = "tuskanRaiderEntity";
-			
+		
 	
 	public TuskanRaiderEntity(World worldIn) {
 		
-		super(worldIn);
+		super(worldIn, "tuskanRaiderEntity");
 		
 		this.setupAI();
 		
 		this.setSize(1.0F, 1.0F);
 		
 		// Put a gaffi stick in his mainhand slot.
-		this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(SuperDopeJediMod.gaffiStick));
+		//this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(SuperDopeJediMod.gaffiStick));
 	}
 
 	
 	@Override
-	public void registerObject() {
-				
-		ResourceLocation resourceLocation = new ResourceLocation(this.name);
-		System.out.println("registerObject's name: " + this.name);
-	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.name, SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-	};
-	
-	
-	@Override
 	public void registerEntityRender() {
 			
-		//Class renderBaseClass = TuskanRaiderRender.class;
-		//Class renderBaseClass = RenderLiving.class;
-		Class renderBaseClass = RenderVillager.class;
-		//Class modelBaseClass = TuskanRaiderModel.class;
-		Class modelBaseClass = ModelVillager.class;
+		Class renderBaseClass = TuskanRaiderRender.class;
+		//Class renderBaseClass = RenderVillager.class;
+		Class modelBaseClass = TuskanRaiderModel.class;
+		//Class modelBaseClass = ModelVillager.class;
 		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
