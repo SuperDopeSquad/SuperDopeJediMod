@@ -1,5 +1,5 @@
 {
-    "parent": "superdopejedimod:block/rubyOre",
+    "parent": "superdopejedimod:block/saphireOre",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],
