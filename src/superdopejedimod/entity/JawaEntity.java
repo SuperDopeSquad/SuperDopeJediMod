@@ -21,6 +21,8 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.client.renderer.entity.RenderChicken;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -56,6 +58,21 @@ public class JawaEntity extends BaseEntityAnimal {
 		Class modelBaseClass = JawaModel.class;
 		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
+	}
+	
+	
+	@Override
+	public void registerRecipe() {
+		
+		// Recipe for creating a Jawa Egg.
+		ItemStack carrotStack = new ItemStack(Items.CARROT);	
+		ItemStack eggStack = new ItemStack(Items.EGG);
+
+		GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.entityManager.jawaEgg, 1), 
+						"A", 
+						"B", 
+						'A', carrotStack, 
+						'B', eggStack);
 	}
 	
 	

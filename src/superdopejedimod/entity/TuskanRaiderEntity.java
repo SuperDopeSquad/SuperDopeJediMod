@@ -22,6 +22,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -62,6 +63,21 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 		//Class modelBaseClass = ModelVillager.class;
 		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
+	}
+	
+	
+	@Override
+	public void registerRecipe() {
+		
+		// Recipe for creating a TuskanRaider Egg.
+		ItemStack featherStack = new ItemStack(Items.FEATHER);	
+		ItemStack eggStack = new ItemStack(Items.EGG);
+
+		GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.entityManager.tuskanRaiderEgg, 1), 
+						"A", 
+						"B", 
+						'A', featherStack, 
+						'B', eggStack);
 	}
 	
 	
