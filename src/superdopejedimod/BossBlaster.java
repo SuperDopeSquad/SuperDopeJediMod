@@ -10,6 +10,8 @@ public class BossBlaster extends BaseRangedWeapon {
 	public BossBlaster(String unlocalizedName) {
 		
 		super(unlocalizedName);
+		
+		this.setDamage(null, 7);
 	}
 
 	
