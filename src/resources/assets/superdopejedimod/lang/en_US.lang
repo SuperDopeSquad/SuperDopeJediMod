@@ -73,3 +73,9 @@ entity.wookieEntity.name=Wookie
 entity.jawaEntity.name=Jawa
 entity.snakeEntity.name=Snake
 entity.tuskanRaiderEntity.name=Tuskan Raider
+item.jawaEgg.name=Jawa Egg
+item.snakeEgg.name=Snake Egg
+item.wookieEgg.name=Wookie Egg
+item.tuskanRaiderEgg.name=Tuskan Raider Egg
+
+
