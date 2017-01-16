@@ -10,9 +10,12 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
 
@@ -23,16 +26,35 @@ import superdopesquad.superdopejedimod.SuperDopeObject;
 // EntityAnimal is an EntityAgeable that enables breeding by implementing IAnimal.
 // EntityTameable is EntityAnimal that implement IEntityOwnable 
 
-public abstract class BaseEntityTameable extends EntityTameable implements SuperDopeObject {
+
+public abstract class BaseEntityTameable extends EntityTameable implements SuperDopeEntity {
+
 	
+	private String _name = "";
+
 	
-	public BaseEntityTameable(World worldIn) {
+	public BaseEntityTameable(World worldIn, String name) {
 		
 		super(worldIn);
+		
+		this._name = name;
 				
 		// Insert this object into our collection of custom objects, so we 
 		// can send separate events to it for lifecycle management.
 		SuperDopeJediMod.customObjects.add(this);
+	}
+	
+	
+	@Override
+	public String getName() {
+		
+		return this._name;
+	}
+	
+	
+	public String getFullName() {
+		
+		return SuperDopeJediMod.MODID + ":" + this.getName();
 	}
 
 	
@@ -68,32 +90,30 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 	}
 	
 	
+	@Override
 	public void registerObject() {
-		return;
-	}
+		
+		ResourceLocation resourceLocation = new ResourceLocation(this.getFullName());
+		//System.out.println("registerObject's name: " + this.getName());
+		//System.out.println("resourceLocation: " + resourceLocation.toString());
+	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
+	};
 	
 	
+	@Override
 	public void registerRecipe() {
 		return;
 	}
 	
 	
+	@Override
 	public void registerModel() {
 	    return;
 	}
-  
-	
-	public void generateEnd(World world, Random random, int i, int j) {
-		return;
-	}
 	
 	
-	public void generateSurface(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	public void generateNether(World world, Random random, int i, int j) {
+	@Override
+	public void registerEntityRender() {
 		return;
 	}
 }

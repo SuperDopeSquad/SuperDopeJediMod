@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "superdopejedimod:items/rubyOre"
+        "all": "superdopejedimod:blocks/rubyOre"
     }
 }

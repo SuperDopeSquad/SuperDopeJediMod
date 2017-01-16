@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import superdopesquad.superdopejedimod.entity.SuperDopeEntity;
 
 
 public class SuperDopeClientProxy extends SuperDopeCommonProxy {
@@ -21,6 +22,14 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
         
 		super.preInit(e);
+		
+		// Iterate through all our custom objects, and see if we have any entity models to render.
+    	// We only want to call this method for instances of SuperDopeEntity.
+        for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
+        	if(superDopeObject instanceof SuperDopeEntity) {
+        		((SuperDopeEntity)superDopeObject).registerEntityRender();
+            }
+        }
     }
 
 	

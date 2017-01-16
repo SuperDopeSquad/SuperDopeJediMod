@@ -1,8 +1,11 @@
 package superdopesquad.superdopejedimod.entity;
 
+
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.model.ModelVillager;
+import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderVillager;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -19,96 +22,86 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.client.renderer.entity.RenderChicken;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-//public class EntityTuskanRaider extends BaseEntityAnimal implements IRenderFactory<EntityLiving> {
-public class EntityExample extends EntityVillager { //implements IRenderFactory<EntityLiving> {
-
-	//public static String name = "entityTuskanRaider";
-			
+public class TuskanRaiderEntity extends BaseEntityAnimal {
+		
 	
-	public EntityExample(World worldIn) {
+	public TuskanRaiderEntity(World worldIn) {
 		
-		super(worldIn);
+		super(worldIn, "tuskanRaiderEntity");
 		
-//	  	EntityRegistry.registerModEntity(this.getClass(), "entityExample", SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-//		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), this);
-
-
-		//this.clearAITasks();
-		//this.setupAI();
+		this.setupAI();
+		
+		this.setSize(1.0F, 1.0F);
+		
+		// Put a gaffi stick in his mainhand slot.
+		//this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(SuperDopeJediMod.gaffiStick));
 	}
 
 	
-//	public void registerObject() {
-//		
-//		System.out.println("DEBUGGING: Made it into EntityTuskanRaider:registerObject()");
-//		
-//	  	EntityRegistry.registerModEntity(this.getClass(), this.name, SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-//		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), this);
-//	}
-//	
+	@Override
+	public void registerEntityRender() {
+			
+		Class renderBaseClass = TuskanRaiderRender.class;
+		//Class renderBaseClass = RenderVillager.class;
+		Class modelBaseClass = TuskanRaiderModel.class;
+		//Class modelBaseClass = ModelVillager.class;
+		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
+		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
+	}
 	
-//	@Override
-//	public Render<? super EntityLiving> createRenderFor(RenderManager manager) {
-//
-////    	System.out.println("DEBUGGING: Made it into EntityTuskanRaider:createRenderFor(..)");
-////    	
-////       //return new RenderTuskanRaider(manager, new ModelBiped(1.0f), 1.0f);
-////       // return new RenderTuskanRaider(manager, new ModelBiped(0.0f), 0.0f);
-////       // return new RenderTuskanRaider(manager, new ModelTuskanRaider(), 0.0f);
-////        return new RenderChicken(manager, new ModelChicken(), 0.0f);
-////        
-////        return new RenderChicken();
-//	}
-//	
 	
-//	// set up AI tasks
-//	protected void setupAI()
-//	{
-//	   //getNavigator().setAvoidsWater(true);
-//	   //getNavigator().
-//	   
-//	   clearAITasks(); // clear any tasks assigned in super classes
-//	   
-//	   //tasks.addTask(5, new net.minecraft.entity.ai.);
-//	   //tasks.addTask(0, new EntityAISwimming(this));
-//	   //tasks.addTask(1, new EntityAIPanicHerdAnimal(this));
-//	   // the leap and the collide together form an actual attack
-//	   //tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
-//	   //tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0D, true));
-//	  // tasks.addTask(5, new EntityAIMate(this, 1.0D));
-//	   //tasks.addTask(6, new EntityAITempt(this, 1.25D, Items.wheat, false));
-//	   //tasks.addTask(7, new EntityAIFollowParent(this, 1.25D));
-//	  // tasks.addTask(8, new EntityAIWander(this, interpTargetPitch));
-//	   //tasks.addTask(8, new net.minecraft.entity.ai.EntityAIWander(this, 2.0F));
-//	   //tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F));
-//	   //tasks.addTask(10, new EntityAILookIdle(this));
-//	   //targetTasks.addTask(0, new EntityAIHurtByTargetHerdAnimal(this, true));      
-//	}
-//
-//	protected void clearAITasks()
-//	{
-//	   tasks.taskEntries.clear();
-//	   targetTasks.taskEntries.clear();
-//	}
+	// set up AI tasks
+	protected void setupAI()
+	{
+	   //getNavigator().setAvoidsWater(true);
+	   //getNavigator().
+	   
+	   clearAITasks(); // clear any tasks assigned in super classes
+	   
+	   //tasks.addTask(5, new net.minecraft.entity.ai.);
+	   //tasks.addTask(0, new EntityAISwimming(this));
+	   //tasks.addTask(1, new EntityAIPanicHerdAnimal(this));
+	   // the leap and the collide together form an actual attack
+	   //tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
+	   //tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0D, true));
+	  // tasks.addTask(5, new EntityAIMate(this, 1.0D));
+	   //tasks.addTask(6, new EntityAITempt(this, 1.25D, Items.wheat, false));
+	   //tasks.addTask(7, new EntityAIFollowParent(this, 1.25D));
+	  // tasks.addTask(8, new EntityAIWander(this, interpTargetPitch));
+	   //tasks.addTask(8, new net.minecraft.entity.ai.EntityAIWander(this, 2.0F));
+	   //tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F));
+	   //tasks.addTask(10, new EntityAILookIdle(this));
+	   //targetTasks.addTask(0, new EntityAIHurtByTargetHerdAnimal(this, true));      
+	}
+
+	
+	protected void clearAITasks()
+	{
+	   tasks.taskEntries.clear();
+	   targetTasks.taskEntries.clear();
+	}
 
 
-//	@Override
-//	public EntityAgeable createChild(EntityAgeable ageable) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public EntityAgeable createChild(EntityAgeable ageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 //	@Override

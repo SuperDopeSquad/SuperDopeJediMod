@@ -1,8 +1,6 @@
 package superdopesquad.superdopejedimod.entity;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -27,46 +25,38 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-public class EntityTuskanRaider extends BaseEntityAnimal implements IRenderFactory<EntityLiving> {
-//public class EntityTuskanRaider extends EntityAnimal implements IRenderFactory<EntityLiving> {
-
-	public static String name = "entityTuskanRaider";
-			
+public class SnakeEntity extends BaseEntityAnimal {
+				
 	
-	public EntityTuskanRaider(World worldIn) {
+	public SnakeEntity(World worldIn) {
 		
-		super(worldIn);
+		super(worldIn, "snakeEntity");
 
-		//this.clearAITasks();
 		this.setupAI();
+		
+		// Helpful documentation: 
+		// http://jabelarminecraft.blogspot.com/p/minecraft-forge-172-finding-block.html
+		// http://jabelarminecraft.blogspot.com/p/creating-custom-entities.html
+		// http://greyminecraftcoder.blogspot.com/2015/07/entity-rotations-and-animation.html
+		// Note: I do not yet know how to move the Y axis of his head, which would affect what he can see.  Current one is OK.
+		this.setSize(1.0F, 0.5F);
+		//this.setRotationYawHead(0.5F);
+		//this.setRenderYawOffset(0.5F);
 	}
 
-	
-	public void registerObject() {
-		
-		System.out.println("DEBUGGING: Made it into EntityTuskanRaider:registerObject()");
-		
-		ResourceLocation resourceLocation = new ResourceLocation(this.name);
-	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.name, SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-		
-	  	//EntityRegistry.registerModEntity(ResourceLocation registryName, Class<? extends Entity> entityClass, String entityName, int id, Object mod, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int eggPrimary, int eggSecondary)
-	  
-	  	
-	  	RenderingRegistry.registerEntityRenderingHandler(this.getClass(), this);
-	}
-	
 	
 	@Override
-	public Render<? super EntityLiving> createRenderFor(RenderManager manager) {
-
-    	System.out.println("DEBUGGING: Made it into EntityTuskanRaider:createRenderFor(..)");
-    	
-       //return new RenderTuskanRaider(manager, new ModelBiped(1.0f), 1.0f);
-       // return new RenderTuskanRaider(manager, new ModelBiped(0.0f), 0.0f);
-        return new RenderTuskanRaider(manager, new ModelTuskanRaider(), 0.0f);
+	public void registerEntityRender() {
+			
+		Class renderBaseClass = SnakeRender.class;
+		Class modelBaseClass = SnakeModel.class;
+		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
+		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
 	
 	
@@ -94,6 +84,7 @@ public class EntityTuskanRaider extends BaseEntityAnimal implements IRenderFacto
 	   //targetTasks.addTask(0, new EntityAIHurtByTargetHerdAnimal(this, true));      
 	}
 
+	
 	protected void clearAITasks()
 	{
 	   tasks.taskEntries.clear();

@@ -16,8 +16,3 @@ public class MandalorianIronIngot extends BaseItem {
 	public void registerRecipe() {
 	}
 }
-
-
-
-
-

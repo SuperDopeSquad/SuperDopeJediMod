@@ -1,5 +1,6 @@
 package superdopesquad.superdopejedimod;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -8,7 +9,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BossBlaster extends BaseRangedWeapon {
 
 	public BossBlaster(String unlocalizedName) {
+		
 		super(unlocalizedName);
+		
+		
 	}
 
 	
