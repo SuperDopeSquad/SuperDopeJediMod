@@ -35,15 +35,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-
 public class WookieEntity extends BaseEntityTameable {
-	
-	public static String name = "entityWookie";
-			
+				
 	
 	public WookieEntity(World worldIn) {
 		
-		super(worldIn);
+		super(worldIn, "wookieEntity");
 
 		this.setupAI();
 		
@@ -52,17 +49,12 @@ public class WookieEntity extends BaseEntityTameable {
 
 	
 	@Override
-	public void registerObject() {
-				
-		ResourceLocation resourceLocation = new ResourceLocation(this.name);
-	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.name, SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-	}
-	
-	
-	@Override
 	public void registerEntityRender() {
-		
-		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), new WookieRenderFactory());
+				
+		Class renderBaseClass = WookieRender.class;
+		Class modelBaseClass = WookieModel.class;
+		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
+		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
 	
 	

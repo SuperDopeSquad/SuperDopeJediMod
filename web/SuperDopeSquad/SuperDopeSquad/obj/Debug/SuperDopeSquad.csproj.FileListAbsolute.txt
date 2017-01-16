@@ -1,0 +1,6 @@
+C:\dev\SuperDopeJediMod-mc\SuperDopeJediMod\web\SuperDopeSquad\SuperDopeSquad\bin\SuperDopeSquad.dll.config
+C:\dev\SuperDopeJediMod-mc\SuperDopeJediMod\web\SuperDopeSquad\SuperDopeSquad\bin\SuperDopeSquad.dll
+C:\dev\SuperDopeJediMod-mc\SuperDopeJediMod\web\SuperDopeSquad\SuperDopeSquad\bin\SuperDopeSquad.pdb
+C:\dev\SuperDopeJediMod-mc\SuperDopeJediMod\web\SuperDopeSquad\SuperDopeSquad\obj\Debug\SuperDopeSquad.csprojResolveAssemblyReference.cache
+C:\dev\SuperDopeJediMod-mc\SuperDopeJediMod\web\SuperDopeSquad\SuperDopeSquad\obj\Debug\SuperDopeSquad.dll
+C:\dev\SuperDopeJediMod-mc\SuperDopeJediMod\web\SuperDopeSquad\SuperDopeSquad\obj\Debug\SuperDopeSquad.pdb

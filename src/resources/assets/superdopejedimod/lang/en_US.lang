@@ -69,7 +69,7 @@ item.jediBoots.name=Jedi Boots
 item.saphire.name=Saphire
 tile.saphireOre.name=Saphire Ore
 item.faction.name=Faction
-
-
-
-
+entity.wookieEntity.name=Wookie
+entity.jawaEntity.name=Jawa
+entity.snakeEntity.name=Snake
+entity.tuskanRaiderEntity.name=Tuskan Raider

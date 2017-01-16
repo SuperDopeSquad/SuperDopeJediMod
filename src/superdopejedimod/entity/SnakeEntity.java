@@ -31,13 +31,11 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 public class SnakeEntity extends BaseEntityAnimal {
-	
-	public static String name = "entitySnake";
-			
+				
 	
 	public SnakeEntity(World worldIn) {
 		
-		super(worldIn);
+		super(worldIn, "snakeEntity");
 
 		this.setupAI();
 		
@@ -53,21 +51,12 @@ public class SnakeEntity extends BaseEntityAnimal {
 
 	
 	@Override
-	public void registerObject() {
-		
-		System.out.println("DEBUGGING: Made it into EntitySnake:registerObject() " + this.getClass().getName());
-		
-		ResourceLocation resourceLocation = new ResourceLocation(this.name);
-	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.name, SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-	}
-	
-	
-	@Override
 	public void registerEntityRender() {
-		
-		System.out.println("DEBUGGING: Made it into EntitySnake:preInitClientSide() " + this.getClass().getName());
-		
-		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), new SnakeRenderFactory());
+			
+		Class renderBaseClass = SnakeRender.class;
+		Class modelBaseClass = SnakeModel.class;
+		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
+		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
 	
 	
