@@ -147,7 +147,7 @@ public class SithMark extends BaseBlock
 		System.out.println("SithMark: creating tower, pos=" + pos + ", side=" + side);
 		 
 		 /* Build the pillar up the middle. We go one extra to make it look cool. */
-        GeometryUtil.buildColumn(world, pos, HEIGHT_BLOCKS + 1, MATERIAL_CLAY);
+        GeometryUtil.buildColumnDestructive(world, pos, HEIGHT_BLOCKS + 1, MATERIAL_CLAY);
         
         /* Build spiral staircase. */
         BlockPos stairPos = pos.offset(side.getOpposite(), 1).offset(side.rotateY(), 1);
@@ -256,7 +256,7 @@ public class SithMark extends BaseBlock
 		EnumFacing poleSide = side.rotateY();
 		for (int i = 0 ; i < 4 ; ++i) {
 			BlockPos polePos = pos.up(HEIGHT_BLOCKS - 1).offset(poleSide, 3).offset(poleSide.rotateY(), 3);
-			GeometryUtil.buildColumn(world, polePos, 3, MATERIAL_CORNERS);
+			GeometryUtil.buildColumnDestructive(world, polePos, 3, MATERIAL_CORNERS);
 			world.setBlockState(polePos.up(3), Blocks.TORCH.getDefaultState());
 			poleSide = poleSide.rotateY();
 		}
