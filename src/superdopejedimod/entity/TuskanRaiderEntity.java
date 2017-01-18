@@ -52,8 +52,9 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 		this.setSize(1.0F, 1.0F);
 		
 		// Put a gaffi stick in his mainhand slot.
-		//this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(SuperDopeJediMod.gaffiStick));
+		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.gaffiStick));
 	}
+	
 
 	
 	@Override
