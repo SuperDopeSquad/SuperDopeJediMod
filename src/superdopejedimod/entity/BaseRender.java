@@ -3,6 +3,9 @@ package superdopesquad.superdopejedimod.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
+import net.minecraft.client.renderer.entity.layers.LayerElytra;
+import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
@@ -17,11 +20,15 @@ public abstract class BaseRender extends RenderLiving {
 	private ResourceLocation _resourceLocationTexture;
 	
 	
-	public BaseRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize, String textureFileName) {
+	public BaseRender(RenderManager renderManager, ModelBase modelBase, float shadowSize, String textureFileName) {
 	
-        super(renderManager, par1ModelBase, parShadowSize);
+        super(renderManager, modelBase, shadowSize);
         
-        //setEntityTexture();   
+        // This line of code was stolen from RenderBiped, to help me figure out how to render items held in the entity's hand.
+        // Note that your code will fail if your model is not a daughter class of ModelBiped and actually has something in-hand.
+        this.addLayer(new LayerHeldItem(this));
+        
+        // set the location of the texture.
     	this._resourceLocationTexture = new ResourceLocation(SuperDopeJediMod.MODID + ":textures/entities/" + textureFileName + ".png");
     }
  
@@ -29,32 +36,10 @@ public abstract class BaseRender extends RenderLiving {
     @Override
     protected void preRenderCallback(EntityLivingBase entity, float f)
     {
-        //preRenderCallbackTuskanRaider((TuskanRaiderEntity) entity, f);
+        
     }
 
-    
-//    protected void preRenderCallbackTuskanRaider(TuskanRaiderEntity entity, float f)
-//    {
-//        // some people do some G11 transformations or blends here, like you can do
-//        // GL11.glScalef(2F, 2F, 2F); to scale up the entity
-//        // which is used for Slime entities.  I suggest having the entity cast to
-//        // your custom type to make it easier to access fields from your 
-//        // custom entity, eg. GL11.glScalef(entity.scaleFactor, entity.scaleFactor, 
-//        // entity.scaleFactor); 
-//    }
 
-    
-//    protected void setEntityTexture()
-//    {
-//        //resourceLocationTexture = new ResourceLocation(SuperDopeJediMod.MODID+":textures/entity/serpents/python.png");
-//    	resourceLocationTexture = new ResourceLocation(SuperDopeJediMod.MODID + ":textures/entities/tuskanraider.png");
-//    }
-
-    
-    /**
-    * Returns the location of an entity's texture. Doesn't seem to be called 
-    * unless you call Render.bindEntityTexture.
-    */
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 	

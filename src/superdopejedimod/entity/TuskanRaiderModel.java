@@ -3,6 +3,7 @@ package superdopesquad.superdopejedimod.entity;
 
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
@@ -11,8 +12,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import scala.Int;
 
 
+// Note: if you want to have items in your entity's hands get rendered for you,
+// you should be a daughter class of ModelBiped, not ModelBase.
+
 @SideOnly(Side.CLIENT)
-public class TuskanRaiderModel extends ModelBase
+public class TuskanRaiderModel extends ModelBiped
 {
 
 	  /** The head box of the VillagerModel */

@@ -2,6 +2,7 @@ package superdopesquad.superdopejedimod.entity;
 
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
@@ -9,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 @SideOnly(Side.CLIENT)
-public class JawaModel extends ModelBase
+public class JawaModel extends ModelBiped
 {
     public ModelRenderer head;
     public ModelRenderer tongue;

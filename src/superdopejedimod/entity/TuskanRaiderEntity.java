@@ -1,13 +1,13 @@
 package superdopesquad.superdopejedimod.entity;
 
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelSkeleton;
-import net.minecraft.client.model.ModelVillager;
-import net.minecraft.client.renderer.entity.RenderBiped;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderVillager;
-import net.minecraft.enchantment.EnchantmentHelper;
+//import net.minecraft.client.model.ModelBiped;
+//import net.minecraft.client.model.ModelSkeleton;
+//import net.minecraft.client.model.ModelVillager;
+//import net.minecraft.client.renderer.entity.RenderBiped;
+//import net.minecraft.client.renderer.entity.RenderLiving;
+//import net.minecraft.client.renderer.entity.RenderVillager;
+//import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -27,6 +27,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
