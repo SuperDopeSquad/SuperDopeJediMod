@@ -1,6 +1,5 @@
 package superdopesquad.superdopejedimod.entity;
 
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -13,26 +12,28 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 @SideOnly(Side.CLIENT)
-public class JawaRender extends BaseRender {
+public abstract class BaseRender extends RenderLiving {
 
-	//protected ResourceLocation resourceLocationTexture;
+	private ResourceLocation _resourceLocationTexture;
 	
 	
-	public JawaRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {
+	public BaseRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize, String textureFileName) {
 	
-        super(renderManager, par1ModelBase, parShadowSize, "jawa");
-       // setEntityTexture();        
+        super(renderManager, par1ModelBase, parShadowSize);
+        
+        //setEntityTexture();   
+    	this._resourceLocationTexture = new ResourceLocation(SuperDopeJediMod.MODID + ":textures/entities/" + textureFileName + ".png");
     }
  
 	
     @Override
     protected void preRenderCallback(EntityLivingBase entity, float f)
     {
-        //preRenderCallbackJawa((JawaEntity) entity, f);
+        //preRenderCallbackTuskanRaider((TuskanRaiderEntity) entity, f);
     }
 
     
-//    protected void preRenderCallbackJawa(JawaEntity entity, float f)
+//    protected void preRenderCallbackTuskanRaider(TuskanRaiderEntity entity, float f)
 //    {
 //        // some people do some G11 transformations or blends here, like you can do
 //        // GL11.glScalef(2F, 2F, 2F); to scale up the entity
@@ -45,17 +46,18 @@ public class JawaRender extends BaseRender {
     
 //    protected void setEntityTexture()
 //    {
-//        resourceLocationTexture = new ResourceLocation(SuperDopeJediMod.MODID+":textures/entity/serpents/python.png");
+//        //resourceLocationTexture = new ResourceLocation(SuperDopeJediMod.MODID+":textures/entity/serpents/python.png");
+//    	resourceLocationTexture = new ResourceLocation(SuperDopeJediMod.MODID + ":textures/entities/tuskanraider.png");
 //    }
 
     
-//    /**
-//    * Returns the location of an entity's texture. Doesn't seem to be called 
-//    * unless you call Render.bindEntityTexture.
-//    */
-//	@Override
-//	protected ResourceLocation getEntityTexture(Entity entity) {
-//	
-//		return this.resourceLocationTexture;
-//	}
+    /**
+    * Returns the location of an entity's texture. Doesn't seem to be called 
+    * unless you call Render.bindEntityTexture.
+    */
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
+	
+		return this._resourceLocationTexture;
+	}
 }

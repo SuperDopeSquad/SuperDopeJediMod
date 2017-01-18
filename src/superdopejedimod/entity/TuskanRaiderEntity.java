@@ -2,6 +2,7 @@ package superdopesquad.superdopejedimod.entity;
 
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelSkeleton;
 import net.minecraft.client.model.ModelVillager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -61,6 +62,8 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 		//Class renderBaseClass = RenderVillager.class;
 		Class modelBaseClass = TuskanRaiderModel.class;
 		//Class modelBaseClass = ModelVillager.class;
+		//Class modelBaseClass = ModelSkeleton.class;
+		
 		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
