@@ -15,7 +15,7 @@ public class SaphireOre extends BaseBlock{
 		
 		super(Material.ROCK, unlocalizedName);
 		
-		this.setHardness(27.0F);
+		this.setHardness(15.0F);
 		
 		this.setHarvestLevel("pickaxe", 2);
 		

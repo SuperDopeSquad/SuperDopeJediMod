@@ -14,36 +14,36 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class Generator extends BaseBlock{
 	
-public Generator(String unlocalizedName){
+	public Generator(String unlocalizedName){
 	
-	super(Material.IRON, unlocalizedName);
-	this.setCreativeTab(CreativeTabs.MATERIALS);
-}
+		super(Material.IRON, unlocalizedName);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
+	}
 
-public Item getItemDropped(int metadata, Random random, int fortune) {
+	public Item getItemDropped(int metadata, Random random, int fortune) {
     
-	return Item.getItemFromBlock(SuperDopeJediMod.generator);
-}
+		return Item.getItemFromBlock(SuperDopeJediMod.generator);
+	}
 
+	
 
-
-public void registerRecipe() {
+	public void registerRecipe() {
 	
 	// Recipe for creating an Generator.
-	ItemStack chromateIngotStack = new ItemStack(SuperDopeJediMod.chromateIngot);
-	ItemStack electricFluxIngotStack = new ItemStack(SuperDopeJediMod.electricFluxIngot);
-	ItemStack compressedMetalPlateStack = new ItemStack(SuperDopeJediMod.compressedMetalPlate);
-	ItemStack chromateShardStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
+		ItemStack chromateIngotStack = new ItemStack(SuperDopeJediMod.chromateIngot);
+		ItemStack electricFluxIngotStack = new ItemStack(SuperDopeJediMod.electricFluxIngot);
+		ItemStack compressedMetalPlateStack = new ItemStack(SuperDopeJediMod.compressedMetalPlate);
+		ItemStack chromateShardStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
 	
-	GameRegistry.addRecipe(new ItemStack(this, 1), 
-			"ADA", 
-			"CBC", 
-			"ADA", 
-			'A', compressedMetalPlateStack, 
-			'B', electricFluxIngotStack, 
-			'C', chromateShardStack,
-			'D', chromateIngotStack);
+		GameRegistry.addRecipe(new ItemStack(this, 1), 
+				"ADA", 
+				"CBC", 
+				"ADA", 
+				'A', compressedMetalPlateStack, 
+				'B', electricFluxIngotStack, 
+				'C', chromateShardStack,
+				'D', chromateIngotStack);
 			
-}
+		}
 
 }

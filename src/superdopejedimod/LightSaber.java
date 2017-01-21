@@ -1,5 +1,6 @@
 package superdopesquad.superdopejedimod;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -28,6 +29,8 @@ public class LightSaber extends BaseMeleeWeapon {
 		
 	}
 	
+	
+
 	
 	public void registerRecipe() {
 		
