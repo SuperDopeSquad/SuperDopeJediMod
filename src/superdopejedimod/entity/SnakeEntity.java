@@ -17,6 +17,8 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -57,6 +59,21 @@ public class SnakeEntity extends BaseEntityAnimal {
 		Class modelBaseClass = SnakeModel.class;
 		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
+	}
+	
+	
+	@Override
+	public void registerRecipe() {
+		
+		// Recipe for creating a Snake Egg.
+		ItemStack appleStack = new ItemStack(Items.APPLE);	
+		ItemStack eggStack = new ItemStack(Items.EGG);
+
+		GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.entityManager.snakeEgg, 1), 
+						"A", 
+						"B", 
+						'A', appleStack, 
+						'B', eggStack);
 	}
 	
 	

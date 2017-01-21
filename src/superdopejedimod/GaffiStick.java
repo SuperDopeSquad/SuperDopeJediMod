@@ -27,5 +27,4 @@ public class GaffiStick extends BaseMeleeWeapon {
     	ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     	GameRegistry.addRecipe(new ItemStack(this), "xx", " y", " x", 'x', ironIngotStack, 'y', stickStack);
 	}
-	
 }
