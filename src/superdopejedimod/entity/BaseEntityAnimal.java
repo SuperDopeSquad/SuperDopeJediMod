@@ -17,6 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
+import superdopesquad.superdopejedimod.SuperDopeObjectGeneratable;
 
 
 // Note:
@@ -24,7 +25,7 @@ import superdopesquad.superdopejedimod.SuperDopeObject;
 // EntityAgeable is an EntityCreature that can come in various sizes/ages. 
 // EntityAnimal is an EntityAgeable that enables breeding by implementing IAnimal.
 // EntityTameable is EntityAnimal that implement IEntityOwnable 
-public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDopeEntity {
+public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDopeEntity, SuperDopeObjectGeneratable {
 
 	
 	private String _name = "";
@@ -111,6 +112,24 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	
 	@Override
 	public void registerEntityRender() {
+		return;
+	}
+	
+	
+	@Override
+	public void generateEnd(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	@Override
+	public void generateSurface(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	@Override
+	public void generateNether(World world, Random random, int i, int j) {
 		return;
 	}
 }

@@ -21,6 +21,8 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.client.renderer.entity.RenderChicken;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -55,6 +57,21 @@ public class WookieEntity extends BaseEntityTameable {
 		Class modelBaseClass = WookieModel.class;
 		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
+	}
+	
+	
+	@Override
+	public void registerRecipe() {
+		
+		// Recipe for creating a Wookie Egg.
+		ItemStack arrowStack = new ItemStack(Items.ARROW);	
+		ItemStack eggStack = new ItemStack(Items.EGG);
+
+		GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.entityManager.wookieEgg, 1), 
+						"A", 
+						"B", 
+						'A', arrowStack, 
+						'B', eggStack);
 	}
 	
 	
