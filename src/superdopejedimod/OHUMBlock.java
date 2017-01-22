@@ -69,7 +69,7 @@ public class OHUMBlock extends BaseBlock
 	 */
 	protected void buildDomeFort(World worldIn, BlockPos pos, EnumFacing side) {
 		/* Build central dome. */
-		GeometryUtil.buildDome(worldIn, pos, 7, DOME_BLOCK);
+		GeometryUtil.buildDomeDestructive(worldIn, pos, 7, DOME_BLOCK);
 		
 		/* Build the door. */
 		BlockPos doorPos = pos.offset(side, 7);
@@ -103,7 +103,7 @@ public class OHUMBlock extends BaseBlock
 		
 		////bUilD BaSEmENt!!!!!
 		BlockPos basementPos = tunnelPos;
-		GeometryUtil.clearBlock(worldIn, basementPos, 10, 4, 3, EnumFacing.SOUTH, EnumFacing.WEST);
+		GeometryUtil.clearPrism(worldIn, basementPos, 10, 4, 3, EnumFacing.SOUTH, EnumFacing.WEST);
 	}
 	
 	
