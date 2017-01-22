@@ -3,6 +3,10 @@
  */
 package superdopesquad.superdopejedimod;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -19,6 +23,9 @@ public class GeometryUtil {
 	
 	/**
 	 *  Computes the distance between two three-dimensional points. 
+	 *  
+	 *  @param pos1 First point.
+	 *  @param pos2 Second point.
 	 */
 	public static double distance(BlockPos pos1, BlockPos pos2) {
 		double d0 = (double)(pos1.getX() - pos2.getX());
@@ -29,119 +36,188 @@ public class GeometryUtil {
 	
 	
 	/**
+	 * Delete a block and replace it with an Air block.
 	 * 
-	 * @param world
-	 * @param pos
+	 * Note that this routine is destructive, and will permanently delete any block in its way. 
+	 * 
+	 * @param world The world to place the blocks.
+	 * @param pos The position of the block to delete.
 	 */
 	public static void setBlockToAir(World world, BlockPos pos) {
 		world.setBlockState(pos, MATERIAL_AIR);
 	}
 	
+	public static boolean isBlockAir(World world, BlockPos pos) {
+		IBlockState bstate = world.getBlockState(pos);
+		return (bstate.getMaterial() == Material.AIR);
+	}
+	
 	
 	/**
+	 * Builds a column (one block by 1 block column starting at startPos and going up).
 	 * 
-	 * @param world
-	 * @param pos
-	 * @param height
-	 * @param bstate
+	 * Note that this routine is destructive, and will permanently delete any block in its way. 
+	 * 
+	 * @param world The world to place the blocks.
+	 * @param startPos The starting position for the column.
+	 * @param height The height of the column, including the startPos.
+	 * @param bstate The blockstate to use for new blocks in the column.
 	 */
-	public static void buildColumn(World world, BlockPos pos, int height, IBlockState bstate) {
+	public static void buildColumnDestructive(World world, BlockPos startPos, int height, IBlockState bstate) {
+		// Sanity check the params.
+		if (height < 0) {
+			throw new IllegalArgumentException("buildColumnDestructive: need a positive height");
+		}
+		
+		// Lay down the column.
 		for (int h = 0 ; h < height ; ++h) {
-			world.setBlockState(pos.up(h), bstate);
+			world.setBlockState(startPos.up(h), bstate);
 		}
 	}
 	
 	
 	/**
+	 * Builds a one-block thick wall starting at startPos, extending for the desired length and height.
+	 *
+	 * Note that this routine is destructive, and will permanently delete any block in its way. 
 	 * 
-	 * @param world
-	 * @param pos
-	 * @param length
-	 * @param height
-	 * @param side
-	 * @param state
-	 * @param force
+	 * @param world The world to place the wall.
+	 * @param startPos The starting position for the wall.
+	 * @param length How long the wall should be on the x (or z) axis.
+	 * @param height The height of the wall on the y axis.
+	 * @param side Which side to extend the wall (north, south, east, or west).
+	 * @param bstate The blockstate to use for new blocks in the wall.
 	 */
-	public static void buildWall(World world, BlockPos pos, int length, int height, EnumFacing side, IBlockState state) {
+	public static void buildWallDestructive(World world, BlockPos startPos, int length, int height, EnumFacing side, IBlockState bstate) {
+		// Sanity check the params.
+		if (height < 0) {
+			throw new IllegalArgumentException("buildWallDestructive: need a positive height");
+		}
+		if (length < 0) {
+			throw new IllegalArgumentException("buildWallDestructive: need a positive length");
+		}
+		if ((side == EnumFacing.UP) || (side == EnumFacing.DOWN)) {
+			throw new IllegalArgumentException("buildWallDestructive: need to supply east,west, north, or south");
+		}
+		
+		// Lay down the wall.
 		for (int l = 0; l < length; ++l) {
 			for (int h = 0 ; h < height ; ++h) {
-				world.setBlockState(pos.offset(side, l).up(h), state);
+				world.setBlockState(startPos.offset(side, l).up(h), bstate);
 			}
 		}
 	}
 	
 	
 	/**
+	 * Clear out a wall area with air.
 	 * 
+	 * Note that this routine is destructive, and will permanently delete any block in its way.
+	 * 
+	 * @param world The world to clear the blocks.
+	 * @param startPos The starting position for the wall.
+	 * @param length How long the wall should be on the x (or z) axis.
+	 * @param height The height of the wall on the y axis.
+	 * @param side Which side to extend the wall (north, south, east, or west).
 	 */
-	public static void clearWall(World world, BlockPos pos, int length, int height, EnumFacing side) {
-		buildWall(world, pos, length, height, side, MATERIAL_AIR);
+	public static void clearWall(World world, BlockPos startPos, int length, int height, EnumFacing side) {
+		buildWallDestructive(world, startPos, length, height, side, MATERIAL_AIR);
 	}
 	
 	
 	/**
+	 * Builds a one-block high wall starting at startPos, extending for the desired length and height.
 	 * 
-	 * @param world
-	 * @param pos
-	 * @param length
-	 * @param width
-	 * @param lengthSide
-	 * @param widthSide
-	 * @param state
+	 * Note that this routine is destructive, and will permanently delete any block in its way.
+	 * 
+	 * @param world The world to place the plane.
+	 * @param startPos The starting position for the plane.
+	 * @param length The length of the plane.
+	 * @param width The width of the plane.
+	 * @param lengthSide The x or z axis for the length.
+	 * @param widthSide The x or z axis for the width.
+	 * @param bstate The blockstate to use for new blocks in the plane.
 	 */
-	public static void buildPlane(World world, BlockPos pos, int length, int width, EnumFacing lengthSide, EnumFacing widthSide, IBlockState state) {
+	public static void buildPlaneDestructive(World world, BlockPos startPos, int length, int width, EnumFacing lengthSide, EnumFacing widthSide, IBlockState bstate) {
+		// Sanity check the params.
+		if (length < 0) {
+			throw new IllegalArgumentException("buildPlaneDestructive: need a positive length");
+		}
+		if (width < 0) {
+			throw new IllegalArgumentException("buildPlaneDestructive: need a positive width");
+		}
+		if ((lengthSide == EnumFacing.UP) || (lengthSide == EnumFacing.DOWN)) {
+			throw new IllegalArgumentException("buildPlaneDestructive: need to supply east, west, north, or south for lengthSide.");
+		}
+		if ((widthSide == EnumFacing.UP) || (widthSide == EnumFacing.DOWN)) {
+			throw new IllegalArgumentException("buildPlaneDestructive: need to supply east, west, north, or south for lengthSide.");
+		}
+		if (widthSide == lengthSide.getOpposite()) {
+			throw new IllegalArgumentException("buildPlaneDestructive: need to supply different axis for length and width sides.");
+		}
+		
+		// Lay down the plane.
 		for (int l = 0; l < length; ++l) {
 			for (int w = 0 ; w < width ; ++w) {
-				world.setBlockState(pos.offset(lengthSide, l).offset(widthSide, w), state);
+				world.setBlockState(startPos.offset(lengthSide, l).offset(widthSide, w), bstate);
 			}
 		}
 	}
 
 	
 	/**
-	 * defaulted to length = south, width=west
-	 * @param world
-	 * @param pos
-	 * @param length
-	 * @param width
-	 * @param lengthSide
-	 * @param widthSide
-	 * @param state
+	 * Clears a plane-like space and fills it with air.
+	 * 
+	 * Note that this routine is destructive, and will permanently delete any block in its way.
+	 * 
+	 * @param world The world to clear the blocks.
+	 * @param startPos The starting position for the plane.
+	 * @param length The length of the plane.
+	 * @param width The width of the plane.
+	 * @param lengthSide The x or z axis for the length.
+	 * @param widthSide The x or z axis for the width.
 	 */
 	public static void clearPlane(World world, BlockPos pos, int length, int width, EnumFacing lengthSide, EnumFacing widthSide) {
-		buildPlane(world, pos, length, width, lengthSide, widthSide, MATERIAL_AIR);
+		buildPlaneDestructive(world, pos, length, width, lengthSide, widthSide, MATERIAL_AIR);
 	}
 	
 	
 	/**
+	 * Builds a rectangular prism.
 	 * 
-	 * @param world
-	 * @param pos
-	 * @param length
-	 * @param width
-	 * @param height
-	 * @param lengthSide
-	 * @param widthSide
+	 * Note that this routine is destructive, and will permanently delete any block in its way.
+	 * 
+	 * @param world The world to place the plane.
+	 * @param pos The starting position for the plane.
+	 * @param length The length of the prism.
+	 * @param width The width of the prism.
+	 * @param height The height of the prism.
+	 * @param lengthSide The x or z axis for the length.
+	 * @param widthSide The x or z axis for the width.
+	 * @param bstate The blockstate to use for new blocks in the plane.
 	 */
-	public static void buildBlock(World world, BlockPos pos, int length, int width, int height, EnumFacing lengthSide, EnumFacing widthSide, IBlockState state) {
+	public static void buildPrismDestructive(World world, BlockPos startPos, int length, int width, int height, EnumFacing lengthSide, EnumFacing widthSide, IBlockState bstate) {
 		for (int h = 0 ; h < height ; ++h ) {
-			buildPlane(world, pos.up(h), length, width, lengthSide, widthSide, state);
+			buildPlaneDestructive(world, startPos.up(h), length, width, lengthSide, widthSide, bstate);
 		}
 	}
 	
 	
 	/**
+	 * Clears a space for a rectangular prism, replacing it with air.
+	 *
+	 * Note that this routine is destructive, and will permanently delete any block in its way.
 	 * 
-	 * @param world
-	 * @param pos
-	 * @param length
-	 * @param width
-	 * @param height
-	 * @param lengthSide
-	 * @param widthSide
+	 * @param world The world to clear the prism.
+	 * @param pos The starting position for the plane.
+	 * @param length The length of the prism.
+	 * @param width The width of the prism.
+	 * @param height The height of the prism.
+	 * @param lengthSide The x or z axis for the length.
+	 * @param widthSide The x or z axis for the width.
 	 */
-	public static void clearBlock(World world, BlockPos pos, int length, int width, int height, EnumFacing lengthSide, EnumFacing widthSide) {
-		buildBlock(world, pos, length, width, height, lengthSide, widthSide, MATERIAL_AIR);
+	public static void clearPrism(World world, BlockPos startPos, int length, int width, int height, EnumFacing lengthSide, EnumFacing widthSide) {
+		buildPrismDestructive(world, startPos, length, width, height, lengthSide, widthSide, MATERIAL_AIR);
 	}
 	
 	
@@ -150,7 +226,7 @@ public class GeometryUtil {
 	 *  x^2 + y^2 = r^2
 	 * NOTE: hardcoded to go along the x-axis.
 	 */
-	public static void buildArc(World worldIn, BlockPos pos, int radius, boolean axis_shift, IBlockState blockState) {
+	public static void buildArc(World world, BlockPos centerPos, int radius, boolean axis_shift, IBlockState bstate) {
 		
 		/* first quarter. */
 		int radius_squared = radius * radius;
@@ -160,9 +236,9 @@ public class GeometryUtil {
 			double y_d = Math.sqrt(radius_squared - (x * x));
 			int y = (int) Math.round(y_d);
 			for (int py = last_y + 1 ; py < y ; ++py) {
-				worldIn.setBlockState(pos.add(axis_shift ? 0 : last_x, py, axis_shift ? last_x : 0), blockState);
+				world.setBlockState(centerPos.add(axis_shift ? 0 : last_x, py, axis_shift ? last_x : 0), bstate);
 			}
-			worldIn.setBlockState(pos.add(axis_shift ? 0 : x, y, axis_shift ? x : 0), blockState);
+			world.setBlockState(centerPos.add(axis_shift ? 0 : x, y, axis_shift ? x : 0), bstate);
 			last_x = x;
 			last_y = y;
 		}
@@ -172,28 +248,66 @@ public class GeometryUtil {
 			double y_d = Math.sqrt(radius_squared - (x * x));
 			int y = (int) Math.round(y_d);
 			for (int py = last_y - 1 ; py > y ; --py) {
-				worldIn.setBlockState(pos.add(axis_shift ? 0 : x, py, axis_shift ? x : 0), blockState);
+				world.setBlockState(centerPos.add(axis_shift ? 0 : x, py, axis_shift ? x : 0), bstate);
 			}
-			worldIn.setBlockState(pos.add(axis_shift ? 0 : x, y, axis_shift ? x : 0), blockState);
+			world.setBlockState(centerPos.add(axis_shift ? 0 : x, y, axis_shift ? x : 0), bstate);
 			last_x = x;
 			last_y = y;
 		}	
 	}
 	
+	
 	/**
-	 * This is not the most efficient algorithm, but it works. I iterate over every block in the 
-	 *  [radius x radius x (radius / 2) ] cube, and then calculate the distance from the center of that block
-	 *  to pos. If it equals the radius (after rounding), then that block is on the border of the sphere,
-	 *  and should be turned "on".
+	 * Creates a dome. This is not the most efficient algorithm, but it works. I iterate over every block in the 
+	 * [radius x radius x (radius / 2) ] cube, and then calculate the distance from the center of that block
+	 * to pos. If it equals the radius (after rounding), then that block is on the border of the sphere,
+	 * and should be turned "on".
+	 * 
+	 * Note that this routine is destructive, and will permanently delete any block in its way. 
+	 * 
+	 * @param world The world to place the new blocks in.
+	 * @param centerPos The position of the center of the sphere. 
+	 * @param radius The number of blocks on each side of the center; for a radius of 5, the sphere will be 11 blocks wide (5 on
+	 * 				each side, plus the center block).
+	 * @param bstate The blockstate to use for the surface of the sphere.
 	 */
-	public static void buildDome(World worldIn, BlockPos pos, int radius, IBlockState block) {
-		for (int x = -radius ; x <= radius ; ++x) {
-			for (int z = -radius ; z <= radius ; ++z) {
-				for (int y = 0 ; y <= radius ; ++y) {
-					BlockPos currpos = pos.add(x, y, z);
-					int d = (int) Math.round(distance(currpos, pos));
-					if (d == radius) {
-						worldIn.setBlockState(currpos, block);
+	public static void buildDomeDestructive(World world, BlockPos centerPos, int radius, IBlockState bstate) {
+		for (int y = 0 ; y <= radius ; ++y) {
+			for (int x = -radius ; x <= radius ; ++x) {
+				for (int z = -radius ; z <= radius ; ++z) {
+					BlockPos currPos = centerPos.add(x, y, z);
+					int distanceFromCenter = (int) Math.round(distance(currPos, centerPos));
+					if (distanceFromCenter == radius) {
+						world.setBlockState(currPos, bstate);
+					}
+				}
+			}
+		}
+	}
+	
+	
+	/**
+	 * Creates a sphere. This is not the most efficient algorithm, but it works. I iterate over every block in the 
+	 * [radius x radius x radius] cube centered around centerPos, and then calculate the distance from the center of that block
+	 * to centerPos. If it equals the radius (after rounding), then that block is on the border of the sphere,
+	 * and should be turned "on".
+	 * 
+	 * Note that this routine is destructive, and will permanently delete any block in its way. 
+	 *  
+	 * @param world The world to place the new blocks in.
+	 * @param centerPos The position of the center of the sphere. 
+	 * @param radius The number of blocks on each side of the center; for a radius of 5, the sphere will be 11 blocks wide (5 on
+	 * 				each side, plus the center block).
+	 * @param bstate The blockstate to use for the surface of the sphere.
+	 */
+	public static void buildSphereDestructive(World world, BlockPos centerPos, int radius, IBlockState bstate) {
+		for (int y = -radius ; y <= radius ; ++y) {
+			for (int x = -radius ; x <= radius ; ++x) {
+				for (int z = -radius ; z <= radius ; ++z) {
+					BlockPos currPos = centerPos.add(x, y, z);
+					int distanceFromCenter = (int) Math.round(distance(currPos, centerPos));
+					if (distanceFromCenter == radius) {
+						world.setBlockState(currPos, bstate);
 					}
 				}
 			}
@@ -206,49 +320,69 @@ public class GeometryUtil {
 	 *  [radius x radius x (radius / 2) ] cube, and then calculate the distance from the center of that block
 	 *  to pos. If it equals the radius (after rounding), then that block is on the border of the sphere,
 	 *  and should be turned "on".
+	 *  
+	 *  This algorithm starts at the top, and builds each plan, working down. It also keeps track of every column, 
+	 *  and whether or not it has hit ground yet. One it does, we put no other blocks on that column underneath it. This allows for the sphere 
+	 *  to wrap around rocks.
+	 *  
+	 * @param world The world to place the new blocks in.
+	 * @param centerPos The position of the center of the sphere. 
+	 * @param radius The number of blocks on each side of the center; for a radius of 5, the sphere will be 11 blocks wide (5 on
+	 * 				each side, plus the center block).
+	 * @param bstate The blockstate to use for the surface of the sphere.
 	 */
-	public static void buildSphere(World worldIn, BlockPos pos, int radius, IBlockState block, boolean destructive) {
-		int numhit = 0;
+	public static void buildSphereNonDestructive(World world, BlockPos centerPos, int radius, IBlockState bstate) {
 		
-		for (int x = -radius ; x <= radius ; ++x) {
+		// Init the collision grid.
+		int gridDimension = radius * 2 + 1;
+		boolean[][] collisionGrid = new boolean[gridDimension][gridDimension];
+		Set<String> blockageTypes = new HashSet<String>();
+		
+		for (int y = radius ; y >= -radius ; --y) {
 			for (int z = -radius ; z <= radius ; ++z) {
-				for (int y = -radius ; y <= radius ; ++y) {
-					BlockPos currpos = pos.add(x, y, z);
-					int distance_fromCenter = (int) Math.round(distance(currpos, pos));
-					if (distance_fromCenter == radius) {
-						/* If we are destructive, then we always place it. Otherwise, we need to make sure the path
-						 * to the center is unubstructed. */
-						boolean placeIt = destructive;
-						if (!placeIt) {
-							double x_delta = pos.getX() - currpos.getX();
-							double y_delta = pos.getY() - currpos.getY();
-							double z_delta = pos.getZ() - currpos.getZ();
-							
-							double z_angle = Math.atan2(y_delta, x_delta);
-							double y_angle = Math.atan2(z_delta, x_delta);
-							
-							
-							//Anyway, Assuming direction is initially z aligned, then rotated around x axis followed by rotation around y axis.
-							// x=x0 + distance * cos (angleZ) * sin (angleY)
-							// Y=y0 + distance * sin (Anglez)
-							// Z=z0 + distance * cos (angleZ) * cos (angleY)
-							
-							for (int d = 0 ; d < 10 ; ++d) {
-								double new_x = pos.getX() + d * Math.cos(z_angle) * Math.sin(y_angle);
-								double new_y = pos.getY() + d * Math.sin(z_angle);
-								double new_z = pos.getZ() + d * Math.cos(z_angle) * Math.cos(y_angle);
-								BlockPos spikeypos = new BlockPos(new_x, new_y, new_z);
-								worldIn.setBlockState(spikeypos, block);
+				for (int x = -radius ; x <= radius ; ++x) {
+					BlockPos currPos = centerPos.add(x, y, z);
+					
+					int x_grid = x + radius;
+					int z_grid = z + radius;
+					if (!collisionGrid[x_grid][z_grid]) {
+						
+						int distanceFromCenter = (int) Math.round(distance(currPos, centerPos));
+						if (distanceFromCenter == radius) {
+						
+							boolean placeIt = isBlockAir(world, currPos);
+							if (!placeIt) { 
+								IBlockState currState = world.getBlockState(currPos);
+								String blockName =  currState.getBlock().getUnlocalizedName();
+								placeIt = (!currState.isFullBlock() && 
+										   (blockName.equals("tile.snow") ||
+										    blockName.equals("tile.flower") ||
+										    blockName.equals("tile.flower1") ||
+										    blockName.equals("tile.flower2") ||
+										    blockName.equals("tile.water") ||
+										    blockName.equals("tile.tallgrass"))); // TODO(coolguybri): any other block types that are OK to destroy?
+								placeIt |= (currState.isFullBlock() && 
+											(blockName.equals("tile.leaves")));
+								if (!placeIt) {
+									Material m = currState.getMaterial();
+									blockageTypes.add(currState.getBlock().getUnlocalizedName() + ":" + (currState.isFullBlock() ? "full" : "partial"));
+								}
 							}
 							
-						}
-						
-						if (placeIt) {
-							worldIn.setBlockState(currpos, block);
+							if (placeIt) {
+								world.setBlockState(currPos, bstate);
+							} else {
+								collisionGrid[x_grid][z_grid] = true;
+							}
 						}
 					}
 				}
 			}
+		}
+		
+		// While I am still testing this, print out the block-types that are not being destroyed.
+		for (String blockage : blockageTypes) {
+			System.out.println("JediMark: full sphere blocked by block-type: " + blockage);
 		}
 	}
 }
