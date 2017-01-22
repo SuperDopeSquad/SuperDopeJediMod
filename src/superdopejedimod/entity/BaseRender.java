@@ -26,7 +26,9 @@ public abstract class BaseRender extends RenderLiving {
         
         // This line of code was stolen from RenderBiped, to help me figure out how to render items held in the entity's hand.
         // Note that your code will fail if your model is not a daughter class of ModelBiped and actually has something in-hand.
-        this.addLayer(new LayerHeldItem(this));
+        LayerHeldItem layerhelditem = new LayerHeldItem(this);
+        this.addLayer(layerhelditem);
+        //this.addLayer(new LayerHeldItem(this));
         
         // set the location of the texture.
     	this._resourceLocationTexture = new ResourceLocation(SuperDopeJediMod.MODID + ":textures/entities/" + textureFileName + ".png");
