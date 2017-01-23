@@ -127,7 +127,7 @@ public class JawaEntity extends BaseEntityAnimal {
 	public void generateSurface(World world, Random random, int i, int j) {
 				
 		Class entityClass = JawaEntity.class;
-		int weightedProbability = 100;
+		int weightedProbability = 20;
 		int minimumSpawnCount = 4;
 		int maximumSpawnCount = 16;
 		EnumCreatureType creatureType = EnumCreatureType.MONSTER;
