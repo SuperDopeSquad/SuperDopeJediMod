@@ -61,6 +61,9 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 		// how much experience do you get it you kill it?
 		this.experienceValue = 5;
 		
+		// Properties that we need to have later.
+		this.shadowSize = 1.0F;
+		
 		// Put a gaffi stick in his mainhand slot.
 		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.gaffiStick));
 	}
@@ -71,7 +74,7 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 			
 		Class renderBaseClass = TuskanRaiderRender.class;
 		Class modelBaseClass = TuskanRaiderModel.class;
-		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
+		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, this.shadowSize);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
 	
@@ -110,13 +113,6 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	   this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
-	
-	protected void clearAITasks() {
-		
-	   tasks.taskEntries.clear();
-	   targetTasks.taskEntries.clear();
-	}
-	
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
@@ -129,7 +125,7 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	public void generateSurface(World world, Random random, int i, int j) {
 				
 		Class entityClass = TuskanRaiderEntity.class;
-		int weightedProbability = 100;
+		int weightedProbability = 10;
 		int minimumSpawnCount = 4;
 		int maximumSpawnCount = 16;
 		EnumCreatureType creatureType = EnumCreatureType.MONSTER;
@@ -189,81 +185,10 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	}
 	
 	
-	// Copied from EntityMob.
-	public boolean attackEntityAsMob(Entity entityIn) {
-		
-        float f = (float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
-        int i = 0;
-
-        if (entityIn instanceof EntityLivingBase)
-        {
-            f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase)entityIn).getCreatureAttribute());
-            i += EnchantmentHelper.getKnockbackModifier(this);
-        }
-
-        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
-
-        if (flag)
-        {
-            if (i > 0 && entityIn instanceof EntityLivingBase)
-            {
-                ((EntityLivingBase)entityIn).knockBack(this, (float)i * 0.5F, (double)MathHelper.sin(this.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(this.rotationYaw * 0.017453292F)));
-                this.motionX *= 0.6D;
-                this.motionZ *= 0.6D;
-            }
-
-            int j = EnchantmentHelper.getFireAspectModifier(this);
-
-            if (j > 0)
-            {
-                entityIn.setFire(j * 4);
-            }
-
-            if (entityIn instanceof EntityPlayer)
-            {
-                EntityPlayer entityplayer = (EntityPlayer)entityIn;
-                ItemStack itemstack = this.getHeldItemMainhand();
-                ItemStack itemstack1 = entityplayer.isHandActive() ? entityplayer.getActiveItemStack() : ItemStack.field_190927_a;
-
-                if (!itemstack.func_190926_b() && !itemstack1.func_190926_b() && itemstack.getItem() instanceof ItemAxe && itemstack1.getItem() == Items.SHIELD)
-                {
-                    float f1 = 0.25F + (float)EnchantmentHelper.getEfficiencyModifier(this) * 0.05F;
-
-                    if (this.rand.nextFloat() < f1)
-                    {
-                        entityplayer.getCooldownTracker().setCooldown(Items.SHIELD, 100);
-                        this.worldObj.setEntityState(entityplayer, (byte)30);
-                    }
-                }
-            }
-
-            this.applyEnchantments(this, entityIn);
-        }
-
-        return flag;
-    }
-	
-	
 	// After it dies, what equipment should it drop?
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		
 		this.entityDropItem(new ItemStack(SuperDopeJediMod.gaffiStick), 0);
-    }
-	
-	
-	// Copied from EntityMob.
-	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount) {
-	        
-		return this.isEntityInvulnerable(source) ? false : super.attackEntityFrom(source, amount);
-	}
-	
-	 
-    // Entity won't drop items or experience points if this returns false
-	@Override
-    protected boolean canDropLoot() {
-        
-		return true;
     }
 }
