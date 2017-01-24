@@ -55,7 +55,7 @@ public class GenericEntityEgg extends EntityEgg {
         {
 
         	EntityAnimal entity = (EntityAnimal) this.createEntity();
-            entity.setGrowingAge(-24000);
+           // entity.setGrowingAge(-24000); // this is used to make a baby version.
             entity.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
             this.worldObj.spawnEntityInWorld(entity);
         
