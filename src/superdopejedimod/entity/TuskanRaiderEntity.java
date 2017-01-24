@@ -56,7 +56,8 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 		
 		this.setupAI();
 		
-		this.setSize(1.0F, 1.0F);
+		// This sets the bounding box size, not the actual model that you see rendered.
+		this.setSize(1.0F, 2.0F);
 		
 		// how much experience do you get it you kill it?
 		this.experienceValue = 5;
@@ -101,14 +102,14 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	   clearAITasks(); 
 	
 	   // Main AI task list.
-	   tasks.addTask(1, new EntityAIAttackMelee(this, 0.5, false));
-	   tasks.addTask(5, new EntityAIMate(this, 1.0D));
-	   tasks.addTask(7, new EntityAIFollowParent(this, 1.25D));
-	   tasks.addTask(8, new EntityAIWander(this, 1.0D));
+	   this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0, false));
+	   // tasks.addTask(5, new EntityAIMate(this, 1.0D)); We don't need these guys mating.
+	   this.tasks.addTask(7, new EntityAIFollowParent(this, 1.25D));
+	   this.tasks.addTask(8, new EntityAIWander(this, 1.0D));
 
 	   // Set up the targetTasks list, which defines who the entity focuses his actions on.
 	   // Priority 0: attack anything that attacked me.
-	   targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));   
+	   this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));   
 	   // Priority 1: attack the nearest player I can find.
 	   this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
@@ -125,9 +126,9 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	public void generateSurface(World world, Random random, int i, int j) {
 				
 		Class entityClass = TuskanRaiderEntity.class;
-		int weightedProbability = 10;
-		int minimumSpawnCount = 4;
-		int maximumSpawnCount = 16;
+		int weightedProbability = 5;
+		int minimumSpawnCount = 2;
+		int maximumSpawnCount = 8;
 		EnumCreatureType creatureType = EnumCreatureType.MONSTER;
 		
 		// add the spawn information to EntityRegistry through the addSpawn call.
@@ -181,7 +182,7 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 
 	    // need to register any additional attributes
 	   getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-	   getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
+	   getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
 	}
 	
 	
