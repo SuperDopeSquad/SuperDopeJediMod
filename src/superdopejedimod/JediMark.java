@@ -126,7 +126,7 @@ public class JediMark extends BaseBlock
         
         if (side == EnumFacing.UP) {
         	/* Now lets try a dome. */
-        	GeometryUtil.buildDome(worldIn, pos, 15, blockState);
+        	GeometryUtil.buildSphereNonDestructive(worldIn, pos, 15, blockState);
             return true;
         }
         
