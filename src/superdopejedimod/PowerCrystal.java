@@ -15,7 +15,7 @@ public class PowerCrystal extends BaseItem {
 		
 		this.color = colorInput;
 		
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
 		
 		//this.setMaxStackSize(64);
 		//this.setCreativeTab(CreativeTabs.tabMisc);

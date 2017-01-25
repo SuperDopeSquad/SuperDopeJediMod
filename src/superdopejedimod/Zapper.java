@@ -9,15 +9,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class Zapper extends BaseRangedWeapon {
 
-    
     public Zapper(String unlocalizedName) {
-        
         super(unlocalizedName);
     }
 
-
     public void registerRecipe() {
-        
     }
-    
 }

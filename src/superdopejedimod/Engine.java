@@ -16,8 +16,9 @@ public class Engine extends BaseBlock {
 
 public Engine(String unlocalizedName) {
 		
-		super(Material.iron, unlocalizedName);
-		this.setCreativeTab(CreativeTabs.tabRedstone);
+		super(Material.IRON, unlocalizedName);
+		this.setCreativeTab(CreativeTabs.REDSTONE);
+
 	}
 
 	
@@ -30,7 +31,7 @@ public Engine(String unlocalizedName) {
 		
 		// Recipe for creating an Engine.
 		ItemStack chromateIngotStack = new ItemStack(SuperDopeJediMod.chromateIngot);
-		ItemStack redstoneStack = new ItemStack(Items.redstone);
+		ItemStack electricFluxIngotStack = new ItemStack(SuperDopeJediMod.electricFluxIngot);
 		ItemStack compressedMetalPlateStack = new ItemStack(SuperDopeJediMod.compressedMetalPlate);
 		ItemStack quadaniumSteelStack = new ItemStack(SuperDopeJediMod.quadaniumSteel);
 		
@@ -39,7 +40,7 @@ public Engine(String unlocalizedName) {
 				"CBC", 
 				"ADA", 
 				'A', compressedMetalPlateStack, 
-				'B', redstoneStack, 
+				'B', electricFluxIngotStack, 
 				'C', quadaniumSteelStack,
 				'D', chromateIngotStack);
 				

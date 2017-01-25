@@ -13,6 +13,7 @@ public class Blaster extends BaseRangedWeapon {
 	public Blaster(String unlocalizedName) {
 		
 		super(unlocalizedName);
+		
 	}
 
 

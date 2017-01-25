@@ -3,8 +3,8 @@ package superdopesquad.superdopejedimod;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -30,7 +30,7 @@ public abstract class BaseRangedWeapon extends ItemBow implements SuperDopeObjec
 		this.setUnlocalizedName(this.name);
 				
 		// By default, we'll put all new blocks in the combat tab.
-		this.setCreativeTab(CreativeTabs.tabCombat);
+		this.setCreativeTab(CreativeTabs.COMBAT);
 				
 		// Insert this object into our collection of custom blocks, so we 
 		// can send separate events to it for lifecycle management.
@@ -43,36 +43,25 @@ public abstract class BaseRangedWeapon extends ItemBow implements SuperDopeObjec
 	}
 	
 	
+	@Override
 	public void registerObject() {
 		
 		// Register the item with the game.
-		GameRegistry.registerItem(this, this.name);
+		//GameRegistry.registerItem(this, this.name);
+		GameRegistry.register(this.setRegistryName(this.name));
 	}
 	
 	
+	@Override
 	public void registerRecipe() {
 		return;
 	}
 	
 	
+	@Override
 	public void registerModel() {
 	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseRangedWeapon) this).getName(), "inventory"));
-	}
-	
-	
-	public void generateEnd(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	public void generateSurface(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	public void generateNether(World world, Random random, int i, int j) {
-		return;
 	}
 }
