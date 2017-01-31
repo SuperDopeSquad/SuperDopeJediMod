@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
+import superdopesquad.superdopejedimod.SuperDopeObjectGeneratable;
 
 
 // Note:
@@ -27,7 +29,7 @@ import superdopesquad.superdopejedimod.SuperDopeObject;
 // EntityTameable is EntityAnimal that implement IEntityOwnable 
 
 
-public abstract class BaseEntityTameable extends EntityTameable implements SuperDopeEntity {
+public abstract class BaseEntityTameable extends EntityTameable implements SuperDopeEntity, SuperDopeObjectGeneratable {
 
 	
 	private String _name = "";
@@ -114,6 +116,24 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 	
 	@Override
 	public void registerEntityRender() {
+		return;
+	}
+	
+	
+	@Override
+	public void generateEnd(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	@Override
+	public void generateSurface(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	@Override
+	public void generateNether(World world, Random random, int i, int j) {
 		return;
 	}
 }

@@ -1,33 +1,43 @@
 package superdopesquad.superdopejedimod.entity;
 
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelVillager;
-import net.minecraft.client.renderer.entity.RenderBiped;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderVillager;
+import java.util.Random;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Biomes;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeCache;
+import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -46,54 +56,62 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 		
 		this.setupAI();
 		
-		this.setSize(1.0F, 1.0F);
+		// This sets the bounding box size, not the actual model that you see rendered.
+		this.setSize(1.0F, 2.0F);
+		
+		// how much experience do you get it you kill it?
+		this.experienceValue = 5;
+		
+		// Properties that we need to have later.
+		this.shadowSize = 1.0F;
 		
 		// Put a gaffi stick in his mainhand slot.
-		//this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(SuperDopeJediMod.gaffiStick));
+		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.gaffiStick));
 	}
-
+	
 	
 	@Override
 	public void registerEntityRender() {
 			
 		Class renderBaseClass = TuskanRaiderRender.class;
-		//Class renderBaseClass = RenderVillager.class;
 		Class modelBaseClass = TuskanRaiderModel.class;
-		//Class modelBaseClass = ModelVillager.class;
-		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
+		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, this.shadowSize);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
 	
 	
-	// set up AI tasks
-	protected void setupAI()
-	{
-	   //getNavigator().setAvoidsWater(true);
-	   //getNavigator().
-	   
-	   clearAITasks(); // clear any tasks assigned in super classes
-	   
-	   //tasks.addTask(5, new net.minecraft.entity.ai.);
-	   //tasks.addTask(0, new EntityAISwimming(this));
-	   //tasks.addTask(1, new EntityAIPanicHerdAnimal(this));
-	   // the leap and the collide together form an actual attack
-	   //tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
-	   //tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0D, true));
-	  // tasks.addTask(5, new EntityAIMate(this, 1.0D));
-	   //tasks.addTask(6, new EntityAITempt(this, 1.25D, Items.wheat, false));
-	   //tasks.addTask(7, new EntityAIFollowParent(this, 1.25D));
-	  // tasks.addTask(8, new EntityAIWander(this, interpTargetPitch));
-	   //tasks.addTask(8, new net.minecraft.entity.ai.EntityAIWander(this, 2.0F));
-	   //tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F));
-	   //tasks.addTask(10, new EntityAILookIdle(this));
-	   //targetTasks.addTask(0, new EntityAIHurtByTargetHerdAnimal(this, true));      
-	}
+	@Override
+	public void registerRecipe() {
+		
+		// Recipe for creating a TuskanRaider Egg.
+		ItemStack featherStack = new ItemStack(Items.FEATHER);	
+		ItemStack eggStack = new ItemStack(Items.EGG);
 
+		GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.entityManager.tuskanRaiderEgg, 1), 
+						"A", 
+						"B", 
+						'A', featherStack, 
+						'B', eggStack);
+	}
 	
-	protected void clearAITasks()
-	{
-	   tasks.taskEntries.clear();
-	   targetTasks.taskEntries.clear();
+	
+	// set up AI tasks
+	protected void setupAI() {
+		
+		// clear any tasks assigned in super classes.
+	   clearAITasks(); 
+	
+	   // Main AI task list.
+	   this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0, false));
+	   // tasks.addTask(5, new EntityAIMate(this, 1.0D)); We don't need these guys mating.
+	   this.tasks.addTask(7, new EntityAIFollowParent(this, 1.25D));
+	   this.tasks.addTask(8, new EntityAIWander(this, 1.0D));
+
+	   // Set up the targetTasks list, which defines who the entity focuses his actions on.
+	   // Priority 0: attack anything that attacked me.
+	   this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));   
+	   // Priority 1: attack the nearest player I can find.
+	   this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 
@@ -104,90 +122,74 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	}
 	
 	
-//	@Override
-//	public boolean attackEntityAsMob(Entity entityTarget)
-//	{
-//		
-//		System.out.println("DEBUGGING: Made it into EntityTuskanRaider:attackEntityAsMob(..)");
-//		
-//	    float attackDamage = (float)getEntityAttribute(SharedMonsterAttributes
-//	          .ATTACK_DAMAGE).getAttributeValue();
-//	    int knockbackModifier = 0;
-//
-////	    if (entityTarget instanceof EntityLivingBase)
-////	    {
-////	        attackDamage += EnchantmentHelper.getEnchantmentModifierLiving(this, 
-////	              (EntityLivingBase)entityTarget);
-////	        knockbackModifier  += EnchantmentHelper.getKnockbackModifier(this, 
-////	              (EntityLivingBase)entityTarget);
-////	    }
-//
-//	    boolean isTargetHurt = entityTarget.attackEntityFrom(DamageSource
-//	          .causeMobDamage(this), attackDamage);
-//
-//	    //if (wasDamageDone)
-//	    if (true) {
-//	   // {
-//	        if (knockbackModifier  > 0)
-//	        {
-//	            entityTarget.addVelocity((double)(-MathHelper.sin(rotationYaw * 
-//	                  (float)Math.PI / 180.0F) * (float)knockbackModifier  * 0.5F), 
-//	                   0.1D, (double)(MathHelper.cos(rotationYaw * 
-//	                  (float)Math.PI / 180.0F) * (float)knockbackModifier  * 0.5F));
-//	            motionX *= 0.6D;
-//	            motionZ *= 0.6D;
-//	        }
-//
-//	        int fireModifier = EnchantmentHelper.getFireAspectModifier(this);
-//
-//	        if (fireModifier > 0)
-//	        {
-//	            entityTarget.setFire(fireModifier * 4);
-//	        }
-//
-////	        // I copied these enchantments from EntityMob, not sure what they do
-////	        if (entityTarget instanceof EntityLivingBase)
-////	        {
-////	            EnchantmentHelper.func_151384_a((EntityLivingBase)entityTarget, this);
-////	        }
-////
-////	        EnchantmentHelper.func_151385_b(this, entityTarget);
-//	    }
-//
-//	    return isTargetHurt ;
-//	}
+	@Override
+	public void generateSurface(World world, Random random, int i, int j) {
+				
+		Class entityClass = TuskanRaiderEntity.class;
+		int weightedProbability = 5;
+		int minimumSpawnCount = 2;
+		int maximumSpawnCount = 8;
+		EnumCreatureType creatureType = EnumCreatureType.MONSTER;
+		
+		// add the spawn information to EntityRegistry through the addSpawn call.
+		EntityRegistry.addSpawn(entityClass, weightedProbability, minimumSpawnCount, maximumSpawnCount, creatureType,
+				Biomes.BEACH,
+				Biomes.BIRCH_FOREST,
+				Biomes.BIRCH_FOREST_HILLS,
+				Biomes.COLD_BEACH,
+				Biomes.COLD_TAIGA,
+				Biomes.COLD_TAIGA_HILLS,
+				Biomes.DESERT,
+				Biomes.DESERT_HILLS,
+				Biomes.EXTREME_HILLS,
+				Biomes.EXTREME_HILLS_EDGE,
+				Biomes.EXTREME_HILLS_WITH_TREES,
+				Biomes.FOREST,
+				Biomes.FOREST_HILLS,
+				Biomes.ICE_MOUNTAINS,
+				Biomes.ICE_PLAINS,
+				Biomes.JUNGLE,
+				Biomes.JUNGLE_EDGE,
+				Biomes.JUNGLE_HILLS,
+				Biomes.MESA,
+				Biomes.MESA_CLEAR_ROCK,
+				Biomes.MESA_ROCK,
+				Biomes.MUSHROOM_ISLAND,
+				Biomes.MUSHROOM_ISLAND_SHORE,
+				Biomes.PLAINS,
+				Biomes.REDWOOD_TAIGA,
+				Biomes.REDWOOD_TAIGA_HILLS,
+				Biomes.ROOFED_FOREST,
+				Biomes.SAVANNA,
+				Biomes.SAVANNA_PLATEAU,
+				Biomes.STONE_BEACH,
+				Biomes.SWAMPLAND,
+				Biomes.TAIGA,
+				Biomes.TAIGA_HILLS);
+	}
 	
 	
-//	@Override
-//	public boolean attackEntityFrom(DamageSource damageSource, float amount)
-//	{
-//	
-//		System.out.println("DEBUGGING: damageType:" + damageSource.damageType);
-////		System.out.println("DEBUGGING: damageSource:" + damageSource.getSourceOfDamage().getName());
-////	
-////		//System.out.println("DEBUGGING: Made it into EntityTuskanRaider:attackEntityFrom(..): damageType:" + damageSource.damageType + ", damageSource:" + damageSource.getSourceOfDamage().getName());
-////		
-////		
-////	    if (isEntityInvulnerable(damageSource))
-////	    {
-////	        return false;
-////	    }
-////	   // else
-////	   // {
-//	    	
-//	        //aisit.setSitting(false);
-//	        return super.attackEntityFrom(damageSource, amount);
-//	   // }
-//	}
+	@Override
+	protected void applyEntityAttributes() {
+		
+	    super.applyEntityAttributes(); 
+
+	    // standard attributes registered to EntityLivingBase
+	   getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+	   getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20D);
+	   getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
+	   getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
+
+	    // need to register any additional attributes
+	   getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+	   getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+	}
 	
 	
-//	@Override
-//	public boolean isEntityInvulnerable(DamageSource damageSource) {
-//		
-//		if (damageSource.damageType == "inWall") {
-//			return true;
-//		}
-//			
-//		return super.isEntityInvulnerable(damageSource);
-//	}	
+	// After it dies, what equipment should it drop?
+	@Override
+	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
+		
+		this.entityDropItem(new ItemStack(SuperDopeJediMod.gaffiStick), 0);
+    }
 }
