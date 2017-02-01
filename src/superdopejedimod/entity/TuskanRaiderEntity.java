@@ -30,10 +30,13 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeCache;
@@ -52,7 +55,7 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	
 	public TuskanRaiderEntity(World worldIn) {
 		
-		super(worldIn, "tuskanRaiderEntity");
+		super(worldIn, "tuskanRaiderEntity", "Tuskan Raider");
 		
 		this.setupAI();
 		

@@ -19,6 +19,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -38,14 +40,16 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 
 	
 	private String _name = "";
+	private String _displayName = "";
 	protected float shadowSize = 1.0F;
 	
 	
-	public BaseEntityAnimal(World worldIn, String name) {
+	public BaseEntityAnimal(World worldIn, String name, String displayName) {
 		
 		super(worldIn);
 		
 		this._name = name;
+		this._displayName = displayName;
 				
 		// Insert this object into our collection of custom objects, so we 
 		// can send separate events to it for lifecycle management.
@@ -63,6 +67,14 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	public String getFullName() {
 		
 		return SuperDopeJediMod.MODID + ":" + this.getName();
+	}
+	
+
+	@Override
+	public ITextComponent getDisplayName() {
+		
+        TextComponentString textcomponentstring = new TextComponentString(this._displayName);
+        return textcomponentstring;
 	}
 	
 	

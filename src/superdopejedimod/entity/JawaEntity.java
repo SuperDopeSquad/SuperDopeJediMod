@@ -53,7 +53,7 @@ public class JawaEntity extends BaseEntityAnimal {
 	
 	public JawaEntity(World worldIn) {
 		
-		super(worldIn, "jawaEntity");
+		super(worldIn, "jawaEntity", "Jawa");
 
 		this.setupAI();
 		
