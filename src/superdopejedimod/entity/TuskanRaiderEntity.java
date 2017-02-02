@@ -131,7 +131,7 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 		Class entityClass = TuskanRaiderEntity.class;
 		int weightedProbability = 5;
 		int minimumSpawnCount = 2;
-		int maximumSpawnCount = 8;
+		int maximumSpawnCount = 4;
 		EnumCreatureType creatureType = EnumCreatureType.MONSTER;
 		
 		// add the spawn information to EntityRegistry through the addSpawn call.

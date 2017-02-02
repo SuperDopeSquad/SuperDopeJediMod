@@ -149,4 +149,11 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 	public void generateNether(World world, Random random, int i, int j) {
 		return;
 	}
+	
+	
+	@Override
+	protected boolean canDespawn() {
+		
+		return true;
+	}
 }

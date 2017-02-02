@@ -232,4 +232,11 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	        
 			return true;
 	    }
+		
+		
+		@Override
+		protected boolean canDespawn() {
+			
+			return true;
+		}
 }

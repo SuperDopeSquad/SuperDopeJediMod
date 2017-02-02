@@ -131,7 +131,7 @@ public class JawaEntity extends BaseEntityAnimal {
 		Class entityClass = JawaEntity.class;
 		int weightedProbability = 5;
 		int minimumSpawnCount = 2;
-		int maximumSpawnCount = 8;
+		int maximumSpawnCount = 4;
 		EnumCreatureType creatureType = EnumCreatureType.MONSTER;
 		
 		// add the spawn information to EntityRegistry through the addSpawn call.
@@ -193,6 +193,6 @@ public class JawaEntity extends BaseEntityAnimal {
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 			
-		this.entityDropItem(new ItemStack(Items.CARROT), 0);
+		this.entityDropItem(new ItemStack(Items.LEATHER), 0);
 	}
 }
