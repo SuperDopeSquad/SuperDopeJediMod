@@ -13,6 +13,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -26,6 +27,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 /*
@@ -76,6 +78,16 @@ public class StarBlock extends BaseBlock
 								EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		return false;
     }
+	
+	
+	/*
+	 *
+	 */
+	@Override
+	public void registerRecipe() {
+		ItemStack stack1 = new ItemStack(Items.SUGAR);
+		GameRegistry.addRecipe(new ItemStack(this), "x x", "   ", "x x", 'x', stack1);
+	}
 	
     
 	/*
