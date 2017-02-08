@@ -21,6 +21,8 @@ public class ImperialProbeDroidModel extends ModelBase {
 	public static int TEXTURE_WIDTH = 64; // The texture we are importing is a 64x64 PNG
 	public static int TEXTURE_HEIGHT = 64;
 	
+	protected enum ArmDirection {FORWARD, BACKWARD, LEFTWARD, RIGHTWARD};
+	
 	/* Instance Members  */
 	public ModelRenderer head;
 	public ModelRenderer body;
@@ -60,12 +62,12 @@ public class ImperialProbeDroidModel extends ModelBase {
         this.body.addChild(subpart);
             
         // arms
-		modelArms(this.body, -1.0F, 2.0F, false, 0);
-		modelArms(this.body, -2.0F, 1.0F, true, 1);
-		modelArms(this.body, -2.0F, -2.0F, false, 2);
-		modelArms(this.body, 0.0F, -2.0F, true, 3);
-		modelArms(this.body, 2.0F, -1.0F, false, 4);
-		modelArms(this.body, 2.0F, 2.0F, true, 5); 
+		modelArms(this.body, -1.0F, 2.0F, false, ArmDirection.BACKWARD,  0.8F, 0);
+		modelArms(this.body, -2.0F, 1.0F, true, ArmDirection.LEFTWARD, 1.0F, 1);
+		modelArms(this.body, -2.0F, -2.0F, false, ArmDirection.FORWARD, 0.9F, 2);
+		modelArms(this.body, 0.0F, -2.0F, true, ArmDirection.FORWARD, .4F, 3);
+		modelArms(this.body, 2.0F, -1.0F, false, ArmDirection.RIGHTWARD, 0.9F, 4);
+		modelArms(this.body, 2.0F, 2.0F, true, ArmDirection.BACKWARD,  0.6F, 5); 
     }
 
     // CHEAT SHEET
@@ -75,55 +77,74 @@ public class ImperialProbeDroidModel extends ModelBase {
     // width: left to right distance
     // height: up and down distance
     // depth: front to back distance
+    // angles are in radians!
+    
     
     /* */
-    private void modelArms(ModelRenderer parent, float xOffset, float zOffset, boolean longStyle, int i) {
-		ModelRenderer subpart = new ModelRenderer(this);
-		subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT); 
-		ModelRenderer subpart2 = new ModelRenderer(this);
-		subpart2.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT); 
+    private void modelArms(ModelRenderer parent, float xOffset, float zOffset, boolean longStyle, ArmDirection armDirection, float angle, int i) {
+		// hardcoded y offset, upperArms hanging right underneath the body.
+		float yOffset = -1.5F;
 		
-		// TODO: bring back longStyle.
-		/*if (longStyle) {
-			subpart.setTextureOffset(4, 53);
-			subpart.addBox(0.0F, 0.0F, 0.0F, 1, 6, 1);
-			subpart.setRotationPoint(xOffset, -1.5F, zOffset);   
-		} else */ { 
-			subpart.setTextureOffset(0, 53);
-			subpart.addBox(0.0F, 0.0F, 0.0F, 1, 4, 1);
-			subpart.setRotationPoint(xOffset, -1.5F, zOffset);  
-			
-			subpart2.setTextureOffset(0, 53);
-			subpart2.addBox(0.0F, 0.0F, 0.0F, 1, 4, 1);
-			subpart2.setRotationPoint(xOffset, 0.5F, zOffset + 3.0F);   
-			
-			// TODO: this code manually positions the lower-arms to where it should attach to the 
-			// upper-arm at the elbow. As an improvement, we should calculate this with sin/cos so 
-			// it wouldbe possible to move the upperarm and have the lower arm move with it.
-			if (i == 0) {
-				subpart.rotateAngleX = 0.9F;
-				subpart2.setRotationPoint(xOffset, 0.5F, zOffset + 3.0F);   
-			} else if (i == 1) {
-				subpart.rotateAngleZ = 0.9F;
-				subpart2.setRotationPoint(xOffset - 3.0F, 0.5F, zOffset); 
-			} else if (i == 2) {
-				subpart.rotateAngleX = 0.5F;
-				subpart2.setRotationPoint(xOffset, 1.5F, zOffset + 2.0F); 
-			} else if (i == 3) {
-				subpart.rotateAngleX = -1.0F;
-				subpart2.setRotationPoint(xOffset, 0.5F, zOffset - 3.0F); 
-			} else if (i == 4) {
-				subpart.rotateAngleZ = -1.0F;
-				subpart2.setRotationPoint(xOffset + 3.0F, 0.5F, zOffset); 
-			} else if (i == 5) {
-				subpart.rotateAngleX = -0.5F;
-				subpart2.setRotationPoint(xOffset, 1.5F, zOffset - 2.0F); 
-			}
+		// Build the upper arm.
+		int upperArmLength = 0;
+		ModelRenderer upperArm = new ModelRenderer(this);
+		upperArm.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT); 
+		if (longStyle) {
+			upperArmLength = 6;
+			upperArm.setTextureOffset(4, 53);
+		} else { 
+			upperArmLength = 4;
+			upperArm.setTextureOffset(0, 53);
 		}
+		upperArm.addBox(0.0F, 0.0F, 0.0F, 1, upperArmLength, 1);
+		upperArm.setRotationPoint(xOffset, yOffset, zOffset);  	// global space coordinate, upper arm is anchored right under the body,
+																//  with xOffset and zOffset scattered across the edge on the yOffset plane.
+			
+		// Build the lower arm.
+		ModelRenderer lowerArm = new ModelRenderer(this);
+		lowerArm.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT); 
+		lowerArm.setTextureOffset(0, 53);
+		if (longStyle ) {
+			lowerArm.setTextureOffset(4, 53);
+		} else {
+			lowerArm.setTextureOffset(0, 53);
+		}
+		lowerArm.addBox(0.0F, 0.0F, 0.0F, 1, upperArmLength, 1);
+		
+		float xCoord = 0.0F;
+		float yCoord = 0.0F;
+		float zCoord = 0.0F;
+		switch (armDirection) {		
+		case BACKWARD:
+			upperArm.rotateAngleX = angle;
+			yCoord = (float) (((float) upperArmLength) * Math.cos(upperArm.rotateAngleX));
+			zCoord = (float) (((float) upperArmLength) * Math.sin(upperArm.rotateAngleX));
+			break;
+			
+		case FORWARD:
+			upperArm.rotateAngleX = -angle;
+			yCoord = (float) (((float) upperArmLength) * Math.cos(upperArm.rotateAngleX));
+			zCoord = (float) (((float) upperArmLength) * Math.sin(upperArm.rotateAngleX));
+			break;
 	
-		this.arms.add(subpart);
-		this.arms2.add(subpart2);
+		case RIGHTWARD:
+			upperArm.rotateAngleZ = -angle;
+			yCoord = (float) (((float) upperArmLength) * Math.cos(upperArm.rotateAngleZ));
+			xCoord = (float) (((float) -upperArmLength) * Math.sin(upperArm.rotateAngleZ));
+			break;
+		
+		case LEFTWARD:
+			upperArm.rotateAngleZ = angle;
+			yCoord = (float) (((float) upperArmLength) * Math.cos(upperArm.rotateAngleZ));
+			xCoord = (float) (((float) -upperArmLength) * Math.sin(upperArm.rotateAngleZ));
+			break;
+		}
+		lowerArm.setRotationPoint(xOffset + xCoord, yOffset + yCoord, zOffset + zCoord); 
+			
+		this.arms.add(upperArm);
+		this.arms2.add(lowerArm);
 	}
+    
     
     /**
      * Sets the models various rotation angles then renders the model.
@@ -159,7 +180,7 @@ public class ImperialProbeDroidModel extends ModelBase {
     	// We allow the head to move left and right, but not up-and-down (this probe does not have a neck)
     	if (this.head != null) {
     		this.head.rotateAngleY = netHeadYaw * 0.017453292F;
-    	}
+    	}					
        
        int i = 0;
        for (ModelRenderer subrenderer : arms2) {
@@ -169,12 +190,12 @@ public class ImperialProbeDroidModel extends ModelBase {
     	   subrenderer.rotateAngleZ = 0.0F;
     	   
     	   // TODO: make this more random.
-    	   if (i == 0) {
-    		   subrenderer.rotateAngleX = MathHelper.cos(limbSwing /* * 0.6662F */) * 1.4F * limbSwingAmount * 1.0F;
+    	  if (i == 0) {
+    		   subrenderer.rotateAngleX = .75F + MathHelper.cos(limbSwing /* * 0.6662F */) * 1.4F * limbSwingAmount * 1.0F;
     	   } else if (i < 3) {
     		   subrenderer.rotateAngleZ = MathHelper.cos(limbSwing /* * 0.6662F */) * 1.4F * limbSwingAmount * 1.0F;
     	   } else if (i < 4) {
-    		   subrenderer.rotateAngleX = MathHelper.cos(limbSwing/* * 0.6662F*/ + (float)Math.PI) * 1.4F * limbSwingAmount * 1.0F;
+    		   subrenderer.rotateAngleX = .75F + MathHelper.cos(limbSwing/* * 0.6662F*/ + (float)Math.PI) * 1.4F * limbSwingAmount * 1.0F;
     	   } else {
     		   subrenderer.rotateAngleZ = MathHelper.cos(limbSwing /** 0.6662F*/ + (float)Math.PI) * 1.4F * limbSwingAmount * 1.0F;
     	   }

@@ -53,7 +53,7 @@ public class ImperialProbeDroidEntity extends BaseEntityAnimal {
 	
 	public ImperialProbeDroidEntity(World worldIn) {
 		
-		super(worldIn, "imperialProbeDroidEntity");
+		super(worldIn, "imperialProbeDroidEntity", "Imperial Probe Droid");
 
 		this.setupAI();
 		
