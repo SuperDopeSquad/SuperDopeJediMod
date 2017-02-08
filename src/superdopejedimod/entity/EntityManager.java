@@ -12,7 +12,7 @@ public class EntityManager {
     // that this will crash on the server side.  Putting in null doesn't seem to have a harmful effect.  I need to
     // figure out later the downside of not having it, and if i need it, figure out the best way to get a handle
     // for it that is server-safe.
-    private static int s_startEntityId = 300;
+    private static int _startEntityId = 300;
     
     // Entities.
     public static SnakeEntity snake = new SnakeEntity(null);    
@@ -32,6 +32,6 @@ public class EntityManager {
     
     
     public int getUniqueEntityId() {
-    	return this.s_startEntityId++;
+    	return this._startEntityId++;
     }
 }
