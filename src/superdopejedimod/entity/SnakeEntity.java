@@ -37,7 +37,7 @@ public class SnakeEntity extends BaseEntityAnimal {
 	
 	public SnakeEntity(World worldIn) {
 		
-		super(worldIn, "snakeEntity");
+		super(worldIn, "snakeEntity", "Snake");
 
 		this.setupAI();
 		
