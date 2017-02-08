@@ -47,8 +47,7 @@ public class OHUMBlock extends BaseBlock
 	/*
 	 * This is the special constructor function that is called on game startup when the first "JediMark" object is created.
 	*/
-	public OHUMBlock(String localName) 
-	{
+	public OHUMBlock(String localName) {
 		super(Material.IRON, localName);
 		this.setLightLevel(1.0F);
 	}
