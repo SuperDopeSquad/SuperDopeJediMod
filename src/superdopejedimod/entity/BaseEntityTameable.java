@@ -12,6 +12,8 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -33,13 +35,16 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 
 	
 	private String _name = "";
-
+	private String _displayName = "";
+	protected float shadowSize = 1.0F;
 	
-	public BaseEntityTameable(World worldIn, String name) {
+	
+	public BaseEntityTameable(World worldIn, String name, String displayName) {
 		
 		super(worldIn);
 		
 		this._name = name;
+		this._displayName = displayName;
 				
 		// Insert this object into our collection of custom objects, so we 
 		// can send separate events to it for lifecycle management.
@@ -57,6 +62,14 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 	public String getFullName() {
 		
 		return SuperDopeJediMod.MODID + ":" + this.getName();
+	}
+	
+	
+	@Override
+	public ITextComponent getDisplayName() {
+		
+        TextComponentString textcomponentstring = new TextComponentString(this._displayName);
+        return textcomponentstring;
 	}
 
 	
@@ -135,5 +148,12 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 	@Override
 	public void generateNether(World world, Random random, int i, int j) {
 		return;
+	}
+	
+	
+	@Override
+	protected boolean canDespawn() {
+		
+		return true;
 	}
 }

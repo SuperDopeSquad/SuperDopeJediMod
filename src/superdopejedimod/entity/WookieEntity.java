@@ -42,7 +42,7 @@ public class WookieEntity extends BaseEntityTameable {
 	
 	public WookieEntity(World worldIn) {
 		
-		super(worldIn, "wookieEntity");
+		super(worldIn, "wookieEntity", "Wookie");
 
 		this.setupAI();
 		
