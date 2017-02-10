@@ -6,6 +6,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -44,7 +45,7 @@ public class SuperDopeJediMod //Start the class Declaration
     @SidedProxy(clientSide="superdopesquad.superdopejedimod.SuperDopeClientProxy", serverSide="superdopesquad.superdopejedimod.SuperDopeServerProxy")
     public static SuperDopeCommonProxy superDopeCommonProxy;
     
-    // This is the collection of custom objects we will maintain.
+    // This is our collection of custom objects we will maintain.
     public static ArrayList<SuperDopeObject> customObjects = new ArrayList<SuperDopeObject>();
     
     // this is the world generator that adds our custom objects to newly spawned world chunks.
@@ -173,6 +174,9 @@ public class SuperDopeJediMod //Start the class Declaration
     // Entities.
     public static EntityManager entityManager = new EntityManager();
  
+    // Commands.
+    public static CommandManager commandManager = new CommandManager();
+    
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -191,6 +195,13 @@ public class SuperDopeJediMod //Start the class Declaration
     public void load(FMLInitializationEvent event) {
     	
     }
+    
+    
+    @EventHandler
+	public void serverLoad(FMLServerStartingEvent event) {
+		
+    	commandManager.serverLoad(event);
+	}
       
     
     @EventHandler
