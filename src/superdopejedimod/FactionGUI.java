@@ -1,6 +1,7 @@
 package superdopesquad.superdopejedimod;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import javax.swing.plaf.synth.ColorType;
@@ -34,6 +35,7 @@ public class FactionGUI extends GuiScreen{
 	
 	GuiButton SithButton;
 	GuiButton JediButton;
+	
 	
 	//draws how big the whole gui is and what texture it uses
 	@Override
@@ -82,18 +84,25 @@ public class FactionGUI extends GuiScreen{
 		
 		//if you choose the sith
 		case 1:
-			SithButton.displayString = "You have chosen Sith.";
-			JediButton.enabled = false;
+			SithButton.displayString = "You have chosen the Sith";
 			SithButton.enabled = false;
+			JediButton.enabled = false;
+		}
 		
+		switch(JediButton.id){
 		//if you choose the republic
-		case 2:
+		case 1:
 			JediButton.displayString = "You have chosen the Republic.";
 			JediButton.enabled = false;
 			SithButton.enabled = false;
 		}
+		
 		super.actionPerformed(SithButton);
-		super.actionPerformed(JediButton);
+		
+	}
+		
+		
+		
 	}
 	
 	
