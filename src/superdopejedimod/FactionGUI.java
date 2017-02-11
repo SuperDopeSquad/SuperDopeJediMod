@@ -79,8 +79,8 @@ public class FactionGUI extends GuiScreen{
 	
 	//what the gui says when you click on one of the two buttons
 	@Override
-	protected void actionPerformed(GuiButton SithButton) throws IOException {
-		switch(SithButton.id){
+	protected void actionPerformed(GuiButton button) throws IOException {
+		switch(button.id){
 		
 		//if you choose the sith
 		case 1:
@@ -97,13 +97,13 @@ public class FactionGUI extends GuiScreen{
 			SithButton.enabled = false;
 		}
 		
-		super.actionPerformed(SithButton);
+		super.actionPerformed(button);
 		
 	}
 		
 		
 		
-	}
+}
 	
 	
 	
