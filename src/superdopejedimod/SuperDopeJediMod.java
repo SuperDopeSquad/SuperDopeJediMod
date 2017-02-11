@@ -1,6 +1,9 @@
 package superdopesquad.superdopejedimod;
 
 import java.util.ArrayList;
+
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -16,6 +19,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.entity.EntityManager;
+import superdopesquad.superdopejedimod.faction.FactionManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -106,7 +110,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
     public static JediMark jediMark = new JediMark("jediMark");
-    public static Faction faction = new Faction("faction");
+    public static FactionBlock factionBlock = new FactionBlock("factionBlock");
     public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
     public static StarBlock starBlock = new StarBlock("StarBlock");
     
@@ -177,6 +181,9 @@ public class SuperDopeJediMod //Start the class Declaration
     // Commands.
     public static CommandManager commandManager = new CommandManager();
     
+    // Factions.
+    public static FactionManager factionManager = new FactionManager();
+        
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -188,6 +195,12 @@ public class SuperDopeJediMod //Start the class Declaration
     	for (SuperDopeObject superDopeObject : this.customObjects) {
     		superDopeObject.registerObject();
     	}  
+    	
+    	// Call the pre-init of FactionManager, which needs to do some registration work.
+    	this.factionManager.preInit();
+    	
+    	// Let's register our eventhandler class.   
+    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());	   
     }
      
      
