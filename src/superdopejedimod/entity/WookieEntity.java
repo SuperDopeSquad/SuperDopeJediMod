@@ -2,7 +2,6 @@ package superdopesquad.superdopejedimod.entity;
 
 
 import java.util.Random;
-
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -24,14 +23,10 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.client.renderer.entity.RenderChicken;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -44,11 +39,13 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.faction.FactionInfo;
+import superdopesquad.superdopejedimod.faction.FactionManager;
 
 
 public class WookieEntity extends BaseEntityTameable {
-				
-	
+		
+		
 	public WookieEntity(World worldIn) {
 		
 		super(worldIn, "wookieEntity", "Wookie");
@@ -63,10 +60,10 @@ public class WookieEntity extends BaseEntityTameable {
 		// Properties that we need to have later.
 		this.shadowSize = 1.0F;
 				
-		// Put a gaffi stick in his mainhand slot.
-		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.gaffiStick));
+		// Put a iron axe in his mainhand slot.
+		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.IRON_AXE));
 	}
-
+	
 	
 	@Override
 	public void registerEntityRender() {
@@ -98,8 +95,13 @@ public class WookieEntity extends BaseEntityTameable {
 	{
 	   clearAITasks(); // clear any tasks assigned in super classes
 	   
+	   // Set up the FactionInfo array that defines who Wookies attack.
+	   FactionInfo[] factions = new FactionInfo[2];
+	   factions[0] = SuperDopeJediMod.factionManager.getFactionInfo(SuperDopeJediMod.factionManager.SITH);
+	   factions[1] = SuperDopeJediMod.factionManager.getFactionInfo(SuperDopeJediMod.factionManager.BOUNTYHUNTER);
+	   
 	   // Main AI task list.
-	   this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false));
+	   this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false, factions));
 	   // tasks.addTask(5, new EntityAIMate(this, 1.0D)); We don't need these guys mating.
 	   //this.tasks.addTask(7, new EntityAIFollowParent(this, 1.25D));
 	   this.tasks.addTask(8, new EntityAIWander(this, 1.0D));
@@ -110,13 +112,6 @@ public class WookieEntity extends BaseEntityTameable {
 	   // Priority 1: attack the nearest player I can find.
 	   this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
-
-	
-//	protected void clearAITasks()
-//	{
-//	   tasks.taskEntries.clear();
-//	   targetTasks.taskEntries.clear();
-//	}
 
 
 	@Override
@@ -136,9 +131,9 @@ public class WookieEntity extends BaseEntityTameable {
 		//System.out.println("Inside generateSurface for Wookies");
 		
 		Class entityClass = WookieEntity.class;
-		int weightedProbability = 100;
-		int minimumSpawnCount = 8;
-		int maximumSpawnCount = 16;
+		int weightedProbability = 10;
+		int minimumSpawnCount = 4;
+		int maximumSpawnCount = 8;
 		EnumCreatureType creatureType = EnumCreatureType.MONSTER;
 		
 		// add the spawn information to EntityRegistry through the addSpawn call.
@@ -200,6 +195,6 @@ public class WookieEntity extends BaseEntityTameable {
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		
-		this.entityDropItem(new ItemStack(SuperDopeJediMod.gaffiStick), 0);
+		this.entityDropItem(new ItemStack(Items.IRON_AXE), 0);
     }
 }
