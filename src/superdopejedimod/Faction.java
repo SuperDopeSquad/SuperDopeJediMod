@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -37,4 +38,14 @@ public class FactionBlock extends BaseBlock {
 		  
 		 return super.onItemRightClick(worldIn, playerIn, hand);
 	}
+	
+public void registerRecipe() {
+		
+		ItemStack cobbleStack = new ItemStack(Blocks.COBBLESTONE);
+		ItemStack dirtStack = new ItemStack(Blocks.DIRT);
+		
+    	GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.faction), "xxx", "xyx", "xxx",'x', cobbleStack, 'y', dirtStack);		
+		
+	}	
+	
 }
