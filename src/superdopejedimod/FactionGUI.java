@@ -1,6 +1,7 @@
 package superdopesquad.superdopejedimod;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import javax.swing.plaf.synth.ColorType;
@@ -35,6 +36,8 @@ public class FactionGUI extends GuiScreen{
 	GuiButton SithButton;
 	GuiButton JediButton;
 	
+	
+	//draws how big the whole gui is and what texture it uses
 	@Override
 	public void drawScreen(int X, int Y, float Ticks) {
 		
@@ -43,13 +46,13 @@ public class FactionGUI extends GuiScreen{
 		int guiX = (width - guiWidth) / 2;
 		int guiY = (height - guiHeight) / 2;
 		GL11.glColor4f(1, 1, 1, 1);
-		drawDefaultBackground();
-		mc.renderEngine.bindTexture(new ResourceLocation(SuperDopeJediMod.MODID, "textures/gui/FactionGUI.png"));
+		
+		mc.renderEngine.bindTexture(new ResourceLocation(SuperDopeJediMod.MODID, "MDKExample/src/main/resources/assets/superdopejedimod/textures/gui/FactionGUI.png"));
+		//draws rectangles
 		drawTexturedModalRect(guiX, guiY, 0, 0, guiWidth, guiHeight);
 		drawTexturedModalRect(guiX, guiY, 0, 81, sithWidth, sithHeight);
 		
-		// Draw the count of how many credits the user has.
-		// We know the number of credits, because it was an input into the class.
+		
 		//ScaledResolution res = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
 		FontRenderer fontRender = mc.fontRendererObj;
 		//int displayWidthScaled = res.getScaledWidth();
@@ -62,6 +65,7 @@ public class FactionGUI extends GuiScreen{
 		super.drawScreen(X, Y, Ticks);
 	}
 
+	//sets the gui size and buttons.
 	@Override
 	public void initGui() {
 		
@@ -73,15 +77,34 @@ public class FactionGUI extends GuiScreen{
 		super.initGui();
 	}
 	
+	//what the gui says when you click on one of the two buttons
 	@Override
 	protected void actionPerformed(GuiButton SithButton) throws IOException {
 		switch(SithButton.id){
+		
+		//if you choose the sith
 		case 1:
-			SithButton.displayString = "You have chosen Sith.";
+			SithButton.displayString = "You have chosen the Sith";
+			SithButton.enabled = false;
+			JediButton.enabled = false;
+		}
+		
+		switch(JediButton.id){
+		//if you choose the republic
+		case 1:
+			JediButton.displayString = "You have chosen the Republic.";
 			JediButton.enabled = false;
 			SithButton.enabled = false;
 		}
+		
 		super.actionPerformed(SithButton);
+		
 	}
+		
+		
+		
+	}
+	
+	
 	
 }
