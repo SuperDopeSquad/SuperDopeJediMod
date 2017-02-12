@@ -113,7 +113,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static FactionBlock factionBlock = new FactionBlock("factionBlock");
     public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
     public static StarBlock starBlock = new StarBlock("StarBlock");
-    
+        
     // Ranged weapons.
     public static Blaster blaster = new Blaster("blaster");
     public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
@@ -241,4 +241,5 @@ public class SuperDopeJediMod //Start the class Declaration
     	// Call our proxy for any side-specific work.
     	superDopeCommonProxy.postInit(event);
     }
+    
 }

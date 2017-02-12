@@ -1,7 +1,10 @@
 package superdopesquad.superdopejedimod;
 
+
 import net.minecraft.block.material.Material;
-//import net.minecraft.client.Minecraft;
+
+import net.minecraft.client.Minecraft;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -27,11 +30,11 @@ public class FactionBlock extends BaseBlock {
 	}
 	
 	
-//	@Override
-//	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-//		  
-//		Minecraft.getMinecraft().displayGuiScreen(new FactionGUI());
-//		  
-//		 return super.onItemRightClick(worldIn, playerIn, hand);
-//	}
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		  
+		Minecraft.getMinecraft().displayGuiScreen(new FactionGUI());
+		  
+		 return super.onItemRightClick(worldIn, playerIn, hand);
+	}
 }
