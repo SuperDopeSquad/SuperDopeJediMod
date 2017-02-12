@@ -1,6 +1,10 @@
 package superdopesquad.superdopejedimod;
 
+
+import net.minecraft.block.material.Material;
+
 import net.minecraft.client.Minecraft;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -15,12 +19,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-public class Faction extends BaseItem {
+public class FactionBlock extends BaseBlock {
 
 	
-	public Faction(String unlocalizedName) {
+	public FactionBlock(String unlocalizedName) {
 		
-		super(unlocalizedName);
+		super(Material.IRON, unlocalizedName);
 		
 		setCreativeTab(CreativeTabs.MISC);
 	}
