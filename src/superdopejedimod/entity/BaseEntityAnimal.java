@@ -18,7 +18,12 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -38,14 +43,16 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 
 	
 	private String _name = "";
+	private String _displayName = "";
 	protected float shadowSize = 1.0F;
 	
 	
-	public BaseEntityAnimal(World worldIn, String name) {
+	public BaseEntityAnimal(World worldIn, String name, String displayName) {
 		
 		super(worldIn);
 		
 		this._name = name;
+		this._displayName = displayName;
 				
 		// Insert this object into our collection of custom objects, so we 
 		// can send separate events to it for lifecycle management.
@@ -63,6 +70,14 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	public String getFullName() {
 		
 		return SuperDopeJediMod.MODID + ":" + this.getName();
+	}
+	
+
+	@Override
+	public ITextComponent getDisplayName() {
+		
+        TextComponentString textcomponentstring = new TextComponentString(this._displayName);
+        return textcomponentstring;
 	}
 	
 	
@@ -152,10 +167,10 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	
 	
 	// Copied from EntityMob.
-		public boolean attackEntityAsMob(Entity entityIn) {
+	public boolean attackEntityAsMob(Entity entityIn) {
 			
-	        float f = (float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
-	        int i = 0;
+		float f = (float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
+	    int i = 0;
 
 	        if (entityIn instanceof EntityLivingBase)
 	        {
@@ -207,6 +222,47 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 		
 		
 		// Copied from EntityMob.
+		/**
+	     * Checks to make sure the light is not too bright where the mob is spawning
+	     */
+	    protected boolean isValidLightLevel()
+	    {
+	        BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
+
+	        if (this.worldObj.getLightFor(EnumSkyBlock.SKY, blockpos) > this.rand.nextInt(32))
+	        {
+	            return false;
+	        }
+	        else
+	        {
+	            int i = this.worldObj.getLightFromNeighbors(blockpos);
+
+	            if (this.worldObj.isThundering())
+	            {
+	                int j = this.worldObj.getSkylightSubtracted();
+	                this.worldObj.setSkylightSubtracted(10);
+	                i = this.worldObj.getLightFromNeighbors(blockpos);
+	                this.worldObj.setSkylightSubtracted(j);
+	            }
+
+	            return i <= this.rand.nextInt(8);
+	        }
+	    }
+		
+	    
+		// Copied from EntityMob.
+		 /**
+	     * Checks if the entity's current position is a valid location to spawn this entity.
+	     */
+		@Override
+	    public boolean getCanSpawnHere()
+	    {
+	        //return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere();
+			return ((this.isValidLightLevel()) && (super.getCanSpawnHere()));
+	    }
+		
+		
+		// Copied from EntityMob.
 		@Override
 		public boolean attackEntityFrom(DamageSource source, float amount) {
 		        
@@ -220,4 +276,11 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	        
 			return true;
 	    }
+		
+		
+		@Override
+		protected boolean canDespawn() {
+			
+			return true;
+		}
 }
