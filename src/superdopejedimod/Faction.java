@@ -39,13 +39,12 @@ public class Faction extends BaseItem {
 	}
 
 	
-public void registerRecipe() {
+	@Override
+	public void registerRecipe() {
 		
 		ItemStack cobbleStack = new ItemStack(Blocks.COBBLESTONE);
 		ItemStack dirtStack = new ItemStack(Blocks.DIRT);
 		
     	GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.faction), "xxx", "xyx", "xxx",'x', cobbleStack, 'y', dirtStack);		
-		
 	}	
-	
 }

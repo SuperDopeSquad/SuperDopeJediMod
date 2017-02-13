@@ -263,8 +263,7 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 		        //return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere();
 				
 				//return ((this.isValidLightLevel()) && (super.getCanSpawnHere()));
-				//return super.getCanSpawnHere();
-				return true;
+				return super.getCanSpawnHere();
 		    }
 			
 			
@@ -272,8 +271,8 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 			@Override
 			public boolean attackEntityFrom(DamageSource source, float amount) {
 			        
-				//return this.isEntityInvulnerable(source) ? false : super.attackEntityFrom(source, amount);
-				return true;
+				return this.isEntityInvulnerable(source) ? false : super.attackEntityFrom(source, amount);
+				//return true;
 			}
 			
 			 
@@ -288,6 +287,6 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 	@Override
 	protected boolean canDespawn() {
 		
-		return false;
+		return true;
 	}
 }
