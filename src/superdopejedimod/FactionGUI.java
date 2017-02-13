@@ -46,8 +46,6 @@ public class FactionGUI extends GuiScreen {
 	@Override
 	public void drawScreen(int X, int Y, float Ticks) {
 		
-		
-		
 		int guiX = (width - guiWidth) / 2;
 		int guiY = (height - guiHeight) / 2;
 		GL11.glColor4f(1, 1, 1, 1);
@@ -92,15 +90,14 @@ public class FactionGUI extends GuiScreen {
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 
-		
 		// Go ahead and set the faction.  If it fails, we should tell the user we failed.
-		boolean setSuccessfully = _factionManager.setPlayerFactionById(this._player, button.id);
+		int factionId = button.id;
+		boolean setSuccessfully = _factionManager.setPlayerFactionById(this._player, factionId);
 		if (!setSuccessfully) {
 			System.out.println("Error setting faction through FactionGUI");
 			return;
 		}
 		
-
 		// If you made it this far, you succeeded in setting the faction, and we want to tell the user what happened.
 		
 		// if you choose the sith
@@ -119,7 +116,6 @@ public class FactionGUI extends GuiScreen {
 			this._sithButton.enabled = false;
 		}
 		
-
 		super.actionPerformed(button);
 	}		
 }
