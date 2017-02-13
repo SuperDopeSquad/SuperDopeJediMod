@@ -91,6 +91,7 @@ public class FactionGUI extends GuiScreen {
 	//what the gui says when you click on one of the two buttons
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
+
 		
 		// Go ahead and set the faction.  If it fails, we should tell the user we failed.
 		boolean setSuccessfully = _factionManager.setPlayerFactionById(this._player, button.id);
@@ -99,6 +100,7 @@ public class FactionGUI extends GuiScreen {
 			return;
 		}
 		
+
 		// If you made it this far, you succeeded in setting the faction, and we want to tell the user what happened.
 		
 		// if you choose the sith
@@ -117,7 +119,9 @@ public class FactionGUI extends GuiScreen {
 			this._sithButton.enabled = false;
 		}
 		
+
 		super.actionPerformed(button);
 	}		
 }
+
 
