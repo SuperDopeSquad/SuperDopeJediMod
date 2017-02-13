@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod;
+package superdopesquad.superdopejedimod.faction;
 
 
 import java.awt.Color;
@@ -14,7 +14,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import superdopesquad.superdopejedimod.faction.FactionManager;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;

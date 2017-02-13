@@ -20,6 +20,8 @@ public class FactionManager {
 	public static final String SITH_NAME = "Sith";
 	public static final String SMUGGLER_NAME = "Smuggler";
 	public static final String BOUNTYHUNTER_NAME = "Bounty Hunter";
+	public static final String BOUNTYHUNTER_SHORTNAME = "Bountyhunter";
+	
 
 	private HashMap _factionsMap = new HashMap();
 	
@@ -30,7 +32,7 @@ public class FactionManager {
 		this._factionsMap.put(JEDI, new FactionInfo(JEDI, JEDI_NAME, Color.blue));
 		this._factionsMap.put(SITH, new FactionInfo(SITH, SITH_NAME, Color.red));
 		this._factionsMap.put(SMUGGLER, new FactionInfo(SMUGGLER, SMUGGLER_NAME, Color.green));
-		this._factionsMap.put(BOUNTYHUNTER, new FactionInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black));
+		this._factionsMap.put(BOUNTYHUNTER, new FactionInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, BOUNTYHUNTER_SHORTNAME));
 	}
 	
 	
@@ -113,7 +115,7 @@ public class FactionManager {
 		for (Object key : this._factionsMap.keySet()) {
 				
 			FactionInfo factionInfo = (FactionInfo) this._factionsMap.get(key);
-			String factionName = factionInfo.getName();
+			String factionName = factionInfo.getShortName();
 			
 			//System.out.println(key.toString() + ":" + value);
 			if (factionName.equalsIgnoreCase(inputFactionName)) {

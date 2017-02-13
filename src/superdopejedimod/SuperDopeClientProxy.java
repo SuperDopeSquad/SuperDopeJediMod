@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.entity.SuperDopeEntity;
+import superdopesquad.superdopejedimod.faction.FactionGUI;
 
 
 public class SuperDopeClientProxy extends SuperDopeCommonProxy {

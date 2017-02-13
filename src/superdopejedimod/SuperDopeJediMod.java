@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.entity.EntityManager;
+import superdopesquad.superdopejedimod.faction.FactionItem;
 import superdopesquad.superdopejedimod.faction.FactionManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -110,7 +111,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
     public static JediMark jediMark = new JediMark("jediMark");
-    public static Faction faction = new Faction("faction");
+    public static FactionItem faction = new FactionItem("faction");
     public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
     public static StarBlock starBlock = new StarBlock("StarBlock");
         

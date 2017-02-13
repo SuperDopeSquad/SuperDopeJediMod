@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod;
+package superdopesquad.superdopejedimod.faction;
 
 
 import net.minecraft.block.material.Material;
@@ -16,12 +16,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import superdopesquad.superdopejedimod.BaseItem;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-public class Faction extends BaseItem {
+public class FactionItem extends BaseItem {
 
 	
-	public Faction(String unlocalizedName) {
+	public FactionItem(String unlocalizedName) {
 		
 		super(unlocalizedName);
 		

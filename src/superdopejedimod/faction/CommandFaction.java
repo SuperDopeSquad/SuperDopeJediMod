@@ -50,8 +50,8 @@ public class CommandFaction extends BaseCommand
 	    } 
 	    
 	    // Debug info.
-	    String playerName = sender.getName();
-    	System.out.println(playerName);
+	    //String playerName = sender.getName();
+    	//System.out.println(playerName);
 	        
 	    // If there are no arguments, spit out the faction of the current user.
 	    if (args.length == 0) { 
@@ -71,8 +71,8 @@ public class CommandFaction extends BaseCommand
 	    // OK, we have 2 arguments.
 	    String verbName = args[0];
 	    String inputFactionName = args[1];
-	    System.out.println("Verb name: -->" + verbName + "<--");
-	    System.out.println("Faction name: -->" + inputFactionName + "<--");
+	    //System.out.println("Verb name: -->" + verbName + "<--");
+	    //System.out.println("Faction name: -->" + inputFactionName + "<--");
 	    	
 	    if (verbName.equalsIgnoreCase("set")) {
 	    		
