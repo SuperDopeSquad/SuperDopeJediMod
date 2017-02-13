@@ -2,9 +2,7 @@ package superdopesquad.superdopejedimod;
 
 
 import net.minecraft.block.material.Material;
-
 import net.minecraft.client.Minecraft;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -20,24 +18,26 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-public class FactionBlock extends BaseBlock {
+public class Faction extends BaseItem {
 
 	
-	public FactionBlock(String unlocalizedName) {
+	public Faction(String unlocalizedName) {
 		
-		super(Material.IRON, unlocalizedName);
+		super(unlocalizedName);
 		
 		setCreativeTab(CreativeTabs.MISC);
 	}
 	
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		  
-		Minecraft.getMinecraft().displayGuiScreen(new FactionGUI());
-		  
-		 return super.onItemRightClick(worldIn, playerIn, hand);
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+	
+		ItemStack itemStack = player.getHeldItem(hand);
+		SuperDopeJediMod.superDopeCommonProxy.displayFactionGui(player);
+
+		return super.onItemRightClick(world, player, hand);
 	}
+
 	
 public void registerRecipe() {
 		

@@ -110,7 +110,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
     public static JediMark jediMark = new JediMark("jediMark");
-    public static FactionBlock factionBlock = new FactionBlock("factionBlock");
+    public static Faction faction = new Faction("faction");
     public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
     public static StarBlock starBlock = new StarBlock("StarBlock");
         
@@ -175,15 +175,15 @@ public class SuperDopeJediMod //Start the class Declaration
     public static SaphireOre saphireOre = new SaphireOre("saphireOre");
     public static Saphire saphire = new Saphire("saphire");
     
+    // Factions.  Must be before EntityManager.
+    public static FactionManager factionManager = new FactionManager();
+   
     // Entities.
     public static EntityManager entityManager = new EntityManager();
  
     // Commands.
     public static CommandManager commandManager = new CommandManager();
-    
-    // Factions.
-    public static FactionManager factionManager = new FactionManager();
-        
+         
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
