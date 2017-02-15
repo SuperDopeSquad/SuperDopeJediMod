@@ -18,6 +18,7 @@ public class WookieModel extends ModelBiped
 	public ModelRenderer arms;
 	public ModelRenderer rightLeg;
 	public ModelRenderer leftLeg;
+	public ModelRenderer factionEmblem;
     
 	public static int textureWidth = 64;
 	public static int textureHeight = 64;
@@ -37,7 +38,7 @@ public class WookieModel extends ModelBiped
     
     public WookieModel(float scale, float p_i1164_2_, int width, int height) {
     	
-    	float yOffset = 8.0F;  // this is a grand hack, to push the model down, since at render time, i resize it.
+    	float yOffset = 0.0F;  // this is a grand hack, to push the model down, since at render time, i resize it.
     	
     	// Debug info.
     	System.out.println("DEBUG width:" + String.valueOf(width) + ", height:" + String.valueOf(height) + ", p_i1164_2_:" + String.valueOf(p_i1164_2_) + ", scale:" + String.valueOf(scale));
@@ -45,6 +46,8 @@ public class WookieModel extends ModelBiped
         this.head = (new ModelRenderer(this)).setTextureSize(width, height);
         this.head.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
         this.head.setTextureOffset(0, 0).addBox(-4.0F, (-8.0F + yOffset), -4.0F, 8, 8, 8, scale);
+        
+        
         
         // x: left (negative) and right (positive)
         // y: up (negative) and down (positive)
@@ -72,6 +75,10 @@ public class WookieModel extends ModelBiped
        	this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
      	this.arms.setTextureOffset(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
     	this.arms.setTextureOffset(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
+    	
+    	 this.factionEmblem = (new ModelRenderer(this)).setTextureSize(width, height);
+         //this.factionEmblem.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
+         this.factionEmblem.setTextureOffset(16, 16).addBox(-4.0F, (-20.0F + yOffset), -3.0F, 2, 2, 2, scale);
     }
 
     
@@ -81,7 +88,7 @@ public class WookieModel extends ModelBiped
     @Override
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         
-    	float realScale = scale * 0.7F;  // this is a hack to make my jawa small.
+    	float realScale = scale * 1.0F;  
     	
     	this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, realScale, entityIn);
         this.head.render(realScale);
@@ -89,6 +96,7 @@ public class WookieModel extends ModelBiped
         this.rightLeg.render(realScale);
         this.leftLeg.render(realScale);
         this.arms.render(realScale);
+        this.factionEmblem.render(realScale);
     }
 
     
@@ -116,4 +124,3 @@ public class WookieModel extends ModelBiped
         this.leftLeg.rotateAngleY = 0.0F;
     }
 }
-

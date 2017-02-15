@@ -1,16 +1,30 @@
 package superdopesquad.superdopejedimod;
 
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderEntity;
+import net.minecraft.client.renderer.entity.RenderLivingBase;
+import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.layers.LayerCape;
+import net.minecraft.client.renderer.entity.layers.LayerDeadmau5Head;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import superdopesquad.superdopejedimod.faction.FactionCapabilityProvider;
+import superdopesquad.superdopejedimod.entity.LayerFactionIndicator;
 import superdopesquad.superdopejedimod.faction.FactionCapability;
 import superdopesquad.superdopejedimod.faction.FactionCapabilityInterface;
 
@@ -56,6 +70,114 @@ public class SuperDopeEventHandler {
 			//System.out.println("DEBUG: Attaching the Faction capability to EntityPlayer.");
 			ResourceLocation factionCapabilityId = new ResourceLocation(SuperDopeJediMod.MODID, "factionCapability");
 			event.addCapability(factionCapabilityId, new FactionCapabilityProvider());
+		}
+	}
+	
+	
+//	@SubscribeEvent
+//	public void onLivingUpdate(LivingUpdateEvent event) {
+//		
+//		//System.out.println("DEBUG: Inside onLivingUpdate: " + event.toString());
+//	}
+//	
+	
+//	@SubscribeEvent
+//	public void onEntityInit(LivingUpdateEvent event) {
+//		
+//		//System.out.println("DEBUG: Inside onLivingUpdate: " + event.toString());
+//	}
+//	
+	
+//	@SubscribeEvent
+//	public void onRenderEntity(RenderLivingEvent.Pre event) {
+//	 
+//		//System.out.println("Render Event Called");
+//		
+//		EntityLivingBase entity = event.getEntity();
+//		
+//	 
+//		if(entity instanceof EntityPlayer) {
+//			
+//			//System.out.println("inside");
+//			
+//			EntityPlayer player = (EntityPlayer) entity;
+//			RenderLivingBase renderer = event.getRenderer();
+//			
+//			//renderer
+//			
+//			//LayerRenderer layerRenderer = new LayerCape((RenderPlayer) event.getRenderer());
+//			//LayerRenderer layerRenderer = new LayerDeadmau5Head((RenderPlayer) event.getRenderer());
+//			////event.getRenderer().addLayer(layerRenderer);
+//			
+//			//event.setCanceled(true);
+//			
+//			////RenderChicken()
+//			 //event.getRenderer().doRender(player, 0F, 0F, 0F, 0F, 0F);
+//			
+//			//event.getRenderer().doRender(entity, x, y, z, entityYaw, partialTicks);
+//	 
+//			//event.renderer.addLayer(new LayerBipedBackpack(event.renderer));
+//	 
+//			//LogHelper.logInfo("Layer Added");
+//		}
+//	}
+	
+//	
+//	@SubscribeEvent 
+//	 public void onEntityConstructing(EntityConstructing event) { 
+//		
+//		Entity entity = event.getEntity();
+//		//LayerRenderer = entity.getr
+//		
+//		 //LayerRenderer layerRenderer = new LayerFactionIndicator(null);
+//		//l.addLayer(layerRenderer);
+//		
+////	  if(event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME) == null) { 
+////	   EntityPlayer player = (EntityPlayer)event.entity; 
+////	    
+////	   player.registerExtendedProperties(ExtendedPlayerProperties.PROP_NAME, new ExtendedPlayerProperties()); 
+////	  } 
+//	 } 
+	
+	
+//	@SubscribeEvent
+//	public void onEntitySpawn(EntityJoinWorldEvent event) {
+//	// DO YOUR STUFF HERE
+//		
+//	}
+	
+	
+	@SubscribeEvent
+	public void onEntityJoined(EntityJoinWorldEvent event)
+	{
+		Entity entityIn = event.getEntity();
+		Class entityClass = entityIn.getClass();
+		Render<? extends Entity> render = Minecraft.getMinecraft().getRenderManager().entityRenderMap.get(entityClass);
+				
+		// Debug info.
+		//String info;
+		//if (render == null) {
+		//	info = "Render: NULL; " + entityIn.getName();
+		//}
+		//else {
+		//	info = "Render: " + render.toString() + ", Entity: " + entityIn.getName();;
+		//}
+		//System.out.println("DEBUG: onEntityJoined: " + info);
+		
+		// Try to add the LayerFactionIndicator if entityRender points to this being a creature.
+		if (false) {
+		if (render != null && render instanceof RenderLivingBase) {
+			
+			//System.out.println("DEBUG: onEntityJoined: about to add layer to " + info);
+			LayerRenderer layerRenderer = new LayerFactionIndicator((RenderLivingBase)render);
+			
+			try {
+				((RenderLivingBase)render).addLayer(layerRenderer);
+			}
+			catch (Exception e) {
+				System.out.println("DEBUG: onEntityJoined: failed to add LayerFactionIndicator on " + entityIn.getName() + ": " + e.getMessage());
+			}
+		}
 		}
 	}
 }
