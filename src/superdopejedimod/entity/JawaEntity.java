@@ -128,10 +128,14 @@ public class JawaEntity extends BaseEntityAnimal {
 	@Override
 	public void generateSurface(World world, Random random, int i, int j) {
 				
+		// Because BaseEntityAnimal's will only spawn where there is no light, it means they will only spawn 
+		// at night, and away from player homes where they have torches.  The weightedProbability below is 
+		// the percentage chance after taking that into account, so it should be a high number.
+		
 		Class entityClass = JawaEntity.class;
-		int weightedProbability = 5;
-		int minimumSpawnCount = 2;
-		int maximumSpawnCount = 4;
+		int weightedProbability = 100;
+		int minimumSpawnCount = 4;
+		int maximumSpawnCount = 8;
 		EnumCreatureType creatureType = EnumCreatureType.MONSTER;
 		
 		// add the spawn information to EntityRegistry through the addSpawn call.

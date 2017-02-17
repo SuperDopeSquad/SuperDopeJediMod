@@ -31,9 +31,10 @@ public class SuperDopeCommonProxy {
     }
     
     
-	public void credit_displayCreditGui(int stackSize) {
-		
-	}
+	public void displayCreditGui(int stackSize) {}
+	
+	
+	public void displayFactionGui(EntityPlayer player) {}
 }
 
 
