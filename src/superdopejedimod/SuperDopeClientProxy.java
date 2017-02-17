@@ -52,10 +52,17 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
     
     
     @Override
-	public void credit_displayCreditGui(int stackSize) {
+	public void displayCreditGui(int stackSize) {
     	
     	Minecraft.getMinecraft().displayGuiScreen(new CreditGUI(stackSize));
 	}
+    
+    
+    @Override
+    public void displayFactionGui(EntityPlayer player) {
+    	
+    	Minecraft.getMinecraft().displayGuiScreen(new FactionGUI(player));
+    }
 }
 
 
