@@ -62,19 +62,19 @@ public class SnakeEntity extends BaseEntityAnimal {
 	}
 	
 	
-	@Override
-	public void registerRecipe() {
-		
-		// Recipe for creating a Snake Egg.
-		ItemStack appleStack = new ItemStack(Items.APPLE);	
-		ItemStack eggStack = new ItemStack(Items.EGG);
-
-		GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.entityManager.snakeEgg, 1), 
-						"A", 
-						"B", 
-						'A', appleStack, 
-						'B', eggStack);
-	}
+//	@Override
+//	public void registerRecipe() {
+//		
+//		// Recipe for creating a Snake Egg.
+//		ItemStack appleStack = new ItemStack(Items.APPLE);	
+//		ItemStack eggStack = new ItemStack(Items.EGG);
+//
+//		GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.entityManager.snakeEgg, 1), 
+//						"A", 
+//						"B", 
+//						'A', appleStack, 
+//						'B', eggStack);
+//	}
 	
 	
 	// set up AI tasks
