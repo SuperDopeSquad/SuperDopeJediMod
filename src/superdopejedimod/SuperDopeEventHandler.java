@@ -24,6 +24,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import superdopesquad.superdopejedimod.faction.FactionCapabilityProvider;
+import superdopesquad.superdopejedimod.faction.FactionInfo;
 import superdopesquad.superdopejedimod.entity.LayerFactionIndicator;
 import superdopesquad.superdopejedimod.faction.FactionCapability;
 import superdopesquad.superdopejedimod.faction.FactionCapabilityInterface;
@@ -36,10 +37,15 @@ public class SuperDopeEventHandler {
 	public void onPlayerLogsIn(PlayerLoggedInEvent event) {
 
 		EntityPlayer player = event.player;
-		String factionName = SuperDopeJediMod.factionManager.getPlayerFactionName(player);
+		FactionInfo factionInfo = SuperDopeJediMod.factionManager.getPlayerFaction(player);
+		String factionName = factionInfo.getName();
 	 
 		String message = "Welcome back.  You are a member of the " + factionName + " faction.";
 		player.addChatMessage(new TextComponentString(message));
+		
+		// Let's tell clients.
+		SuperDopePacketMessage packet = new SuperDopePacketMessage(player, factionInfo.getId());
+		SuperDopeJediMod.packetHandler.INSTANCE.sendToAll(packet);
 	}
 	
 
@@ -72,112 +78,39 @@ public class SuperDopeEventHandler {
 			event.addCapability(factionCapabilityId, new FactionCapabilityProvider());
 		}
 	}
-	
-	
-//	@SubscribeEvent
-//	public void onLivingUpdate(LivingUpdateEvent event) {
-//		
-//		//System.out.println("DEBUG: Inside onLivingUpdate: " + event.toString());
-//	}
-//	
-	
-//	@SubscribeEvent
-//	public void onEntityInit(LivingUpdateEvent event) {
-//		
-//		//System.out.println("DEBUG: Inside onLivingUpdate: " + event.toString());
-//	}
-//	
-	
-//	@SubscribeEvent
-//	public void onRenderEntity(RenderLivingEvent.Pre event) {
-//	 
-//		//System.out.println("Render Event Called");
-//		
-//		EntityLivingBase entity = event.getEntity();
-//		
-//	 
-//		if(entity instanceof EntityPlayer) {
-//			
-//			//System.out.println("inside");
-//			
-//			EntityPlayer player = (EntityPlayer) entity;
-//			RenderLivingBase renderer = event.getRenderer();
-//			
-//			//renderer
-//			
-//			//LayerRenderer layerRenderer = new LayerCape((RenderPlayer) event.getRenderer());
-//			//LayerRenderer layerRenderer = new LayerDeadmau5Head((RenderPlayer) event.getRenderer());
-//			////event.getRenderer().addLayer(layerRenderer);
-//			
-//			//event.setCanceled(true);
-//			
-//			////RenderChicken()
-//			 //event.getRenderer().doRender(player, 0F, 0F, 0F, 0F, 0F);
-//			
-//			//event.getRenderer().doRender(entity, x, y, z, entityYaw, partialTicks);
-//	 
-//			//event.renderer.addLayer(new LayerBipedBackpack(event.renderer));
-//	 
-//			//LogHelper.logInfo("Layer Added");
-//		}
-//	}
-	
-//	
-//	@SubscribeEvent 
-//	 public void onEntityConstructing(EntityConstructing event) { 
-//		
-//		Entity entity = event.getEntity();
-//		//LayerRenderer = entity.getr
-//		
-//		 //LayerRenderer layerRenderer = new LayerFactionIndicator(null);
-//		//l.addLayer(layerRenderer);
-//		
-////	  if(event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME) == null) { 
-////	   EntityPlayer player = (EntityPlayer)event.entity; 
-////	    
-////	   player.registerExtendedProperties(ExtendedPlayerProperties.PROP_NAME, new ExtendedPlayerProperties()); 
-////	  } 
-//	 } 
-	
-	
-//	@SubscribeEvent
-//	public void onEntitySpawn(EntityJoinWorldEvent event) {
-//	// DO YOUR STUFF HERE
-//		
-//	}
-	
+
 	
 	@SubscribeEvent
 	public void onEntityJoined(EntityJoinWorldEvent event)
 	{
-		Entity entityIn = event.getEntity();
-		Class entityClass = entityIn.getClass();
-		Render<? extends Entity> render = Minecraft.getMinecraft().getRenderManager().entityRenderMap.get(entityClass);
-				
-		// Debug info.
-		//String info;
-		//if (render == null) {
-		//	info = "Render: NULL; " + entityIn.getName();
-		//}
-		//else {
-		//	info = "Render: " + render.toString() + ", Entity: " + entityIn.getName();;
-		//}
-		//System.out.println("DEBUG: onEntityJoined: " + info);
-		
-		// Try to add the LayerFactionIndicator if entityRender points to this being a creature.
-		if (false) {
-		if (render != null && render instanceof RenderLivingBase) {
-			
-			//System.out.println("DEBUG: onEntityJoined: about to add layer to " + info);
-			LayerRenderer layerRenderer = new LayerFactionIndicator((RenderLivingBase)render);
-			
-			try {
-				((RenderLivingBase)render).addLayer(layerRenderer);
-			}
-			catch (Exception e) {
-				System.out.println("DEBUG: onEntityJoined: failed to add LayerFactionIndicator on " + entityIn.getName() + ": " + e.getMessage());
-			}
-		}
-		}
+//		Entity entityIn = event.getEntity();
+//		Class entityClass = entityIn.getClass();
+//		Render<? extends Entity> render = Minecraft.getMinecraft().getRenderManager().entityRenderMap.get(entityClass);
+//				
+//		// Debug info.
+//		//String info;
+//		//if (render == null) {
+//		//	info = "Render: NULL; " + entityIn.getName();
+//		//}
+//		//else {
+//		//	info = "Render: " + render.toString() + ", Entity: " + entityIn.getName();;
+//		//}
+//		//System.out.println("DEBUG: onEntityJoined: " + info);
+//		
+//		// Try to add the LayerFactionIndicator if entityRender points to this being a creature.
+//		if (false) {
+//		if (render != null && render instanceof RenderLivingBase) {
+//			
+//			//System.out.println("DEBUG: onEntityJoined: about to add layer to " + info);
+//			LayerRenderer layerRenderer = new LayerFactionIndicator((RenderLivingBase)render);
+//			
+//			try {
+//				((RenderLivingBase)render).addLayer(layerRenderer);
+//			}
+//			catch (Exception e) {
+//				System.out.println("DEBUG: onEntityJoined: failed to add LayerFactionIndicator on " + entityIn.getName() + ": " + e.getMessage());
+//			}
+//		}
+//		}
 	}
 }

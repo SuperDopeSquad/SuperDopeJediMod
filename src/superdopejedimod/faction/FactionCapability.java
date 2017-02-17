@@ -10,6 +10,7 @@ public class FactionCapability implements FactionCapabilityInterface {
 	public boolean set(Integer factionId) {
 		
 		this._factionId = factionId;
+		
 		return true;
 	}
 

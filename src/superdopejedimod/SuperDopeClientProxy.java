@@ -54,17 +54,13 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
         
         // This sets our additional layers on the "default" player model, also known as Steve.
         RenderPlayer renderPlayerDefault = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
-        renderPlayerDefault.addLayer(new LayerFactionIndicator(renderPlayerDefault));
+        //renderPlayerDefault.addLayer(new LayerFactionIndicator(renderPlayerDefault));
         renderPlayerDefault.addLayer(new LayerFactionCape(renderPlayerDefault));
         
         // This sets our additional layers on the "slim" player model, also known as Alex.
         RenderPlayer renderPlayerSlim = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
-        renderPlayerSlim.addLayer(new LayerFactionIndicator(renderPlayerSlim));
+        //renderPlayerSlim.addLayer(new LayerFactionIndicator(renderPlayerSlim));
         renderPlayerSlim.addLayer(new LayerFactionCape(renderPlayerSlim));
-          
-        
-        //Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default").addLayer(new LayerFactionIndictator(Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default")));
-        // Where SKINTYPE can be “default” for Steve model, and “slim” for the Alex model.
 	}
 
 	

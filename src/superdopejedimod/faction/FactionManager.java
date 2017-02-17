@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.SuperDopePacketMessage;
 
 
 public class FactionManager {
@@ -15,24 +17,28 @@ public class FactionManager {
 	public static final Integer SITH = 2;
 	public static final Integer SMUGGLER = 3;
 	public static final Integer BOUNTYHUNTER = 4;
+	public static final Integer TEAMJUDE = 5;
 	public static final String UNAFFILIATED_NAME = "Unaffiliated";
 	public static final String JEDI_NAME = "Jedi";
 	public static final String SITH_NAME = "Sith";
 	public static final String SMUGGLER_NAME = "Smuggler";
 	public static final String BOUNTYHUNTER_NAME = "Bounty Hunter";
+	public static final String TEAMJUDE_NAME = "Team Jude";
 	public static final String BOUNTYHUNTER_SHORTNAME = "Bountyhunter";
-	
+	public static final String TEAMJUDE_SHORTNAME = "Jude";
 
+	
 	private HashMap _factionsMap = new HashMap();
 	
 	
 	public FactionManager() {
 				
-		this._factionsMap.put(UNAFFILIATED, new FactionInfo(UNAFFILIATED, UNAFFILIATED_NAME, Color.blue));
-		this._factionsMap.put(JEDI, new FactionInfo(JEDI, JEDI_NAME, Color.blue));
-		this._factionsMap.put(SITH, new FactionInfo(SITH, SITH_NAME, Color.red));
-		this._factionsMap.put(SMUGGLER, new FactionInfo(SMUGGLER, SMUGGLER_NAME, Color.green));
-		this._factionsMap.put(BOUNTYHUNTER, new FactionInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, BOUNTYHUNTER_SHORTNAME));
+		this._factionsMap.put(UNAFFILIATED, new FactionInfo(UNAFFILIATED, UNAFFILIATED_NAME, Color.blue, null));
+		this._factionsMap.put(JEDI, new FactionInfo(JEDI, JEDI_NAME, Color.blue, "capejedi.png"));
+		this._factionsMap.put(SITH, new FactionInfo(SITH, SITH_NAME, Color.red, "capesith.png"));
+		this._factionsMap.put(SMUGGLER, new FactionInfo(SMUGGLER, SMUGGLER_NAME, Color.green, "capesmuggler.png"));
+		this._factionsMap.put(BOUNTYHUNTER, new FactionInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, "capebountyhunter.png", BOUNTYHUNTER_SHORTNAME));
+		this._factionsMap.put(TEAMJUDE, new FactionInfo(TEAMJUDE, TEAMJUDE_NAME, Color.pink, "capejude.png", TEAMJUDE_SHORTNAME));
 	}
 	
 	
@@ -74,6 +80,8 @@ public class FactionManager {
 		Integer factionId = factionCapability.get();
 		FactionInfo factionInfo = (FactionInfo) this._factionsMap.get(factionId);
 
+		//System.out.println("getPlayerFaction: " + player.toString() + ", factionid:" + factionId.toString());
+		
 		return factionInfo;
 	}
 	
@@ -96,11 +104,23 @@ public class FactionManager {
 			return false;
 		}
 		
-		return factionCapability.set(inputFactionId);
+		// This sets it on the server.
+		boolean setSuccess = factionCapability.set(inputFactionId);
+		if (!setSuccess) {
+			return false;
+		}
+		
+		// Tell the client what is going on.
+		SuperDopePacketMessage message = new SuperDopePacketMessage(player, inputFactionId);
+		SuperDopeJediMod.packetHandler.INSTANCE.sendToAll(message);
+		
+		return true;
 	}
 	
-
-	public boolean setPlayerFactionByName(EntityPlayer player, String inputFactionName) {
+	
+	// MC-TO: Instead of having a separate function setPlayerFactionByclientId, i think i can just have a "isWorldRemote"
+	// check in the setPlayerFactionById call, just to prevent recursive calling of the client message.
+	public boolean setPlayerFactionByClientId(EntityPlayer player, Integer inputFactionId) {
 		
 		// Let's get the Faction capability that is set on every player.
 		FactionCapabilityInterface factionCapability = player.getCapability(FactionCapabilityProvider.FactionCapability, null);
@@ -108,6 +128,18 @@ public class FactionManager {
 		if (factionCapability == null) {
 			return false;
 		}
+		
+		// This sets it on the server.
+		boolean setSuccess = factionCapability.set(inputFactionId);
+		if (!setSuccess) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+
+	public boolean setPlayerFactionByName(EntityPlayer player, String inputFactionName) {
 		
 		int factionId = -1;
 		
@@ -124,10 +156,10 @@ public class FactionManager {
 			}
 		}
 		
-		if (factionId != -1) {
-			return factionCapability.set(factionId);
+		if (factionId == -1) {
+			return false;
 		}
 		
-		return false;
+		return this.setPlayerFactionById(player, factionId);
 	}
 }

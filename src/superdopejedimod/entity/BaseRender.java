@@ -43,17 +43,6 @@ public abstract class BaseRender extends RenderLiving {
 		// this.addLayer(layerRenderer);
         // **********
         
-        // Should factions come with capes?  I think so!
-        //LayerRenderer layerRenderer = new LayerCape(this);
-        //LayerRenderer layerRenderer = new LayerDeadmau5Head((RenderPlayer) event.getRenderer());
-		   
-    	//LayerRenderer layerRenderer = new LayerDeadmau5Head();
-    	//this.addLayer(layerRenderer);
-        //this.addLayer(new LayerHeldItem(this));
-        
-        //LayerRenderer
-        //this.addLayer(layerhelditem)
-        
         // set the location of the texture.
     	this._resourceLocationTexture = new ResourceLocation(SuperDopeJediMod.MODID + ":textures/entities/" + textureFileName + ".png");
     }

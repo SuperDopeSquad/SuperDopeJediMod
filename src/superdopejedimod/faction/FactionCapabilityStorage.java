@@ -16,7 +16,6 @@ public class FactionCapabilityStorage implements IStorage<FactionCapabilityInter
 	@Override
 	public NBTBase writeNBT(Capability<FactionCapabilityInterface> capability, FactionCapabilityInterface instance, EnumFacing side) {
 	
-		//return new NBTTagFloat(instance.getMana());
 		return new NBTTagInt(instance.get());
 	}
 
@@ -31,7 +30,6 @@ public class FactionCapabilityStorage implements IStorage<FactionCapabilityInter
 			return;
 		}
 	
-		//instance.set(((NBTPrimitive) nbt).toString());
 		instance.set(((NBTTagInt) nbt).getInt());
 	}
 }

@@ -7,6 +7,8 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -16,76 +18,60 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.faction.FactionInfo;
+import superdopesquad.superdopejedimod.faction.FactionManager;
 
 
 @SideOnly(Side.CLIENT)
-public class LayerFactionCape implements LayerRenderer<AbstractClientPlayer>
+public class LayerFactionCape implements LayerRenderer<EntityLivingBase>
 {
+	
+	
     private final RenderPlayer playerRenderer;
 
+    
     public LayerFactionCape(RenderPlayer playerRendererIn)
     {
         this.playerRenderer = playerRendererIn;
     }
 
-    public void doRenderLayer(AbstractClientPlayer entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
-    	//System.out.println("Inside LayerFactionCape:doRenderLayer");
+    
+     public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)  {
     	
-        //if (entitylivingbaseIn.hasPlayerInfo() && !entitylivingbaseIn.isInvisible() && entitylivingbaseIn.isWearing(EnumPlayerModelParts.CAPE) && entitylivingbaseIn.getLocationCape() != null)
-        //{
-            //ItemStack itemstack = entitylivingbaseIn.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-
-            //if (itemstack.getItem() != Items.ELYTRA)
-            //{
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    	 // I don't know what this does yet, it was in the code i stole from the original cape layer code.
+    	 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 
-                NetworkPlayerInfo networkplayerinfo = Minecraft.getMinecraft().getConnection().getPlayerInfo(entitylivingbaseIn.getUniqueID());
-                if (networkplayerinfo == null) {
-                	System.out.println("networkplayerinfo is null!");
-                	return;
-                }
-                //System.out.println("networkplayerinfo: " + networkplayerinfo.toString());
+         // Bail if the current entity is not a player.  
+    	 if (!(entitylivingbaseIn instanceof EntityPlayer)) {
+                	
+    		 System.out.println("DEBUG: FAILURE! Unexpected object in LayerFactionCape.");      	
+    		 return;     
+    	 }
                 
-//                ResourceLocation rl = networkplayerinfo.getLocationCape();
-//                if (rl == null) {
-//                	System.out.println("rl is null!");
-//                }
+         // figure out the faction and the corresponding cape.    
+    	 EntityPlayer player = (EntityPlayer)entitylivingbaseIn;      
+    	 FactionInfo factionInfo = SuperDopeJediMod.factionManager.getPlayerFaction(player);           
+    	 String resourceName = factionInfo.getCapeResource();
                 
+         // if resourceName == null, that means FactionManager is telling us this faction doesn't get a cape.
+         if (resourceName == null) {
+        	 return;
+         }
                 
-                //NetworkPlayerInfo networkplayerinfo = entitylivingbaseIn.getPlayerInfo();
-                //return networkplayerinfo == null ? null : networkplayerinfo.getLocationCape();
-                
-                ResourceLocation rl2 = new ResourceLocation(SuperDopeJediMod.MODID, "textures/models/layerfactioncape.png");
-                if (rl2 == null) {
-                	System.out.println("rl2 is null");
-                	return;
-                }
-               //else {
-               // 	System.out.println("fl2 is NOT null");
-               // }
-                
-                
-         //       ResourceLocation resourceLocationCape = entitylivingbaseIn.getLocationCape();
-         //       if (resourceLocationCape == null) {
-         //       	System.out.println("resourceLocationCape is null!");
-         //       	return;
-         //       }
-                
-                
-                
-                
-                //this.playerRenderer.bindTexture(resourceLocationCape);
-                this.playerRenderer.bindTexture(rl2);
+         //System.out.println("DEBUG: FACTION: " + factionInfo.getId().toString() + ":" + factionInfo.getName());
+       
+         // Bind the texture.
+         ResourceLocation resourceLocation = new ResourceLocation(SuperDopeJediMod.MODID, resourceName);
+         this.playerRenderer.bindTexture(resourceLocation);
                    
                 
-                
+                // The rest of this code is copied from the original layercape.
                 GlStateManager.pushMatrix();
                 GlStateManager.translate(0.0F, 0.0F, 0.125F);
-                double d0 = entitylivingbaseIn.prevChasingPosX + (entitylivingbaseIn.chasingPosX - entitylivingbaseIn.prevChasingPosX) * (double)partialTicks - (entitylivingbaseIn.prevPosX + (entitylivingbaseIn.posX - entitylivingbaseIn.prevPosX) * (double)partialTicks);
-                double d1 = entitylivingbaseIn.prevChasingPosY + (entitylivingbaseIn.chasingPosY - entitylivingbaseIn.prevChasingPosY) * (double)partialTicks - (entitylivingbaseIn.prevPosY + (entitylivingbaseIn.posY - entitylivingbaseIn.prevPosY) * (double)partialTicks);
-                double d2 = entitylivingbaseIn.prevChasingPosZ + (entitylivingbaseIn.chasingPosZ - entitylivingbaseIn.prevChasingPosZ) * (double)partialTicks - (entitylivingbaseIn.prevPosZ + (entitylivingbaseIn.posZ - entitylivingbaseIn.prevPosZ) * (double)partialTicks);
-                float f = entitylivingbaseIn.prevRenderYawOffset + (entitylivingbaseIn.renderYawOffset - entitylivingbaseIn.prevRenderYawOffset) * partialTicks;
+                double d0 = player.prevChasingPosX + (player.chasingPosX - player.prevChasingPosX) * (double)partialTicks - (player.prevPosX + (player.posX - player.prevPosX) * (double)partialTicks);
+                double d1 = player.prevChasingPosY + (player.chasingPosY - player.prevChasingPosY) * (double)partialTicks - (player.prevPosY + (player.posY - player.prevPosY) * (double)partialTicks);
+                double d2 = player.prevChasingPosZ + (player.chasingPosZ - player.prevChasingPosZ) * (double)partialTicks - (player.prevPosZ + (player.posZ - player.prevPosZ) * (double)partialTicks);
+                float f = player.prevRenderYawOffset + (player.renderYawOffset - player.prevRenderYawOffset) * partialTicks;
                 double d3 = (double)MathHelper.sin(f * 0.017453292F);
                 double d4 = (double)(-MathHelper.cos(f * 0.017453292F));
                 float f1 = (float)d1 * 10.0F;
@@ -98,10 +84,10 @@ public class LayerFactionCape implements LayerRenderer<AbstractClientPlayer>
                     f2 = 0.0F;
                 }
 
-                float f4 = entitylivingbaseIn.prevCameraYaw + (entitylivingbaseIn.cameraYaw - entitylivingbaseIn.prevCameraYaw) * partialTicks;
-                f1 = f1 + MathHelper.sin((entitylivingbaseIn.prevDistanceWalkedModified + (entitylivingbaseIn.distanceWalkedModified - entitylivingbaseIn.prevDistanceWalkedModified) * partialTicks) * 6.0F) * 32.0F * f4;
+                float f4 = player.prevCameraYaw + (player.cameraYaw - player.prevCameraYaw) * partialTicks;
+                f1 = f1 + MathHelper.sin((player.prevDistanceWalkedModified + (player.distanceWalkedModified - player.prevDistanceWalkedModified) * partialTicks) * 6.0F) * 32.0F * f4;
 
-                if (entitylivingbaseIn.isSneaking())
+                if (player.isSneaking())
                 {
                     f1 += 25.0F;
                 }
@@ -112,13 +98,11 @@ public class LayerFactionCape implements LayerRenderer<AbstractClientPlayer>
                 GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
                 this.playerRenderer.getMainModel().renderCape(0.0625F);
                 GlStateManager.popMatrix();
-                
-            //}
-        //}
     }
 
-    public boolean shouldCombineTextures()
-    {
-        return false;
+     
+    public boolean shouldCombineTextures() {
+        
+    	return false;
     }
 }

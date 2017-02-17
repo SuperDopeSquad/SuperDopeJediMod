@@ -29,7 +29,7 @@ public class LayerFactionIndicator implements LayerRenderer<EntityLivingBase>
     public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
     {
     	
-    	System.out.println("Inside LayerFactionIndictator:doRenderLayer");
+    	//System.out.println("Inside LayerFactionIndictator:doRenderLayer");
     	
         int i = 3; // entitylivingbaseIn.getArrowCountInEntity();
 
