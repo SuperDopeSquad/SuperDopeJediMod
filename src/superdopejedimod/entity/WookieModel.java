@@ -18,11 +18,13 @@ public class WookieModel extends ModelBiped
 	public ModelRenderer arms;
 	public ModelRenderer rightLeg;
 	public ModelRenderer leftLeg;
+	
 	public ModelRenderer factionEmblem;
+	private static boolean _showFactionEmblem = false;
     
 	public static int textureWidth = 64;
 	public static int textureHeight = 64;
-	 
+	
     
     public WookieModel() {   
     	
@@ -41,7 +43,7 @@ public class WookieModel extends ModelBiped
     	float yOffset = 0.0F;  // this is a grand hack, to push the model down, since at render time, i resize it.
     	
     	// Debug info.
-    	System.out.println("DEBUG width:" + String.valueOf(width) + ", height:" + String.valueOf(height) + ", p_i1164_2_:" + String.valueOf(p_i1164_2_) + ", scale:" + String.valueOf(scale));
+    	//System.out.println("DEBUG width:" + String.valueOf(width) + ", height:" + String.valueOf(height) + ", p_i1164_2_:" + String.valueOf(p_i1164_2_) + ", scale:" + String.valueOf(scale));
     	
         this.head = (new ModelRenderer(this)).setTextureSize(width, height);
         this.head.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
@@ -76,9 +78,11 @@ public class WookieModel extends ModelBiped
      	this.arms.setTextureOffset(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
     	this.arms.setTextureOffset(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
     	
+    	if (_showFactionEmblem) {
     	 this.factionEmblem = (new ModelRenderer(this)).setTextureSize(width, height);
          //this.factionEmblem.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
          this.factionEmblem.setTextureOffset(16, 16).addBox(-4.0F, (-20.0F + yOffset), -3.0F, 2, 2, 2, scale);
+    	}
     }
 
     
@@ -96,7 +100,10 @@ public class WookieModel extends ModelBiped
         this.rightLeg.render(realScale);
         this.leftLeg.render(realScale);
         this.arms.render(realScale);
+        
+        if (_showFactionEmblem) {
         this.factionEmblem.render(realScale);
+        }
     }
 
     
