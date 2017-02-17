@@ -8,22 +8,22 @@ public class FactionInfo {
 	private Integer _id;
 	private String _name;
 	private Color _color;
-	private String _capeResource;
 	private String _shortName;
+	private boolean _hasCape;
 	
 	
-	public FactionInfo(Integer id, String name, Color color, String capeResource) {
+	public FactionInfo(Integer id, String name, Color color, boolean hasCape) {
 		
-		this(id, name, color, capeResource, null);
+		this(id, name, color, hasCape, null);
 	}
 
 	
-	public FactionInfo(Integer id, String name, Color color, String capeResource, String shortName) {
+	public FactionInfo(Integer id, String name, Color color, boolean hasCape, String shortName) {
 		
 		this._id = id;
 		this._name = name;
 		this._color = color;
-		this._capeResource = capeResource;
+		this._hasCape = hasCape;
 		this._shortName = shortName;
 	}
 
@@ -50,10 +50,10 @@ public class FactionInfo {
 	
 	public String getCapeResource() {
 		
-		if (this._capeResource == null) {
+		if (!(this._hasCape)) {
 			return null;
 		}
 		
-		return "textures/models/" + this._capeResource;
+		return "textures/models/cape/" + this.getShortName().toLowerCase() + ".png";
 	}
 }

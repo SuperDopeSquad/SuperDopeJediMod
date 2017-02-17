@@ -24,7 +24,7 @@ public class FactionManager {
 	public static final String SMUGGLER_NAME = "Smuggler";
 	public static final String BOUNTYHUNTER_NAME = "Bounty Hunter";
 	public static final String TEAMJUDE_NAME = "Team Jude";
-	public static final String BOUNTYHUNTER_SHORTNAME = "Bountyhunter";
+	public static final String BOUNTYHUNTER_SHORTNAME = "bountyhunter";
 	public static final String TEAMJUDE_SHORTNAME = "Jude";
 
 	
@@ -33,12 +33,12 @@ public class FactionManager {
 	
 	public FactionManager() {
 				
-		this._factionsMap.put(UNAFFILIATED, new FactionInfo(UNAFFILIATED, UNAFFILIATED_NAME, Color.blue, null));
-		this._factionsMap.put(JEDI, new FactionInfo(JEDI, JEDI_NAME, Color.blue, "capejedi.png"));
-		this._factionsMap.put(SITH, new FactionInfo(SITH, SITH_NAME, Color.red, "capesith.png"));
-		this._factionsMap.put(SMUGGLER, new FactionInfo(SMUGGLER, SMUGGLER_NAME, Color.green, "capesmuggler.png"));
-		this._factionsMap.put(BOUNTYHUNTER, new FactionInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, "capebountyhunter.png", BOUNTYHUNTER_SHORTNAME));
-		this._factionsMap.put(TEAMJUDE, new FactionInfo(TEAMJUDE, TEAMJUDE_NAME, Color.pink, "capejude.png", TEAMJUDE_SHORTNAME));
+		this._factionsMap.put(UNAFFILIATED, new FactionInfo(UNAFFILIATED, UNAFFILIATED_NAME, Color.blue, false));
+		this._factionsMap.put(JEDI, new FactionInfo(JEDI, JEDI_NAME, Color.blue, true));
+		this._factionsMap.put(SITH, new FactionInfo(SITH, SITH_NAME, Color.red, true));
+		this._factionsMap.put(SMUGGLER, new FactionInfo(SMUGGLER, SMUGGLER_NAME, Color.green, true));
+		this._factionsMap.put(BOUNTYHUNTER, new FactionInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, true, BOUNTYHUNTER_SHORTNAME));
+		this._factionsMap.put(TEAMJUDE, new FactionInfo(TEAMJUDE, TEAMJUDE_NAME, Color.pink, true, TEAMJUDE_SHORTNAME));
 	}
 	
 	
