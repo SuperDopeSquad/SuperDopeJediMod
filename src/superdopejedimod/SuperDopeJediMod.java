@@ -186,7 +186,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static CommandManager commandManager = new CommandManager();
          
     // MessageHandler.
-    public static SuperDopePacketHandler packetHandler = new SuperDopePacketHandler();
+    public static SuperDopePacketManager packetHandler = new SuperDopePacketManager();
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

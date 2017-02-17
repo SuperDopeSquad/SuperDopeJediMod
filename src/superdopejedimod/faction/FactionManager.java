@@ -7,7 +7,6 @@ import java.util.HashMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.SuperDopePacketMessage;
 
 
 public class FactionManager {
@@ -111,7 +110,7 @@ public class FactionManager {
 		}
 		
 		// Tell the client what is going on.
-		SuperDopePacketMessage message = new SuperDopePacketMessage(player, inputFactionId);
+		PacketPlayerSetFaction message = new PacketPlayerSetFaction(player, inputFactionId);
 		SuperDopeJediMod.packetHandler.INSTANCE.sendToAll(message);
 		
 		return true;

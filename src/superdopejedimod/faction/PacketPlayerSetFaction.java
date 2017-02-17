@@ -1,4 +1,5 @@
-package superdopesquad.superdopejedimod;
+package superdopesquad.superdopejedimod.faction;
+
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,7 +8,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 
-public class SuperDopePacketMessage implements IMessage {
+public class PacketPlayerSetFaction implements IMessage {
 
 
 	private int _playerId;
@@ -15,10 +16,10 @@ public class SuperDopePacketMessage implements IMessage {
 		  
 
 	// A default constructor is always required
-	public SuperDopePacketMessage(){}
+	public PacketPlayerSetFaction() {}
 
 	  
-	public SuperDopePacketMessage(EntityPlayer player, int factionId) {
+	public PacketPlayerSetFaction(EntityPlayer player, int factionId) {
 	    
 			this._playerId = player.getEntityId();
 			this._factionId = factionId;

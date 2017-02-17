@@ -25,6 +25,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import superdopesquad.superdopejedimod.faction.FactionCapabilityProvider;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
+import superdopesquad.superdopejedimod.faction.PacketPlayerSetFaction;
 import superdopesquad.superdopejedimod.entity.LayerFactionIndicator;
 import superdopesquad.superdopejedimod.faction.FactionCapability;
 import superdopesquad.superdopejedimod.faction.FactionCapabilityInterface;
@@ -44,7 +45,7 @@ public class SuperDopeEventHandler {
 		player.addChatMessage(new TextComponentString(message));
 		
 		// Let's tell clients.
-		SuperDopePacketMessage packet = new SuperDopePacketMessage(player, factionInfo.getId());
+		PacketPlayerSetFaction packet = new PacketPlayerSetFaction(player, factionInfo.getId());
 		SuperDopeJediMod.packetHandler.INSTANCE.sendToAll(packet);
 	}
 	
