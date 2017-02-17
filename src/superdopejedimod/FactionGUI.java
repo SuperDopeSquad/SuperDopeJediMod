@@ -116,19 +116,7 @@ public class FactionGUI extends GuiScreen {
 			this._sithButton.enabled = false;
 		}
 		
-<<<<<<< HEAD
-		super.actionPerformed(SithButton);
-		
-	}
-		
-		
-		
-	}
-	
-=======
 		super.actionPerformed(button);
-	}		
+	}
 }
 
-
->>>>>>> origin/master
