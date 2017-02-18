@@ -88,6 +88,18 @@ public class ClassManager {
 	}
 	
 	
+	public FactionInfo getFactionInfo(Integer id) {
+		
+		Object factionInfo = this._factionMap.get(id);
+		
+		if (factionInfo == null) {
+			return null;
+		}
+		
+		return (FactionInfo) factionInfo;
+	}
+	
+	
 	public ClassInfo getClassInfo(Integer id) {
 		
 		Object classInfo = this._classMap.get(id);
@@ -97,6 +109,15 @@ public class ClassManager {
 		}
 		
 		return (ClassInfo) classInfo;
+	}
+	
+	
+	public boolean isPlayerInFaction(EntityPlayer player, FactionInfo factionInfoInput) {
+		
+		ClassInfo classInfo = this.getPlayerClass(player);
+		FactionInfo factionInfo = classInfo.getFaction();
+		
+		return (factionInfoInput.getId() == factionInfo.getId());
 	}
 	
 	

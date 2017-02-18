@@ -19,6 +19,12 @@ public class FactionInfo {
 	}
 	
 	
+	public Integer getId() {
+		
+		return this._id;
+	}
+	
+	
 	public String getName() {
 		
 		return this._name;
