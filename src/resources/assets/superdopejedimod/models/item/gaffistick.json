@@ -1,18 +1,6 @@
 {
-    "parent": "builtin/generated",
+    "parent": "item/handheld",
     "textures": {
         "layer0": "superdopejedimod:items/gaffiStick"
-    },
-    "display": {
-        "thirdperson_righthand": {
-            "rotation": [ 0, -120, 0 ],
-            "translation": [ -3, 7, 10 ],
-            "scale": [ 1, 1, 1 ]
-        },
-        "firstperson_righthand": {
-            "rotation": [ 0, -135, 25 ],
-            "translation": [ 0, 4, 2 ],
-            "scale": [ 1.7, 1.7, 1.7 ]
-        }
     }
 }
