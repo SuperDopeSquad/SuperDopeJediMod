@@ -31,7 +31,6 @@ public class LightSaber extends BaseMeleeWeapon {
 	
 	
 
-	
 	public void registerRecipe() {
 		
 		if (this.color == "Red") {
