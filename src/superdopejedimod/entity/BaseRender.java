@@ -39,7 +39,7 @@ public abstract class BaseRender extends RenderLiving {
         // This code is not necessary any more, since i moved this code to fire at the onEntityJoin event.  But, if I ever
         // change my mind and only want to draw it for our custom mobs, instead of all mobs/animals, uncomment below.
         // **********
-        // LayerRenderer layerRenderer = new LayerFactionIndicator(this);
+        // LayerRenderer layerRenderer = new LayerClassIndicator(this);
 		// this.addLayer(layerRenderer);
         // **********
         

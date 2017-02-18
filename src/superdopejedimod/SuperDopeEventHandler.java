@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -23,12 +24,12 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import superdopesquad.superdopejedimod.faction.FactionCapabilityProvider;
-import superdopesquad.superdopejedimod.faction.FactionInfo;
-import superdopesquad.superdopejedimod.faction.PacketPlayerSetFaction;
-import superdopesquad.superdopejedimod.entity.LayerFactionIndicator;
-import superdopesquad.superdopejedimod.faction.FactionCapability;
-import superdopesquad.superdopejedimod.faction.FactionCapabilityInterface;
+import superdopesquad.superdopejedimod.entity.LayerClassIndicator;
+import superdopesquad.superdopejedimod.playerclass.ClassCapability;
+import superdopesquad.superdopejedimod.playerclass.ClassCapabilityInterface;
+import superdopesquad.superdopejedimod.playerclass.ClassCapabilityProvider;
+import superdopesquad.superdopejedimod.playerclass.ClassInfo;
+import superdopesquad.superdopejedimod.playerclass.PacketPlayerSetClass;
 
 
 public class SuperDopeEventHandler {
@@ -38,15 +39,40 @@ public class SuperDopeEventHandler {
 	public void onPlayerLogsIn(PlayerLoggedInEvent event) {
 
 		EntityPlayer player = event.player;
-		FactionInfo factionInfo = SuperDopeJediMod.factionManager.getPlayerFaction(player);
-		String factionName = factionInfo.getName();
-	 
-		String message = "Welcome back.  You are a member of the " + factionName + " faction.";
+		ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(player);
+		//String className = classInfo.getName();
+		
+		//String message = "Welcome back.  You are a member of the " + className + " class.";
+		String message = "Welcome back. " + SuperDopeJediMod.classManager.getPlayerClassLongDescription(player);
 		player.addChatMessage(new TextComponentString(message));
 		
-		// Let's tell clients.
-		PacketPlayerSetFaction packet = new PacketPlayerSetFaction(player, factionInfo.getId());
-		SuperDopeJediMod.packetHandler.INSTANCE.sendToAll(packet);
+		// Let's tell the client side of every current player what my class is.
+		PacketPlayerSetClass packet = new PacketPlayerSetClass(player, classInfo.getId());
+		SuperDopeJediMod.packetManager.INSTANCE.sendToAll(packet);
+	
+		// Let's tell the client side of this new player what the class of every other current player is.
+		//Entity entity = event.getEntity();
+		
+		
+		// If this is a player, tell them the class of all current players.
+		//if (entity instanceof EntityPlayer ) {
+			
+			//EntityPlayer newPlayer = (EntityPlayer) entity;
+		//Minecraft.getMinecraft()
+			
+//			for (EntityPlayer existingPlayer : event.g.playerEntities) {
+//				
+//				ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(existingPlayer);
+//				//String className = classInfo.getName();
+//			 
+//				//String message = "Welcome back.  You are a member of the " + className + " class.";
+//				//player.addChatMessage(new TextComponentString(message));
+//				
+//				// Let's tell clients.
+//				PacketPlayerSetClass packet = new PacketPlayerSetClass(existingPlayer, classInfo.getId());
+//				SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, (EntityPlayerMP) newPlayer);
+//			}
+		//}
 	}
 	
 
@@ -60,9 +86,9 @@ public class SuperDopeEventHandler {
 			EntityPlayer originalPlayer = event.getOriginal();
 			EntityPlayer newPlayer = event.getEntityPlayer();
 			
-			// Copy faction information to the new player object being clone from the original.
-			String originalFaction = SuperDopeJediMod.factionManager.getPlayerFactionName(originalPlayer);
-			SuperDopeJediMod.factionManager.setPlayerFactionByName(newPlayer, originalFaction);
+			// Copy class information to the new player object being clone from the original.
+			String originalClass = SuperDopeJediMod.classManager.getPlayerClassName(originalPlayer);
+			SuperDopeJediMod.classManager.setPlayerClassByName(newPlayer, originalClass);
 		}
 	}
 	
@@ -73,10 +99,10 @@ public class SuperDopeEventHandler {
 
 		if (event.getObject() instanceof EntityPlayer) {
 			 
-			// Attaching the faction capability to EntityPlayer.
-			//System.out.println("DEBUG: Attaching the Faction capability to EntityPlayer.");
-			ResourceLocation factionCapabilityId = new ResourceLocation(SuperDopeJediMod.MODID, "factionCapability");
-			event.addCapability(factionCapabilityId, new FactionCapabilityProvider());
+			// Attaching the class capability to EntityPlayer.
+			//System.out.println("DEBUG: Attaching the Class capability to EntityPlayer.");
+			ResourceLocation classCapabilityId = new ResourceLocation(SuperDopeJediMod.MODID, "classCapability");
+			event.addCapability(classCapabilityId, new ClassCapabilityProvider());
 		}
 	}
 
@@ -84,6 +110,29 @@ public class SuperDopeEventHandler {
 	@SubscribeEvent
 	public void onEntityJoined(EntityJoinWorldEvent event)
 	{
+//		Entity entity = event.getEntity();
+//		
+//		// If this is a player, tell them the class of all current players.
+//		if (entity instanceof EntityPlayer ) {
+//			
+//			EntityPlayer newPlayer = (EntityPlayer) entity;
+//			
+//			for (EntityPlayer existingPlayer : event.getWorld().playerEntities) {
+//				
+//				ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(existingPlayer);
+//				//String className = classInfo.getName();
+//			 
+//				//String message = "Welcome back.  You are a member of the " + className + " class.";
+//				//player.addChatMessage(new TextComponentString(message));
+//				
+//				// Let's tell clients.
+//				PacketPlayerSetClass packet = new PacketPlayerSetClass(existingPlayer, classInfo.getId());
+//				SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, (EntityPlayerMP) newPlayer);
+//			}
+//		}
+		
+		//event.getWorld().playerEntities
+		
 //		Entity entityIn = event.getEntity();
 //		Class entityClass = entityIn.getClass();
 //		Render<? extends Entity> render = Minecraft.getMinecraft().getRenderManager().entityRenderMap.get(entityClass);

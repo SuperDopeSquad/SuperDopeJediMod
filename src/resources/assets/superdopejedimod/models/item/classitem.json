@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "superdopejedimod:items/faction"
+        "layer0": "superdopejedimod:items/classitem"
     },
     "display": {
         "thirdperson": {

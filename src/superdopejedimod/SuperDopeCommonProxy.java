@@ -28,7 +28,7 @@ public class SuperDopeCommonProxy {
 	public void displayCreditGui(int stackSize) {}
 	
 	
-	public void displayFactionGui(EntityPlayer player) {}
+	public void displayClassGui(EntityPlayer player) {}
 }
 
 

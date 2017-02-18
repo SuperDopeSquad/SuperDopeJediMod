@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.faction;
+package superdopesquad.superdopejedimod.playerclass;
 
 
 import io.netty.buffer.ByteBuf;
@@ -8,21 +8,21 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 
-public class PacketPlayerSetFaction implements IMessage {
+public class PacketPlayerSetClass implements IMessage {
 
 
 	private int _playerId;
-	private int _factionId;
+	private int _classId;
 		  
 
 	// A default constructor is always required
-	public PacketPlayerSetFaction() {}
+	public PacketPlayerSetClass() {}
 
 	  
-	public PacketPlayerSetFaction(EntityPlayer player, int factionId) {
+	public PacketPlayerSetClass(EntityPlayer player, int classId) {
 	    
 			this._playerId = player.getEntityId();
-			this._factionId = factionId;
+			this._classId = classId;
 	}
 
 	
@@ -31,8 +31,8 @@ public class PacketPlayerSetFaction implements IMessage {
 	}
 	
 	
-	public int getFactionId() {
-		return this._factionId;
+	public int getClassId() {
+		return this._classId;
 	}
 	
 	
@@ -40,7 +40,7 @@ public class PacketPlayerSetFaction implements IMessage {
 	 public void fromBytes(ByteBuf buffer) {
 	 
 		 this._playerId = buffer.readInt();
-		 this._factionId = buffer.readInt(); 
+		 this._classId = buffer.readInt(); 
 	 }
 
 	 
@@ -48,6 +48,6 @@ public class PacketPlayerSetFaction implements IMessage {
 	 public void toBytes(ByteBuf buffer) {
 	
 		 buffer.writeInt(this._playerId);
-		 buffer.writeInt(this._factionId);
+		 buffer.writeInt(this._classId);
 	 }
 }

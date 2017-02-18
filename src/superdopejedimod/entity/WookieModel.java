@@ -19,8 +19,8 @@ public class WookieModel extends ModelBiped
 	public ModelRenderer rightLeg;
 	public ModelRenderer leftLeg;
 	
-	public ModelRenderer factionEmblem;
-	private static boolean _showFactionEmblem = false;
+	public ModelRenderer classEmblem;
+	private static boolean _showClassEmblem = false;
     
 	public static int textureWidth = 64;
 	public static int textureHeight = 64;
@@ -78,10 +78,10 @@ public class WookieModel extends ModelBiped
      	this.arms.setTextureOffset(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
     	this.arms.setTextureOffset(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
     	
-    	if (_showFactionEmblem) {
-    	 this.factionEmblem = (new ModelRenderer(this)).setTextureSize(width, height);
+    	if (_showClassEmblem) {
+    	 this.classEmblem = (new ModelRenderer(this)).setTextureSize(width, height);
          //this.factionEmblem.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
-         this.factionEmblem.setTextureOffset(16, 16).addBox(-4.0F, (-20.0F + yOffset), -3.0F, 2, 2, 2, scale);
+         this.classEmblem.setTextureOffset(16, 16).addBox(-4.0F, (-20.0F + yOffset), -3.0F, 2, 2, 2, scale);
     	}
     }
 
@@ -101,8 +101,8 @@ public class WookieModel extends ModelBiped
         this.leftLeg.render(realScale);
         this.arms.render(realScale);
         
-        if (_showFactionEmblem) {
-        this.factionEmblem.render(realScale);
+        if (_showClassEmblem) {
+        this.classEmblem.render(realScale);
         }
     }
 

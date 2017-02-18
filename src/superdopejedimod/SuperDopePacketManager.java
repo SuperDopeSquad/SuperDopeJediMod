@@ -4,8 +4,8 @@ package superdopesquad.superdopejedimod;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
-import superdopesquad.superdopejedimod.faction.PacketHandlerPlayerSetFaction;
-import superdopesquad.superdopejedimod.faction.PacketPlayerSetFaction;
+import superdopesquad.superdopejedimod.playerclass.PacketHandlerPlayerSetClass;
+import superdopesquad.superdopejedimod.playerclass.PacketPlayerSetClass;
 
 
 public class SuperDopePacketManager  {
@@ -16,7 +16,7 @@ public class SuperDopePacketManager  {
 	
 	public SuperDopePacketManager() {
 		
-		INSTANCE.registerMessage(PacketHandlerPlayerSetFaction.class, PacketPlayerSetFaction.class, _nextMessageId++, Side.CLIENT);
+		INSTANCE.registerMessage(PacketHandlerPlayerSetClass.class, PacketPlayerSetClass.class, _nextMessageId++, Side.CLIENT);
 	}
 	
 	

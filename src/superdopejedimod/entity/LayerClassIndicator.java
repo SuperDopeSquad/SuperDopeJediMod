@@ -17,20 +17,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 @SideOnly(Side.CLIENT)
-public class LayerFactionIndicator implements LayerRenderer<EntityLivingBase>
+public class LayerClassIndicator implements LayerRenderer<EntityLivingBase>
 {
     private final RenderLivingBase<?> renderer;
 
-    public LayerFactionIndicator(RenderLivingBase<?> rendererIn)
+    public LayerClassIndicator(RenderLivingBase<?> rendererIn)
     {
         this.renderer = rendererIn;
     }
 
     public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
     {
-    	
-    	//System.out.println("Inside LayerFactionIndictator:doRenderLayer");
-    	
+    	  	
         int i = 3; // entitylivingbaseIn.getArrowCountInEntity();
 
         if (i > 0)

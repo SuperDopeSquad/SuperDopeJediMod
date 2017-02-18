@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.faction;
+package superdopesquad.superdopejedimod.playerclass;
 
 
 import net.minecraft.block.material.Material;
@@ -20,10 +20,10 @@ import superdopesquad.superdopejedimod.BaseItem;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-public class FactionItem extends BaseItem {
+public class ClassItem extends BaseItem {
 
 	
-	public FactionItem(String unlocalizedName) {
+	public ClassItem(String unlocalizedName) {
 		
 		super(unlocalizedName);
 		
@@ -35,7 +35,7 @@ public class FactionItem extends BaseItem {
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 	
 		ItemStack itemStack = player.getHeldItem(hand);
-		SuperDopeJediMod.superDopeCommonProxy.displayFactionGui(player);
+		SuperDopeJediMod.superDopeCommonProxy.displayClassGui(player);
 
 		return super.onItemRightClick(world, player, hand);
 	}
@@ -47,6 +47,6 @@ public class FactionItem extends BaseItem {
 		ItemStack cobbleStack = new ItemStack(Blocks.COBBLESTONE);
 		ItemStack dirtStack = new ItemStack(Blocks.DIRT);
 		
-    	GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.faction), "xxx", "xyx", "xxx",'x', cobbleStack, 'y', dirtStack);		
+    	GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.classItem), "xxx", "xyx", "xxx",'x', cobbleStack, 'y', dirtStack);		
 	}	
 }

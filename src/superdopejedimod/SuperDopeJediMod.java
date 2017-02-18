@@ -1,7 +1,7 @@
 package superdopesquad.superdopejedimod;
 
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.util.EnumHelper;
@@ -19,8 +19,8 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.entity.EntityManager;
-import superdopesquad.superdopejedimod.faction.FactionItem;
-import superdopesquad.superdopejedimod.faction.FactionManager;
+import superdopesquad.superdopejedimod.playerclass.ClassItem;
+import superdopesquad.superdopejedimod.playerclass.ClassManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -111,7 +111,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
     public static JediMark jediMark = new JediMark("jediMark");
-    public static FactionItem faction = new FactionItem("faction");
+    public static ClassItem classItem = new ClassItem("classItem");
     public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
     public static StarBlock starBlock = new StarBlock("StarBlock");
         
@@ -176,8 +176,8 @@ public class SuperDopeJediMod //Start the class Declaration
     public static SaphireOre saphireOre = new SaphireOre("saphireOre");
     public static Saphire saphire = new Saphire("saphire");
     
-    // Factions.  Must be before EntityManager.
-    public static FactionManager factionManager = new FactionManager();
+    // Classes.  Must be before EntityManager.
+    public static ClassManager classManager = new ClassManager();
    
     // Entities.
     public static EntityManager entityManager = new EntityManager();
@@ -185,8 +185,8 @@ public class SuperDopeJediMod //Start the class Declaration
     // Commands.
     public static CommandManager commandManager = new CommandManager();
          
-    // MessageHandler.
-    public static SuperDopePacketManager packetHandler = new SuperDopePacketManager();
+    // Our packet manager; this is where we manage custom packets to keep the client and server in-sync.  
+    public static SuperDopePacketManager packetManager = new SuperDopePacketManager();
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -199,8 +199,8 @@ public class SuperDopeJediMod //Start the class Declaration
     		superDopeObject.registerObject();
     	}  
     	
-    	// Call the pre-init of FactionManager, which needs to do some registration work.
-    	this.factionManager.preInit();
+    	// Call the pre-init of ClassManager, which needs to do some registration work.
+    	this.classManager.preInit();
     	
     	// Let's register our eventhandler class.   
     	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());	   

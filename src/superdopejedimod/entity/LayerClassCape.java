@@ -18,19 +18,19 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.faction.FactionInfo;
-import superdopesquad.superdopejedimod.faction.FactionManager;
+import superdopesquad.superdopejedimod.playerclass.ClassInfo;
+import superdopesquad.superdopejedimod.playerclass.ClassManager;
 
 
 @SideOnly(Side.CLIENT)
-public class LayerFactionCape implements LayerRenderer<EntityLivingBase>
+public class LayerClassCape implements LayerRenderer<EntityLivingBase>
 {
 	
 	
     private final RenderPlayer playerRenderer;
 
     
-    public LayerFactionCape(RenderPlayer playerRendererIn)
+    public LayerClassCape(RenderPlayer playerRendererIn)
     {
         this.playerRenderer = playerRendererIn;
     }
@@ -48,10 +48,10 @@ public class LayerFactionCape implements LayerRenderer<EntityLivingBase>
     		 return;     
     	 }
                 
-         // figure out the faction and the corresponding cape.    
+         // figure out the class and the corresponding cape.    
     	 EntityPlayer player = (EntityPlayer)entitylivingbaseIn;      
-    	 FactionInfo factionInfo = SuperDopeJediMod.factionManager.getPlayerFaction(player);           
-    	 String resourceName = factionInfo.getCapeResource();
+    	 ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(player);           
+    	 String resourceName = classInfo.getCapeResource();
                 
          // if resourceName == null, that means FactionManager is telling us this faction doesn't get a cape.
          if (resourceName == null) {

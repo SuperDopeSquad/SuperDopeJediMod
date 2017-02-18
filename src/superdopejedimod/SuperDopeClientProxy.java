@@ -15,10 +15,10 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import superdopesquad.superdopejedimod.entity.LayerFactionCape;
-import superdopesquad.superdopejedimod.entity.LayerFactionIndicator;
+import superdopesquad.superdopejedimod.entity.LayerClassCape;
+import superdopesquad.superdopejedimod.entity.LayerClassIndicator;
 import superdopesquad.superdopejedimod.entity.SuperDopeEntity;
-import superdopesquad.superdopejedimod.faction.FactionGUI;
+import superdopesquad.superdopejedimod.playerclass.ClassGUI;
 
 
 public class SuperDopeClientProxy extends SuperDopeCommonProxy {
@@ -49,18 +49,18 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
         	superDopeObject.registerModel();
         }
         
-        // Should factions come with capes?  I think so!
-        // For now, also including the more experimental FactionIndictor.
+        // Should classess come with capes?  I think so!
+        // For now, also including the more experimental ClassIndictor.
         
         // This sets our additional layers on the "default" player model, also known as Steve.
         RenderPlayer renderPlayerDefault = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
-        //renderPlayerDefault.addLayer(new LayerFactionIndicator(renderPlayerDefault));
-        renderPlayerDefault.addLayer(new LayerFactionCape(renderPlayerDefault));
+        //renderPlayerDefault.addLayer(new LayerClassIndicator(renderPlayerDefault));
+        renderPlayerDefault.addLayer(new LayerClassCape(renderPlayerDefault));
         
         // This sets our additional layers on the "slim" player model, also known as Alex.
         RenderPlayer renderPlayerSlim = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
-        //renderPlayerSlim.addLayer(new LayerFactionIndicator(renderPlayerSlim));
-        renderPlayerSlim.addLayer(new LayerFactionCape(renderPlayerSlim));
+        //renderPlayerSlim.addLayer(new LayerClassIndicator(renderPlayerSlim));
+        renderPlayerSlim.addLayer(new LayerClassCape(renderPlayerSlim));
 	}
 
 	
@@ -78,9 +78,9 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
     
     
     @Override
-    public void displayFactionGui(EntityPlayer player) {
+    public void displayClassGui(EntityPlayer player) {
     	
-    	Minecraft.getMinecraft().displayGuiScreen(new FactionGUI(player));
+    	Minecraft.getMinecraft().displayGuiScreen(new ClassGUI(player));
     }
 }
 

@@ -25,23 +25,23 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-public class EntityFactionIndicator extends EntityArrow
+public class EntityClassIndicator extends EntityArrow
 {
-    private static final DataParameter<Integer> COLOR = EntityDataManager.<Integer>createKey(EntityFactionIndicator.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> COLOR = EntityDataManager.<Integer>createKey(EntityClassIndicator.class, DataSerializers.VARINT);
     private PotionType potion = PotionTypes.EMPTY;
     private final Set<PotionEffect> customPotionEffects = Sets.<PotionEffect>newHashSet();
 
-    public EntityFactionIndicator(World worldIn)
+    public EntityClassIndicator(World worldIn)
     {
         super(worldIn);
     }
 
-    public EntityFactionIndicator(World worldIn, double x, double y, double z)
+    public EntityClassIndicator(World worldIn, double x, double y, double z)
     {
         super(worldIn, x, y, z);
     }
 
-    public EntityFactionIndicator(World worldIn, EntityLivingBase shooter)
+    public EntityClassIndicator(World worldIn, EntityLivingBase shooter)
     {
         super(worldIn, shooter);
     }
