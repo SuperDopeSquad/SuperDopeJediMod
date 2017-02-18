@@ -14,11 +14,14 @@ import superdopesquad.superdopejedimod.playerclass.ClassInfo;
 public class EntityAIAttackMeleeClassAware extends EntityAIAttackMelee {
 
 	
+	private ClassInfo[] _classesToAttack;
 	
 	
+	public EntityAIAttackMeleeClassAware(EntityCreature creature, double speedIn, boolean useLongMemory, ClassInfo[] classsToAttack) {
 		
 		super(creature, speedIn, useLongMemory);	
 		
+		this._classesToAttack = classsToAttack;
 	}
 	
 	
@@ -40,11 +43,13 @@ public class EntityAIAttackMeleeClassAware extends EntityAIAttackMelee {
 			//System.out.println("DEBUG: Contemplating attacking " + attackTargetName + ", of faction " + factionName );
 			
 			// Error handling: if factionsToAttack was not initialized properly.
+			if (this._classesToAttack == null) {
 				//System.out.println("DEBUG: There is noone i like to attack");
 				return false;
 			}
 			
 			// Test to see if target's classInfo is in my list of things to attack.
+			boolean shouldAttack = Arrays.asList(this._classesToAttack).contains(classInfo);
 			//System.out.println("DEBUG: Attack? " + shouldAttack);
 			return shouldAttack;
 		}

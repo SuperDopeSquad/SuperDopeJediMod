@@ -2,6 +2,7 @@ package superdopesquad.superdopejedimod;
 
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import superdopesquad.superdopejedimod.playerclass.CommandClass;
+import superdopesquad.superdopejedimod.playerclass.CommandFaction;
 
 
 public class CommandManager {
