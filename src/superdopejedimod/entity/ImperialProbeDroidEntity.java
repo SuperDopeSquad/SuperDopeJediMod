@@ -58,7 +58,7 @@ public class ImperialProbeDroidEntity extends BaseEntityAnimal {
 		this.setupAI();
 		
 		// This sets the bounding box size, not the actual model that you see rendered.
-		//this.setSize(0.7F, 1.4F);
+		this.setSize(0.6F, 2.0F);
 		
 		// how much experience do you get it you kill it?
 		this.experienceValue = 1;
