@@ -20,10 +20,7 @@ public class DoubleLightSaber extends BaseMeleeWeapon {
 		
 		this.color = colorInput;
 		
-		this.setCreativeTab(CreativeTabs.tabCombat);
-		
-		
-		
+		this.setCreativeTab(CreativeTabs.COMBAT);
 	}
 
 public void registerRecipe() {
@@ -32,7 +29,7 @@ public void registerRecipe() {
 		
 			// Recipe for creating a redLightSaber.
 			ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
-    		ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
+    		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     		GameRegistry.addRecipe(new ItemStack(this), "x", "z", "x", 'x', redPowerCrystalStack, 'z', ironIngotStack);
 		}
 		
@@ -40,7 +37,7 @@ public void registerRecipe() {
 			
 			// Recipe for creating a blueLightSaber.
 			ItemStack bluePowerCrystalStack = new ItemStack(SuperDopeJediMod.bluePowerCrystal);
-    		ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
+    		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     		GameRegistry.addRecipe(new ItemStack(this), "x", "z", "x", 'x', bluePowerCrystalStack, 'z', ironIngotStack);
 		}
 		
@@ -48,7 +45,7 @@ public void registerRecipe() {
 			
 			// Recipe for creating a greenLightSaber.
 			ItemStack greenPowerCrystalStack = new ItemStack(SuperDopeJediMod.greenPowerCrystal);
-    		ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
+    		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     		GameRegistry.addRecipe(new ItemStack(this), "x", "z", "x", 'x', greenPowerCrystalStack, 'z', ironIngotStack);
 		}
 		
@@ -56,7 +53,7 @@ public void registerRecipe() {
 			
 			// Recipe for creating a purpleLightSaber.
 			ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
-    		ItemStack ironIngotStack = new ItemStack(Items.iron_ingot);
+    		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     		GameRegistry.addRecipe(new ItemStack(this), "x", "z", "x", 'x', purplePowerCrystalStack, 'z', ironIngotStack);
 		}
 	}

@@ -16,17 +16,12 @@ public class ControlPanel extends BaseBlock{
 	
 	public ControlPanel(String unlocalizedName) {
 		
-		super(Material.iron, unlocalizedName);
-		
+		super(Material.IRON, unlocalizedName);
 	}
 
 		
 	public Item getItemDropped(int metadata, Random random, int fortune) {
         
 		return Item.getItemFromBlock(SuperDopeJediMod.controlPanel);
-		
-	
-		
 	}
-	
 }

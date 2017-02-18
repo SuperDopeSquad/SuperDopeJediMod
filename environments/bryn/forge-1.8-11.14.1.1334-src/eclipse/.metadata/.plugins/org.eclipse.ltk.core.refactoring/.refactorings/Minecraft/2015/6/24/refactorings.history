@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename package &apos;superDopeJediMod.lang&apos; to &apos;assets.superdopejedimod.lang&apos;&#x0D;&#x0A;- Original project: &apos;Minecraft&apos;&#x0D;&#x0A;- Original element: &apos;Minecraft/src/main/resources/superDopeJediMod.lang&apos;&#x0D;&#x0A;- Renamed element: &apos;Minecraft/src/main/resources/assets.superdopejedimod.lang&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;superDopeJediMod.lang&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/resources&lt;superDopeJediMod.lang" name="assets.superdopejedimod.lang" qualified="false" references="true" stamp="1433709214428" textual="false" version="1.0"/>
-</session>

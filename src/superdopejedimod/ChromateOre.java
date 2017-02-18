@@ -16,9 +16,13 @@ public class ChromateOre extends BaseBlock{
 	
 	public ChromateOre(String unlocalizedName) {
 		
-		super(Material.iron, unlocalizedName);
+		super(Material.IRON, unlocalizedName);
 		
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setHardness(15.0F);
+		
+		this.setHarvestLevel("pickaxe", 2);
+		
+		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 	}
 
 	
@@ -37,9 +41,9 @@ public class ChromateOre extends BaseBlock{
 	
 public void generateSurface(World world, Random random, int i, int j) {
 		
-		int maxVeinSize = 4;
+		int maxVeinSize = 6;
 		int minY = 0;
-		int maxY = 16;
+		int maxY = 32;
 		int chancesPerChunk = 16; // A chunk is 16 blocks wide, 16 blocks long, and 256 blocks deep, which is 65,536 blocks total.
 		
 		SuperDopeJediMod.superDopeWorldGenerator.addOreSpawn(this, world, random, i, j, 16, 16, maxVeinSize, chancesPerChunk, minY, maxY); 

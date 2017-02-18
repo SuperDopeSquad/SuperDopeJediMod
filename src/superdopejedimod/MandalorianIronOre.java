@@ -2,7 +2,6 @@ package superdopesquad.superdopejedimod;
 
 
 import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -15,8 +14,12 @@ public class MandalorianIronOre extends BaseBlock {
 
 	
 	public MandalorianIronOre(String unlocalizedName) {
+
+		super(Material.IRON, unlocalizedName);
 		
-		super(Material.iron, unlocalizedName);
+		this.setHardness(10.0F);
+		
+		this.setHarvestLevel("pickaxe", 2);
 	}
 
 	
@@ -36,11 +39,3 @@ public class MandalorianIronOre extends BaseBlock {
 		SuperDopeJediMod.superDopeWorldGenerator.addOreSpawn(this, world, random, i, j, 16, 16, maxVeinSize, chancesPerChunk, minY, maxY); 
 	}
 }
-
-
-
-
-
-
-
-

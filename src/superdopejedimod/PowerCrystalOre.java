@@ -15,9 +15,10 @@ public class PowerCrystalOre extends BaseBlock {
 	
 	String color;
 	
+	
 	protected PowerCrystalOre(String unlocalizedName, String colorInput) {
 		
-		super(Material.rock, unlocalizedName);
+		super(Material.ROCK, unlocalizedName);
 		
 		this.color = colorInput;
 		
@@ -27,14 +28,14 @@ public class PowerCrystalOre extends BaseBlock {
 		
 		this.setLightLevel(0.9F);
 		
-		this.setStepSound(soundTypeMetal);
-		
+		//this.setStepSound(soundTypeMetal);
+		this.setSoundType(blockSoundType.METAL);
 	}
 	
 	
-	public Item getItemDropped(int metadata, Random random, int fortune) {
-        
-		Item obj;
+	private Item getCorrectCrystal(String color) {
+		
+		Item obj = null;
 		
 		if (this.color == "Red") {
 			obj = SuperDopeJediMod.redPowerCrystal;
@@ -47,34 +48,62 @@ public class PowerCrystalOre extends BaseBlock {
 		}
 		else if (this.color == "Purple") {
 			obj = SuperDopeJediMod.purplePowerCrystal;
-		}
+		} 
 		else {
 			obj = SuperDopeJediMod.greenPowerCrystal;
 		}
 		
-    	return obj;
-    	
-    	
-    }
-	
-public void registerRecipe() {
-		
-		// Smelting a PowerCrystalOre will create 1 PowerCrystal
-		GameRegistry.addSmelting(SuperDopeJediMod.redPowerCrystalOre, new ItemStack(SuperDopeJediMod.redPowerCrystal), 1.0F);
-		GameRegistry.addSmelting(SuperDopeJediMod.bluePowerCrystalOre, new ItemStack(SuperDopeJediMod.bluePowerCrystal), 1.0F);
-		GameRegistry.addSmelting(SuperDopeJediMod.greenPowerCrystalOre, new ItemStack(SuperDopeJediMod.greenPowerCrystal), 1.0F);
-		GameRegistry.addSmelting(SuperDopeJediMod.purplePowerCrystalOre, new ItemStack(SuperDopeJediMod.purplePowerCrystal), 1.0F);
+    	return obj;	
 	}
 	
 	
-public void generateSurface(World world, Random random, int i, int j) {
+	public Item getItemDropped(int metadata, Random random, int fortune) {
+        
+		return this.getCorrectCrystal(this.color);
+//		Item obj = null;
+//		
+//		if (this.color == "Red") {
+//			obj = SuperDopeJediMod.redPowerCrystal;
+//		}
+//		else if (this.color == "Green") {
+//			obj = SuperDopeJediMod.greenPowerCrystal;
+//		}
+//		else if (this.color == "Blue") {
+//			obj = SuperDopeJediMod.bluePowerCrystal;
+//		}
+//		else if (this.color == "Purple") {
+//			obj = SuperDopeJediMod.purplePowerCrystal;
+//		} 
+//		else {
+//			obj = SuperDopeJediMod.greenPowerCrystal;
+//		}
+//		
+//    	return obj;	
+    }
 	
-	int maxVeinSize = 3;
-	int minY = 0;
-	int maxY = 12;
-	int chancesPerChunk = 1; // A chunk is 16 blocks wide, 16 blocks long, and 256 blocks deep, which is 65,536 blocks total.
 	
-	SuperDopeJediMod.superDopeWorldGenerator.addOreSpawn(this, world, random, i, j, 16, 16, maxVeinSize, chancesPerChunk, minY, maxY); 
-}	
-
+	public void registerRecipe() {
+		
+		Item obj = this.getCorrectCrystal(this.color);
+		if (obj != null) {
+			GameRegistry.addSmelting(this, new ItemStack(obj), 1.0F);
+		}
+		
+		// Smelting a PowerCrystalOre will create 1 PowerCrystal
+		//GameRegistry.addSmelting(SuperDopeJediMod.redPowerCrystalOre, new ItemStack(SuperDopeJediMod.redPowerCrystal), 1.0F);
+		////GameRegistry.addSmelting(SuperDopeJediMod.bluePowerCrystalOre, new ItemStack(SuperDopeJediMod.bluePowerCrystal), 1.0F);
+		//GameRegistry.addSmelting(SuperDopeJediMod.greenPowerCrystalOre, new ItemStack(SuperDopeJediMod.greenPowerCrystal), 1.0F);
+		//GameRegistry.addSmelting(SuperDopeJediMod.purplePowerCrystalOre, new ItemStack(SuperDopeJediMod.purplePowerCrystal), 1.0F);
+	}
+	
+	
+	public void generateSurface(World world, Random random, int i, int j) {
+	
+		int maxVeinSize = 1;
+		int minY = 0;
+		int maxY = 12;
+		int chancesPerChunk = 5; // A chunk is 16 blocks wide, 16 blocks long, and 256 blocks deep, which is 65,536 blocks total.
+	
+		SuperDopeJediMod.superDopeWorldGenerator.addOreSpawn(this, world, random, i, j, 16, 16, maxVeinSize, chancesPerChunk, minY, maxY); 
+	}	
 }
