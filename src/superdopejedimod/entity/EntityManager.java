@@ -14,19 +14,25 @@ public class EntityManager {
     // for it that is server-safe.
     private static int _startEntityId = 300;
     
+    // MC: Snakes were our first example entity we used to learn how to make entities work.  They are not within the spirit
+    // of the Star Wars world here, so i should probably comment them out.  Future coders should think this through.
+    
     // Entities.
     public static SnakeEntity snake = new SnakeEntity(null);    
     public static TuskanRaiderEntity tuskanRaider = new TuskanRaiderEntity(null);
     public static JawaEntity jawa = new JawaEntity(null);
     public static WookieEntity wookie = new WookieEntity(null);
     public static ImperialProbeDroidEntity imperialProbeDroid = new ImperialProbeDroidEntity(null);
-    
+    public static RepublicProbeDroidEntity republicProbeDroid = new RepublicProbeDroidEntity(null);
+       
     // Special eggs that can be used in both creative and survival mode, different from spawn eggs.  More like chicken eggs.
     public static GenericEgg snakeEgg = new GenericEgg("snakeEgg", SnakeEntity.class);
     public static GenericEgg tuskanRaiderEgg = new GenericEgg("tuskanRaiderEgg", TuskanRaiderEntity.class);
     public static GenericEgg jawaEgg = new GenericEgg("jawaEgg", JawaEntity.class);
     public static GenericEgg wookieEgg = new GenericEgg("wookieEgg", WookieEntity.class);
     public static GenericEgg imperialProbeDroidEgg = new GenericEgg("imperialProbeDroidEgg", ImperialProbeDroidEntity.class);
+    public static GenericEgg republicProbeDroidEgg = new GenericEgg("republicProbeDroidEgg", RepublicProbeDroidEntity.class);
+      
     
     public EntityManager() {}
     
