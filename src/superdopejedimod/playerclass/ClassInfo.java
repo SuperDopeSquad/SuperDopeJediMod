@@ -51,6 +51,30 @@ public class ClassInfo {
 	}
 	
 	
+	public String getDescription() {
+		
+		String message = this._name;
+		
+		FactionInfo factionInfo = this.getFaction();
+		if (factionInfo != null) {
+			message += " - affiliated with " + factionInfo.getName();
+		}
+		
+		return message;
+	}
+	
+	
+	public String getFactionDescription() {
+		
+		FactionInfo factionInfo = this.getFaction();
+		if (factionInfo == null) {
+			return null;
+		}
+		
+		return "affiliated with " + factionInfo.getName() + ".";	
+	}
+	
+	
 	public String getShortName() {
 		
 		if (this._shortName == null) {

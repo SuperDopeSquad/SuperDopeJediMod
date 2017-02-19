@@ -169,7 +169,7 @@ public class ClassManager {
     	
     	FactionInfo factionInfo = classInfo.getFaction();
     	if (factionInfo != null) {
-    		message += " You are affiliated with " + factionInfo.getName() + ".";
+    		message += " You are " + classInfo.getFactionDescription(); 
     	}
     	
     	return message;
@@ -242,5 +242,14 @@ public class ClassManager {
 		}
 		
 		return this.setPlayerClassById(player, classId);
+	}
+	
+	
+	public void initializeCurrentPlayerClientInformation(EntityPlayer player) {
+		
+		// Send a message to the server asking for my class information.
+		// That message should tell me and every other active player what my class is.
+		
+
 	}
 }

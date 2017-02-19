@@ -2,6 +2,7 @@ package superdopesquad.superdopejedimod;
 
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderEntity;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
@@ -29,7 +30,9 @@ import superdopesquad.superdopejedimod.playerclass.ClassCapability;
 import superdopesquad.superdopejedimod.playerclass.ClassCapabilityInterface;
 import superdopesquad.superdopejedimod.playerclass.ClassCapabilityProvider;
 import superdopesquad.superdopejedimod.playerclass.ClassInfo;
+import superdopesquad.superdopejedimod.playerclass.PacketClientAskingServerAboutClass;
 import superdopesquad.superdopejedimod.playerclass.PacketPlayerSetClass;
+import superdopesquad.superdopejedimod.playerclass.PacketServerPokingClientAboutClass;
 
 
 public class SuperDopeEventHandler {
@@ -38,17 +41,23 @@ public class SuperDopeEventHandler {
 	@SubscribeEvent
 	public void onPlayerLogsIn(PlayerLoggedInEvent event) {
 
+		// We are server-side, so we have accurate information on-hand on class/faction info.
+		// So, let's have a welcome message display to the user.
 		EntityPlayer player = event.player;
 		ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(player);
-		//String className = classInfo.getName();
-		
-		//String message = "Welcome back.  You are a member of the " + className + " class.";
 		String message = "Welcome back. " + SuperDopeJediMod.classManager.getPlayerClassLongDescription(player);
 		player.addChatMessage(new TextComponentString(message));
 		
+		// Am i on the server?
+		
+		//System.out.println(arg0);
+		
 		// Let's tell the client side of every current player what my class is.
-		PacketPlayerSetClass packet = new PacketPlayerSetClass(player, classInfo.getId());
-		SuperDopeJediMod.packetManager.INSTANCE.sendToAll(packet);
+		//PacketPlayerSetClass packet = new PacketPlayerSetClass(player, classInfo.getId());
+		//SuperDopeJediMod.packetManager.INSTANCE.sendToAll(packet);
+		//PacketServerPokingClientAboutClass packet = new PacketServerPokingClientAboutClass();
+		//EntityPlayerMP playerMP = (EntityPlayerMP) player;
+		//SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, playerMP);
 	
 		// Let's tell the client side of this new player what the class of every other current player is.
 		//Entity entity = event.getEntity();
@@ -110,26 +119,54 @@ public class SuperDopeEventHandler {
 	@SubscribeEvent
 	public void onEntityJoined(EntityJoinWorldEvent event)
 	{
-//		Entity entity = event.getEntity();
-//		
-//		// If this is a player, tell them the class of all current players.
-//		if (entity instanceof EntityPlayer ) {
-//			
-//			EntityPlayer newPlayer = (EntityPlayer) entity;
-//			
+		Entity entity = event.getEntity();
+		EntityPlayerSP currentPlayer = Minecraft.getMinecraft().thePlayer;
+		
+		// We get a wave of events fired prior to 'thePlayer' being initialized.  I don't know why this
+		// occurs, but we should safely disregard these events, since there is no action we can take.
+		// We *will* get the event of ourselves logging in with 'thePlayer' initialized, which will
+		// make it through successfully so we can take proper action.
+		if (currentPlayer == null) {
+			//System.out.println("onEntityJoined: crap, currentPlayer is null!");
+			return;
+		}
+
+		// If this is a player, phone home and ask for accurate information on class/faction.
+		if (entity instanceof EntityPlayer ) {
+			
+			EntityPlayer newPlayer = (EntityPlayer) entity;
+			//System.out.println("Inside onEntityJoined: " + (event.getWorld().isRemote) + ", ");
+			
+			//System.out.println(newPlayer.getUniqueID().toString());
+			//System.out.println(currentPlayer.getUniqueID().toString());
+			
+			if (newPlayer.getUniqueID() == (currentPlayer.getUniqueID())) {
+				PacketClientAskingServerAboutClass packet = new PacketClientAskingServerAboutClass(currentPlayer);
+				//EntityPlayerMP playerMP = (EntityPlayerMP) player;
+				SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
+			}
+			
 //			for (EntityPlayer existingPlayer : event.getWorld().playerEntities) {
 //				
-//				ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(existingPlayer);
-//				//String className = classInfo.getName();
-//			 
-//				//String message = "Welcome back.  You are a member of the " + className + " class.";
-//				//player.addChatMessage(new TextComponentString(message));
+//				System.out.println(existingPlayer.getName());
 //				
-//				// Let's tell clients.
-//				PacketPlayerSetClass packet = new PacketPlayerSetClass(existingPlayer, classInfo.getId());
-//				SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, (EntityPlayerMP) newPlayer);
-//			}
-//		}
+//				if (existingPlayer.getEntityId() == currentPlayer.getEntityId()) {
+//					PacketClientAskingServerAboutClass packet = new PacketClientAskingServerAboutClass(currentPlayer);
+//					//EntityPlayerMP playerMP = (EntityPlayerMP) player;
+//					SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
+//				}
+				
+				//ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(existingPlayer);
+				//String className = classInfo.getName();
+			 
+				//String message = "Welcome back.  You are a member of the " + className + " class.";
+				//player.addChatMessage(new TextComponentString(message));
+				
+				// Let's tell clients.
+				//PacketPlayerSetClass packet = new PacketPlayerSetClass(existingPlayer, classInfo.getId());
+				//SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, (EntityPlayerMP) newPlayer);
+			//}
+		}
 		
 		//event.getWorld().playerEntities
 		

@@ -1,6 +1,8 @@
 package superdopesquad.superdopejedimod.playerclass;
 
 
+import java.util.UUID;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +13,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 public class PacketPlayerSetClass implements IMessage {
 
 
-	private int _playerId;
+	private UUID _playerId;
 	private int _classId;
 		  
 
@@ -21,12 +23,12 @@ public class PacketPlayerSetClass implements IMessage {
 	  
 	public PacketPlayerSetClass(EntityPlayer player, int classId) {
 	    
-			this._playerId = player.getEntityId();
+			this._playerId = player.getUniqueID();
 			this._classId = classId;
 	}
 
 	
-	public int getPlayerId() {
+	public UUID getPlayerId() {
 		return this._playerId;
 	}
 	
@@ -39,7 +41,11 @@ public class PacketPlayerSetClass implements IMessage {
 	 @Override
 	 public void fromBytes(ByteBuf buffer) {
 	 
-		 this._playerId = buffer.readInt();
+		 //UUID foo = new UUID();
+		 long mostsignificant  = buffer.readLong();
+		 long leastsignificant  = buffer.readLong();
+
+		 this._playerId = new UUID(mostsignificant, leastsignificant);
 		 this._classId = buffer.readInt(); 
 	 }
 
@@ -47,7 +53,8 @@ public class PacketPlayerSetClass implements IMessage {
 	 @Override
 	 public void toBytes(ByteBuf buffer) {
 	
-		 buffer.writeInt(this._playerId);
+		 buffer.writeLong(this._playerId.getMostSignificantBits());
+		 buffer.writeLong(this._playerId.getLeastSignificantBits());
 		 buffer.writeInt(this._classId);
 	 }
 }

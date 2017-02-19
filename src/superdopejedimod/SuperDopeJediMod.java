@@ -202,8 +202,8 @@ public class SuperDopeJediMod //Start the class Declaration
     	// Call the pre-init of ClassManager, which needs to do some registration work.
     	this.classManager.preInit();
     	
-    	// Let's register our eventhandler class.   
-    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());	   
+//    	// Let's register our eventhandler class.   
+//    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());	   
     }
      
      
@@ -235,6 +235,9 @@ public class SuperDopeJediMod //Start the class Declaration
     	
     	// Register our custom world generator, so our ore gets generated.
     	GameRegistry.registerWorldGenerator(SuperDopeJediMod.superDopeWorldGenerator, 0);
+    	
+    	// Let's register our eventhandler class.   
+    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());	   
     }
     
  

@@ -93,11 +93,11 @@ public class CommandClass extends BaseCommand
 	    	for (ClassInfo classInfo : classes) {
 	 	    	
 	    		if (classInfo.getId() != SuperDopeJediMod.classManager.UNAFFILIATED) {
-	    			String message = classInfo.getName();
-	    			FactionInfo factionInfo = classInfo.getFaction();
-	    			if (factionInfo != null) {
-	    				message += " - affiliated with " + factionInfo.getName();
-	    			}
+	    			String message = classInfo.getDescription();
+//	    			FactionInfo factionInfo = classInfo.getFaction();
+//	    			if (factionInfo != null) {
+//	    				message += " - affiliated with " + factionInfo.getName();
+//	    			}
 	    			sender.addChatMessage(new TextComponentString(message));
 	    		}
 	 	    }
@@ -113,8 +113,8 @@ public class CommandClass extends BaseCommand
 	    		
 	    		String message = playerMp.getName();
 	    		ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(playerMp);
-	    		if (classInfo != null && classInfo.getId() != SuperDopeJediMod.classManager.UNAFFILIATED) {
-	    			message += " - " + classInfo.getName();
+	    		if (classInfo != null && (classInfo.getId() != SuperDopeJediMod.classManager.UNAFFILIATED)) {
+	    			message += " - " + classInfo.getDescription();
 	    		}
 	    		sender.addChatMessage(new TextComponentString(message));
 	    	}
