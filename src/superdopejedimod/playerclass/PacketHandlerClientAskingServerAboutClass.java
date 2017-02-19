@@ -1,7 +1,6 @@
-
 package superdopesquad.superdopejedimod.playerclass;
 
-import net.minecraft.client.Minecraft;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -19,7 +18,6 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 public class PacketHandlerClientAskingServerAboutClass implements IMessageHandler<PacketClientAskingServerAboutClass, IMessage> {
-// Do note that the default constructor is required, but implicitly defined in this case
 
 	
 	@Override 
@@ -32,37 +30,26 @@ public class PacketHandlerClientAskingServerAboutClass implements IMessageHandle
 		
 		try {
 			
-			//System.out.println("DEBUG: RECEIVED PacketClientAskingServerAboutClass");
+			//System.out.println("RECEIVED PacketClientAskingServerAboutClass");
 
+			// Let's get a handle to who the current player is, and what class they are.
 			EntityPlayerMP entityPlayerMP = ctx.getServerHandler().playerEntity;
-			//System.out.println("Serverside: " + entityPlayerMP.getUniqueID());
-			
-			// Let's get a handle to the EntityPlayer's ClassInfo which is being requested.
-			//int playerId = message.getPlayerId();
-			WorldServer server = (WorldServer) ctx.getServerHandler().playerEntity.getServerWorld();
-			//System.out.println((server != null));
-			//System.out.println((playerId));
-			//Entity entity = server.getEntityByID(playerId);
-			//Entity entity = server.getEntityFromUuid(playerId);
-			//System.out.println((entity != null));
-			
-			//EntityPlayer player = (EntityPlayer) entity;
-			//System.out.println((player != null));
-			
 			ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(entityPlayerMP);
 			//System.out.println((classInfo != null));
 			
-			
 			// OK, let's respond to *all* clients and respond with the info that was requested.
 			PacketPlayerSetClass packet = new PacketPlayerSetClass(entityPlayerMP, classInfo.getId());
+			//System.out.println("Sending PacketPlayerSetClass about me to everyone.");
 			SuperDopeJediMod.packetManager.INSTANCE.sendToAll(packet);
 			
 			// Next, let's go through all current players and send the new player their info.
+			WorldServer server = (WorldServer) ctx.getServerHandler().playerEntity.getServerWorld();
 			for (EntityPlayer otherPlayer : server.playerEntities) {
 				
 				EntityPlayerMP otherPlayerMP = (EntityPlayerMP) otherPlayer;
 				ClassInfo classInfoOtherPlayer = SuperDopeJediMod.classManager.getPlayerClass(otherPlayer);
 				PacketPlayerSetClass packetAboutOtherPlayer = new PacketPlayerSetClass(otherPlayer, classInfoOtherPlayer.getId());
+				//System.out.println("Sending PacketPlayerSetClass request to everyone about them..");
 				SuperDopeJediMod.packetManager.INSTANCE.sendTo(packetAboutOtherPlayer, otherPlayerMP);
 			}
 			

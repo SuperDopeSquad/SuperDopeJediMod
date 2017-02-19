@@ -22,7 +22,7 @@ public class CommandClass extends BaseCommand
 { 
 	
 	static String commandName = "class";
-	static String commandUsage = "class[es] [set class-name] | [list]";
+	static String commandUsage = "class[es] [set class-name] | [list] | [clear] | [refresh]";
 	
 	
     public CommandClass() { 
@@ -44,7 +44,7 @@ public class CommandClass extends BaseCommand
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		
 		World world = sender.getEntityWorld(); 
-		EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
+		EntityPlayerMP player = (EntityPlayerMP) sender.getCommandSenderEntity();
 		    
 	    if (world.isRemote) { 
 	    	System.out.println("Not processing on Client side.  Aborting."); 
@@ -81,6 +81,20 @@ public class CommandClass extends BaseCommand
 	    	//String outputClassName = SuperDopeJediMod.classManager.getPlayerClassName(player);
 	    	//sender.addChatMessage(new TextComponentString("Congratulations! You are now a member of the " + outputClassName + " class.")); 
 	    	sender.addChatMessage(new TextComponentString("Congratulations! " + SuperDopeJediMod.classManager.getPlayerClassLongDescription(player))); 
+	    	
+	    	return;
+	    }
+	    
+	    
+	    else if (verbName.equalsIgnoreCase("refresh")) {
+	    	
+	    	// Let's start a conversation with the client about faction/classes, since we need to make
+			// sure all connected clients get refreshed on the current faction/class info of this user.
+			PacketServerPokingClientAboutClass packet = new PacketServerPokingClientAboutClass();
+			System.out.println("SENDING PacketServerPokingClientAboutClass");
+			SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, player);
+			
+	    	sender.addChatMessage(new TextComponentString("Class refresh request initiated.")); 
 	    	
 	    	return;
 	    }

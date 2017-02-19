@@ -2,7 +2,6 @@ package superdopesquad.superdopejedimod.playerclass;
 
 
 import java.util.UUID;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -41,7 +40,6 @@ public class PacketPlayerSetClass implements IMessage {
 	 @Override
 	 public void fromBytes(ByteBuf buffer) {
 	 
-		 //UUID foo = new UUID();
 		 long mostsignificant  = buffer.readLong();
 		 long leastsignificant  = buffer.readLong();
 
