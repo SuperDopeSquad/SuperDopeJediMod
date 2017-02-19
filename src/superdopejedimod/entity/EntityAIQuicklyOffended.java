@@ -1,7 +1,6 @@
 package superdopesquad.superdopejedimod.entity;
 
 import javax.annotation.Nullable;
-
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
+
 public class EntityAIQuicklyOffended extends EntityAITarget {
 	
 	/* Configurable properties. */

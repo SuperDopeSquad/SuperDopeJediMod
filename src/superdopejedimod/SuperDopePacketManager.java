@@ -7,9 +7,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.playerclass.PacketClientAskingServerAboutClass;
 import superdopesquad.superdopejedimod.playerclass.PacketHandlerClientAskingServerAboutClass;
 import superdopesquad.superdopejedimod.playerclass.PacketHandlerPlayerSetClass;
-import superdopesquad.superdopejedimod.playerclass.PacketHandlerServerPokingClientAboutClass;
+//import superdopesquad.superdopejedimod.playerclass.PacketHandlerServerPokingClientAboutClass;
 import superdopesquad.superdopejedimod.playerclass.PacketPlayerSetClass;
-import superdopesquad.superdopejedimod.playerclass.PacketServerPokingClientAboutClass;
+//import superdopesquad.superdopejedimod.playerclass.PacketServerPokingClientAboutClass;
 
 
 public class SuperDopePacketManager  {
@@ -22,7 +22,7 @@ public class SuperDopePacketManager  {
 		
 		INSTANCE.registerMessage(PacketHandlerPlayerSetClass.class, PacketPlayerSetClass.class, _nextMessageId++, Side.CLIENT);
 		INSTANCE.registerMessage(PacketHandlerClientAskingServerAboutClass.class, PacketClientAskingServerAboutClass.class, _nextMessageId++, Side.SERVER);
-		INSTANCE.registerMessage(PacketHandlerServerPokingClientAboutClass.class, PacketServerPokingClientAboutClass.class, _nextMessageId++, Side.CLIENT);
+		//INSTANCE.registerMessage(PacketHandlerServerPokingClientAboutClass.class, PacketServerPokingClientAboutClass.class, _nextMessageId++, Side.CLIENT);
 	}
 	
 	

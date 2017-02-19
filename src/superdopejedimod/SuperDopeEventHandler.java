@@ -2,14 +2,15 @@ package superdopesquad.superdopejedimod;
 
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderEntity;
-import net.minecraft.client.renderer.entity.RenderLivingBase;
-import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.entity.layers.LayerCape;
-import net.minecraft.client.renderer.entity.layers.LayerDeadmau5Head;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+//import net.minecraft.client.Minecraft;
+//import net.minecraft.client.entity.EntityPlayerSP;
+//import net.minecraft.client.renderer.entity.Render;
+//import net.minecraft.client.renderer.entity.RenderEntity;
+//import net.minecraft.client.renderer.entity.RenderLivingBase;
+//import net.minecraft.client.renderer.entity.RenderPlayer;
+//import net.minecraft.client.renderer.entity.layers.LayerCape;
+//import net.minecraft.client.renderer.entity.layers.LayerDeadmau5Head;
+//import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +26,8 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.entity.LayerClassIndicator;
 import superdopesquad.superdopejedimod.playerclass.ClassCapability;
 import superdopesquad.superdopejedimod.playerclass.ClassCapabilityInterface;
@@ -32,7 +35,7 @@ import superdopesquad.superdopejedimod.playerclass.ClassCapabilityProvider;
 import superdopesquad.superdopejedimod.playerclass.ClassInfo;
 import superdopesquad.superdopejedimod.playerclass.PacketClientAskingServerAboutClass;
 import superdopesquad.superdopejedimod.playerclass.PacketPlayerSetClass;
-import superdopesquad.superdopejedimod.playerclass.PacketServerPokingClientAboutClass;
+//import superdopesquad.superdopejedimod.playerclass.PacketServerPokingClientAboutClass;
 
 
 public class SuperDopeEventHandler {
@@ -115,12 +118,12 @@ public class SuperDopeEventHandler {
 		}
 	}
 
-	
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onEntityJoined(EntityJoinWorldEvent event)
 	{
 		Entity entity = event.getEntity();
-		EntityPlayerSP currentPlayer = Minecraft.getMinecraft().thePlayer;
+		EntityPlayer currentPlayer = Minecraft.getMinecraft().thePlayer;
 		
 		// We get a wave of events fired prior to 'thePlayer' being initialized.  I don't know why this
 		// occurs, but we should safely disregard these events, since there is no action we can take.
