@@ -19,7 +19,7 @@ public class BrynsAwesomeSword extends BaseMeleeWeapon{
 	}
 	
 
-public void registerRecipe() {
+	public void registerRecipe() {
 	
 			// Recipe for creating a BrynsAwesomeSword.
 			ItemStack rubyStack = new ItemStack(SuperDopeJediMod.ruby);
