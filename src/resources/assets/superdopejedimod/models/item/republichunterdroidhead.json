@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "superdopejedimod:items/republicprobedroidegg"
+        "layer0": "superdopejedimod:items/republichunterdroidhead"
     },
     "display": {
         "thirdperson": {
