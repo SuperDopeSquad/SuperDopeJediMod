@@ -4,6 +4,9 @@ package superdopesquad.superdopejedimod;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.layers.LayerCape;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,6 +15,10 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import superdopesquad.superdopejedimod.entity.LayerClassCape;
+import superdopesquad.superdopejedimod.entity.LayerClassIndicator;
+import superdopesquad.superdopejedimod.entity.SuperDopeEntity;
+import superdopesquad.superdopejedimod.playerclass.ClassGUI;
 
 
 public class SuperDopeClientProxy extends SuperDopeCommonProxy {
@@ -21,6 +28,14 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
         
 		super.preInit(e);
+		
+		// Iterate through all our custom objects, and see if we have any entity models to render.
+    	// We only want to call this method for instances of SuperDopeEntity.
+        for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
+        	if(superDopeObject instanceof SuperDopeEntity) {
+        		((SuperDopeEntity)superDopeObject).registerEntityRender();
+            }
+        }
     }
 
 	
@@ -33,6 +48,19 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
         for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
         	superDopeObject.registerModel();
         }
+        
+        // Should classess come with capes?  I think so!
+        // For now, also including the more experimental ClassIndictor.
+        
+        // This sets our additional layers on the "default" player model, also known as Steve.
+        RenderPlayer renderPlayerDefault = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
+        //renderPlayerDefault.addLayer(new LayerClassIndicator(renderPlayerDefault));
+        renderPlayerDefault.addLayer(new LayerClassCape(renderPlayerDefault));
+        
+        // This sets our additional layers on the "slim" player model, also known as Alex.
+        RenderPlayer renderPlayerSlim = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
+        //renderPlayerSlim.addLayer(new LayerClassIndicator(renderPlayerSlim));
+        renderPlayerSlim.addLayer(new LayerClassCape(renderPlayerSlim));
 	}
 
 	
@@ -43,10 +71,17 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
     
     
     @Override
-	public void credit_displayCreditGui(int stackSize) {
+	public void displayCreditGui(int stackSize) {
     	
     	Minecraft.getMinecraft().displayGuiScreen(new CreditGUI(stackSize));
 	}
+    
+    
+    @Override
+    public void displayClassGui(EntityPlayer player) {
+    	
+    	Minecraft.getMinecraft().displayGuiScreen(new ClassGUI(player));
+    }
 }
 
 

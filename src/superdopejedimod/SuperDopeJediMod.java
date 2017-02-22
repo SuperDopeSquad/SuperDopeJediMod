@@ -1,11 +1,15 @@
 package superdopesquad.superdopejedimod;
 
+
 import java.util.ArrayList;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -14,19 +18,12 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-//import superdopesquad.superdopejedimod.entity.EntityExample;
-//import superdopesquad.superdopejedimod.entity.EntityTuskanRaider;
+import superdopesquad.superdopejedimod.entity.EntityManager;
+import superdopesquad.superdopejedimod.playerclass.ClassItem;
+import superdopesquad.superdopejedimod.playerclass.ClassManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-//import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.entity.EntityList;
-//import net.minecraft.entity.EntitySpawnPlacementRegistry;
-//import net.minecraft.entity.EnumCreatureType;
-//import net.minecraft.entity.passive.EntityChicken;
-//import net.minecraft.entity.passive.EntityVillager;
-//import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -53,7 +50,7 @@ public class SuperDopeJediMod //Start the class Declaration
     @SidedProxy(clientSide="superdopesquad.superdopejedimod.SuperDopeClientProxy", serverSide="superdopesquad.superdopejedimod.SuperDopeServerProxy")
     public static SuperDopeCommonProxy superDopeCommonProxy;
     
-    // This is the collection of custom objects we will maintain.
+    // This is our collection of custom objects we will maintain.
     public static ArrayList<SuperDopeObject> customObjects = new ArrayList<SuperDopeObject>();
     
     // this is the world generator that adds our custom objects to newly spawned world chunks.
@@ -63,12 +60,14 @@ public class SuperDopeJediMod //Start the class Declaration
     // The order of those #'s at the end: harvestLevel, durability, miningSpeed, damageVsEntities, enchantability
     // http://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-7/custom-tools-swords/
 	public static ToolMaterial gaffiStickMaterial = EnumHelper.addToolMaterial("GaffiStickMaterial", 3, 1000, 15.0F, 4.0F, 30);
-	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 2000, 15.0F, 9.0F, 30);
-	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 2500, 15.0F, 12.0F, 30);
-	public static ToolMaterial brynsAwesomeSwordMaterial = EnumHelper.addToolMaterial("BrynsAwesomeSwordMaterial", 3, 2000, 15.0F, 8.0F, 30);
+	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 2000, 0.0F, 9.0F, 0);
+	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 2500, 0.0F, 12.0F, 0);
+	public static ToolMaterial brynsAwesomeSwordMaterial = EnumHelper.addToolMaterial("BrynsAwesomeSwordMaterial", 3, 2000, 0.0F, 8.0F, 30);
 	public static ToolMaterial mandalorianIronToolMaterial = EnumHelper.addToolMaterial("MandalorianIronToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
 	public static ToolMaterial quadaniumSteelToolMaterial = EnumHelper.addToolMaterial("QuadaniumSteelToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
-
+	public static ToolMaterial blasterMaterial = EnumHelper.addToolMaterial("BlasterMaterial", 3, 1000, 0.0F, 7.0F, 30);
+	public static ToolMaterial lightSaberKnifeMaterial = EnumHelper.addToolMaterial("LightSaberKnifeMaterial", 3, 1000, 0.0F, 6.0F, 0);
+	
 	// Custom ArmorMaterial's.  
 	// EnumHelper.addArmorMaterial("NAME", textureName, durability, reductionAmounts, enchantability, soundOnEquip, toughness)
 	//		Durability: 5 - leather; 7 - gold; 15 - chain and iron; 33 - diamond
@@ -77,6 +76,8 @@ public class SuperDopeJediMod //Start the class Declaration
 	public static ArmorMaterial sithCapeMaterial = EnumHelper.addArmorMaterial("SithCapeMaterial", "", 100, new int[]{}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
 	public static ArmorMaterial mandalorianIronArmorMaterial = EnumHelper.addArmorMaterial("MandalorianIronArmorMaterial", "superdopejedimod:mandalorianironarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
 	public static ArmorMaterial quadaniumSteelArmorMaterial = EnumHelper.addArmorMaterial("QuadaniumSteelArmorMaterial", "superdopejedimod:quadaniumsteelarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
+	public static ArmorMaterial sithLordArmorMaterial = EnumHelper.addArmorMaterial("SithLordArmorMaterial", "superdopejedimod:sithlordarmormaterial", 30, new int[]{3,8,6,3}, 10, null, (float) 0.0);
+	public static ArmorMaterial jediArmorMaterial = EnumHelper.addArmorMaterial("JediArmorMaterial", "superdopejedimod:jediarmormaterial", 30, new int[]{3,8,6,3}, 10, null, (float) 0.0);
 	
     // instance variable.
     @Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
@@ -111,10 +112,10 @@ public class SuperDopeJediMod //Start the class Declaration
     public static Credit credit = new Credit("credit"); 
     public static SithMark sithMark = new SithMark("sithMark");
     public static JediMark jediMark = new JediMark("jediMark");
-    public static Faction faction = new Faction("faction");
+    public static ClassItem classItem = new ClassItem("classItem");
     public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
     public static StarBlock starBlock = new StarBlock("StarBlock");
-    
+        
     // Ranged weapons.
     public static Blaster blaster = new Blaster("blaster");
     public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
@@ -134,10 +135,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static ControlPanel controlPanel = new ControlPanel("controlPanel");
     public static CompressedMetalMesh compressedMetalMesh = new CompressedMetalMesh("compressedMetalMesh");
     public static BitsOfCompressedMetalMesh bitsOfCompressedMetalMesh = new BitsOfCompressedMetalMesh("bitsOfCompressedMetalMesh");
-    
-    //Capes
-    public static Item SithCape;
-    
+     
     // Mandalorian Iron, used to create weapons and armor.
     public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
@@ -158,22 +156,38 @@ public class SuperDopeJediMod //Start the class Declaration
     public static QuadaniumSteelArmor quadaniumSteelBoots = new QuadaniumSteelArmor(EntityEquipmentSlot.FEET, "quadaniumSteelBoots");
     public static QuadaniumSteelSword quadaniumSteelSword = new QuadaniumSteelSword("quadaniumSteelSword");
     
+    //Sith Armor
+    public static SithLordArmor sithLordHelmet = new SithLordArmor(EntityEquipmentSlot.HEAD, "sithLordHelmet");
+    public static SithLordArmor sithLordChestplate = new SithLordArmor(EntityEquipmentSlot.CHEST, "sithLordChestplate");
+    public static SithLordArmor sithLordLeggings = new SithLordArmor(EntityEquipmentSlot.LEGS, "sithLordLeggings");
+    public static SithLordArmor sithLordBoots = new SithLordArmor(EntityEquipmentSlot.FEET, "sithLordBoots");
+    
+    //Jedi Armor
+    public static JediArmor jediHelmet = new JediArmor(EntityEquipmentSlot.HEAD, "jediHelmet");
+    public static JediArmor jediChestplate = new JediArmor(EntityEquipmentSlot.CHEST, "jediChestplate");
+    public static JediArmor jediLeggings = new JediArmor(EntityEquipmentSlot.LEGS, "jediLeggings");
+    public static JediArmor jediBoots = new JediArmor(EntityEquipmentSlot.FEET, "jediBoots");
+    
     // Peoples Custom Items
     public static BrynsAwesomeSword brynsAwesomeSword = new BrynsAwesomeSword("brynsAwesomeSword");
     
     //Items for Custom Items
     public static Ruby ruby = new Ruby("ruby");
     public static RubyOre rubyOre = new RubyOre("rubyOre");
+    public static SaphireOre saphireOre = new SaphireOre("saphireOre");
+    public static Saphire saphire = new Saphire("saphire");
     
+    // Classes.  Must be before EntityManager.
+    public static ClassManager classManager = new ClassManager();
+   
     // Entities.
-    // MC-TODO: the first parameter should be a World instance (Minecraft.getMinecraft.theWorld), but i'm concerned
-    // that this will crash on the server side.  Putting in null doesn't seem to have a harmful effect.  I need to
-    // figure out later the downside of not having it, and if i need it, figure out the best way to get a handle
-    // for it that is server-safe.
-    static int startEntityId = 300;
-    //public static EntityTuskanRaider entityTuskanRaider = new EntityTuskanRaider(null);
-    //public static EntityExample entityExample; 
+    public static EntityManager entityManager = new EntityManager();
  
+    // Commands.
+    public static CommandManager commandManager = new CommandManager();
+         
+    // Our packet manager; this is where we manage custom packets to keep the client and server in-sync.  
+    public static SuperDopePacketManager packetManager = new SuperDopePacketManager();
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -186,48 +200,11 @@ public class SuperDopeJediMod //Start the class Declaration
     		superDopeObject.registerObject();
     	}  
     	
-//    	// mc-temp
-//    	RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
-//    	World world = Minecraft.getMinecraft().theWorld;
-//    	entityExample = new EntityExample(world);
-//    	// mc-temp
-//    	
-//    	// mc-temp
-//		ResourceLocation resourceLocation = new ResourceLocation("entityExample");
-//	  	//EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.name, SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-//	  	EntityRegistry.registerModEntity(resourceLocation, EntityExample.class, "entityExample", SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-//		RenderingRegistry.registerEntityRenderingHandler(EntityExample.class, new RenderVillager(renderManager));
-//    	// mc-temp
+    	// Call the pre-init of ClassManager, which needs to do some registration work.
+    	this.classManager.preInit();
     	
-    	// mc-temp
-	  	//EntityRegistry.registerModEntity(EntityTuskanRaider.class, "entityTuskanRaider2", SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-		//RenderingRegistry.registerEntityRenderingHandler(EntityTuskanRaider.class, entityTuskanRaider2);
-    	// mc-temp
-		
-    	// mc-temp
-	  	//EntityRegistry.registerModEntity(EntityVillager.class, "entityVillager2", SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-		//RenderingRegistry.registerEntityRenderingHandler(EntityVillager.class, entityVillager2);
-		//RenderingRegistry.registerEntityRenderingHandler(EntityVillager.class, new RenderVillager(renderManager));
-    	// mc-temp
-    	
-    	// MC-TODO: 
-      	//EntityRegistry.registerModEntity(EntityExample.class, "entityExample", SuperDopeJediMod.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-      	
-      	//RenderingRegistry.registerEntityRenderingHandler(EntityExample.class, this.entityExample);
-    	
-    	//RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
-    	//RenderChicken renderChicken = new RenderChicken(renderManager, new ModelChicken(), 0);
-      	//RenderingRegistry.registerEntityRenderingHandler(EntityExample.class, renderChicken);
-        
-      	//Render
-;
-//    	RenderingRegistry.registerEntityRenderingHandler(EntityExample.class, new RenderChicken(new RenderManager(), ));
-//    	
-//    	  public RenderChicken(RenderManager renderManagerIn, ModelBase modelBaseIn, float shadowSizeIn)
-//    	    {
-//    	        super(renderManagerIn, modelBaseIn, shadowSizeIn);
-//    	    }
-
+//    	// Let's register our eventhandler class.   
+//    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());	   
     }
      
      
@@ -235,6 +212,13 @@ public class SuperDopeJediMod //Start the class Declaration
     public void load(FMLInitializationEvent event) {
     	
     }
+    
+    
+    @EventHandler
+	public void serverLoad(FMLServerStartingEvent event) {
+		
+    	commandManager.serverLoad(event);
+	}
       
     
     @EventHandler
@@ -252,6 +236,9 @@ public class SuperDopeJediMod //Start the class Declaration
     	
     	// Register our custom world generator, so our ore gets generated.
     	GameRegistry.registerWorldGenerator(SuperDopeJediMod.superDopeWorldGenerator, 0);
+    	
+    	// Let's register our eventhandler class.   
+    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());	   
     }
     
  
@@ -262,9 +249,4 @@ public class SuperDopeJediMod //Start the class Declaration
     	superDopeCommonProxy.postInit(event);
     }
     
-    
-    public static int getUniqueEntityId() {
-    	
-    	return startEntityId++;
-    }
 }
