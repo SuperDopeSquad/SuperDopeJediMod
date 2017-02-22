@@ -48,7 +48,6 @@ public class EntityManager {
     public static GenericEgg jawaEgg = new GenericEgg("jawaEgg", JawaEntity.class);
     public static GenericEgg wookieEgg = new GenericEgg("wookieEgg", WookieEntity.class);
     public static GenericEgg imperialProbeDroidEgg = new GenericEgg("imperialProbeDroidEgg", ImperialProbeDroidEntity.class);
-    //public static GenericEgg republicUtilityDroidEgg = new GenericEgg("republicUtilityDroidEgg", RepublicBaseDroidEntity.class);
       
     
     public EntityManager() {}
@@ -66,9 +65,7 @@ public class EntityManager {
     	// query for the constructor (we get back the one that matches the parameters we request). 
     	Class parameterTypes[] = new Class[1];
     	parameterTypes[0] = World.class;
-    	//parameterTypes[1] = ModelBase.class;
-    	//parameterTypes[2] = float.class;
-    	
+
     	// OK, let's query for that render constructor.
     	Constructor constructor = EntityManager.getConstructor(classToMake, parameterTypes);
     	if (constructor == null) {
@@ -78,8 +75,6 @@ public class EntityManager {
     	// OK, now we create an array that stores the actual parameter values for the render constructor.
     	Object parameterValues[] = new Object[1];
     	parameterValues[0] = world;
-    	//parameterValues[1] = modelInstance;
-    	//parameterValues[2] = this._shadowSize;
     	
     	// Last step, let's call the constructor with the array of parameter values.
     	Object instance = EntityManager.newInstance(constructor, parameterValues);
@@ -95,10 +90,15 @@ public class EntityManager {
     	EntityLivingBase entity = (EntityLivingBase) instance; 
     	
     	// Set the proper location of the entity.
-    	double x = blockPos.getX() + 0.5;
-		double y = blockPos.getY();
-		double z = blockPos.getZ() + 0.5;
-		entity.setLocationAndAngles(x, y, z, 0.0F, 0.0F);
+    	if (blockPos != null) {
+    		double x = blockPos.getX() + 0.5;
+    		double y = blockPos.getY();
+    		double z = blockPos.getZ() + 0.5;
+    		entity.setLocationAndAngles(x, y, z, 0.0F, 0.0F);
+    	}
+    	else {
+    		System.out.println("ERROR: handed null blockPos in EntityManager:createEntity(..)");
+    	}
           
 		// Actually spawn the entity into the world.
 		world.spawnEntityInWorld(entity);
@@ -108,7 +108,7 @@ public class EntityManager {
     }
  
  
-    private static Constructor getConstructor(Class classToMake, Class parameterTypes[]) {
+    public static Constructor getConstructor(Class classToMake, Class parameterTypes[]) {
     	
     	// Let's query for that constructor.
     	Constructor constructor = null;
@@ -126,7 +126,7 @@ public class EntityManager {
     }
     
     
-    private static Object newInstance(Constructor constructor, Object parameterValues[]) {
+    public static Object newInstance(Constructor constructor, Object parameterValues[]) {
     
     	// Let's call the constructor with the array of parameter values.
     	Object newObject = null;
