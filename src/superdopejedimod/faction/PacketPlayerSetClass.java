@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.playerclass;
+package superdopesquad.superdopejedimod.faction;
 
 
 import java.util.UUID;

@@ -18,8 +18,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.playerclass.ClassInfo;
-import superdopesquad.superdopejedimod.playerclass.ClassManager;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
+import superdopesquad.superdopejedimod.faction.ClassManager;
 
 
 @SideOnly(Side.CLIENT)

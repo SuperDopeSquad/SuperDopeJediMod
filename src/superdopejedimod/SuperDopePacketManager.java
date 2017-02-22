@@ -4,12 +4,12 @@ package superdopesquad.superdopejedimod;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
-import superdopesquad.superdopejedimod.playerclass.PacketClientAskingServerAboutClass;
-import superdopesquad.superdopejedimod.playerclass.PacketHandlerClientAskingServerAboutClass;
-import superdopesquad.superdopejedimod.playerclass.PacketHandlerPlayerSetClass;
-import superdopesquad.superdopejedimod.playerclass.PacketHandlerServerPokingClientAboutClass;
-import superdopesquad.superdopejedimod.playerclass.PacketPlayerSetClass;
-import superdopesquad.superdopejedimod.playerclass.PacketServerPokingClientAboutClass;
+import superdopesquad.superdopejedimod.faction.PacketClientAskingServerAboutClass;
+import superdopesquad.superdopejedimod.faction.PacketHandlerClientAskingServerAboutClass;
+import superdopesquad.superdopejedimod.faction.PacketHandlerPlayerSetClass;
+import superdopesquad.superdopejedimod.faction.PacketHandlerServerPokingClientAboutClass;
+import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
+import superdopesquad.superdopejedimod.faction.PacketServerPokingClientAboutClass;
 
 
 public class SuperDopePacketManager  {

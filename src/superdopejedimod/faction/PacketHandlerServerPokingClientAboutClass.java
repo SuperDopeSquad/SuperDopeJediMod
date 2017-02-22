@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.playerclass;
+package superdopesquad.superdopejedimod.faction;
 
 
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.playerclass;
+package superdopesquad.superdopejedimod.faction;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;

@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.playerclass;
+package superdopesquad.superdopejedimod.faction;
 
 
 public interface ClassCapabilityInterface {

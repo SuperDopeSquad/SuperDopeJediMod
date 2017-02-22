@@ -21,13 +21,13 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.entity.LayerClassIndicator;
-import superdopesquad.superdopejedimod.playerclass.ClassCapability;
-import superdopesquad.superdopejedimod.playerclass.ClassCapabilityInterface;
-import superdopesquad.superdopejedimod.playerclass.ClassCapabilityProvider;
-import superdopesquad.superdopejedimod.playerclass.ClassInfo;
-import superdopesquad.superdopejedimod.playerclass.PacketClientAskingServerAboutClass;
-import superdopesquad.superdopejedimod.playerclass.PacketPlayerSetClass;
-import superdopesquad.superdopejedimod.playerclass.PacketServerPokingClientAboutClass;
+import superdopesquad.superdopejedimod.faction.ClassCapability;
+import superdopesquad.superdopejedimod.faction.ClassCapabilityInterface;
+import superdopesquad.superdopejedimod.faction.ClassCapabilityProvider;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
+import superdopesquad.superdopejedimod.faction.PacketClientAskingServerAboutClass;
+import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
+import superdopesquad.superdopejedimod.faction.PacketServerPokingClientAboutClass;
 
 
 public class SuperDopeEventHandler {
