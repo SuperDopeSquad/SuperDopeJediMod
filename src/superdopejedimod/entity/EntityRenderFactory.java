@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 public class EntityRenderFactory implements IRenderFactory<EntityLiving> {
@@ -31,16 +32,16 @@ public class EntityRenderFactory implements IRenderFactory<EntityLiving> {
 	
     @Override
     public Render<? super EntityLiving> createRenderFor(RenderManager manager) {
-    	
+    	   	
     	// Let's create a new model object.  This is simple, since it takes no parameters.
     	// First, grab the constructor.
-    	Constructor modelConstructor = this.getConstructor(this._modelClass, new Class[0]);
+    	Constructor modelConstructor = EntityManager.getConstructor(this._modelClass, new Class[0]);
     	if (modelConstructor == null) {
     		return null;
     	}
 		
 		// Now that we have the model constructor, call it to make a model object.
-		Object modelInstance = this.newInstance(modelConstructor, new Object[0]);
+		Object modelInstance = EntityManager.newInstance(modelConstructor, new Object[0]);
 		if (modelInstance == null) {
 			return null;
 		}
@@ -54,7 +55,7 @@ public class EntityRenderFactory implements IRenderFactory<EntityLiving> {
     	parameterTypes[2] = float.class;
     	
     	// OK, let's query for that render constructor.
-    	Constructor renderConstructor = this.getConstructor(this._renderClass, parameterTypes);
+    	Constructor renderConstructor = EntityManager.getConstructor(this._renderClass, parameterTypes);
     	if (renderConstructor == null) {
     		return null;
     	}
@@ -66,56 +67,12 @@ public class EntityRenderFactory implements IRenderFactory<EntityLiving> {
     	parameterValues[2] = this._shadowSize;
     	
     	// Last step, let's call the constructor with the array of parameter values.
-    	Object renderInstance = this.newInstance(renderConstructor, parameterValues);
+    	Object renderInstance = EntityManager.newInstance(renderConstructor, parameterValues);
     	if (renderInstance == null) {
     		return null;
     	}
 		
 		// OK, let's return what we got.
     	return (Render<? super EntityLiving>) renderInstance;
-    }
-    
-    
-    private Constructor getConstructor(Class classToMake, Class parameterTypes[]) {
-    	
-    	// Let's query for that constructor.
-    	Constructor constructor = null;
-		try {
-			constructor = classToMake.getConstructor(parameterTypes);
-		} catch (NoSuchMethodException e) {
-			System.out.println("EntityRenderFactory: sent in a bogus renderClass: " + classToMake.getName());
-			return null;
-		} catch (SecurityException e) {
-			System.out.println("EntityRenderFactory: weird security issue.  Bailing.");
-			return null;
-		}
-		
-		return constructor;
-    }
-    
-    
-    private Object newInstance(Constructor constructor, Object parameterValues[]) {
-    
-    	// Let's call the constructor with the array of parameter values.
-    	Object newObject = null;
-    	
-		try {
-			newObject = constructor.newInstance(parameterValues);
-		}
-		catch (InstantiationException e1) {
-				System.out.println("EntityRenderFactory: weird instantiation issue.  Bailing.");
-				return null;
-		} catch (IllegalAccessException e1) {
-				System.out.println("EntityRenderFactory: weird access issue.  Bailing.");
-				return null;
-		} catch (IllegalArgumentException e1) {
-				System.out.println("EntityRenderFactory: weird argument issue.  Bailing.");
-				return null;
-		} catch (InvocationTargetException e1) {
-				System.out.println("EntityRenderFactory: weird target issue.  Bailing.");
-				return null;
-		}
-    	
-		return newObject;
     }
 }
