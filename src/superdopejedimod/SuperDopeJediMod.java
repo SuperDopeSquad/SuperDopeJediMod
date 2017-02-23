@@ -19,10 +19,15 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.entity.EntityManager;
+<<<<<<< HEAD
 import superdopesquad.superdopejedimod.playerclass.ClassItem;
 import superdopesquad.superdopejedimod.playerclass.ClassManager;
 import superdopesquad.superdopejedimod.weapon.Blaster;
 import superdopesquad.superdopejedimod.weapon.BlasterCarbine;
+=======
+import superdopesquad.superdopejedimod.faction.ClassItem;
+import superdopesquad.superdopejedimod.faction.ClassManager;
+>>>>>>> 871f6785c33b7a1867749167ccb08b1aec852ce0
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
