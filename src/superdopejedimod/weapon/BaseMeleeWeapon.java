@@ -1,9 +1,9 @@
 package superdopesquad.superdopejedimod.weapon;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -17,13 +17,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-<<<<<<< HEAD:src/superdopejedimod/weapon/BaseMeleeWeapon.java
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
-=======
 import superdopesquad.superdopejedimod.faction.ClassAwareInterface;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
->>>>>>> 871f6785c33b7a1867749167ccb08b1aec852ce0:src/superdopejedimod/BaseMeleeWeapon.java
 
 
 public abstract class BaseMeleeWeapon extends ItemSword implements SuperDopeObject, ClassAwareInterface {
