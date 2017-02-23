@@ -5,8 +5,16 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
@@ -36,6 +44,8 @@ public class ClassManager {
 	
 	private HashMap _factionMap = new HashMap();
 	private HashMap _classMap = new HashMap();
+	ArrayList<ClassInfo> _forceWieldingClasses = new ArrayList<ClassInfo>();
+	ArrayList<ClassInfo> _nonForceWieldingClasses = new ArrayList<ClassInfo>();
 	
 	
 	public ClassManager() {
@@ -47,12 +57,25 @@ public class ClassManager {
 		this._factionMap.put(FACTION_EMPIRE, factionInfoEmpire);
 				
 		// Define our classes.
-		this._classMap.put(UNAFFILIATED, new ClassInfo(UNAFFILIATED, UNAFFILIATED_NAME, Color.blue));
-		this._classMap.put(JEDI, new ClassInfo(JEDI, JEDI_NAME, Color.blue, true, factionInfoRepublic));
-		this._classMap.put(SITH, new ClassInfo(SITH, SITH_NAME, Color.red, true, factionInfoEmpire));
-		this._classMap.put(SMUGGLER, new ClassInfo(SMUGGLER, SMUGGLER_NAME, Color.green, true, factionInfoRepublic));
-		this._classMap.put(BOUNTYHUNTER, new ClassInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, true, factionInfoEmpire, BOUNTYHUNTER_SHORTNAME));
-		this._classMap.put(TEAMJUDE, new ClassInfo(TEAMJUDE, TEAMJUDE_NAME, Color.pink, true, null, TEAMJUDE_SHORTNAME));
+		ClassInfo classInfoUnaffiliated = new ClassInfo(UNAFFILIATED, UNAFFILIATED_NAME, Color.white);
+		ClassInfo classInfoJedi = new ClassInfo(JEDI, JEDI_NAME, Color.blue, true, factionInfoRepublic);
+		ClassInfo classInfoSith = new ClassInfo(SITH, SITH_NAME, Color.red, true, factionInfoEmpire);
+		ClassInfo classInfoSmuggler = new ClassInfo(SMUGGLER, SMUGGLER_NAME, Color.green, true, factionInfoRepublic);
+		ClassInfo classInfoBountyHunter = new ClassInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, true, factionInfoEmpire, BOUNTYHUNTER_SHORTNAME);
+		ClassInfo classInfoTeamJude = new ClassInfo(TEAMJUDE, TEAMJUDE_NAME, Color.pink, true, null, TEAMJUDE_SHORTNAME);
+		
+		this._classMap.put(UNAFFILIATED, classInfoUnaffiliated);
+		this._classMap.put(JEDI, classInfoJedi);
+		this._classMap.put(SITH, classInfoSith);
+		this._classMap.put(SMUGGLER, classInfoSmuggler);
+		this._classMap.put(BOUNTYHUNTER, classInfoBountyHunter);
+		this._classMap.put(TEAMJUDE, classInfoTeamJude);
+		
+		// Stash the list of force wielding classes for each access later.
+		this._forceWieldingClasses.add(classInfoJedi);
+		this._forceWieldingClasses.add(classInfoSith);
+		this._nonForceWieldingClasses.add(classInfoSmuggler);
+		this._nonForceWieldingClasses.add(classInfoBountyHunter);
 	}
 	
 	
@@ -60,6 +83,95 @@ public class ClassManager {
 		
 		// Register the 'class' capability.
 		CapabilityManager.INSTANCE.register(ClassCapabilityInterface.class, new ClassCapabilityStorage(), ClassCapability.class);	
+	}
+	
+	
+	public boolean canPlayerUse(EntityPlayer player, ClassAwareInterface object) {
+		
+		ClassInfo classInfo = this.getPlayerClass(player);
+		
+		//System.out.println(classInfo.toString() + ", " + (object.IsUseFriendlyOnly()) + ", " + object.GetFriendlyClasses().toString() + ", " + object.IsUseUnfriendlyBanned() + ", " + object.GetUnfriendlyClasses());
+			
+		// is this object set to be only used by friendly classes, and is this object not in that friendly list?
+		if (object.IsUseFriendlyOnly() && (!(object.GetFriendlyClasses().contains(classInfo)))) {
+			//System.out.println("failed due to lock down on IsUseFriendly and failed being included in GetFriendlyClasses.");
+			return false;
+		}
+			
+		// is this object set to be banned by unfriendly classes, and is this object in that unfriendly list?
+		if (object.IsUseUnfriendlyBanned() && (object.GetUnfriendlyClasses().contains(classInfo))) {
+			//System.out.println("failed due to lock down on IsUseUnFriendlyBanned and failed being included in GetUnFriendlyClasses.");
+			return false;
+		}
+				
+		// Otherwise, we all good here.
+		return true;
+	}
+	
+	
+	public ArrayList<ClassInfo> getForceWieldingClasses() {
+		
+		return this._forceWieldingClasses;
+	}
+	
+	
+	public ArrayList<ClassInfo> getNonForceWieldingClasses() {
+		
+		return this._nonForceWieldingClasses;
+	}
+	
+	
+    public void onUpdateHandlerClassAware(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
+	    		
+		// Bail if we are on the client.  This event is fired on both sides, just need to react appropriately on server.
+		if (world.isRemote) {
+			return;
+		}
+		
+		// We only want to do tests if the player is holding it in their hand.
+		if (!(isSelected)) {
+			return;
+		}
+		
+		// We only care about testing objects that are class aware.
+		if (!(stack.getItem() instanceof ClassAwareInterface)) {
+			return;
+		}
+		
+		// We only care if the entity is a player.
+		if (!(entity instanceof EntityPlayer)) {
+			return;
+		}
+		
+		// Grab a more specific handle to the two objects we need: the item and the player.
+		ClassAwareInterface itemToTest = (ClassAwareInterface) stack.getItem();
+		EntityPlayer player = (EntityPlayer) entity;
+		
+		// OK, time for the actual check.
+		boolean canUse = this.canPlayerUse(player, itemToTest);
+		if (!canUse) {
+			//System.out.println("DEBUG: Can't use this! " + itemToTest.toString() + ", " + entity.toString() + ", " + (itemSlot) + ", " + (isSelected));
+			player.dropItem(true);
+	 		player.addChatMessage(new TextComponentString("Due to your class, you can't use this item.  Dropping it!")); 
+		}
+	}
+	
+	
+	public boolean IsPlayerForceWielding(EntityPlayer player) {
+		
+		ArrayList<ClassInfo> classes = this.getForceWieldingClasses();
+		ClassInfo classInfo = this.getPlayerClass(player);
+		
+		return (classes.contains(classInfo));
+	}
+	
+	
+	public boolean IsPlayerNonForceWielding(EntityPlayer player) {
+		
+		ArrayList<ClassInfo> classes = this.getNonForceWieldingClasses();
+		ClassInfo classInfo = this.getPlayerClass(player);
+		
+		return (classes.contains(classInfo));
 	}
 	
 	
@@ -242,14 +354,5 @@ public class ClassManager {
 		}
 		
 		return this.setPlayerClassById(player, classId);
-	}
-	
-	
-	public void initializeCurrentPlayerClientInformation(EntityPlayer player) {
-		
-		// Send a message to the server asking for my class information.
-		// That message should tell me and every other active player what my class is.
-		
-
 	}
 }
