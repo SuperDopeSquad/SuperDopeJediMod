@@ -8,7 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.player.EntityPlayer;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.playerclass.ClassInfo;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
 
 
 public class EntityAIAttackMeleeClassAware extends EntityAIAttackMelee {
