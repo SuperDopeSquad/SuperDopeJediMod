@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod;
+package superdopesquad.superdopejedimod.weapon;
 
 import java.util.Random;
 
@@ -13,6 +13,8 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.SuperDopeObject;
 
 
 public abstract class BaseMeleeWeapon extends ItemSword implements SuperDopeObject {

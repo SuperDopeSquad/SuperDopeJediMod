@@ -4,6 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import superdopesquad.superdopejedimod.weapon.BaseRangedWeapon;
 
 
 public class BossBlaster extends BaseRangedWeapon {
