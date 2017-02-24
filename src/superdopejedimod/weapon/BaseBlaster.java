@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod;
+package superdopesquad.superdopejedimod.weapon;
 
 
 import java.util.ArrayList;
@@ -19,6 +19,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.SuperDopeObject;
 import superdopesquad.superdopejedimod.faction.*;
 
 

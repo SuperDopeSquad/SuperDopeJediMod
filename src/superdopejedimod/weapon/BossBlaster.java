@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod;
+package superdopesquad.superdopejedimod.weapon;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
