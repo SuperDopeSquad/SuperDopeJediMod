@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.entity.LayerClassCape;
 import superdopesquad.superdopejedimod.entity.LayerClassIndicator;
 import superdopesquad.superdopejedimod.entity.SuperDopeEntity;
-import superdopesquad.superdopejedimod.playerclass.ClassGUI;
+import superdopesquad.superdopejedimod.faction.ClassGUI;
 
 
 public class SuperDopeClientProxy extends SuperDopeCommonProxy {

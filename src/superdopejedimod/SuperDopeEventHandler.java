@@ -2,15 +2,6 @@ package superdopesquad.superdopejedimod;
 
 
 import net.minecraft.client.Minecraft;
-//import net.minecraft.client.Minecraft;
-//import net.minecraft.client.entity.EntityPlayerSP;
-//import net.minecraft.client.renderer.entity.Render;
-//import net.minecraft.client.renderer.entity.RenderEntity;
-//import net.minecraft.client.renderer.entity.RenderLivingBase;
-//import net.minecraft.client.renderer.entity.RenderPlayer;
-//import net.minecraft.client.renderer.entity.layers.LayerCape;
-//import net.minecraft.client.renderer.entity.layers.LayerDeadmau5Head;
-//import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,18 +15,19 @@ import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.entity.LayerClassIndicator;
-import superdopesquad.superdopejedimod.playerclass.ClassCapability;
-import superdopesquad.superdopejedimod.playerclass.ClassCapabilityInterface;
-import superdopesquad.superdopejedimod.playerclass.ClassCapabilityProvider;
-import superdopesquad.superdopejedimod.playerclass.ClassInfo;
-import superdopesquad.superdopejedimod.playerclass.PacketClientAskingServerAboutClass;
-import superdopesquad.superdopejedimod.playerclass.PacketPlayerSetClass;
-//import superdopesquad.superdopejedimod.playerclass.PacketServerPokingClientAboutClass;
+import superdopesquad.superdopejedimod.faction.ClassCapability;
+import superdopesquad.superdopejedimod.faction.ClassCapabilityInterface;
+import superdopesquad.superdopejedimod.faction.ClassCapabilityProvider;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
+import superdopesquad.superdopejedimod.faction.PacketClientAskingServerAboutClass;
+import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
+import superdopesquad.superdopejedimod.faction.PacketServerPokingClientAboutClass;
 
 
 public class SuperDopeEventHandler {
@@ -46,45 +38,16 @@ public class SuperDopeEventHandler {
 
 		// We are server-side, so we have accurate information on-hand on class/faction info.
 		// So, let's have a welcome message display to the user.
-		EntityPlayer player = event.player;
+		EntityPlayerMP player = (EntityPlayerMP) event.player;
 		ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(player);
 		String message = "Welcome back. " + SuperDopeJediMod.classManager.getPlayerClassLongDescription(player);
 		player.addChatMessage(new TextComponentString(message));
 		
-		// Am i on the server?
-		
-		//System.out.println(arg0);
-		
-		// Let's tell the client side of every current player what my class is.
-		//PacketPlayerSetClass packet = new PacketPlayerSetClass(player, classInfo.getId());
-		//SuperDopeJediMod.packetManager.INSTANCE.sendToAll(packet);
-		//PacketServerPokingClientAboutClass packet = new PacketServerPokingClientAboutClass();
-		//EntityPlayerMP playerMP = (EntityPlayerMP) player;
-		//SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, playerMP);
-	
-		// Let's tell the client side of this new player what the class of every other current player is.
-		//Entity entity = event.getEntity();
-		
-		
-		// If this is a player, tell them the class of all current players.
-		//if (entity instanceof EntityPlayer ) {
-			
-			//EntityPlayer newPlayer = (EntityPlayer) entity;
-		//Minecraft.getMinecraft()
-			
-//			for (EntityPlayer existingPlayer : event.g.playerEntities) {
-//				
-//				ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(existingPlayer);
-//				//String className = classInfo.getName();
-//			 
-//				//String message = "Welcome back.  You are a member of the " + className + " class.";
-//				//player.addChatMessage(new TextComponentString(message));
-//				
-//				// Let's tell clients.
-//				PacketPlayerSetClass packet = new PacketPlayerSetClass(existingPlayer, classInfo.getId());
-//				SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, (EntityPlayerMP) newPlayer);
-//			}
-		//}
+//		// Let's start a conversation with the client about faction/classes, since we need to make
+//		// sure all connected clients get refreshed on the current faction/class info of this user.
+//		PacketServerPokingClientAboutClass packet = new PacketServerPokingClientAboutClass();
+//		System.out.println("SENDING PacketServerPokingClientAboutClass");
+//		SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, player);
 	}
 	
 
@@ -118,6 +81,7 @@ public class SuperDopeEventHandler {
 		}
 	}
 
+	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onEntityJoined(EntityJoinWorldEvent event)
@@ -139,68 +103,49 @@ public class SuperDopeEventHandler {
 			
 			EntityPlayer newPlayer = (EntityPlayer) entity;
 			//System.out.println("Inside onEntityJoined: " + (event.getWorld().isRemote) + ", ");
-			
-			//System.out.println(newPlayer.getUniqueID().toString());
-			//System.out.println(currentPlayer.getUniqueID().toString());
-			
+		
 			if (newPlayer.getUniqueID() == (currentPlayer.getUniqueID())) {
-				PacketClientAskingServerAboutClass packet = new PacketClientAskingServerAboutClass(currentPlayer);
-				//EntityPlayerMP playerMP = (EntityPlayerMP) player;
+				PacketClientAskingServerAboutClass packet = new PacketClientAskingServerAboutClass();
 				SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
 			}
-			
-//			for (EntityPlayer existingPlayer : event.getWorld().playerEntities) {
-//				
-//				System.out.println(existingPlayer.getName());
-//				
-//				if (existingPlayer.getEntityId() == currentPlayer.getEntityId()) {
-//					PacketClientAskingServerAboutClass packet = new PacketClientAskingServerAboutClass(currentPlayer);
-//					//EntityPlayerMP playerMP = (EntityPlayerMP) player;
-//					SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
-//				}
-				
-				//ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(existingPlayer);
-				//String className = classInfo.getName();
-			 
-				//String message = "Welcome back.  You are a member of the " + className + " class.";
-				//player.addChatMessage(new TextComponentString(message));
-				
-				// Let's tell clients.
-				//PacketPlayerSetClass packet = new PacketPlayerSetClass(existingPlayer, classInfo.getId());
-				//SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, (EntityPlayerMP) newPlayer);
-			//}
 		}
 		
-		//event.getWorld().playerEntities
 		
-//		Entity entityIn = event.getEntity();
-//		Class entityClass = entityIn.getClass();
-//		Render<? extends Entity> render = Minecraft.getMinecraft().getRenderManager().entityRenderMap.get(entityClass);
-//				
-//		// Debug info.
-//		//String info;
-//		//if (render == null) {
-//		//	info = "Render: NULL; " + entityIn.getName();
-//		//}
-//		//else {
-//		//	info = "Render: " + render.toString() + ", Entity: " + entityIn.getName();;
-//		//}
-//		//System.out.println("DEBUG: onEntityJoined: " + info);
+		
+		
+		
 //		
-//		// Try to add the LayerFactionIndicator if entityRender points to this being a creature.
-//		if (false) {
-//		if (render != null && render instanceof RenderLivingBase) {
-//			
-//			//System.out.println("DEBUG: onEntityJoined: about to add layer to " + info);
-//			LayerRenderer layerRenderer = new LayerFactionIndicator((RenderLivingBase)render);
-//			
-//			try {
-//				((RenderLivingBase)render).addLayer(layerRenderer);
-//			}
-//			catch (Exception e) {
-//				System.out.println("DEBUG: onEntityJoined: failed to add LayerFactionIndicator on " + entityIn.getName() + ": " + e.getMessage());
-//			}
-//		}
-//		}
+//		
+////		Entity entityIn = event.getEntity();
+////		Class entityClass = entityIn.getClass();
+////		Render<? extends Entity> render = Minecraft.getMinecraft().getRenderManager().entityRenderMap.get(entityClass);
+////				
+////		// Debug info.
+////		//String info;
+////		//if (render == null) {
+////		//	info = "Render: NULL; " + entityIn.getName();
+////		//}
+////		//else {
+////		//	info = "Render: " + render.toString() + ", Entity: " + entityIn.getName();;
+////		//}
+////		//System.out.println("DEBUG: onEntityJoined: " + info);
+////		
+////		// Try to add the LayerFactionIndicator if entityRender points to this being a creature.
+////		if (false) {
+////		if (render != null && render instanceof RenderLivingBase) {
+////			
+////			//System.out.println("DEBUG: onEntityJoined: about to add layer to " + info);
+////			LayerRenderer layerRenderer = new LayerFactionIndicator((RenderLivingBase)render);
+////			
+////			try {
+////				((RenderLivingBase)render).addLayer(layerRenderer);
+////			}
+////			catch (Exception e) {
+////				System.out.println("DEBUG: onEntityJoined: failed to add LayerFactionIndicator on " + entityIn.getName() + ": " + e.getMessage());
+////			}
+////		}
+////		}
+//	}
+// }
 	}
 }
