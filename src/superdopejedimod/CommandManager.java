@@ -1,8 +1,8 @@
 package superdopesquad.superdopejedimod;
 
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import superdopesquad.superdopejedimod.playerclass.CommandClass;
-import superdopesquad.superdopejedimod.playerclass.CommandFaction;
+import superdopesquad.superdopejedimod.faction.CommandClass;
+import superdopesquad.superdopejedimod.faction.CommandFaction;
 
 
 public class CommandManager {
