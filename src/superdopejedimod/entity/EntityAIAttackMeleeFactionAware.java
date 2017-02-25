@@ -2,26 +2,26 @@ package superdopesquad.superdopejedimod.entity;
 
 
 import java.util.Arrays;
-
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.player.EntityPlayer;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
 
 
 public class EntityAIAttackMeleeFactionAware extends EntityAIAttackMelee {
 
 	
-	private FactionInfo[] _factionsToAttack;
+	private FactionInfo _factionToAttack;
 	
 	
-	public EntityAIAttackMeleeFactionAware(EntityCreature creature, double speedIn, boolean useLongMemory, FactionInfo[] factionsToAttack) {
+	public EntityAIAttackMeleeFactionAware(EntityCreature creature, double speedIn, boolean useLongMemory, FactionInfo factionToAttack) {
 		
 		super(creature, speedIn, useLongMemory);	
 		
-		this._factionsToAttack = factionsToAttack;
+		this._factionToAttack = factionToAttack;
 	}
 	
 	
@@ -35,26 +35,14 @@ public class EntityAIAttackMeleeFactionAware extends EntityAIAttackMelee {
 				
 		if (entity instanceof EntityPlayer) {
 			
-			FactionInfo factionInfo = SuperDopeJediMod.factionManager.getPlayerFaction((EntityPlayer)entity);
-			
-			// Debug info.
-			String attackTargetName = entity.getName();
-			String factionName = factionInfo.getName();
-			//System.out.println("DEBUG: Contemplating attacking " + attackTargetName + ", of faction " + factionName );
-			
 			// Error handling: if factionsToAttack was not initialized properly.
-			if (this._factionsToAttack == null) {
-				//System.out.println("DEBUG: There is noone i like to attack");
+			if (this._factionToAttack == null) {
 				return false;
 			}
-		
-			//for (FactionInfo fi : this._factionsToAttack) {
-			//	System.out.println("DEBUG: People I like to attack: " + fi.getName() );
-			//}
 			
 			// Test to see if target's factionInfo is in my list of things to attack.
-			boolean shouldAttack = Arrays.asList(this._factionsToAttack).contains(factionInfo);
-			//System.out.println("DEBUG: Attack? " + shouldAttack);
+			EntityPlayer player = (EntityPlayer) entity;
+			boolean shouldAttack = SuperDopeJediMod.classManager.isPlayerInFaction(player, this._factionToAttack);
 			return shouldAttack;
 		}
 			

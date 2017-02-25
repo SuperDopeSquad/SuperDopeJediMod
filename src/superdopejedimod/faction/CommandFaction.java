@@ -20,7 +20,7 @@ public class CommandFaction extends BaseCommand
 { 
 	
 	static String commandName = "faction";
-	static String commandUsage = "faction [set faction-name]";
+	static String commandUsage = "faction[s] [list]";
 	
 	
     public CommandFaction() { 
@@ -33,7 +33,7 @@ public class CommandFaction extends BaseCommand
 	public List<String> getCommandAliases() {
 		
     	ArrayList aliases = new ArrayList();
-    	aliases.add("fac");
+    	aliases.add("factions");
 		return aliases;
 	}
   
@@ -50,48 +50,126 @@ public class CommandFaction extends BaseCommand
 	    } 
 	    
 	    // Debug info.
-	    String playerName = sender.getName();
-    	System.out.println(playerName);
+	    //String playerName = sender.getName();
+    	//System.out.println(playerName);
 	        
 	    // If there are no arguments, spit out the faction of the current user.
 	    if (args.length == 0) { 
 	    	
-	    	String factionName = SuperDopeJediMod.factionManager.getPlayerFactionName(player);
-	    	
-	    	sender.addChatMessage(new TextComponentString("You are a member of the " + factionName + " faction.")); 
-	    	return; 
-	    }
-	    
-	    // We only support zero arguments, or 2 arguments.
-	    if (args.length == 1 || args.length > 2) {
-	    	sender.addChatMessage(new TextComponentString("Invalid number of arguments.")); 
+	    	this.spitOutFactionList(sender);
 	    	return;
+//	    	String className = SuperDopeJediMod.classManager.getPlayerClassName(player);
+//	    	
+//	    	sender.addChatMessage(new TextComponentString("You are a member of the " + className + " class.")); 
+//	    	return; 
 	    }
 	    
-	    // OK, we have 2 arguments.
+	    // What is the first verb?  Is it 'clear'?
 	    String verbName = args[0];
-	    String inputFactionName = args[1];
-	    System.out.println("Verb name: -->" + verbName + "<--");
-	    System.out.println("Faction name: -->" + inputFactionName + "<--");
+	    
+//	    if (verbName.equalsIgnoreCase("clear")) {
+//	    	
+//	    	// Let's clear the class.
+//	    	ClassInfo classInfoUnaffiliated = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.UNAFFILIATED);
+//	    	boolean classSetSuccessfully = SuperDopeJediMod.classManager.setPlayerClassById(player, classInfoUnaffiliated.getId());
+//	    	if (!classSetSuccessfully) {
+//	    		sender.addChatMessage(new TextComponentString("Failed to clear your class.")); 
+//	    		return;
+//	    	}
+//	    	
+//	    	// Let's pipe into the chat window..
+//	    	//String outputClassName = SuperDopeJediMod.classManager.getPlayerClassName(player);
+//	    	//sender.addChatMessage(new TextComponentString("Congratulations! You are now a member of the " + outputClassName + " class.")); 
+//	    	sender.addChatMessage(new TextComponentString("Congratulations! " + SuperDopeJediMod.classManager.getPlayerClassLongDescription(player))); 
+//	    	
+//	    	return;
+//	    }
+	    
+	    
+	    if (verbName.equalsIgnoreCase("list")) {
 	    	
-	    if (verbName.equalsIgnoreCase("set")) {
-	    		
-	    	// First let's set the faction, then, let's refetch it.
-	    	boolean factionSetSuccessfully = SuperDopeJediMod.factionManager.setPlayerFactionByName(player, inputFactionName);
-	    	if (!factionSetSuccessfully) {
-	    		sender.addChatMessage(new TextComponentString("Failed to set your faction.")); 
-	    		return;
-	    	}
-	    	
-	    	String outputFactionName = SuperDopeJediMod.factionManager.getPlayerFactionName(player);
-	    	sender.addChatMessage(new TextComponentString("Congratulations! You are now a member of the " + outputFactionName + " faction.")); 
+	    	this.spitOutFactionList(sender);
 	    	return;
 	    }
+//	    	ClassInfo[] classes = SuperDopeJediMod.classManager.getClasses();
+//	 	    
+//	    	for (ClassInfo classInfo : classes) {
+//	 	    	
+//	 	    	String message = classInfo.getName();
+//		    	FactionInfo factionInfo = classInfo.getFaction();
+//		    	if (factionInfo != null) {
+//		    		message += " - affiliated with " + factionInfo.getName();
+//		    	}
+//		    	sender.addChatMessage(new TextComponentString(message));
+//	 	    }
+//	    	
+//	 	    return;
+//	    }
+	    
+//	    // For other commands, we only support zero arguments, or 2 arguments.
+//	    if (args.length == 1 || args.length > 2) {
+//	    	sender.addChatMessage(new TextComponentString("Invalid number of arguments.")); 
+//	    	return;
+//	    }
+//	    
+//	    // OK, we have 2 arguments.
+//	    //String verbName = args[0];
+//	    String inputClassName = args[1];
+//	  
+//	    	
+//	    if (verbName.equalsIgnoreCase("set")) {
+//	    		
+//	    	// First let's set the faction, then, let's refetch it.
+//	    	boolean classSetSuccessfully = SuperDopeJediMod.classManager.setPlayerClassByName(player, inputClassName);
+//	    	if (!classSetSuccessfully) {
+//	    		sender.addChatMessage(new TextComponentString("Failed to set your class.")); 
+//	    		return;
+//	    	}
+//	    	
+//	    	//String outputClassName = SuperDopeJediMod.classManager.getPlayerClassName(player);
+//	    	//sender.addChatMessage(new TextComponentString("Congratulations! You are now a member of the " + outputClassName + " class.")); 
+//	    	sender.addChatMessage(new TextComponentString("Congratulations! " + SuperDopeJediMod.classManager.getPlayerClassLongDescription(player))); 
+//
+//	    	return;
+//	    }
 	    	
 	    else {
 	    	
 	    	sender.addChatMessage(new TextComponentString("Invalid argument: don't understand '" + verbName + "'")); 
 		    return;
 	    }
+	}
+	
+	
+	private void spitOutFactionList(ICommandSender sender) {
+		
+		ArrayList<FactionInfo> factions = SuperDopeJediMod.classManager.getFactions();
+ 	    
+    	for (FactionInfo factionInfo : factions) {
+ 	    	
+ 	    	String message = factionInfo.getName();
+	    	
+ 	    	ArrayList<ClassInfo> classes = factionInfo.getClasses();
+	    	if (classes.size() > 0) {
+	    		message += " - classes are ";
+	    		
+	    		boolean thisIsFirstOne = true;
+	    		for (ClassInfo classInfo : classes) {
+	    			if (!thisIsFirstOne) {
+	    				message += ", ";
+	    			}
+	    			else {
+	    				thisIsFirstOne = false;
+	    			}
+	    			
+	    			message += classInfo.getName();
+	    		}
+	    	}
+	    	
+	    	
+	    	sender.addChatMessage(new TextComponentString(message));
+ 	    }
+    	
+ 	    return;
 	}
 }

@@ -6,6 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import superdopesquad.superdopejedimod.weapon.BaseMeleeWeapon;
 
 public class BrynsAwesomeSword extends BaseMeleeWeapon{
 
@@ -19,7 +20,7 @@ public class BrynsAwesomeSword extends BaseMeleeWeapon{
 	}
 	
 
-public void registerRecipe() {
+	public void registerRecipe() {
 	
 			// Recipe for creating a BrynsAwesomeSword.
 			ItemStack rubyStack = new ItemStack(SuperDopeJediMod.ruby);
