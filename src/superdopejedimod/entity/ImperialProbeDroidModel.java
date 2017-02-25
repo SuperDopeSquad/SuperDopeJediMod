@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import superdopesquad.superdopejedimod.faction.ClassManager;
 
 
 @SideOnly(Side.CLIENT)

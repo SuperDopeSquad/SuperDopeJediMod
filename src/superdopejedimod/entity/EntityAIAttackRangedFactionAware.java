@@ -5,15 +5,12 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
-import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.faction.FactionInfo;
 
 
 // ***************************************************************************************
 // This class was largely copied/pasted from EntityAIAttackRanged, and then iterated upon.
-// ***************************************************************************************
+//***************************************************************************************
 
 
 public class EntityAIAttackRangedFactionAware extends EntityAIBase
@@ -35,27 +32,22 @@ public class EntityAIAttackRangedFactionAware extends EntityAIBase
     private final int maxRangedAttackTime;
     private final float attackRadius;
     private final float maxAttackDistance;
-    
-    
-    private FactionInfo _factionToAttack = null;
-    
 
     public EntityAIAttackRangedFactionAware(IRangedAttackMob attacker, double movespeed, int maxAttackTime, float maxAttackDistanceIn)
     {
-        this(attacker, movespeed, maxAttackTime, maxAttackTime, maxAttackDistanceIn, null);
+        this(attacker, movespeed, maxAttackTime, maxAttackTime, maxAttackDistanceIn);
     }
 
-    public EntityAIAttackRangedFactionAware(IRangedAttackMob attacker, double movespeed, int p_i1650_4_, int maxAttackTime, 
-    		float maxAttackDistanceIn, FactionInfo factionToAttack)
+    public EntityAIAttackRangedFactionAware(IRangedAttackMob attacker, double movespeed, int p_i1650_4_, int maxAttackTime, float maxAttackDistanceIn)
     {
         this.rangedAttackTime = -1;
 
-        //if (!(attacker instanceof EntityLivingBase))
-        //{
-        //    throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
-        //}
-        //else
-        //{
+        if (!(attacker instanceof EntityLivingBase))
+        {
+            throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
+        }
+        else
+        {
             this.rangedAttackEntityHost = attacker;
             this.entityHost = (EntityLiving)attacker;
             this.entityMoveSpeed = movespeed;
@@ -63,11 +55,8 @@ public class EntityAIAttackRangedFactionAware extends EntityAIBase
             this.maxRangedAttackTime = maxAttackTime;
             this.attackRadius = maxAttackDistanceIn;
             this.maxAttackDistance = maxAttackDistanceIn * maxAttackDistanceIn;
-            
-            this._factionToAttack = factionToAttack;
-            
             this.setMutexBits(3);
-       // }
+        }
     }
 
     /**
@@ -77,45 +66,15 @@ public class EntityAIAttackRangedFactionAware extends EntityAIBase
     {
         EntityLivingBase entitylivingbase = this.entityHost.getAttackTarget();
 
-        // if there is noone to attack, bail.
-        if (entitylivingbase == null) {
+        if (entitylivingbase == null)
+        {
             return false;
         }
-        
-     // Error handling: if factionsToAttack was not initialized properly.
-		if (this._factionToAttack == null) {
-			return false;
-		}
-        
-        //else
-        //{
-             
-            
-//    		EntityLivingBase entity = this.attacker.getAttackTarget();
-//    		if (entity == null) {
-//    			return false;
-//    		}
-    				
-    		if (entitylivingbase instanceof EntityPlayer) {
-    			
-    			
-    			
-    			// Test to see if target's factionInfo is in my list of things to attack.
-    			EntityPlayer player = (EntityPlayer) entitylivingbase;
-    			boolean shouldAttack = SuperDopeJediMod.classManager.isPlayerInFaction(player, this._factionToAttack);
-    			
-    			if (shouldAttack) {
-    				this.attackTarget = entitylivingbase;
-    			}
-    			
-    			return shouldAttack;
-    		}
-            
-            
-    		//this.attackTarget = entitylivingbase;
-            //return true;
-    		return false;
-        //}
+        else
+        {
+            this.attackTarget = entitylivingbase;
+            return true;
+        }
     }
 
     /**

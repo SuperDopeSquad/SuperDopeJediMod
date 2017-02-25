@@ -28,7 +28,6 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySnowball;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -53,22 +52,28 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.faction.FactionInfo;
-import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
 
 
-public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implements IRangedAttackMob {
+public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity {
 		
 	
 	public RepublicSentryDroidEntity(World worldIn) {
 		
 		super(worldIn, "republicSentryDroidEntity", "Republic Sentry Droid");
-				
+		
+		//this.setupAI();
+		
 		// This sets the bounding box size, not the actual model that you see rendered.
 		this.setSize(1.0F, 2.0F);
 		
-		// Customize these properties in daughter classes to get different behaviors.
-		this.movementSpeed = 0.0; // This renders this droid unmoveable.
+		// how much experience do you get it you kill it?
+		//this.experienceValue = 5;
+		
+		// Properties that we need to have later.
+		//this.shadowSize = 1.0F;
+		
+		// Put a gaffi stick in his mainhand slot.
+		//this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.gaffiStick));
 	}
 	
 	
@@ -86,15 +91,29 @@ public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implement
 	@Override
 	protected void setupAI() {
 			
+		// clear any tasks assigned in super classes.
+		//clearAITasks(); 
 		super.setupAI();
+			
+	   // Main AI task list: shoot to kill any empire you see.
+	   this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false, 
+			   SuperDopeJediMod.classManager.getFactionInfo(SuperDopeJediMod.classManager.FACTION_EMPIRE)));
+		
+	   // When not attacking the Empire, stare at the closest person.
+	   this.tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F, 0.02F));
+
+	   // Set up the targetTasks list, which defines who the entity focuses his actions on.
+	   // Priority 0: attack anything that attacked me.
+	   this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));   
+	   // Priority 1: attack the nearest player I can find.
+	   this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
-	
+
 	
 	// After it dies, what equipment should it drop?
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		
-		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.droidKit), 0);
-		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.republicSentryDroidHead), 0);
+		this.entityDropItem(new ItemStack(Items.IRON_INGOT), 0);
     }
 }
