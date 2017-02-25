@@ -22,6 +22,7 @@ import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.weapon.Blaster;
 import superdopesquad.superdopejedimod.weapon.BlasterCarbine;
 import superdopesquad.superdopejedimod.weapon.BossBlaster;
+import superdopesquad.superdopejedimod.weapon.WeaponManager;
 import superdopesquad.superdopejedimod.weapon.Zapper;
 import superdopesquad.superdopejedimod.faction.ClassItem;
 import superdopesquad.superdopejedimod.faction.ClassManager;
@@ -77,11 +78,12 @@ public class SuperDopeJediMod //Start the class Declaration
 	//		Durability: 5 - leather; 7 - gold; 15 - chain and iron; 33 - diamond
 	//		Reduction Amounts: 1,3,2,1 - leather; 2,5,3,1 - gold; 2,5,4,1 - chain; 2,6,5,2 - iron; 3,8,6,3 - diamond
 	//		Enchantability: 15 - leather; 12 - chain; 9 - iron; 25 - gold; 10 - diamond
-	public static ArmorMaterial sithCapeMaterial = EnumHelper.addArmorMaterial("SithCapeMaterial", "", 100, new int[]{}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
+	
 	public static ArmorMaterial mandalorianIronArmorMaterial = EnumHelper.addArmorMaterial("MandalorianIronArmorMaterial", "superdopejedimod:mandalorianironarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
 	public static ArmorMaterial quadaniumSteelArmorMaterial = EnumHelper.addArmorMaterial("QuadaniumSteelArmorMaterial", "superdopejedimod:quadaniumsteelarmormaterial", 15, new int[]{2,6,5,2}, 9, null, (float) 0.0);
-	public static ArmorMaterial sithLordArmorMaterial = EnumHelper.addArmorMaterial("SithLordArmorMaterial", "superdopejedimod:sithlordarmormaterial", 30, new int[]{3,8,6,3}, 10, null, (float) 0.0);
-	public static ArmorMaterial jediArmorMaterial = EnumHelper.addArmorMaterial("JediArmorMaterial", "superdopejedimod:jediarmormaterial", 30, new int[]{3,8,6,3}, 10, null, (float) 0.0);
+	public static ArmorMaterial sithLordArmorMaterial = EnumHelper.addArmorMaterial("SithLordArmorMaterial", "superdopejedimod:sithlordarmormaterial", 30, new int[]{3,8,6,3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
+	public static ArmorMaterial jediArmorMaterial = EnumHelper.addArmorMaterial("JediArmorMaterial", "superdopejedimod:jediarmormaterial", 30, new int[]{3,8,6,3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
+	public static ArmorMaterial stormTrooperArmorMaterial = EnumHelper.addArmorMaterial("StormTrooperArmor", "superdopejedimod:stormtrooperarmormaterial", 15, new int[]{2,6,5,2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
 	
     // instance variable.
     @Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
@@ -173,6 +175,12 @@ public class SuperDopeJediMod //Start the class Declaration
     public static JediArmor jediLeggings = new JediArmor(EntityEquipmentSlot.LEGS, "jediLeggings");
     public static JediArmor jediBoots = new JediArmor(EntityEquipmentSlot.FEET, "jediBoots");
     
+    //Storm Trooper
+    public static StormTrooperArmor stormTrooperHelmet = new StormTrooperArmor(EntityEquipmentSlot.HEAD, "stormTrooperHelmet");
+    public static StormTrooperArmor stormTrooperChestplate = new StormTrooperArmor(EntityEquipmentSlot.CHEST, "stormTrooperChestplate");
+    public static StormTrooperArmor stormTrooperLeggings = new StormTrooperArmor(EntityEquipmentSlot.LEGS, "stormTrooperLeggings");
+    public static StormTrooperArmor stormTrooperBoots = new StormTrooperArmor(EntityEquipmentSlot.FEET, "stormTrooperBoots");
+    
     // Peoples Custom Items
     public static BrynsAwesomeSword brynsAwesomeSword = new BrynsAwesomeSword("brynsAwesomeSword");
     
@@ -190,9 +198,13 @@ public class SuperDopeJediMod //Start the class Declaration
  
     // Commands.
     public static CommandManager commandManager = new CommandManager();
-         
+            
     // Our packet manager; this is where we manage custom packets to keep the client and server in-sync.  
     public static SuperDopePacketManager packetManager = new SuperDopePacketManager();
+    
+    // Weapons.
+    public static WeaponManager weaponManager = new WeaponManager();
+ 
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
