@@ -71,7 +71,7 @@ public class EntityAIQuicklyOffended extends EntityAITarget {
         	return false;
         }
         
-        System.out.println("EntityAIQuicklyOffended: engaging QuicklyOffended with revenge=" + (this.taskOwner.ticksExisted - revengeTick));
+        //System.out.println("EntityAIQuicklyOffended: engaging QuicklyOffended with revenge=" + (this.taskOwner.ticksExisted - revengeTick));
         return true;
     }
 
@@ -94,7 +94,7 @@ public class EntityAIQuicklyOffended extends EntityAITarget {
             this.alertOthers();
         }
 
-        System.out.println("EntityAIQuicklyOffended: starting QuicklyOffended with this=" + this + ", taskOwner=" + this.taskOwner + ", target="+ this.target);
+        //System.out.println("EntityAIQuicklyOffended: starting QuicklyOffended with this=" + this + ", taskOwner=" + this.taskOwner + ", target="+ this.target);
         super.startExecuting();
     }
     
@@ -105,14 +105,14 @@ public class EntityAIQuicklyOffended extends EntityAITarget {
     public boolean continueExecuting() {
     	EntityLivingBase revengeTarget = this.taskOwner.getAITarget();
     	if (revengeTarget != this.target) {
-    		System.out.println("EntityAIQuicklyOffended: continueExecuting bailing because no target.");
+    		//System.out.println("EntityAIQuicklyOffended: continueExecuting bailing because no target.");
     		return false;
     	}
     	
     	// If its been twenty ticks since the attack, cool down and don't seek revenge anymore.
         int revengeTick = this.taskOwner.getRevengeTimer();
         if ((this.taskOwner.ticksExisted - revengeTick) > 20) {
-        	System.out.println("EntityAIQuicklyOffended: continueExecuting bailing because revengeTick=" + (this.taskOwner.ticksExisted - revengeTick));
+        	//System.out.println("EntityAIQuicklyOffended: continueExecuting bailing because revengeTick=" + (this.taskOwner.ticksExisted - revengeTick));
         	return false;
         }
         
@@ -126,7 +126,7 @@ public class EntityAIQuicklyOffended extends EntityAITarget {
     @Override
     public void resetTask() {
     	// Clear the state machine.
-    	System.out.println("EntityAIQuicklyOffended: resetting");
+    	//System.out.println("EntityAIQuicklyOffended: resetting");
     	this.target = null;
     	this.revengeTimerOld = 0;
     	
