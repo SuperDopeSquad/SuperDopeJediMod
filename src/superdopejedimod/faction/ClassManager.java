@@ -227,9 +227,9 @@ public class ClassManager {
 	public boolean isPlayerInFaction(EntityPlayer player, FactionInfo factionInfoInput) {
 		
 		ClassInfo classInfo = this.getPlayerClass(player);
-		FactionInfo factionInfo = classInfo.getFaction();
+		FactionInfo factionInfo = (classInfo == null) ? null : classInfo.getFaction();
 		
-		return (factionInfoInput.getId() == factionInfo.getId());
+		return (factionInfo != null) && (factionInfoInput.getId() == factionInfo.getId());
 	}
 	
 	
