@@ -3,6 +3,8 @@ package superdopesquad.superdopejedimod.entity;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -49,6 +51,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.faction.FactionInfo;
+import superdopesquad.superdopejedimod.faction.ClassManager;
 
 
 
@@ -100,12 +104,15 @@ public class ImperialProbeDroidEntity extends BaseEntityAnimal implements IRange
 	   
 		// targetTasks sets the "target" member of "this", which other tasks then use. 
 		// Currently, the probe should only attack people that hurt it. Note that it will also alert other probes that are nearby to help attack.
-		this.targetTasks.addTask(1, new EntityAIQuicklyOffended(this, true, false));  
-		 
+		this.targetTasks.addTask(1, new EntityAIQuicklyOffended(this, true, false, 
+				SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_EMPIRE)));  
+		this.targetTasks.addTask(2, new EntityAIEnemyFactionDetector(this, true, false, 16.0F, 
+				SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_REPUBLIC)));  
+		
 		 // Main AI task list.
-		 //this.tasks.addTask(0, new EntityAISwimming(this)); // I think this prevents drowning.
-		this.tasks.addTask(0, new EntityAIHoldAndShoot(this, 5, 16.0F));
-		this.tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F, 0.02F));
+		this.tasks.addTask(0, new EntityAISwimming(this)); // I think this prevents drowning.
+		this.tasks.addTask(0, new EntityAIHoldAndShoot(this, 10, 16.0F));	// Once enemy is identified, hold position and shoot until it goes out of range.
+		this.tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F, 0.02F)); // Turn the head to look and nearest entity.
 		
 		// If nothing else to do, wander around.
 		this.tasks.addTask(8, new EntityAIWander(this, 1.0D, 50));
