@@ -169,6 +169,8 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	// Copied from EntityMob.
 	public boolean attackEntityAsMob(Entity entityIn) {
 			
+		System.out.println("Inside BaseEntityAnimal:attackEntityAsMob");
+		
 		float f = (float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 	    int i = 0;
 

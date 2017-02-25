@@ -60,20 +60,11 @@ public class RepublicHunterDroidEntity extends RepublicBaseDroidEntity {
 	public RepublicHunterDroidEntity(World worldIn) {
 		
 		super(worldIn, "republicHunterDroidEntity", "Republic Hunter Droid");
-		
-		//this.setupAI();
-		
+				
 		// This sets the bounding box size, not the actual model that you see rendered.
 		this.setSize(1.0F, 2.0F);
 		
-		// how much experience do you get it you kill it?
-		//this.experienceValue = 5;
-		
-		// Properties that we need to have later.
-		//this.shadowSize = 1.0F;
-		
-		// Put a gaffi stick in his mainhand slot.
-		//this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.gaffiStick));
+		this.movementSpeed = 2F;
 	}
 	
 	
@@ -91,24 +82,9 @@ public class RepublicHunterDroidEntity extends RepublicBaseDroidEntity {
 	@Override
 	protected void setupAI() {
 			
-		// clear any tasks assigned in super classes.
-		//clearAITasks(); 
 		super.setupAI();
-	
-	   // Main AI task list: shoot to kill any empire you see.
-	   this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false, 
-			   SuperDopeJediMod.classManager.getFactionInfo(SuperDopeJediMod.classManager.FACTION_EMPIRE)));
 		
-	   // When not attacking the Empire, stare at the closest person and/or wander around.
-	   this.tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F, 0.02F));
-	   this.tasks.addTask(8, new EntityAIWander(this, 1.0D));
-
-
-	   // Set up the targetTasks list, which defines who the entity focuses his actions on.
-	   // Priority 0: attack anything that attacked me.
-	   this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));   
-	   // Priority 1: attack the nearest player I can find.
-	   this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		this.tasks.addTask(8, new EntityAIWander(this, this.movementSpeed));
 	}
 	
 	
@@ -116,6 +92,7 @@ public class RepublicHunterDroidEntity extends RepublicBaseDroidEntity {
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		
-		this.entityDropItem(new ItemStack(Items.IRON_INGOT), 0);
+		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.droidKit), 0);
+		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.republicHunterDroidHead), 0);
     }
 }

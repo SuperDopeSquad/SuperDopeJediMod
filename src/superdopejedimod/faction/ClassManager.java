@@ -229,6 +229,10 @@ public class ClassManager {
 		ClassInfo classInfo = this.getPlayerClass(player);
 		FactionInfo factionInfo = classInfo.getFaction();
 		
+		if ((factionInfoInput == null) || (factionInfo == null)) {
+			return false;
+		}
+		
 		return (factionInfoInput.getId() == factionInfo.getId());
 	}
 	

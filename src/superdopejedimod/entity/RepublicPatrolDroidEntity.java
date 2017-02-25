@@ -60,20 +60,11 @@ public class RepublicPatrolDroidEntity extends RepublicBaseDroidEntity {
 	public RepublicPatrolDroidEntity(World worldIn) {
 		
 		super(worldIn, "republicPatrolDroidEntity", "Republic Patrol Droid");
-		
-		//this.setupAI();
-		
+				
 		// This sets the bounding box size, not the actual model that you see rendered.
 		this.setSize(1.0F, 2.0F);
-		
-		// how much experience do you get it you kill it?
-		//this.experienceValue = 5;
-		
-		// Properties that we need to have later.
-		//this.shadowSize = 1.0F;
-		
-		// Put a gaffi stick in his mainhand slot.
-		//this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.gaffiStick));
+				
+		this.movementSpeed = 1F;
 	}
 	
 	
@@ -87,42 +78,13 @@ public class RepublicPatrolDroidEntity extends RepublicBaseDroidEntity {
 	}
 	
 	
-//	@Override
-//	public void registerRecipe() {
-//		
-//		// Recipe for creating an Egg.
-//		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);	
-//		ItemStack eggStack = new ItemStack(Items.EGG);
-//
-//		GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.entityManager.republicUtilityDroidEgg, 1), 
-//						"A", 
-//						"B", 
-//						'A', ironIngotStack, 
-//						'B', eggStack);
-//	}
-	
-	
 	// set up AI tasks
 	@Override
 	protected void setupAI() {
 		
-		// clear any tasks assigned in super classes.
-	   //clearAITasks(); 
 		super.setupAI();
-	
-	   // Main AI task list: shoot to kill any empire you see.
-	   this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false, 
-			   SuperDopeJediMod.classManager.getFactionInfo(SuperDopeJediMod.classManager.FACTION_EMPIRE)));
 		
-	   // When not attacking the Empire, stare at the closest person, and/or wander around.
-	   this.tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F, 0.02F));
-	   this.tasks.addTask(8, new EntityAIWander(this, 1.0D));
-
-	   // Set up the targetTasks list, which defines who the entity focuses his actions on.
-	   // Priority 0: attack anything that attacked me.
-	   this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));   
-	   // Priority 1: attack the nearest player I can find.
-	   this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		this.tasks.addTask(8, new EntityAIWander(this, this.movementSpeed));
 	}
 
 	
@@ -130,23 +92,7 @@ public class RepublicPatrolDroidEntity extends RepublicBaseDroidEntity {
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		
-		this.entityDropItem(new ItemStack(Items.IRON_INGOT), 0);
+		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.droidKit), 0);
+		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.republicPatrolDroidHead), 0);
     }
-
-
-//	@Override
-//	public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
-//	    	
-//		System.out.println("RepublicUtilityDroid: attacking with ranged!");
-//	        
-//		EntitySnowball entitysnowball = new EntitySnowball(this.worldObj, this);
-//	    double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;
-//	    double d1 = target.posX - this.posX;
-//	    double d2 = d0 - entitysnowball.posY;
-//	    double d3 = target.posZ - this.posZ;
-//	    float f = MathHelper.sqrt_double(d1 * d1 + d3 * d3) * 0.2F;
-//	    entitysnowball.setThrowableHeading(d1, d2 + (double)f, d3, 1.6F, 12.0F);
-//	    this.playSound(SoundEvents.ENTITY_SNOWMAN_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-//	    this.worldObj.spawnEntityInWorld(entitysnowball); 
-//	}
 }
