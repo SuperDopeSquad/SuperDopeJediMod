@@ -51,7 +51,7 @@ public class TuskanRaiderModel extends ModelBiped {
     	int textureOffsetSpikeY = 32;
     	
     	// Debug info.
-    	System.out.println("DEBUG width:" + String.valueOf(width) + ", height:" + String.valueOf(height) + ", p_i1164_2_:" + String.valueOf(p_i1164_2_) + ", scale:" + String.valueOf(scale));
+    	//System.out.println("DEBUG width:" + String.valueOf(width) + ", height:" + String.valueOf(height) + ", p_i1164_2_:" + String.valueOf(p_i1164_2_) + ", scale:" + String.valueOf(scale));
     	
         this.head = (new ModelRenderer(this)).setTextureSize(width, height);
         this.head.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);

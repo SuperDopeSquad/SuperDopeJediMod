@@ -57,6 +57,9 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 public abstract class RepublicBaseDroidEntity extends BaseEntityAnimal implements IRangedAttackMob {
 		
 	
+	protected double movementSpeed;
+	
+	
 	public RepublicBaseDroidEntity(World worldIn, String name, String displayName) {
 		
 		super(worldIn, name, displayName);
@@ -68,6 +71,9 @@ public abstract class RepublicBaseDroidEntity extends BaseEntityAnimal implement
 		
 		// Properties that we need to have later.
 		this.shadowSize = 1.0F;
+		
+		// Customize this properties in daughter classes to get different behaviors.
+		this.movementSpeed = 1.0;
 	}
 	
 	

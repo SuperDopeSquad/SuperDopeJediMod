@@ -28,6 +28,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySnowball;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -52,9 +53,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.faction.FactionInfo;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntity;
 
 
-public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity {
+public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implements IRangedAttackMob {
 		
 	
 	public RepublicSentryDroidEntity(World worldIn) {
@@ -74,6 +77,9 @@ public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity {
 		
 		// Put a gaffi stick in his mainhand slot.
 		//this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.gaffiStick));
+		
+		// Customize this properties in daughter classes to get different behaviors.
+		this.movementSpeed = 0.0; // This renders this droid unmoveable.
 	}
 	
 	
@@ -96,9 +102,17 @@ public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity {
 		super.setupAI();
 			
 	   // Main AI task list: shoot to kill any empire you see.
-	   this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false, 
-			   SuperDopeJediMod.classManager.getFactionInfo(SuperDopeJediMod.classManager.FACTION_EMPIRE)));
+	   //this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false, 
+		//	   SuperDopeJediMod.classManager.getFactionInfo(SuperDopeJediMod.classManager.FACTION_EMPIRE)));
+	
+		   //public EntityAIAttackRangedFactionAware(IRangedAttackMob attacker, double movespeed, int p_i1650_4_, int maxAttackTime, 
+		   // 		float maxAttackDistanceIn, FactionInfo factionToAttack)
+		 
 		
+	   this.tasks.addTask(1, new EntityAIAttackRangedFactionAware(this, this.movementSpeed, 1, 3, 10,
+			   SuperDopeJediMod.classManager.getFactionInfo(SuperDopeJediMod.classManager.FACTION_EMPIRE)));
+	
+	   
 	   // When not attacking the Empire, stare at the closest person.
 	   this.tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F, 0.02F));
 
@@ -108,12 +122,25 @@ public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity {
 	   // Priority 1: attack the nearest player I can find.
 	   this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
+	
+	
+	 /**
+     * Attack the specified entity using a ranged attack.
+     *  
+     * @param distanceFactor How far the target is, normalized and clamped between 0.1 and 1.0
+     */
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
+    {
+    	float damageAmount = 1;
+    	SuperDopeJediMod.weaponManager.ThrowPlasmaShot(worldObj, this, target, distanceFactor, damageAmount);
+    }
 
 	
 	// After it dies, what equipment should it drop?
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		
-		this.entityDropItem(new ItemStack(Items.IRON_INGOT), 0);
+		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.droidKit), 0);
+		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.republicSentryDroidHead), 0);
     }
 }
