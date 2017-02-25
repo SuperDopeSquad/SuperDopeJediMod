@@ -54,7 +54,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
-import superdopesquad.superdopejedimod.weapon.PlasmaShotEntity;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
 
 
 public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implements IRangedAttackMob {
@@ -132,7 +132,7 @@ public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implement
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
     {
     	float damageAmount = 1;
-    	SuperDopeJediMod.weaponManager.ThrowPlasmaShot(worldObj, this, target, distanceFactor, damageAmount);
+    	SuperDopeJediMod.weaponManager.ThrowPlasmaShotBlue(worldObj, this, target, distanceFactor, damageAmount);
     }
 
 	

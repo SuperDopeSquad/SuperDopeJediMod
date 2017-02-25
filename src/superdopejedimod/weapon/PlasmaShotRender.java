@@ -15,32 +15,25 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 @SideOnly(Side.CLIENT)
 public class PlasmaShotRender<T extends Entity> extends Render<T>
 {
     protected final Item item;
     private final RenderItem itemRenderer;
 
-    public PlasmaShotRender(RenderManager renderManagerIn, Item itemIn, RenderItem itemRendererIn)
-    {
+    
+    public PlasmaShotRender(RenderManager renderManagerIn, Item itemIn, RenderItem itemRendererIn) {
+    	
         super(renderManagerIn);
         this.item = itemIn;
         this.itemRenderer = itemRendererIn;
-        
-        //System.out.println("inside PlasmaShotRender()");
     }
 
 
-    
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     @Override
-    public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
-    {
-    	
-    	//System.out.println("inside PlasmaShotRender:doRender");
-    	
+    public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
+     	
         GlStateManager.pushMatrix();
         GlStateManager.translate((float)x, (float)y, (float)z);
         GlStateManager.enableRescaleNormal();

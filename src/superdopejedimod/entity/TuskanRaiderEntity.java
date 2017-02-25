@@ -76,7 +76,7 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	@Override
 	public void registerEntityRender() {
 			
-    	System.out.println("inisde TuskanRaiderEntity:registerEntityRender");
+    	//System.out.println("inisde TuskanRaiderEntity:registerEntityRender");
     	
 		Class renderBaseClass = TuskanRaiderRender.class;
 		Class modelBaseClass = TuskanRaiderModel.class;

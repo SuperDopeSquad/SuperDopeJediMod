@@ -28,20 +28,22 @@ import superdopesquad.superdopejedimod.entity.JawaRender;
 import superdopesquad.superdopejedimod.entity.SuperDopeRenderManager;
 
 	
-public class PlasmaShotEntity extends BaseEntityProjectile {
+public abstract class PlasmaShotEntityBase extends BaseEntityProjectile {
 	
 	
-	    public PlasmaShotEntity(World worldIn)
+	    public PlasmaShotEntityBase(World worldIn)
 	    {
 	        super(worldIn);
 	    }
 
-	    public PlasmaShotEntity(World worldIn, EntityLivingBase throwerIn, float damageAmount)
+	    
+	    public PlasmaShotEntityBase(World worldIn, EntityLivingBase throwerIn, float damageAmount)
 	    {
 	        super(worldIn, throwerIn, damageAmount);
 	    }
 
-	    public PlasmaShotEntity(World worldIn, double x, double y, double z)
+	    
+	    public PlasmaShotEntityBase(World worldIn, double x, double y, double z)
 	    {
 	        super(worldIn, x, y, z);
 	    }
@@ -50,7 +52,6 @@ public class PlasmaShotEntity extends BaseEntityProjectile {
 	    @Override
 		public String getName() {
 			
-			//return this._name;
 			return "plasmaShotEntity";
 		}
 

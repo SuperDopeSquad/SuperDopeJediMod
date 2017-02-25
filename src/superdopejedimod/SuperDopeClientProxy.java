@@ -24,7 +24,7 @@ import superdopesquad.superdopejedimod.entity.LayerClassCape;
 import superdopesquad.superdopejedimod.entity.LayerClassIndicator;
 import superdopesquad.superdopejedimod.entity.SuperDopeEntity;
 import superdopesquad.superdopejedimod.faction.ClassGUI;
-import superdopesquad.superdopejedimod.weapon.PlasmaShotEntity;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotRender;
 
 
@@ -69,32 +69,8 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
         //renderPlayerSlim.addLayer(new LayerClassIndicator(renderPlayerSlim));
         renderPlayerSlim.addLayer(new LayerClassCape(renderPlayerSlim));
         
-        
-        //
-    	System.out.println("inisde PlasmaFireEntity:registerEntityRender");
-    	
-    	RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
-    	RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-    	PlasmaShotRender plasmaShotRender = new PlasmaShotRender(renderManager, SuperDopeJediMod.weaponManager.plasmaShotItemBlue, renderItem);
-  
-     	System.out.println((Minecraft.getMinecraft() == null));
-    	System.out.println((Minecraft.getMinecraft().getRenderManager() == null));
-    	System.out.println((Minecraft.getMinecraft().getRenderItem() == null));
-    	System.out.println((Minecraft.getMinecraft().getRenderManager().entityRenderMap == null));
-    	    	    	
-    	//Render<? extends Entity> renderInstance = new R
-    	//this.entityRenderMap.put(EntitySnowball.class, new RenderSnowball(this, Items.SNOWBALL, itemRendererIn));
-		Minecraft.getMinecraft().getRenderManager().entityRenderMap.put(PlasmaShotEntity.class, plasmaShotRender);
-		
-		Object o = Minecraft.getMinecraft().getRenderManager().entityRenderMap.get(PlasmaShotEntity.class);
-		System.out.println("DEBUG: " + o.getClass().getName());
-		
-		PlasmaShotEntity plasmafireentity = new PlasmaShotEntity(null);
-		Object o2 = Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(plasmafireentity);
-		System.out.println("DEBUG: " + o2.getClass().getName());
-		
-		
-
+        // WeaponManager needs to be called at onInit time, to properly register some projectile entities.
+        SuperDopeJediMod.weaponManager.onInit();
 	}
 
 	

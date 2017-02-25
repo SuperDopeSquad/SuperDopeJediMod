@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import superdopesquad.superdopejedimod.MandalorianIron;
 import superdopesquad.superdopejedimod.MandalorianIronIngot;
 import superdopesquad.superdopejedimod.SuperDopeObject;
-import superdopesquad.superdopejedimod.weapon.PlasmaShotEntity;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotItem;
 
 
