@@ -22,6 +22,7 @@ import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.weapon.Blaster;
 import superdopesquad.superdopejedimod.weapon.BlasterCarbine;
 import superdopesquad.superdopejedimod.weapon.BossBlaster;
+import superdopesquad.superdopejedimod.weapon.WeaponManager;
 import superdopesquad.superdopejedimod.weapon.Zapper;
 import superdopesquad.superdopejedimod.faction.ClassItem;
 import superdopesquad.superdopejedimod.faction.ClassManager;
@@ -197,9 +198,13 @@ public class SuperDopeJediMod //Start the class Declaration
  
     // Commands.
     public static CommandManager commandManager = new CommandManager();
-         
+            
     // Our packet manager; this is where we manage custom packets to keep the client and server in-sync.  
     public static SuperDopePacketManager packetManager = new SuperDopePacketManager();
+    
+    // Weapons.
+    public static WeaponManager weaponManager = new WeaponManager();
+ 
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
