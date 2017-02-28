@@ -25,6 +25,6 @@ public class DroidParts extends BaseItem {
     	ItemStack itemStackmandalorianIronIngot = new ItemStack(SuperDopeJediMod.mandalorianIronIngot);
     	ItemStack itemStackquadaniumSteelIngot = new ItemStack(SuperDopeJediMod.quadaniumSteelIngot);
     	ItemStack itemStackDroidParts = new ItemStack(this, 8);
-    	GameRegistry.addRecipe(itemStackDroidParts, "xx", 'x', itemStackmandalorianIronIngot, 'y', itemStackquadaniumSteelIngot);	
+    	GameRegistry.addRecipe(itemStackDroidParts, "xy", 'x', itemStackmandalorianIronIngot, 'y', itemStackquadaniumSteelIngot);	
 	}
 }

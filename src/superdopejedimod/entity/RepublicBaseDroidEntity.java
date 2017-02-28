@@ -139,23 +139,14 @@ public abstract class RepublicBaseDroidEntity extends BaseEntityAnimal implement
     // @param distanceFactor How far the target is, normalized and clamped between 0.1 and 1.
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
     	
-    	float damageAmount = 1;
+    	float damageAmount = 2;
     	SuperDopeJediMod.weaponManager.ThrowPlasmaShotBlue(worldObj, this, target, distanceFactor, damageAmount);
     }
 
-//	@Override
-//	public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
-//	    	
-//		System.out.println("RepublicBaseDroidEntity: attacking with ranged!");
-//	        
-//		EntitySnowball entitysnowball = new EntitySnowball(this.worldObj, this);
-//	    double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;
-//	    double d1 = target.posX - this.posX;
-//	    double d2 = d0 - entitysnowball.posY;
-//	    double d3 = target.posZ - this.posZ;
-//	    float f = MathHelper.sqrt_double(d1 * d1 + d3 * d3) * 0.2F;
-//	    entitysnowball.setThrowableHeading(d1, d2 + (double)f, d3, 1.6F, 12.0F);
-//	    this.playSound(SoundEvents.ENTITY_SNOWMAN_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-//	    this.worldObj.spawnEntityInWorld(entitysnowball); 
-//	}
+    
+	@Override
+	protected boolean canDespawn() {
+		
+		return false;
+	}
 }

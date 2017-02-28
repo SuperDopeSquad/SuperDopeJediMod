@@ -45,14 +45,13 @@ public abstract class RepublicBaseDroidHead extends BaseItem {
     	Block blockClicked = blockStateClicked.getBlock();
     	boolean isDroidKit = (blockClicked instanceof DroidKit);
     	
-    	System.out.println("DEBUG: inside RepublicUtilityDroidHeadBase:onItemUse: " + blockClicked.toString() + 
-    			" : " + hand.name() + " : " + facing.getName() + " : " + (isDroidKit));
+    	//System.out.println("DEBUG: inside RepublicUtilityDroidHeadBase:onItemUse: " + blockClicked.toString() + 
+    	//		" : " + hand.name() + " : " + facing.getName() + " : " + (isDroidKit));
     	
     	// If we are on the server, and we are being held in the main hand, and this is actually a droid torso, ...
     	if ((isWorldServer) && (hand == EnumHand.MAIN_HAND) && (isDroidKit)) {
         	
     		// Destroy the existing block.
-    		System.out.println("DEBUG: attempting to break block: " + blockClicked.toString() + " : ");
     		world.setBlockToAir(blockPos);
     		
     		// Create the new entity.
