@@ -127,12 +127,9 @@ public class EntityAIHoldAndShoot extends EntityAIBase
         --this.attackIntervalCounter;
         if (this.attackIntervalCounter == 0)
         {
-        	//System.out.println("EntityAIHoldAndShoot: time to attack!");
-        	
         	// If they are out of range or behind a tree, don't shoot. 
             if (distSquared > (double) this.attackRadiusSquared || !canSee)
             {
-            	//System.out.println("EntityAIHoldAndShoot: suppressing attack to due to dist=" + distSquared + ", cansee=" + canSee);
             	this.outOfRangeCounter++;
                 return;
             }
