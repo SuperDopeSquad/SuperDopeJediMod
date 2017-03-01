@@ -21,7 +21,8 @@ public class WeaponManager {
     // Projectile entities should be created here, to trigger registration properly.
     public static PlasmaShotEntityBlue plasmaShotEntityBlue = new PlasmaShotEntityBlue(null);
     public static PlasmaShotEntityRed plasmaShotEntityRed = new PlasmaShotEntityRed(null);
-	
+		
+		
     public WeaponManager() {}
 	
     
