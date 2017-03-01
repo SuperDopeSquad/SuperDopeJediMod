@@ -21,8 +21,20 @@ public class WeaponManager {
     // Projectile entities should be created here, to trigger registration properly.
     public static PlasmaShotEntityBlue plasmaShotEntityBlue = new PlasmaShotEntityBlue(null);
     public static PlasmaShotEntityRed plasmaShotEntityRed = new PlasmaShotEntityRed(null);
-		
-		
+	
+    // Blaster weapons.
+    public static BlasterCarbine blasterCarbine = new BlasterCarbine("blasterCarbine");
+    public static BlasterRifle blasterRifle = new BlasterRifle("blasterRifle");
+    public static BlasterPistol blasterPistol = new BlasterPistol ("blasterPistol");
+    public static BlasterSniper blasterSniper = new BlasterSniper("blasterSniper");
+    public static BlasterCannon blasterCannon = new BlasterCannon("blasterCannon");
+    public static RocketLauncher rocketLauncher = new RocketLauncher("rocketLauncher");
+	
+    // earlier stuff.
+    public static Blaster blaster = new Blaster("blaster");
+    public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
+ 
+
     public WeaponManager() {}
 	
     

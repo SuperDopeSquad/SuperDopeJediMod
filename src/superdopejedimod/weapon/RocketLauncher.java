@@ -1,11 +1,9 @@
 package superdopesquad.superdopejedimod.weapon;
 
-
-
-public class BlasterCarbine extends BaseBlaster {
+public class RocketLauncher extends BaseBlaster {
 
 	
-	public BlasterCarbine(String unlocalizedName) {
+	public RocketLauncher(String unlocalizedName) {
 		
 		super(unlocalizedName);
 		
@@ -16,7 +14,5 @@ public class BlasterCarbine extends BaseBlaster {
 		
 	}
 	
+
 }
-	
-
-

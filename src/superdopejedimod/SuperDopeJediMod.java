@@ -19,11 +19,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.entity.EntityManager;
-import superdopesquad.superdopejedimod.weapon.Blaster;		
-import superdopesquad.superdopejedimod.weapon.BlasterCarbine;		
-import superdopesquad.superdopejedimod.weapon.BossBlaster;
 import superdopesquad.superdopejedimod.weapon.WeaponManager;
-import superdopesquad.superdopejedimod.weapon.Zapper;
 import superdopesquad.superdopejedimod.faction.ClassItem;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import net.minecraft.block.Block;
@@ -122,12 +118,6 @@ public class SuperDopeJediMod //Start the class Declaration
     public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
     public static StarBlock starBlock = new StarBlock("StarBlock");
            
-     // Ranged weapons.		
-    public static Blaster blaster = new Blaster("blaster");		
-    public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");		
-    public static Zapper zapper = new Zapper("zapper");		
-    public static BlasterCarbine blasterCarbine = new BlasterCarbine("blasterCarbine");
-
     // Blocks and Items Used for a Spaceship
     public static Engine engine = new Engine("engine");
     public static ChromateOre chromateOre = new ChromateOre("chromateOre");
