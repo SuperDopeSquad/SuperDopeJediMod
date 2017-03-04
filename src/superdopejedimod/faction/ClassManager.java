@@ -28,6 +28,7 @@ public class ClassManager {
 	public static final Integer SMUGGLER = 3;
 	public static final Integer BOUNTYHUNTER = 4;
 	public static final Integer TEAMJUDE = 5;
+	public static final Integer BOUNTYHUNTERLEADER = 6;
 	public static final String UNAFFILIATED_NAME = "Unaffiliated";
 	public static final String JEDI_NAME = "Jedi";
 	public static final String SITH_NAME = "Sith";
@@ -36,7 +37,9 @@ public class ClassManager {
 	public static final String TEAMJUDE_NAME = "Team Jude";
 	public static final String BOUNTYHUNTER_SHORTNAME = "bountyhunter";
 	public static final String TEAMJUDE_SHORTNAME = "Jude";
-
+	public static final String BOUNTYHUNTERLEADER_NAME = "Bounty Hunter Leader";
+	public static final String BOUNTYHUNTERLEADER_SHORTNAME = "bountyhunterleader";
+	
 	public static final Integer FACTION_REPUBLIC = 0;
 	public static final Integer FACTION_EMPIRE = 1;
 	public static final String FACTION_REPUBLIC_NAME = "The Republic";
@@ -46,7 +49,7 @@ public class ClassManager {
 	private HashMap _classMap = new HashMap();
 	ArrayList<ClassInfo> _forceWieldingClasses = new ArrayList<ClassInfo>();
 	ArrayList<ClassInfo> _nonForceWieldingClasses = new ArrayList<ClassInfo>();
-	
+	ArrayList<ClassInfo> _partialForceWieldingClasses = new ArrayList<ClassInfo>();
 	
 	public ClassManager() {
 		
@@ -63,6 +66,7 @@ public class ClassManager {
 		ClassInfo classInfoSmuggler = new ClassInfo(SMUGGLER, SMUGGLER_NAME, Color.green, true, factionInfoRepublic);
 		ClassInfo classInfoBountyHunter = new ClassInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, true, factionInfoEmpire, BOUNTYHUNTER_SHORTNAME);
 		ClassInfo classInfoTeamJude = new ClassInfo(TEAMJUDE, TEAMJUDE_NAME, Color.pink, true, null, TEAMJUDE_SHORTNAME);
+		ClassInfo classInfoBountyHunterLeader = new ClassInfo(BOUNTYHUNTERLEADER, BOUNTYHUNTERLEADER_NAME, Color.black, true, factionInfoEmpire, BOUNTYHUNTERLEADER_SHORTNAME);
 		
 		this._classMap.put(UNAFFILIATED, classInfoUnaffiliated);
 		this._classMap.put(JEDI, classInfoJedi);
@@ -70,12 +74,14 @@ public class ClassManager {
 		this._classMap.put(SMUGGLER, classInfoSmuggler);
 		this._classMap.put(BOUNTYHUNTER, classInfoBountyHunter);
 		this._classMap.put(TEAMJUDE, classInfoTeamJude);
+		this._classMap.put(BOUNTYHUNTERLEADER, classInfoBountyHunterLeader);
 		
 		// Stash the list of force wielding classes for each access later.
 		this._forceWieldingClasses.add(classInfoJedi);
 		this._forceWieldingClasses.add(classInfoSith);
 		this._nonForceWieldingClasses.add(classInfoSmuggler);
 		this._nonForceWieldingClasses.add(classInfoBountyHunter);
+		this._partialForceWieldingClasses.add(classInfoBountyHunterLeader);
 	}
 	
 	
@@ -120,6 +126,10 @@ public class ClassManager {
 		return this._nonForceWieldingClasses;
 	}
 	
+	public ArrayList<ClassInfo> getPartialForceWieldingClasses() {
+		
+		return this._nonForceWieldingClasses;
+	}
 	
     public void onUpdateHandlerClassAware(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
 	    		
@@ -169,6 +179,14 @@ public class ClassManager {
 	public boolean IsPlayerNonForceWielding(EntityPlayer player) {
 		
 		ArrayList<ClassInfo> classes = this.getNonForceWieldingClasses();
+		ClassInfo classInfo = this.getPlayerClass(player);
+		
+		return (classes.contains(classInfo));
+	}
+	
+	public boolean IsPlayerPartialForceWielding(EntityPlayer player) {
+		
+		ArrayList<ClassInfo> classes = this.getPartialForceWieldingClasses();
 		ClassInfo classInfo = this.getPlayerClass(player);
 		
 		return (classes.contains(classInfo));

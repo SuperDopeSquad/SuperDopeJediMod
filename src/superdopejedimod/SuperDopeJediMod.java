@@ -22,6 +22,13 @@ import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.weapon.Blaster;
 import superdopesquad.superdopejedimod.weapon.BlasterCarbine;
 import superdopesquad.superdopejedimod.weapon.BossBlaster;
+import superdopesquad.superdopejedimod.weapon.BountyHunterLeaderKnife;
+import superdopesquad.superdopejedimod.weapon.BrynsAwesomeSword;
+import superdopesquad.superdopejedimod.weapon.DoubleLightSaber;
+import superdopesquad.superdopejedimod.weapon.GaffiStick;
+import superdopesquad.superdopejedimod.weapon.LightSaber;
+import superdopesquad.superdopejedimod.weapon.MandalorianIronSword;
+import superdopesquad.superdopejedimod.weapon.QuadaniumSteelSword;
 import superdopesquad.superdopejedimod.weapon.Zapper;
 import superdopesquad.superdopejedimod.faction.ClassItem;
 import superdopesquad.superdopejedimod.faction.ClassManager;
@@ -179,6 +186,9 @@ public class SuperDopeJediMod //Start the class Declaration
     public static StormTrooperArmor stormTrooperChestplate = new StormTrooperArmor(EntityEquipmentSlot.CHEST, "stormTrooperChestplate");
     public static StormTrooperArmor stormTrooperLeggings = new StormTrooperArmor(EntityEquipmentSlot.LEGS, "stormTrooperLeggings");
     public static StormTrooperArmor stormTrooperBoots = new StormTrooperArmor(EntityEquipmentSlot.FEET, "stormTrooperBoots");
+    
+    //Bounty Hunter stuff
+    public static BountyHunterLeaderKnife bountyHunterLeaderKnife = new BountyHunterLeaderKnife("bountyHunterLeaderKnife");
     
     // Peoples Custom Items
     public static BrynsAwesomeSword brynsAwesomeSword = new BrynsAwesomeSword("brynsAwesomeSword");
