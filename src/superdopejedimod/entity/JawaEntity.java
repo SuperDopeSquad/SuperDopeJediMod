@@ -198,5 +198,6 @@ public class JawaEntity extends BaseEntityAnimal {
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 			
 		this.entityDropItem(new ItemStack(Items.LEATHER), 0);
+		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.droidParts), 0);
 	}
 }

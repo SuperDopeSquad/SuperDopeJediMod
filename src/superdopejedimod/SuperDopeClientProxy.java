@@ -3,12 +3,17 @@ package superdopesquad.superdopejedimod;
 
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.entity.layers.LayerCape;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntitySnowball;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -19,6 +24,8 @@ import superdopesquad.superdopejedimod.entity.LayerClassCape;
 import superdopesquad.superdopejedimod.entity.LayerClassIndicator;
 import superdopesquad.superdopejedimod.entity.SuperDopeEntity;
 import superdopesquad.superdopejedimod.faction.ClassGUI;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotRender;
 
 
 public class SuperDopeClientProxy extends SuperDopeCommonProxy {
@@ -61,6 +68,9 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
         RenderPlayer renderPlayerSlim = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
         //renderPlayerSlim.addLayer(new LayerClassIndicator(renderPlayerSlim));
         renderPlayerSlim.addLayer(new LayerClassCape(renderPlayerSlim));
+        
+        // WeaponManager needs to be called at onInit time, to properly register some projectile entities.
+        SuperDopeJediMod.weaponManager.onInit();
 	}
 
 	

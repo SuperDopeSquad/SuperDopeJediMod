@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "superdopejedimod:items/zapper"
+        "layer0": "superdopejedimod:items/plasmashotitemred"
     },
     "display": {
         "thirdperson": {

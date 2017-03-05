@@ -2,7 +2,7 @@ package superdopesquad.superdopejedimod.weapon;
 
 
 
-public class BlasterCarbine extends BaseRangedWeapon {
+public class BlasterCarbine extends BaseBlaster {
 
 	
 	public BlasterCarbine(String unlocalizedName) {
