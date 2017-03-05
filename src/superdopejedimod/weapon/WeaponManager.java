@@ -34,6 +34,7 @@ public class WeaponManager {
     public static Blaster blaster = new Blaster("blaster");
     public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
  
+
     public WeaponManager() {}
 	
     
