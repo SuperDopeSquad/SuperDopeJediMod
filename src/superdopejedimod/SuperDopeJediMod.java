@@ -19,7 +19,6 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.entity.EntityManager;
-import superdopesquad.superdopejedimod.weapon.WeaponManager;
 import superdopesquad.superdopejedimod.faction.ClassItem;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import net.minecraft.block.Block;
@@ -170,6 +169,9 @@ public class SuperDopeJediMod //Start the class Declaration
     public static StormTrooperArmor stormTrooperChestplate = new StormTrooperArmor(EntityEquipmentSlot.CHEST, "stormTrooperChestplate");
     public static StormTrooperArmor stormTrooperLeggings = new StormTrooperArmor(EntityEquipmentSlot.LEGS, "stormTrooperLeggings");
     public static StormTrooperArmor stormTrooperBoots = new StormTrooperArmor(EntityEquipmentSlot.FEET, "stormTrooperBoots");
+    
+    //Bounty Hunter stuff
+    public static BountyHunterLeaderKnife bountyHunterLeaderKnife = new BountyHunterLeaderKnife("bountyHunterLeaderKnife");
     
     // Peoples Custom Items
     public static BrynsAwesomeSword brynsAwesomeSword = new BrynsAwesomeSword("brynsAwesomeSword");

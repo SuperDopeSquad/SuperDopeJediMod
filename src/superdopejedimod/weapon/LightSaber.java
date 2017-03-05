@@ -1,4 +1,6 @@
-package superdopesquad.superdopejedimod;
+package superdopesquad.superdopejedimod.weapon;
+
+import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -7,7 +9,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import superdopesquad.superdopejedimod.weapon.BaseMeleeWeapon;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
 
 public class LightSaber extends BaseMeleeWeapon {
 	
@@ -104,5 +107,27 @@ public class LightSaber extends BaseMeleeWeapon {
     		GameRegistry.addRecipe(new ItemStack(this), "xxx", "xyx", "xxx", 'x', redstoneStack, 'y', lightSaberPurpleStack);
 		} 	
 	}
-
+	
+	@Override
+	public List<ClassInfo> GetFriendlyClasses() {
+	
+		// By default, we only let force-wielding classes use Light Sabers.
+		return SuperDopeJediMod.classManager.getForceWieldingClasses();
+	}
+	
+	
+	@Override
+	public List<ClassInfo> GetUnfriendlyClasses() {
+	
+		// By default, we do not let force-wielding classes use blasters.
+		return SuperDopeJediMod.classManager.getNonForceWieldingClasses();
+	}
+	
+	@Override
+	public boolean IsUseUnfriendlyBanned() {
+	
+		// By default, all blasters are banned from the unfriendly classes, namely, the force-wielding classes.
+		return true;
+	}
+	
 }
