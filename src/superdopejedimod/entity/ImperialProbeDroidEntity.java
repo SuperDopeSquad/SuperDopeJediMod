@@ -144,15 +144,9 @@ public class ImperialProbeDroidEntity extends BaseEntityAnimal implements IRange
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
     {
     	System.out.println("ImperialProbe: attacking with ranged!");
-        EntitySnowball entitysnowball = new EntitySnowball(this.worldObj, this);
-        double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;
-        double d1 = target.posX - this.posX;
-        double d2 = d0 - entitysnowball.posY;
-        double d3 = target.posZ - this.posZ;
-        float f = MathHelper.sqrt_double(d1 * d1 + d3 * d3) * 0.2F;
-        entitysnowball.setThrowableHeading(d1, d2 + (double)f, d3, 1.6F, 12.0F);
-        this.playSound(SoundEvents.ENTITY_SNOWMAN_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.worldObj.spawnEntityInWorld(entitysnowball);
+    	
+        float damageAmount = 1;
+    	SuperDopeJediMod.weaponManager.ThrowPlasmaShotRed(worldObj, this, target, distanceFactor, damageAmount);
     }
     
 
