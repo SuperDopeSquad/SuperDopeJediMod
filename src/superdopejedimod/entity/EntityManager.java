@@ -12,6 +12,14 @@ import net.minecraft.world.World;
 import superdopesquad.superdopejedimod.MandalorianIron;
 import superdopesquad.superdopejedimod.MandalorianIronIngot;
 import superdopesquad.superdopejedimod.SuperDopeObject;
+import superdopesquad.superdopejedimod.entity.droid.DroidKit;
+import superdopesquad.superdopejedimod.entity.droid.DroidParts;
+import superdopesquad.superdopejedimod.entity.droid.RepublicHunterDroidEntity;
+import superdopesquad.superdopejedimod.entity.droid.RepublicHunterDroidHead;
+import superdopesquad.superdopejedimod.entity.droid.RepublicPatrolDroidEntity;
+import superdopesquad.superdopejedimod.entity.droid.RepublicPatrolDroidHead;
+import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidEntity;
+import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidHead;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotItem;
 

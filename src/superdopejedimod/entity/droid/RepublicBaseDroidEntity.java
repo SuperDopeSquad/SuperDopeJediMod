@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.droid;
 
 
 import java.util.Random;
@@ -52,9 +52,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.entity.BaseEntityAnimal;
+import superdopesquad.superdopejedimod.entity.EntityAIAttackRangedFactionAware;
 
 
-public abstract class RepublicBaseDroidEntity extends BaseEntityAnimal implements IRangedAttackMob {
+public abstract class RepublicBaseDroidEntity extends BaseDroidEntity implements IRangedAttackMob {
 		
 	
 	protected double movementSpeed;
@@ -77,11 +79,12 @@ public abstract class RepublicBaseDroidEntity extends BaseEntityAnimal implement
 	}
 	
 	
-	@Override
-	public void registerEntityRender() {}
+//	@Override
+//	public void registerEntityRender() {}
 	
 	
 	// set up AI tasks
+	@Override
 	protected void setupAI() {
 		
 		// clear any tasks assigned in super classes.
@@ -106,11 +109,11 @@ public abstract class RepublicBaseDroidEntity extends BaseEntityAnimal implement
 	}
 
 
-	@Override
-	public EntityAgeable createChild(EntityAgeable ageable) {
-		
-		return null;
-	}
+//	@Override
+//	public EntityAgeable createChild(EntityAgeable ageable) {
+//		
+//		return null;
+//	}
 	
 	
 	@Override
@@ -125,15 +128,15 @@ public abstract class RepublicBaseDroidEntity extends BaseEntityAnimal implement
 	   getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 
 	    // need to register any additional attributes
-	   getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+	   //getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 	   getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
 	}
 	
-	
-	// After it dies, what equipment should it drop?
-	@Override
-	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {}
-
+//	
+//	// After it dies, what equipment should it drop?
+//	@Override
+//	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {}
+//
 	
     // Attack the specified entity using a ranged attack.
     // @param distanceFactor How far the target is, normalized and clamped between 0.1 and 1.
@@ -144,9 +147,9 @@ public abstract class RepublicBaseDroidEntity extends BaseEntityAnimal implement
     }
 
     
-	@Override
-	protected boolean canDespawn() {
-		
-		return false;
-	}
+//	@Override
+//	protected boolean canDespawn() {
+//		
+//		return false;
+//	}
 }

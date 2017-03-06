@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.droid;
 
 
 import net.minecraft.creativetab.CreativeTabs;

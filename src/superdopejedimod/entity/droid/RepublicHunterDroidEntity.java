@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.droid;
 
 
 import java.util.Random;
@@ -28,7 +28,6 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySnowball;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -53,30 +52,28 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.faction.FactionInfo;
-import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
+import superdopesquad.superdopejedimod.entity.EntityRenderFactory;
 
 
-public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implements IRangedAttackMob {
+public class RepublicHunterDroidEntity extends RepublicBaseDroidEntity {
 		
 	
-	public RepublicSentryDroidEntity(World worldIn) {
+	public RepublicHunterDroidEntity(World worldIn) {
 		
-		super(worldIn, "republicSentryDroidEntity", "Republic Sentry Droid");
+		super(worldIn, "republicHunterDroidEntity", "Republic Hunter Droid");
 				
 		// This sets the bounding box size, not the actual model that you see rendered.
 		this.setSize(1.0F, 2.0F);
 		
-		// Customize these properties in daughter classes to get different behaviors.
-		this.movementSpeed = 0.0; // This renders this droid unmoveable.
+		this.movementSpeed = 2F;
 	}
 	
 	
 	@Override
 	public void registerEntityRender() {
 			
-		Class renderBaseClass = RepublicSentryDroidRender.class;
-		Class modelBaseClass = RepublicSentryDroidModel.class;
+		Class renderBaseClass = RepublicHunterDroidRender.class;
+		Class modelBaseClass = RepublicHunterDroidModel.class;
 		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, this.shadowSize);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
@@ -87,6 +84,8 @@ public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implement
 	protected void setupAI() {
 			
 		super.setupAI();
+		
+		this.tasks.addTask(8, new EntityAIWander(this, this.movementSpeed));
 	}
 	
 	
@@ -95,6 +94,6 @@ public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implement
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		
 		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.droidKit), 0);
-		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.republicSentryDroidHead), 0);
+		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.republicHunterDroidHead), 0);
     }
 }

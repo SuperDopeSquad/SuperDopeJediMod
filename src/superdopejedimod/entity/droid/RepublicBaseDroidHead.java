@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.droid;
 
 
 import net.minecraft.block.Block;
@@ -13,6 +13,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import superdopesquad.superdopejedimod.BaseItem;
+import superdopesquad.superdopejedimod.entity.EntityManager;
 
 
 public abstract class RepublicBaseDroidHead extends BaseItem {
