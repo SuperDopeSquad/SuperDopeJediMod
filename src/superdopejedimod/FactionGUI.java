@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.faction;
+package superdopesquad.superdopejedimod;
 
 
 import java.awt.Color;
@@ -14,7 +14,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.faction.FactionManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -22,7 +22,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 
 @SideOnly(Side.CLIENT)
-public class ClassGUI extends GuiScreen {
+public class FactionGUI extends GuiScreen {
 
 	int guiWidth = 250;
 	int guiHeight = 350;
@@ -33,10 +33,10 @@ public class ClassGUI extends GuiScreen {
 	private GuiButton _sithButton = null;
 	private GuiButton _jediButton = null;
 	private EntityPlayer _player = null;
-	private static final ClassManager _classManager = SuperDopeJediMod.classManager;
+	private static final FactionManager _factionManager = SuperDopeJediMod.factionManager;
 
 	
-	public ClassGUI(EntityPlayer player) {
+	public FactionGUI(EntityPlayer player) {
 				
 		this._player = player;
 	}
@@ -76,13 +76,13 @@ public class ClassGUI extends GuiScreen {
 		int guiX = (width - guiWidth) / 2;
 		int guiY = (height - guiHeight) / 2;
 		buttonList.clear();
-		buttonList.add(this._sithButton = new GuiButton(_classManager.SITH, guiX + 10, guiY + 30, 250, 175, _classManager.SITH_NAME));
-		buttonList.add(this._jediButton = new GuiButton(_classManager.JEDI, guiX + 10, guiY + 200, 250, 175, _classManager.JEDI_NAME));
+		buttonList.add(this._sithButton = new GuiButton(_factionManager.SITH, guiX + 10, guiY + 30, 250, 175, _factionManager.SITH_NAME));
+		buttonList.add(this._jediButton = new GuiButton(_factionManager.JEDI, guiX + 10, guiY + 200, 250, 175, _factionManager.JEDI_NAME));
 		super.initGui();
 	}
 	
 	
-	private void setClass(Integer id) {
+	private void setFaction(Integer id) {
 		
 	}
 	
@@ -91,31 +91,32 @@ public class ClassGUI extends GuiScreen {
 	protected void actionPerformed(GuiButton button) throws IOException {
 
 		// Go ahead and set the faction.  If it fails, we should tell the user we failed.
-		int classId = button.id;
-		boolean setSuccessfully = _classManager.setPlayerClassById(this._player, classId);
+		int factionId = button.id;
+		boolean setSuccessfully = _factionManager.setPlayerFactionById(this._player, factionId);
 		if (!setSuccessfully) {
-			System.out.println("Error setting class through ClassGUI");
+			System.out.println("Error setting faction through FactionGUI");
 			return;
 		}
 		
 		// If you made it this far, you succeeded in setting the faction, and we want to tell the user what happened.
 		
 		// if you choose the sith
-		if (button.id == _classManager.SITH) {
+		if (button.id == _factionManager.SITH) {
 			
-			this._sithButton.displayString = "You have chosen the " + _classManager.SITH_NAME + ".";
+			this._sithButton.displayString = "You have chosen the " + _factionManager.SITH_NAME + ".";
 			this._sithButton.enabled = false;
 			this._jediButton.enabled = false;
 		}
 		
 		//if you choose the republic
-		else if (button.id == _classManager.JEDI) {
+		else if (button.id == _factionManager.JEDI) {
 			
-			this._jediButton.displayString = "You have chosen the " + _classManager.JEDI_NAME + ".";
+			this._jediButton.displayString = "You have chosen the " + _factionManager.JEDI_NAME + ".";
 			this._jediButton.enabled = false;
 			this._sithButton.enabled = false;
 		}
 		
 		super.actionPerformed(button);
-	}		
+	}
 }
+
