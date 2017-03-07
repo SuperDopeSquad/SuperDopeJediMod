@@ -39,8 +39,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.faction.FactionInfo;
-import superdopesquad.superdopejedimod.faction.FactionManager;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
+import superdopesquad.superdopejedimod.faction.ClassManager;
 
 
 public class WookieEntity extends BaseEntityTameable {
@@ -95,13 +95,13 @@ public class WookieEntity extends BaseEntityTameable {
 	{
 	   clearAITasks(); // clear any tasks assigned in super classes
 	   
-	   // Set up the FactionInfo array that defines who Wookies attack.
-	   FactionInfo[] factions = new FactionInfo[2];
-	   factions[0] = SuperDopeJediMod.factionManager.getFactionInfo(SuperDopeJediMod.factionManager.SITH);
-	   factions[1] = SuperDopeJediMod.factionManager.getFactionInfo(SuperDopeJediMod.factionManager.BOUNTYHUNTER);
+	   // Set up the ClassInfo array that defines who Wookies attack.
+	   ClassInfo[] classes = new ClassInfo[2];
+	   classes[0] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.SITH);
+	   classes[1] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.BOUNTYHUNTER);
 	   
 	   // Main AI task list.
-	   this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false, factions));
+	   this.tasks.addTask(1, new EntityAIAttackMeleeClassAware(this, 1.0, false, classes));
 	   // tasks.addTask(5, new EntityAIMate(this, 1.0D)); We don't need these guys mating.
 	   //this.tasks.addTask(7, new EntityAIFollowParent(this, 1.25D));
 	   this.tasks.addTask(8, new EntityAIWander(this, 1.0D));

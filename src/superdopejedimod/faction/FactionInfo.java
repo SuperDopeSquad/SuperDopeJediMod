@@ -1,24 +1,44 @@
 package superdopesquad.superdopejedimod.faction;
 
-import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FactionInfo {
 
 	
 	private Integer _id;
 	private String _name;
-	private Color _color;
+	private ArrayList<ClassInfo> _classes;
 	
 	
-	public FactionInfo(Integer id, String name, Color color) {
+	public FactionInfo(Integer id, String name) {
 		
 		this._id = id;
 		this._name = name;
-		this._color = color;
+		this._classes = new ArrayList<ClassInfo>();
+	}
+	
+	
+	public Integer getId() {
+		
+		return this._id;
 	}
 	
 	
 	public String getName() {
+		
 		return this._name;
+	}
+	
+	
+	public void addClass(ClassInfo classInfo) {
+		
+		this._classes.add(classInfo);
+	}
+	
+	
+	public ArrayList<ClassInfo> getClasses() {
+		
+		return this._classes;
 	}
 }
