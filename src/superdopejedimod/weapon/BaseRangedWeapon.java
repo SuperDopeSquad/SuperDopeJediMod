@@ -24,8 +24,10 @@ import superdopesquad.superdopejedimod.faction.ClassAwareInterface;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
 
 
-public abstract class BaseRangedWeapon extends ItemBow implements SuperDopeObject, ClassAwareInterface {
+//public abstract class BaseRangedWeapon extends ItemBow implements SuperDopeObject, ClassAwareInterface {
+public abstract class BaseRangedWeapon extends Item implements SuperDopeObject, ClassAwareInterface {
 
+	
 	protected String name = "";
 	
 	public BaseRangedWeapon(String name) {

@@ -17,6 +17,7 @@ import net.minecraft.init.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.datafix.DataFixer;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -87,5 +88,35 @@ public abstract class PlasmaShotEntityBase extends BaseEntityProjectile {
 	            this.setDead();
 	        }
 	    }
+	    
+	    
+	    public void setAim(Entity shooter, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy)
+	    {
+	        float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+	        float f1 = -MathHelper.sin(pitch * 0.017453292F);
+	        float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+	        this.setThrowableHeading((double)f, (double)f1, (double)f2, velocity, inaccuracy);
+	        this.motionX += shooter.motionX;
+	        this.motionZ += shooter.motionZ;
+
+	        if (!shooter.onGround)
+	        {
+	            this.motionY += shooter.motionY;
+	        }
+	    }
+	    
+	    
+
+	    public void setDamage(double damageIn)
+	    {
+	        this._damageAmount = (float) damageIn;
+	    }
+
+	    
+	    public double getDamage()
+	    {
+	        return this._damageAmount;
+	    }
+
 	}
 	

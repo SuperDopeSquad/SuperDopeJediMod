@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public class BossBlaster extends BaseRangedWeapon {
+public class BossBlaster extends BaseBlaster {
 
 	public BossBlaster(String unlocalizedName) {
 		
