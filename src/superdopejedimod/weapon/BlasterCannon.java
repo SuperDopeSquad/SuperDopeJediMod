@@ -7,6 +7,7 @@ public class BlasterCannon extends BaseBlaster {
 		
 		super(unlocalizedName);
 		
+		this.isInstantWeapon = false;
 	}
 
 
