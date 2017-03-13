@@ -13,13 +13,18 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import superdopesquad.superdopejedimod.weapon.GaffiStick;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.entity.droid.DroidParts;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
+import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
 
 
 public class WeaponManager {
+	
+	// BlasterParts is a basic build block for blasters and other weapons.
+	public static BlasterParts blasterParts = new BlasterParts("blasterParts");
 
-	 // Projectile items that are rendered later by the projectile entities..
+	// Projectile items that are rendered later by the projectile entities..
     public static PlasmaShotItem plasmaShotItemBlue = new PlasmaShotItem("plasmaShotItemBlue");
     public static PlasmaShotItem plasmaShotItemRed = new PlasmaShotItem("plasmaShotItemRed");
     
@@ -36,8 +41,8 @@ public class WeaponManager {
     public static RocketLauncher rocketLauncher = new RocketLauncher("rocketLauncher");
 	
     // earlier stuff.
-    public static Blaster blaster = new Blaster("blaster");
-    public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
+    // public static Blaster blaster = new Blaster("blaster");
+    // public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
  
     // Miscellaneous hand-held weapons.
     public static GaffiStick gaffiStick = new GaffiStick("gaffiStick");  
@@ -70,17 +75,22 @@ public class WeaponManager {
     }
 
     
+    public void ThrowPlasmaShot(World world, EntityLivingBase thrower, FactionInfo throwerFactionInfo, EntityLivingBase target, float distanceFactor, float damageAmount) {
+
+    	EntityThrowable entityThrowable = this.createPlasmaShotEntity(world, thrower, throwerFactionInfo, damageAmount);
+    	this.ThrowSomething(entityThrowable, world, thrower, target, distanceFactor, damageAmount);
+    }
+    
+    
     public void ThrowPlasmaShotBlue(World world, EntityLivingBase thrower, EntityLivingBase target, float distanceFactor, float damageAmount) {
 
-    	EntityThrowable entityThrowable  = new PlasmaShotEntityBlue(world, thrower, damageAmount);
-    	this.ThrowSomething(entityThrowable, world, thrower, target, distanceFactor, damageAmount);
+    	this.ThrowPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_REPUBLIC), target, distanceFactor, damageAmount);
     }
     
 	
     public void ThrowPlasmaShotRed(World world, EntityLivingBase thrower, EntityLivingBase target, float distanceFactor, float damageAmount) {
 
-    	EntityThrowable entityThrowable  = new PlasmaShotEntityRed(world, thrower, damageAmount);
-    	this.ThrowSomething(entityThrowable, world, thrower, target, distanceFactor, damageAmount);
+       	this.ThrowPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_EMPIRE), target, distanceFactor, damageAmount);
     }
     
     
@@ -98,43 +108,35 @@ public class WeaponManager {
     }
     
     
-    public PlasmaShotEntityBase createPlasmaShotEntity(World world, EntityPlayer thrower, float damageAmount) {
-    	
-    	// What color should we be using?
- 	   ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(thrower);
- 	   FactionInfo factionInfo = classInfo.getFaction();
- 	   
+    private PlasmaShotEntityBase createPlasmaShotEntity(World world, EntityLivingBase thrower, FactionInfo throwerFactionInfo, float damageAmount) {
+     
  	   // Create an entity based on factioninfo.
- 	   if ((factionInfo == null) || (factionInfo.getId() == SuperDopeJediMod.classManager.FACTION_REPUBLIC)) {
+ 	   if ((throwerFactionInfo == null) || (throwerFactionInfo.getId() == SuperDopeJediMod.classManager.FACTION_REPUBLIC)) {
  		   return new PlasmaShotEntityBlue(world, thrower, damageAmount);
  	   }
  	   else {
  		  return new PlasmaShotEntityRed(world, thrower, damageAmount);
  	   }
     }
+ 
+    
+    private PlasmaShotEntityBase createPlasmaShotEntity(World world, EntityPlayer thrower, float damageAmount) {
+    	
+    	// What color should we be using?
+ 	   ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(thrower);
+ 	   FactionInfo factionInfo = classInfo.getFaction();
+ 	   
+ 	   return this.createPlasmaShotEntity(world, thrower, factionInfo, damageAmount);
+    }
     
     
-   //public void ThrowPlasmaShotAtDirection(World world, EntityPlayer thrower, float targetX, float targetY, float targetZ, float distanceFactor, float damageAmount) {
-   public void ThrowPlasmaShotAtDirection(World world, EntityPlayer thrower, float damageAmount, int timeLeft) {
-
-	   // What color should we be using?
-	   //ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(thrower);
-	   //FactionInfo factionInfo = classInfo.getFaction();
-	   
-//    	EntityThrowable entityThrowable  = new PlasmaShotEntityBlue(world, thrower, damageAmount);
-//    	//this.ThrowSomething(entityThrowable, world, thrower, target, distanceFactor, damageAmount);
-//    	this.ThrowSomething(entityThrowable, world, thrower, targetX, targetY, targetZ, distanceFactor, damageAmount);
-	   
-	   
-	      //int i = this.getMaxItemUseDuration(null) - timeLeft;
-	   int i = 72000 - timeLeft;
-	   float f = getArrowVelocity(i);
-	   
-	   
-       //EntityArrow entityarrow = itemarrow.createArrow(worldIn, itemstack, entityplayer);
-       PlasmaShotEntityBase plasmaShotEntity =  this.createPlasmaShotEntity(world, thrower, damageAmount); //new PlasmaShotEntityBlue(world, thrower, 1.0F);
-
-       
+    public void ThrowPlasmaShotAtDirection(World world, EntityPlayer thrower, float damageAmount, int timeLeft) {
+   
+	    //int i = this.getMaxItemUseDuration(null) - timeLeft;
+    	int i = 72000 - timeLeft;
+    	float f = getArrowVelocity(i);
+	    
+       PlasmaShotEntityBase plasmaShotEntity =  this.createPlasmaShotEntity(world, thrower, damageAmount); 
        plasmaShotEntity.setAim(thrower, thrower.rotationPitch, thrower.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 
        //if (f == 1.0F)
@@ -144,12 +146,11 @@ public class WeaponManager {
 
        int j = 1; // EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 
-       if (j > 0)
-       {
+       if (j > 0) {
     	   plasmaShotEntity.setDamage(plasmaShotEntity.getDamage() + (double)j * 0.5D + 0.5D);
        }
 
-       System.out.println("damageAmount: " + plasmaShotEntity.getDamage());
+       //System.out.println("damageAmount: " + plasmaShotEntity.getDamage());
        
       // int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
 
@@ -183,28 +184,6 @@ public class WeaponManager {
 		double d1 = target.posX - thrower.posX;      
 		double d2 = d0 - entityThrowable.posY;     
 		double d3 = target.posZ - thrower.posZ;      
-		float f = MathHelper.sqrt_double(d1 * d1 + d3 * d3) * 0.2F;
-		entityThrowable.setThrowableHeading(d1, d2 + (double)f, d3, 1.6F, 12.0F);
-		        
-		//this.playSound(SoundEvents.ENTITY_SNOWMAN_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-		       
-		// Actually throw!
-		boolean success = world.spawnEntityInWorld(entityThrowable);
-		if (!success) {
-			System.out.println("Failed to spawn an EntityThrowable!");
-		}
-	}
-	
-	
-	private void ThrowSomething(EntityThrowable entityThrowable, World world, EntityLivingBase thrower, float targetX, float targetY, float targetZ, float distanceFactor, float damageAmount) {
-    	
-		//System.out.println("DEBUG: inside ThrowPlasmaShot");
-		         	
-		// Some complicated math to figure out what direction to throw.   
-		double d0 = targetY; // + (double)target.getEyeHeight() - 1.100000023841858D;      
-		double d1 = targetX - thrower.posX;      
-		double d2 = d0 - entityThrowable.posY;     
-		double d3 = targetZ - thrower.posZ;      
 		float f = MathHelper.sqrt_double(d1 * d1 + d3 * d3) * 0.2F;
 		entityThrowable.setThrowableHeading(d1, d2 + (double)f, d3, 1.6F, 12.0F);
 		        

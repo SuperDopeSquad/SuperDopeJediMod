@@ -52,6 +52,7 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 	
 	protected boolean isInstantWeapon = true;
 	protected float damageAmount = 2.0F;
+	protected float range = 10.0F;
 	
 	
 	public BaseBlaster(String name) {
@@ -101,34 +102,28 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 		return true;
 	}
 	
-// 
-//	protected boolean isArrow(ItemStack stack) {
-//		return stack.getItem() instanceof ItemArrow;
-//	}
-
-	      /**
-	       * Called when the player stops using an Item (stops holding the right mouse button).
-	       */
-	      public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
-	      {
-	       	  System.out.println("inside onPlayerStoppedUsing: timeLeft:" + timeLeft);
+  
+	/**    
+	 * Called when the player stops using an Item (stops holding the right mouse button).
+	*/    
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
+	       	  
+		System.out.println("inside onPlayerStoppedUsing: timeLeft:" + timeLeft);
 	    	  
-	          if (entityLiving instanceof EntityPlayer)
-	          {
-	        	  if (this.isInstantWeapon) {
-	        	   	  System.out.println("onItemRightClick: skipped doing anything due to isInstantWeapon==true");
-	        		  return;
-	        	  }
+		if (entityLiving instanceof EntityPlayer) {
 	        	  
-	              EntityPlayer entityplayer = (EntityPlayer)entityLiving;
-	             // boolean flag = entityplayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
-	              //ItemStack itemstack = this.findAmmo(entityplayer);
-
-	              int i = this.getMaxItemUseDuration(stack) - timeLeft;
-	              boolean hasAmmo = true;
-	              //i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, (EntityPlayer)entityLiving, i, itemstack != null || flag);
-	              i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, (EntityPlayer)entityLiving, i, hasAmmo);
-	  	              if (i < 0) return;
+			if (this.isInstantWeapon) {
+	        	   	  
+				//System.out.println("onItemRightClick: skipped doing anything due to isInstantWeapon==true"); 		  
+				return;  
+			}
+	        	       
+			EntityPlayer entityplayer = (EntityPlayer)entityLiving;
+			int i = this.getMaxItemUseDuration(stack) - timeLeft;
+	        boolean hasAmmo = true;
+	                            
+	        i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, (EntityPlayer)entityLiving, i, hasAmmo);
+	  	    if (i < 0) return;
 
 	             // if (!itemstack.func_190926_b() || flag)
 	              //{
@@ -244,33 +239,27 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 	      
 	      public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 	      {
-	    	  System.out.println("inside onItemRightClick");
+	    	  //System.out.println("inside onItemRightClick");
 	    	  
 	    	  ItemStack itemstack = player.getHeldItem(hand);
 	    	  
 	    	  if (this.isInstantWeapon) {
 	    		  
-	    		  System.out.println("onItemRightClick: isInstantWeapon==true");
-	    		  
-	    		  //this.shootBlasterRound(world, player, 0);  a
+		  		  int timeLeft = 0;
 	    		  SuperDopeJediMod.weaponManager.ThrowPlasmaShotAtDirection(world, player, this.damageAmount, 0);
 	    		 
 	    		  return new ActionResult(EnumActionResult.SUCCESS, itemstack);
 	    	  }
 	    	  
-	  		  System.out.println("onItemRightClick: isInstantWeapon==false");
-	  		 
-	          
-	          //boolean flag = !this.findAmmo(player).func_190926_b();
-	  		  boolean flag = true;
-
-	  		  // public static ActionResult<ItemStack> onArrowNock(ItemStack item, World world, EntityPlayer player, EnumHand hand, boolean hasAmmo)
-	          ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, world, player, hand, flag);
+	  		  //System.out.println("onItemRightClick: isInstantWeapon==false");
+	  		           
+	  		  boolean hasAmmo = true;
+	          ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, world, player, hand, hasAmmo);
 	          if (ret != null) return ret;
 
-	          if (!player.capabilities.isCreativeMode && !flag)
+	          if (!player.capabilities.isCreativeMode && !hasAmmo)
 	          {
-	              return flag ? new ActionResult(EnumActionResult.PASS, itemstack) : new ActionResult(EnumActionResult.FAIL, itemstack);
+	              return hasAmmo ? new ActionResult(EnumActionResult.PASS, itemstack) : new ActionResult(EnumActionResult.FAIL, itemstack);
 	          }
 	          else
 	          {
@@ -287,75 +276,4 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 	          return 1;
 	      }
 	      
-//	      
-//	      private void xxxShootBlasterRound(World worldIn, EntityPlayer entityplayer, int timeLeft) {
-//	 
-//
-//	   		 
-//	    	  
-//	    	  if (!worldIn.isRemote)
-//              {
-//			      int i = this.getMaxItemUseDuration(null) - timeLeft;
-//		   		  float f = getArrowVelocity(i);
-//	    		  
-//                  //ItemArrow itemarrow = (ItemArrow)((ItemArrow)(itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.ARROW));
-//                 
-//                  //EntityArrow entityarrow = itemarrow.createArrow(worldIn, itemstack, entityplayer);
-//                  PlasmaShotEntityBase entityarrow =  new PlasmaShotEntityBlue(worldIn, entityplayer, 1.0F);
-//
-//                  
-//                  entityarrow.setAim(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * 3.0F, 1.0F);
-//
-//                  //if (f == 1.0F)
-//                  //{
-//                  //    entityarrow.setIsCritical(true);
-//                  //}
-//
-//                  int j = 1; // EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
-//
-//                  if (j > 0)
-//                  {
-//                      entityarrow.setDamage(entityarrow.getDamage() + (double)j * 0.5D + 0.5D);
-//                  }
-//
-//                 // int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
-//
-////                  if (k > 0)
-////                  {
-////                      entityarrow.setKnockbackStrength(k);
-////                  }
-//
-////                  if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0)
-////                  {
-////                      entityarrow.setFire(100);
-////                  }
-//
-//                 // stack.damageItem(1, entityplayer);
-//
-////                  if (flag1 || entityplayer.capabilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW))
-////                  {
-////                      entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
-////                  }
-//
-//                  worldIn.spawnEntityInWorld(entityarrow);
-//              }
-//	    	  
-//	    	  
-//	    	   worldIn.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-//
-////               if (!flag1 && !entityplayer.capabilities.isCreativeMode)
-////               {
-////                   itemstack.func_190918_g(1);
-////
-////                   if (itemstack.func_190926_b())
-////                   {
-////                       entityplayer.inventory.deleteStack(itemstack);
-////                   }
-////               }
-//
-//               entityplayer.addStat(StatList.getObjectUseStats(this));
-//	    	  
-//	      }
-//	  
-	  
 }
