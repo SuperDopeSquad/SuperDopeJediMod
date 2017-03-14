@@ -100,12 +100,11 @@ item.republicSentryDroidHead.name=Republic Sentry Droid Head
 item.republicHunterDroidHead.name=Republic Hunter Droid Head
 item.republicPatrolDroidHead.name=Republic Patrol Droid Head
 tile.droidKit.name=Droid Kit
-tile.droidParts.name=Droid Parts
+item.droidParts.name=Droid Parts
 entity.republicSentryDroidEntity.name=Republic Sentry Droid
 entity.republicHunterDroidEntity.name=Republic Hunter Droid
 entity.republicPatrolDroidEntity.name=Republic Patrol Droid
 entity.superdopejedimod.republicSentryDroidEntity.name=Republic Sentry Droid
 entity.superdopejedimod.republicHunterDroidEntity.name=Republic Hunter Droid
 entity.superdopejedimod.republicPatrolDroidEntity.name=Republic Patrol Droid
-
 
