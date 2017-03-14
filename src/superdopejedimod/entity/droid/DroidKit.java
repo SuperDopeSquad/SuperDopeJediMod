@@ -33,9 +33,11 @@ public class DroidKit extends BaseBlock {
 	public void registerRecipe() {
 		
 		// An 8-box of DroidParts creates a DroidKit.	
-	    ItemStack itemStackDroidParts = new ItemStack(SuperDopeJediMod.entityManager.droidParts);
+	    ItemStack itemStackDroidPartsOne = new ItemStack(SuperDopeJediMod.entityManager.droidParts);
 	    ItemStack itemStackDroidKit = new ItemStack(this);
-	    
-	    GameRegistry.addRecipe(itemStackDroidKit, "xxx", "x x", "xxx", 'x', itemStackDroidParts);	
+	    ItemStack itemStackDroidPartsMany = new ItemStack(SuperDopeJediMod.entityManager.droidParts, 8);
+		    
+	    GameRegistry.addRecipe(itemStackDroidKit, "xxx", "x x", "xxx", 'x', itemStackDroidPartsOne);	
+	    GameRegistry.addRecipe(itemStackDroidPartsMany, "x", 'x', itemStackDroidKit);	
 	}
 }
