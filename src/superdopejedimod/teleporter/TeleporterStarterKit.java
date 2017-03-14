@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.teleporter;
 
 
 import java.util.Random;
@@ -15,10 +15,10 @@ import superdopesquad.superdopejedimod.BaseBlock;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-public class DroidKit extends BaseBlock {
+public class TeleporterStarterKit extends BaseBlock {
 
 	
-	public DroidKit(String unlocalizedName) {
+	public TeleporterStarterKit(String unlocalizedName) {
 
 		super(Material.IRON, unlocalizedName);
 	}
@@ -26,16 +26,15 @@ public class DroidKit extends BaseBlock {
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {
         
-		return Item.getItemFromBlock(SuperDopeJediMod.entityManager.droidKit);
+		return Item.getItemFromBlock(SuperDopeJediMod.teleporterManager.teleporterStarterKit);
 	}
 	
 	
+	@Override
 	public void registerRecipe() {
 		
-		// An 8-box of DroidParts creates a DroidKit.	
-	    ItemStack itemStackDroidParts = new ItemStack(SuperDopeJediMod.entityManager.droidParts);
-	    ItemStack itemStackDroidKit = new ItemStack(this);
-	    
-	    GameRegistry.addRecipe(itemStackDroidKit, "xxx", "x x", "xxx", 'x', itemStackDroidParts);	
+		// Recipe for creating a GaffiStick.
+		ItemStack itemStackTeleporterParts = new ItemStack(SuperDopeJediMod.teleporterManager.teleporterParts);
+    	GameRegistry.addRecipe(new ItemStack(this), "xxx", "x x", "xxx", 'x', itemStackTeleporterParts);	
 	}
 }

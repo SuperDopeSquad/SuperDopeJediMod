@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.droid;
 
 
 import net.minecraft.client.model.ModelBase;
@@ -10,15 +10,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.entity.BaseRender;
 
 
 @SideOnly(Side.CLIENT)
-public class RepublicPatrolDroidRender extends BaseRender {
+public class RepublicHunterDroidRender extends BaseRender {
 	
 	
-	public RepublicPatrolDroidRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {
+	public RepublicHunterDroidRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {
 	
-        super(renderManager, par1ModelBase, parShadowSize, "republicPatrolDroid");      
+        super(renderManager, par1ModelBase, parShadowSize, "republicHunterDroid");      
     }
  
 	
