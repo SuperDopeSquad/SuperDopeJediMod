@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.faction.ClassItem;
 import superdopesquad.superdopejedimod.faction.ClassManager;
+import superdopesquad.superdopejedimod.teleporter.TeleporterManager;
 import superdopesquad.superdopejedimod.weapon.BountyHunterLeaderKnife;
 import superdopesquad.superdopejedimod.weapon.BrynsAwesomeSword;
 import superdopesquad.superdopejedimod.weapon.DoubleLightSaber;
@@ -201,6 +202,9 @@ public class SuperDopeJediMod //Start the class Declaration
     // Weapons.
     public static WeaponManager weaponManager = new WeaponManager();
  
+    // Teleporters.
+    public static TeleporterManager teleporterManager = new TeleporterManager();
+    
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
