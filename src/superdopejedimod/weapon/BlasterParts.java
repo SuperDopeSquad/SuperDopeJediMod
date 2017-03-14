@@ -21,10 +21,10 @@ public class BlasterParts extends BaseItem {
 	
 	public void registerRecipe() {
 		
-		// 1 Mandalorian Iron Ingot and 1 Quadanium Steel Ingot create 8 Droid Parts.
+		// 1 Mandalorian Iron Ingot and 2 Quadanium Steel Ingot create 8 Blaster Parts.
     	ItemStack itemStackmandalorianIronIngot = new ItemStack(SuperDopeJediMod.mandalorianIronIngot);
     	ItemStack itemStackquadaniumSteelIngot = new ItemStack(SuperDopeJediMod.quadaniumSteelIngot);
-    	ItemStack itemStackDroidParts = new ItemStack(this, 8);
-    	GameRegistry.addRecipe(itemStackDroidParts, "yx", 'x', itemStackmandalorianIronIngot, 'y', itemStackquadaniumSteelIngot);	
+    	ItemStack itemStackBlasterParts = new ItemStack(this, 8);
+    	GameRegistry.addRecipe(itemStackBlasterParts, "xx ", "y  ", "   ", 'x', itemStackquadaniumSteelIngot, 'y', itemStackmandalorianIronIngot);	
 	}
 }

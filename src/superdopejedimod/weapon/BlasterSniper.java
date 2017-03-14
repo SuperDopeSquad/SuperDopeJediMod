@@ -16,12 +16,18 @@ public class BlasterSniper extends BaseBlaster {
 		this.damageAmount = 6.0F;
 		this.range = 30.0F;
 	}
-
-
+	
+	
 	public void registerRecipe() {
 		
-		// Recipe for creating a GaffiStick.
-		ItemStack itemStackBlasterParts = new ItemStack(SuperDopeJediMod.weaponManager.blasterParts);
-    	GameRegistry.addRecipe(new ItemStack(this), "x x", "xx ", "   ", 'x', itemStackBlasterParts);	
+		ItemStack itemStackBlasterPartsOne = new ItemStack(SuperDopeJediMod.weaponManager.blasterParts);
+		ItemStack itemStackMe = new ItemStack(this);
+		ItemStack itemStackBlasterPartsMany = new ItemStack(SuperDopeJediMod.weaponManager.blasterParts, 4);
+		
+		// Many Blaster Parts create this weapon.
+    	GameRegistry.addRecipe(itemStackMe,  "x x", "xx ", "   ", 'x', itemStackBlasterPartsOne);	
+    	
+    	// This weapon can be broken down into many Blaster Parts.
+    	GameRegistry.addRecipe(itemStackBlasterPartsMany, "x", 'x', itemStackMe);
 	}
 }
