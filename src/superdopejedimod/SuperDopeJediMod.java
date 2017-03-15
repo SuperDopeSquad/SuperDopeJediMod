@@ -21,10 +21,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.faction.ClassItem;
 import superdopesquad.superdopejedimod.faction.ClassManager;
-import superdopesquad.superdopejedimod.ship.BaseMovingVehicle;
+import superdopesquad.superdopejedimod.teleporter.TeleporterManager;
 import superdopesquad.superdopejedimod.weapon.BountyHunterLeaderKnife;
 import superdopesquad.superdopejedimod.weapon.BrynsAwesomeSword;
 import superdopesquad.superdopejedimod.weapon.DoubleLightSaber;
+import superdopesquad.superdopejedimod.ship.BaseMovingVehicle;
 import superdopesquad.superdopejedimod.weapon.GaffiStick;
 import superdopesquad.superdopejedimod.weapon.LightSaber;
 import superdopesquad.superdopejedimod.weapon.MandalorianIronSword;
@@ -92,10 +93,7 @@ public class SuperDopeJediMod //Start the class Declaration
     // instance variable.
     @Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
     public static SuperDopeJediMod instance;
-    
-    // Miscellaneous hand-held weapons.
-    public static GaffiStick gaffiStick = new GaffiStick("gaffiStick");  
-    
+      
     // Vehicle parts.
     public static VehicleSeat vehicleSeat = new VehicleSeat("vehicleSeat");
     
@@ -210,6 +208,9 @@ public class SuperDopeJediMod //Start the class Declaration
     // Weapons.
     public static WeaponManager weaponManager = new WeaponManager();
  
+    // Teleporters.
+    public static TeleporterManager teleporterManager = new TeleporterManager();
+    
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

@@ -5,16 +5,26 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import superdopesquad.superdopejedimod.weapon.GaffiStick;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.entity.droid.DroidParts;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
+import superdopesquad.superdopejedimod.faction.ClassManager;
+import superdopesquad.superdopejedimod.faction.FactionInfo;
 
 
 public class WeaponManager {
+	
+	// BlasterParts is a basic build block for blasters and other weapons.
+	public static BlasterParts blasterParts = new BlasterParts("blasterParts");
 
-	 // Projectile items that are rendered later by the projectile entities..
+	// Projectile items that are rendered later by the projectile entities..
     public static PlasmaShotItem plasmaShotItemBlue = new PlasmaShotItem("plasmaShotItemBlue");
     public static PlasmaShotItem plasmaShotItemRed = new PlasmaShotItem("plasmaShotItemRed");
     
@@ -31,9 +41,12 @@ public class WeaponManager {
     public static RocketLauncher rocketLauncher = new RocketLauncher("rocketLauncher");
 	
     // earlier stuff.
-    public static Blaster blaster = new Blaster("blaster");
-    public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
+    // public static Blaster blaster = new Blaster("blaster");
+    // public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
  
+    // Miscellaneous hand-held weapons.
+    public static GaffiStick gaffiStick = new GaffiStick("gaffiStick");  
+  
 
     public WeaponManager() {}
 	
@@ -62,17 +75,103 @@ public class WeaponManager {
     }
 
     
+    public void ThrowPlasmaShot(World world, EntityLivingBase thrower, FactionInfo throwerFactionInfo, EntityLivingBase target, float distanceFactor, float damageAmount) {
+
+    	EntityThrowable entityThrowable = this.createPlasmaShotEntity(world, thrower, throwerFactionInfo, damageAmount);
+    	this.ThrowSomething(entityThrowable, world, thrower, target, distanceFactor, damageAmount);
+    }
+    
+    
     public void ThrowPlasmaShotBlue(World world, EntityLivingBase thrower, EntityLivingBase target, float distanceFactor, float damageAmount) {
 
-    	EntityThrowable entityThrowable  = new PlasmaShotEntityBlue(world, thrower, damageAmount);
-    	this.ThrowSomething(entityThrowable, world, thrower, target, distanceFactor, damageAmount);
+    	this.ThrowPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_REPUBLIC), target, distanceFactor, damageAmount);
     }
     
 	
     public void ThrowPlasmaShotRed(World world, EntityLivingBase thrower, EntityLivingBase target, float distanceFactor, float damageAmount) {
 
-    	EntityThrowable entityThrowable  = new PlasmaShotEntityRed(world, thrower, damageAmount);
-    	this.ThrowSomething(entityThrowable, world, thrower, target, distanceFactor, damageAmount);
+       	this.ThrowPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_EMPIRE), target, distanceFactor, damageAmount);
+    }
+    
+    
+    public static float getArrowVelocity(int charge)
+    {
+        float f = (float)charge / 20.0F;
+        f = (f * f + f * 2.0F) / 3.0F;
+
+        if (f > 1.0F)
+        {
+            f = 1.0F;
+        }
+
+        return f;
+    }
+    
+    
+    private PlasmaShotEntityBase createPlasmaShotEntity(World world, EntityLivingBase thrower, FactionInfo throwerFactionInfo, float damageAmount) {
+     
+ 	   // Create an entity based on factioninfo.
+ 	   if ((throwerFactionInfo == null) || (throwerFactionInfo.getId() == SuperDopeJediMod.classManager.FACTION_REPUBLIC)) {
+ 		   return new PlasmaShotEntityBlue(world, thrower, damageAmount);
+ 	   }
+ 	   else {
+ 		  return new PlasmaShotEntityRed(world, thrower, damageAmount);
+ 	   }
+    }
+ 
+    
+    private PlasmaShotEntityBase createPlasmaShotEntity(World world, EntityPlayer thrower, float damageAmount) {
+    	
+    	// What color should we be using?
+ 	   ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(thrower);
+ 	   FactionInfo factionInfo = classInfo.getFaction();
+ 	   
+ 	   return this.createPlasmaShotEntity(world, thrower, factionInfo, damageAmount);
+    }
+    
+    
+    public void ThrowPlasmaShotAtDirection(World world, EntityPlayer thrower, float damageAmount, int timeLeft) {
+   
+	    //int i = this.getMaxItemUseDuration(null) - timeLeft;
+    	int i = 72000 - timeLeft;
+    	float f = getArrowVelocity(i);
+	    
+       PlasmaShotEntityBase plasmaShotEntity =  this.createPlasmaShotEntity(world, thrower, damageAmount); 
+       plasmaShotEntity.setAim(thrower, thrower.rotationPitch, thrower.rotationYaw, 0.0F, f * 3.0F, 1.0F);
+
+       //if (f == 1.0F)
+       //{
+       //    entityarrow.setIsCritical(true);
+       //}
+
+       int j = 1; // EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+
+       if (j > 0) {
+    	   plasmaShotEntity.setDamage(plasmaShotEntity.getDamage() + (double)j * 0.5D + 0.5D);
+       }
+
+       //System.out.println("damageAmount: " + plasmaShotEntity.getDamage());
+       
+      // int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
+
+//       if (k > 0)
+//       {
+//           entityarrow.setKnockbackStrength(k);
+//       }
+
+//       if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0)
+//       {
+//           entityarrow.setFire(100);
+//       }
+
+      // stack.damageItem(1, entityplayer);
+
+//       if (flag1 || entityplayer.capabilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW))
+//       {
+//           entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+//       }
+
+       world.spawnEntityInWorld(plasmaShotEntity);
     }
     
     

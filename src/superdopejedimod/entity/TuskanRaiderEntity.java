@@ -69,7 +69,7 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 		this.shadowSize = 1.0F;
 		
 		// Put a gaffi stick in his mainhand slot.
-		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.gaffiStick));
+		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.weaponManager.gaffiStick));
 	}
 	
 	
@@ -199,6 +199,6 @@ public class TuskanRaiderEntity extends BaseEntityAnimal {
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		
-		this.entityDropItem(new ItemStack(SuperDopeJediMod.gaffiStick), 0);
+		this.entityDropItem(new ItemStack(SuperDopeJediMod.weaponManager.gaffiStick), 0);
     }
 }

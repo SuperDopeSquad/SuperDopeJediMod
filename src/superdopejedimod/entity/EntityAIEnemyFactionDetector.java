@@ -156,7 +156,15 @@ public class EntityAIEnemyFactionDetector extends EntityAITarget {
      * 
      */
     protected void alertOthers() {
-        double d0 = this.getTargetDistance();
+        
+    	// BRIAN-TO-DO!
+    	// EMERGENCY FIX ON 3/15/2017.
+    	// BACK THIS OUT WHEN CRASH IS FIXED.
+    	if (true) {
+    		return;
+    	}
+    	
+    	double d0 = this.getTargetDistance();
 
         for (EntityCreature entitycreature : this.taskOwner.worldObj.getEntitiesWithinAABB(this.taskOwner.getClass(), 
         		(new AxisAlignedBB(this.taskOwner.posX, this.taskOwner.posY, this.taskOwner.posZ, this.taskOwner.posX + 1.0D, this.taskOwner.posY + 1.0D, this.taskOwner.posZ + 1.0D)).expand(d0, 10.0D, d0)))
