@@ -143,6 +143,13 @@ public class TeleporterWrench extends BaseItem {
 	}
 	
 	
+	private boolean createColumn(BlockPos blockPos, int columnHeight) {
+		
+		
+		
+		return true;
+	}
+	
 }
 
 

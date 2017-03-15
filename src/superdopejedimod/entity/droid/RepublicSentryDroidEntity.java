@@ -95,6 +95,8 @@ public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implement
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		
+		super.dropEquipment(wasRecentlyHit, lootingModifier);
+		
 		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.droidKit), 0);
 		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.republicSentryDroidHead), 0);
     }
