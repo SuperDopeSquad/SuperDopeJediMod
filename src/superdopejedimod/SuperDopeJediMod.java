@@ -21,6 +21,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.faction.ClassItem;
 import superdopesquad.superdopejedimod.faction.ClassManager;
+import superdopesquad.superdopejedimod.ship.BaseMovingVehicle;
+import superdopesquad.superdopejedimod.weapon.BountyHunterLeaderKnife;
+import superdopesquad.superdopejedimod.weapon.BrynsAwesomeSword;
+import superdopesquad.superdopejedimod.weapon.DoubleLightSaber;
+import superdopesquad.superdopejedimod.weapon.GaffiStick;
+import superdopesquad.superdopejedimod.weapon.LightSaber;
+import superdopesquad.superdopejedimod.weapon.MandalorianIronSword;
+import superdopesquad.superdopejedimod.weapon.QuadaniumSteelSword;
+import superdopesquad.superdopejedimod.weapon.WeaponManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -131,7 +140,11 @@ public class SuperDopeJediMod //Start the class Declaration
     public static ControlPanel controlPanel = new ControlPanel("controlPanel");
     public static CompressedMetalMesh compressedMetalMesh = new CompressedMetalMesh("compressedMetalMesh");
     public static BitsOfCompressedMetalMesh bitsOfCompressedMetalMesh = new BitsOfCompressedMetalMesh("bitsOfCompressedMetalMesh");
-     
+    
+    //Spaceship Entitys
+    
+    
+    
     // Mandalorian Iron, used to create weapons and armor.
     public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");

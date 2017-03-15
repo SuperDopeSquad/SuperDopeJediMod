@@ -35,6 +35,7 @@ public class EntityManager {
     public static JawaEntity jawa = new JawaEntity(null);
     public static WookieEntity wookie = new WookieEntity(null);
     public static ImperialProbeDroidEntity imperialProbeDroid = new ImperialProbeDroidEntity(null);
+    public static StormTrooperEntity stormTrooper = new StormTrooperEntity(null);
     
     // Republic Utility Droid objects.
     public static DroidParts droidParts = new DroidParts("droidParts");
@@ -52,7 +53,7 @@ public class EntityManager {
     public static GenericEgg jawaEgg = new GenericEgg("jawaEgg", JawaEntity.class);
     public static GenericEgg wookieEgg = new GenericEgg("wookieEgg", WookieEntity.class);
     public static GenericEgg imperialProbeDroidEgg = new GenericEgg("imperialProbeDroidEgg", ImperialProbeDroidEntity.class);
-      
+    public static GenericEgg stormTrooperEgg = new GenericEgg("stormTrooperEgg", StormTrooperEntity.class);
     
     public EntityManager() {}
     
