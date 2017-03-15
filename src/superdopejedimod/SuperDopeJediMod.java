@@ -25,6 +25,8 @@ import superdopesquad.superdopejedimod.teleporter.TeleporterManager;
 import superdopesquad.superdopejedimod.weapon.BountyHunterLeaderKnife;
 import superdopesquad.superdopejedimod.weapon.BrynsAwesomeSword;
 import superdopesquad.superdopejedimod.weapon.DoubleLightSaber;
+import superdopesquad.superdopejedimod.ship.BaseMovingVehicle;
+import superdopesquad.superdopejedimod.weapon.GaffiStick;
 import superdopesquad.superdopejedimod.weapon.LightSaber;
 import superdopesquad.superdopejedimod.weapon.MandalorianIronSword;
 import superdopesquad.superdopejedimod.weapon.QuadaniumSteelSword;
@@ -136,7 +138,11 @@ public class SuperDopeJediMod //Start the class Declaration
     public static ControlPanel controlPanel = new ControlPanel("controlPanel");
     public static CompressedMetalMesh compressedMetalMesh = new CompressedMetalMesh("compressedMetalMesh");
     public static BitsOfCompressedMetalMesh bitsOfCompressedMetalMesh = new BitsOfCompressedMetalMesh("bitsOfCompressedMetalMesh");
-     
+    
+    //Spaceship Entitys
+    
+    
+    
     // Mandalorian Iron, used to create weapons and armor.
     public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
     public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");

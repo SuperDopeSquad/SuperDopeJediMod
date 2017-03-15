@@ -22,8 +22,7 @@ public class CommandClass extends BaseCommand
 { 
 	
 	static String commandName = "class";
-	static String commandUsage = "class[es] [set class-name] | [list] | [clear] | [refresh]";
-	
+	static String commandUsage = "class[es] [set class-name] | [list] | [clear] | [refresh] | [set class-name leader player-name]";
 	
     public CommandClass() { 
 
