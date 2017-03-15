@@ -33,8 +33,11 @@ public class TeleporterStarterKit extends BaseBlock {
 	@Override
 	public void registerRecipe() {
 		
-		// Recipe for creating a GaffiStick.
 		ItemStack itemStackTeleporterParts = new ItemStack(SuperDopeJediMod.teleporterManager.teleporterParts);
-    	GameRegistry.addRecipe(new ItemStack(this), "xxx", "x x", "xxx", 'x', itemStackTeleporterParts);	
+		ItemStack itemStackTeleporterPartsMany = new ItemStack(SuperDopeJediMod.teleporterManager.teleporterParts, 8);
+		ItemStack itemStackThis = new ItemStack(this);
+		
+		GameRegistry.addRecipe(itemStackThis, "xxx", "x x", "xxx", 'x', itemStackTeleporterParts);
+    	GameRegistry.addRecipe(itemStackTeleporterPartsMany, "x", 'x', itemStackThis);	
 	}
 }

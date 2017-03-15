@@ -19,8 +19,10 @@ public class RepublicHunterDroidHead extends RepublicBaseDroidHead {
 	    ItemStack itemStackDroidParts = new ItemStack(SuperDopeJediMod.entityManager.droidParts);
 	    ItemStack itemStackMandalorianIronIngot = new ItemStack(SuperDopeJediMod.mandalorianIronIngot); 
 	    ItemStack itemStackThis = new ItemStack(this);
-	    
+	    ItemStack itemStackDroidPartsMany = new ItemStack(SuperDopeJediMod.entityManager.droidParts, 8);
+
 	    GameRegistry.addRecipe(itemStackThis, "xxx", "xyx", "xxx", 'x', itemStackDroidParts,
 	    			'y', itemStackMandalorianIronIngot);	
+	    GameRegistry.addRecipe(itemStackDroidPartsMany, "x", 'x', itemStackThis);	
 	}
 }

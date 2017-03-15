@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.entity.BaseEntityAnimal;
@@ -18,6 +19,10 @@ public abstract class BaseDroidEntity extends BaseEntityAnimal {
 		super(worldIn, name, displayName);
 		
 		this.setupAI();
+		
+		// I am not sure if this is important or not, but experimenting with ways
+		// to keep entity from despawning.
+		this.enablePersistence();
 	}
 
 
@@ -56,7 +61,10 @@ public abstract class BaseDroidEntity extends BaseEntityAnimal {
 	
 	// After it dies, what equipment should it drop?
 	@Override
-	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {}
+	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
+		
+		System.out.println(this.toString() + " DROPPING EQUIPMENT for some reason!");
+	}
 
     
 	@Override
@@ -64,4 +72,13 @@ public abstract class BaseDroidEntity extends BaseEntityAnimal {
 		
 		return false;
 	}
+	
+	
+	@Override
+    protected void despawnEntity()
+    {
+		System.out.println(this.toString() + " DESPAWNING for some reason!");
+		
+		super.despawnEntity();
+    }
 }

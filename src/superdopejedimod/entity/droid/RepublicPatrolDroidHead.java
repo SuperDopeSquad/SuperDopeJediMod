@@ -19,8 +19,10 @@ public class RepublicPatrolDroidHead extends RepublicBaseDroidHead  {
 	    ItemStack itemStackDroidParts = new ItemStack(SuperDopeJediMod.entityManager.droidParts);
 	    ItemStack itemStackQuadaniumSteelIngot = new ItemStack(SuperDopeJediMod.quadaniumSteelIngot); 
 	    ItemStack itemStackThis = new ItemStack(this);
+	    ItemStack itemStackDroidPartsMany = new ItemStack(SuperDopeJediMod.entityManager.droidParts, 8);
 	    
 	    GameRegistry.addRecipe(itemStackThis, "xxx", "xyx", "xxx", 'x', itemStackDroidParts,
 	    			'y', itemStackQuadaniumSteelIngot);	
+	    GameRegistry.addRecipe(itemStackDroidPartsMany, "x", 'x', itemStackThis);	
 	}
 }

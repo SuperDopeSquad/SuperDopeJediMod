@@ -36,7 +36,11 @@ public class TeleporterWrench extends BaseItem {
 	public void registerRecipe() {
 		
 		ItemStack itemStackTeleporterParts = new ItemStack(SuperDopeJediMod.teleporterManager.teleporterParts);
-    	GameRegistry.addRecipe(new ItemStack(this), " x ", " x ", " x ", 'x', itemStackTeleporterParts);	
+		ItemStack itemStackThis = new ItemStack(this);
+		ItemStack itemStackTeleporterPartsMany = new ItemStack(SuperDopeJediMod.teleporterManager.teleporterParts, 3);
+		
+    	GameRegistry.addRecipe(itemStackThis, " x ", " x ", " x ", 'x', itemStackTeleporterParts);	
+    	GameRegistry.addRecipe(itemStackTeleporterPartsMany, "x", 'x', itemStackThis);	
 	}
 
 	
@@ -138,6 +142,13 @@ public class TeleporterWrench extends BaseItem {
 		return true;
 	}
 	
+	
+	private boolean createColumn(BlockPos blockPos, int columnHeight) {
+		
+		
+		
+		return true;
+	}
 	
 }
 

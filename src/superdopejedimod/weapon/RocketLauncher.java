@@ -20,8 +20,14 @@ public class RocketLauncher extends BaseBlaster {
 
 	public void registerRecipe() {
 		
-		// Recipe for creating a GaffiStick.
-		ItemStack itemStackBlasterParts = new ItemStack(SuperDopeJediMod.weaponManager.blasterParts);
-    	GameRegistry.addRecipe(new ItemStack(this), "xxx", "xx ", "xx ", 'x', itemStackBlasterParts);	
+		ItemStack itemStackBlasterPartsOne = new ItemStack(SuperDopeJediMod.weaponManager.blasterParts);
+		ItemStack itemStackMe = new ItemStack(this);
+		ItemStack itemStackBlasterPartsMany = new ItemStack(SuperDopeJediMod.weaponManager.blasterParts, 7);
+		
+		// Many Blaster Parts create this weapon.
+    	GameRegistry.addRecipe(itemStackMe,  "xxx", "xx ", "xx ", 'x', itemStackBlasterPartsOne);	
+    	
+    	// This weapon can be broken down into many Blaster Parts.
+    	GameRegistry.addRecipe(itemStackBlasterPartsMany, "x", 'x', itemStackMe);
 	}
 }
