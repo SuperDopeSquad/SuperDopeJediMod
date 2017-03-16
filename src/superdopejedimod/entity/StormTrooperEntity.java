@@ -41,6 +41,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
 import superdopesquad.superdopejedimod.faction.ClassManager;
+import superdopesquad.superdopejedimod.faction.FactionInfo;
 
 
 public class StormTrooperEntity extends BaseEntityTameable {
@@ -61,15 +62,15 @@ public class StormTrooperEntity extends BaseEntityTameable {
 		this.shadowSize = 1.0F;
 				
 		// Put a iron axe in his mainhand slot.
-		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.weaponManager.blaster));
+		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.weaponManager.blasterRifle));
 	}
 	
 	
 	@Override
 	public void registerEntityRender() {
 				
-		Class renderBaseClass = WookieRender.class;
-		Class modelBaseClass = WookieModel.class;
+		Class renderBaseClass = StormTrooperRender.class;
+		Class modelBaseClass = StormTrooperModel.class;
 		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, 1.0F);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
@@ -96,13 +97,15 @@ public class StormTrooperEntity extends BaseEntityTameable {
 	   clearAITasks(); // clear any tasks assigned in super classes
 	   
 	   // Set up the ClassInfo array that defines who Wookies attack.
-	   ClassInfo[] classes = new ClassInfo[2];
-	   classes[0] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.JEDI);
-	   classes[1] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.SMUGGLER);
-	   classes[2] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.REPUBLICPILOT);
+	   //ClassInfo[] classes = new ClassInfo[3];
+	   //classes[0] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.JEDI);
+	   //classes[1] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.SMUGGLER);
+	   //classes[2] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.REPUBLICPILOT);
+	   FactionInfo factionInfo = SuperDopeJediMod.classManager.getFactionInfo(SuperDopeJediMod.classManager.FACTION_REPUBLIC);
 	   
 	   // Main AI task list.
-	   this.tasks.addTask(1, new EntityAIAttackMeleeClassAware(this, 1.0, false, classes));
+	   //this.tasks.addTask(1, new EntityAIAttackMeleeClassAware(this, 1.0, false, classes));
+	   this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false, factionInfo));
 	   // tasks.addTask(5, new EntityAIMate(this, 1.0D)); We don't need these guys mating.
 	   //this.tasks.addTask(7, new EntityAIFollowParent(this, 1.25D));
 	   this.tasks.addTask(8, new EntityAIWander(this, 1.0D));
@@ -131,7 +134,7 @@ public class StormTrooperEntity extends BaseEntityTameable {
 		
 		//System.out.println("Inside generateSurface for Wookies");
 		
-		Class entityClass = WookieEntity.class;
+		Class entityClass = StormTrooperEntity.class;
 		int weightedProbability = 10;
 		int minimumSpawnCount = 4;
 		int maximumSpawnCount = 8;

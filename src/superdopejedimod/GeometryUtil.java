@@ -85,11 +85,11 @@ public class GeometryUtil {
 	 */
 	public static boolean checkIfColumnWouldBeDestructive(World world, BlockPos startBlockPos, int height) {
 		
-		System.out.println("checkIfColumnWouldBeDestructive blockPos: " + startBlockPos.toString());
+		//System.out.println("checkIfColumnWouldBeDestructive blockPos: " + startBlockPos.toString());
 		
 		// Sanity check the params.
 		if (height < 0) {
-			System.out.println("checkIfColumnWouldBeDestructive: need a positive height. Sent in: " + height);
+			//System.out.println("checkIfColumnWouldBeDestructive: need a positive height. Sent in: " + height);
 			return false;
 		}
 		
