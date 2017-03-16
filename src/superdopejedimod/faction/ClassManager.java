@@ -39,16 +39,10 @@ public class ClassManager {
 	public static final String SMUGGLER_NAME = "Smuggler";
 	public static final String BOUNTYHUNTER_NAME = "Bounty Hunter";
 	public static final String TEAMJUDE_NAME = "Team Jude";
-	public static final String BOUNTYHUNTER_SHORTNAME = "bountyhunter";
-	public static final String TEAMJUDE_SHORTNAME = "Jude";
 	public static final String TUNNELER_NAME = "Tunneler";
-	public static final String TUNNELER_SHORTNAME = "tunneler";
 	public static final String STORMTROOPERCOMMANDER_NAME = "Storm Trooper Commander";
-	public static final String STORMTROOPERCOMMANDER_SHORTNAME = "stormtroopercommander";
 	public static final String SITHPILOT_NAME = "Sith Pilot";
-	public static final String SITHPILOT_SHORTNAME = "sithpilot";
 	public static final String REPUBLICPILOT_NAME = "Republic Pilot";
-	public static final String REPUBLICPILOT_SHORTNAME = "republicpilot";
 	
 	public static final Integer FACTION_REPUBLIC = 0;
 	public static final Integer FACTION_EMPIRE = 1;
@@ -58,7 +52,6 @@ public class ClassManager {
 	private HashMap _factionMap = new HashMap();
 	private HashMap _classMap = new HashMap();
 	ArrayList<ClassInfo> _forceWieldingClasses = new ArrayList<ClassInfo>();
-	//ArrayList<ClassInfo> _nonForceWieldingClasses = new ArrayList<ClassInfo>();
 	
 	
 	public ClassManager() {
@@ -74,9 +67,9 @@ public class ClassManager {
 		ClassInfo classInfoJedi = new ClassInfo(JEDI, JEDI_NAME, Color.blue, true, factionInfoRepublic);
 		ClassInfo classInfoSith = new ClassInfo(SITH, SITH_NAME, Color.red, true, factionInfoEmpire);
 		ClassInfo classInfoSmuggler = new ClassInfo(SMUGGLER, SMUGGLER_NAME, Color.green, true, factionInfoRepublic);
-		ClassInfo classInfoBountyHunter = new ClassInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, true, factionInfoEmpire, BOUNTYHUNTER_SHORTNAME);
-		ClassInfo classInfoTeamJude = new ClassInfo(TEAMJUDE, TEAMJUDE_NAME, Color.pink, true, null, TEAMJUDE_SHORTNAME);
-		ClassInfo classInfoTunneler = new ClassInfo(TUNNELER, TUNNELER_NAME, Color.lightGray, true, null, TUNNELER_SHORTNAME);
+		ClassInfo classInfoBountyHunter = new ClassInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, true, factionInfoEmpire);
+		ClassInfo classInfoTeamJude = new ClassInfo(TEAMJUDE, TEAMJUDE_NAME, Color.pink, true, null);
+		ClassInfo classInfoTunneler = new ClassInfo(TUNNELER, TUNNELER_NAME, Color.lightGray, true, null);
 		ClassInfo classInfoStormTrooperCommander = new ClassInfo(STORMTROOPERCOMMANDER, STORMTROOPERCOMMANDER_NAME, Color.orange, true, factionInfoEmpire);
 		ClassInfo classInfoSithPilot = new ClassInfo(SITHPILOT, SITHPILOT_NAME, Color.gray, true, factionInfoEmpire);
 		ClassInfo classInfoRepublicPilot = new ClassInfo(REPUBLICPILOT, REPUBLICPILOT_NAME, Color.cyan, true, factionInfoRepublic);
@@ -92,18 +85,9 @@ public class ClassManager {
 		this._classMap.put(SITHPILOT, classInfoSithPilot);
 		this._classMap.put(REPUBLICPILOT, classInfoRepublicPilot);
 		
-		// Stash the list of force wielding classes for each access later.
+		// Stash the list of force wielding classes for easy access later.
 		this._forceWieldingClasses.add(classInfoJedi);
 		this._forceWieldingClasses.add(classInfoSith);
-//		this._nonForceWieldingClasses.add(classInfoSmuggler);
-//		this._nonForceWieldingClasses.add(classInfoBountyHunter);
-//		this._nonForceWieldingClasses.add(classInfoTunneler);
-//		this._nonForceWieldingClasses.add(classInfoTeamJude);
-//		this._nonForceWieldingClasses.add(classInfoUnaffiliated);
-//		this._nonForceWieldingClasses.add(classInfoStormTrooperCommander);
-//		this._nonForceWieldingClasses.add(classInfoSithPilot);
-//		this._nonForceWieldingClasses.add(classInfoRepublicPilot);
-		
 	}
 	
 	
@@ -141,13 +125,6 @@ public class ClassManager {
 		
 		return this._forceWieldingClasses;
 	}
-	
-	
-//	public ArrayList<ClassInfo> getNonForceWieldingClasses() {
-//		
-//		return this._nonForceWieldingClasses;
-//	}
-	
 	
 	
     public void onUpdateHandlerClassAware(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
@@ -196,16 +173,9 @@ public class ClassManager {
 	
 	
 	public boolean IsPlayerNonForceWielding(EntityPlayer player) {
-		
-//		ArrayList<ClassInfo> classes = this.getNonForceWieldingClasses();
-//		ClassInfo classInfo = this.getPlayerClass(player);
-//		
-//		return (classes.contains(classInfo));
-		
+			
 		return (!(this.IsPlayerForceWielding(player)));
 	}
-	
-	
 	
 	
 	public ArrayList<ClassInfo> getClasses() {
@@ -313,7 +283,6 @@ public class ClassManager {
     		return ("You are not affiliated with any class.");
     	}
     	
-    	// return ("You are a member of the " + classInfo.getName() + " class.");
     	String message = "You are a member of the " + classInfo.getName() + " class.";
     	
     	FactionInfo factionInfo = classInfo.getFaction();
