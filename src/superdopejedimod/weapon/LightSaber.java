@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
@@ -34,7 +35,7 @@ public class LightSaber extends BaseMeleeWeapon {
 	}
 	
 	
-
+	
 	public void registerRecipe() {
 		
 		if (this.color == "Red") {
@@ -44,6 +45,7 @@ public class LightSaber extends BaseMeleeWeapon {
     		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     		ItemStack stoneButtonStack = new ItemStack(Blocks.STONE_BUTTON);
     		GameRegistry.addRecipe(new ItemStack(this), "x", "y", "z", 'x', redPowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
+    		
 		} 
 		
 		if (this.color == "Blue") {
@@ -115,13 +117,13 @@ public class LightSaber extends BaseMeleeWeapon {
 		return SuperDopeJediMod.classManager.getForceWieldingClasses();
 	}
 	
-	
-	@Override
-	public List<ClassInfo> GetUnfriendlyClasses() {
-	
-		// By default, we do not let force-wielding classes use blasters.
-		return SuperDopeJediMod.classManager.getNonForceWieldingClasses();
-	}
+//	
+//	@Override
+//	public List<ClassInfo> GetUnfriendlyClasses() {
+//	
+//		// By default, we do not let force-wielding classes use blasters.
+//		return SuperDopeJediMod.classManager.getNonForceWieldingClasses();
+//	}
 	
 	@Override
 	public boolean IsUseUnfriendlyBanned() {
@@ -129,5 +131,9 @@ public class LightSaber extends BaseMeleeWeapon {
 		// By default, all blasters are banned from the unfriendly classes, namely, the force-wielding classes.
 		return true;
 	}
+	
+	
+	
+	
 	
 }

@@ -23,26 +23,9 @@ public class BountyHunterLeaderKnife extends BaseMeleeWeapon implements ClassAwa
 	}
 	
 	
-	@Override
-	public List<ClassInfo> GetFriendlyClasses() {
-	
-		// By default, we only let partial force-wielding classes use this.
-		return SuperDopeJediMod.classManager.getPartialForceWieldingClasses();
-	}
+
 	
 	
-	@Override
-	public List<ClassInfo> GetUnfriendlyClasses() {
 	
-		// By default, we do not let non force-wielding classes use blasters.
-		return SuperDopeJediMod.classManager.getNonForceWieldingClasses();
-	}
-	
-	@Override
-	public boolean IsUseUnfriendlyBanned() {
-	
-		// By default, all blasters are banned from the unfriendly classes, namely, the force-wielding classes.
-		return true;
-	}
 	
 }
