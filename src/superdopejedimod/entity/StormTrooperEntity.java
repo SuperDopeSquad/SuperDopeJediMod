@@ -78,7 +78,7 @@ public class StormTrooperEntity extends BaseEntityTameable {
 	@Override
 	public void registerRecipe() {
 		
-		// Recipe for creating a Wookie Egg.
+		// Recipe for creating a Storm Trooper Egg.
 		ItemStack quartzStack = new ItemStack(Items.QUARTZ);	
 		ItemStack eggStack = new ItemStack(Items.EGG);
 
@@ -99,6 +99,7 @@ public class StormTrooperEntity extends BaseEntityTameable {
 	   ClassInfo[] classes = new ClassInfo[2];
 	   classes[0] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.JEDI);
 	   classes[1] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.SMUGGLER);
+	   classes[2] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.REPUBLICPILOT);
 	   
 	   // Main AI task list.
 	   this.tasks.addTask(1, new EntityAIAttackMeleeClassAware(this, 1.0, false, classes));
@@ -195,6 +196,6 @@ public class StormTrooperEntity extends BaseEntityTameable {
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		
-		this.entityDropItem(new ItemStack(Items.IRON_INGOT), 0);
+		this.entityDropItem(new ItemStack(Items.QUARTZ), 0);
     }
 }
