@@ -77,6 +77,40 @@ public class GeometryUtil {
 	
 	
 	/**
+	 * Checks to see if a column (one block by 1 block column starting at startBlockPos and going up) would be destructive here.
+	 * 
+	 * @param world The world to place the blocks.
+	 * @param startBlockPos The starting position for the column.
+	 * @param height The height of the column, including the startPos.
+	 */
+	public static boolean checkIfColumnWouldBeDestructive(World world, BlockPos startBlockPos, int height) {
+		
+		System.out.println("checkIfColumnWouldBeDestructive blockPos: " + startBlockPos.toString());
+		
+		// Sanity check the params.
+		if (height < 0) {
+			System.out.println("checkIfColumnWouldBeDestructive: need a positive height. Sent in: " + height);
+			return false;
+		}
+		
+		BlockPos currentBlockPos = startBlockPos;
+		
+		// Check each block in the column.
+		for (int h = 0 ; h < height ; ++h) {
+			
+			if (!(world.isAirBlock(currentBlockPos))) {
+				System.out.println(("rut-roh: blockPos: " + startBlockPos.toString()));
+				return true;
+			}
+			
+			currentBlockPos = startBlockPos.up(h);
+		}
+		
+		return false;
+	}
+	
+	
+	/**
 	 * Builds a one-block thick wall starting at startPos, extending for the desired length and height.
 	 *
 	 * Note that this routine is destructive, and will permanently delete any block in its way. 
