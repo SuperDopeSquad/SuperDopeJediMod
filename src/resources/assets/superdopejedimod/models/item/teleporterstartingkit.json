@@ -1,7 +1,7 @@
 {    
-    "parent": "superdopejedimod:block/teleporterstarterkit",
+    "parent": "superdopejedimod:block/teleporterstartingkit",
     "textures": {
-        "all": "superdopejedimod:blocks/teleporterstarterkit"
+        "all": "superdopejedimod:blocks/teleporterstartingkit"
     },
     "display": {
         "thirdperson_righthand": {
