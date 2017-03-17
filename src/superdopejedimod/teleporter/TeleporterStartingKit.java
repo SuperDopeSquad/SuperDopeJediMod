@@ -15,10 +15,10 @@ import superdopesquad.superdopejedimod.BaseBlock;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-public class TeleporterStarterKit extends BaseBlock {
+public class TeleporterStartingKit extends BaseBlock {
 
 	
-	public TeleporterStarterKit(String unlocalizedName) {
+	public TeleporterStartingKit(String unlocalizedName) {
 
 		super(Material.IRON, unlocalizedName);
 	}
@@ -26,7 +26,7 @@ public class TeleporterStarterKit extends BaseBlock {
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {
         
-		return Item.getItemFromBlock(SuperDopeJediMod.teleporterManager.teleporterStarterKit);
+		return Item.getItemFromBlock(SuperDopeJediMod.teleporterManager.teleporterStartingKit);
 	}
 	
 	

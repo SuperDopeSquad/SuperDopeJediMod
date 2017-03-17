@@ -74,11 +74,11 @@ public abstract class BaseDroidEntity extends BaseEntityAnimal {
 	}
 	
 	
-	@Override
-    protected void despawnEntity()
-    {
-		System.out.println(this.toString() + " DESPAWNING for some reason!");
-		
-		super.despawnEntity();
-    }
+//	@Override
+//    protected void despawnEntity()
+//    {
+//		System.out.println(this.toString() + " DESPAWNING for some reason!");
+//		
+//		super.despawnEntity();
+//    }
 }
