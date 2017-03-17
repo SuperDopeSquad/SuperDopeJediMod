@@ -61,7 +61,7 @@ public class StormTrooperEntity extends BaseEntityTameable {
 		this.shadowSize = 1.0F;
 				
 		// Put a iron axe in his mainhand slot.
-		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.weaponManager.blaster));
+		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.weaponManager.blasterRifle));
 	}
 	
 	
@@ -96,7 +96,7 @@ public class StormTrooperEntity extends BaseEntityTameable {
 	   clearAITasks(); // clear any tasks assigned in super classes
 	   
 	   // Set up the ClassInfo array that defines who Wookies attack.
-	   ClassInfo[] classes = new ClassInfo[2];
+	   ClassInfo[] classes = new ClassInfo[3];
 	   classes[0] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.JEDI);
 	   classes[1] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.SMUGGLER);
 	   classes[2] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.REPUBLICPILOT);
