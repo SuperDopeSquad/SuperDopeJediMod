@@ -2,7 +2,11 @@ package superdopesquad.superdopejedimod;
 
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 public class PowerCrystal extends BaseItem {
@@ -22,10 +26,86 @@ public class PowerCrystal extends BaseItem {
 		//this.setUnlocalizedName(unlocalizedName);
 	}
 	
+	public void registerRecipe() {
+		
+		if (this.color == "Red") {
+		
+			// Recipe for creating a redLightSaber.
+			ItemStack bluePowerCrystalStack = new ItemStack(SuperDopeJediMod.bluePowerCrystal);
+    		ItemStack slimeballStack = new ItemStack(Items.SLIME_BALL);
+    		ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
+    		ItemStack diamondStack = new ItemStack(Items.DIAMOND);
+    		ItemStack bookStack = new ItemStack(Items.BOOK);
+    		ItemStack greenPowerCrystalStack = new ItemStack(SuperDopeJediMod.greenPowerCrystal);
+    		ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
+    		ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
+
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', bluePowerCrystalStack, 'y', redstoneStack);
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', greenPowerCrystalStack, 'y', redstoneStack);
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', purplePowerCrystalStack, 'y', redstoneStack);
+
+    		
+		} 
 	
+		if (this.color == "Blue") {
+			
+			// Recipe for creating a redLightSaber.
+			ItemStack bluePowerCrystalStack = new ItemStack(SuperDopeJediMod.bluePowerCrystal);
+    		ItemStack slimeballStack = new ItemStack(Items.SLIME_BALL);
+    		ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
+    		ItemStack diamondStack = new ItemStack(Items.DIAMOND);
+    		ItemStack bookStack = new ItemStack(Items.BOOK);
+    		ItemStack greenPowerCrystalStack = new ItemStack(SuperDopeJediMod.greenPowerCrystal);
+    		ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
+    		ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
+
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', redPowerCrystalStack, 'y', diamondStack);
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', greenPowerCrystalStack, 'y', diamondStack);
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', purplePowerCrystalStack, 'y', diamondStack);
+
+    		
+		} 
 	
-	
-	
-	
+		
+		if (this.color == "Green") {
+			
+			// Recipe for creating a redLightSaber.
+			ItemStack bluePowerCrystalStack = new ItemStack(SuperDopeJediMod.bluePowerCrystal);
+    		ItemStack slimeballStack = new ItemStack(Items.SLIME_BALL);
+    		ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
+    		ItemStack diamondStack = new ItemStack(Items.DIAMOND);
+    		ItemStack bookStack = new ItemStack(Items.BOOK);
+    		ItemStack greenPowerCrystalStack = new ItemStack(SuperDopeJediMod.greenPowerCrystal);
+    		ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
+    		ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
+
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', bluePowerCrystalStack, 'y', slimeballStack);
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', redPowerCrystalStack, 'y', slimeballStack);
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', purplePowerCrystalStack, 'y', slimeballStack);
+
+    		
+		} 
+		
+		
+		if (this.color == "Purple") {
+			
+			// Recipe for creating a redLightSaber.
+			ItemStack bluePowerCrystalStack = new ItemStack(SuperDopeJediMod.bluePowerCrystal);
+    		ItemStack slimeballStack = new ItemStack(Items.SLIME_BALL);
+    		ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
+    		ItemStack diamondStack = new ItemStack(Items.DIAMOND);
+    		ItemStack bookStack = new ItemStack(Items.BOOK);
+    		ItemStack greenPowerCrystalStack = new ItemStack(SuperDopeJediMod.greenPowerCrystal);
+    		ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
+    		ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
+
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', bluePowerCrystalStack, 'y', bookStack);
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', greenPowerCrystalStack, 'y', bookStack);
+    		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', redPowerCrystalStack, 'y', bookStack);
+
+    		
+		} 
+		
+	}
 
 }
