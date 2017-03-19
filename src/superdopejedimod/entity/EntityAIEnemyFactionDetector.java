@@ -92,7 +92,7 @@ public class EntityAIEnemyFactionDetector extends EntityAITarget {
             this.alertOthers();
         }
 
-        System.out.println("EntityAIEnemyFactionDetector: starting with this=" + this + ", taskOwner=" + this.taskOwner + ", target="+ this.target);
+        //System.out.println("EntityAIEnemyFactionDetector: starting with this=" + this + ", taskOwner=" + this.taskOwner + ", target="+ this.target);
         super.startExecuting();
     }
     
@@ -103,7 +103,7 @@ public class EntityAIEnemyFactionDetector extends EntityAITarget {
     @Override
     public void resetTask() {
     	// Clear the state machine.
-    	System.out.println("EntityAIEnemyFactionDetector: resetting");
+    	//System.out.println("EntityAIEnemyFactionDetector: resetting");
     	this.target = null;
     	this.taskOwner.setAttackTarget(null);
     }
@@ -156,16 +156,28 @@ public class EntityAIEnemyFactionDetector extends EntityAITarget {
      * 
      */
     protected void alertOthers() {
-        double d0 = this.getTargetDistance();
+        double dist = this.getTargetDistance();
+        AxisAlignedBB alertBoundary = new AxisAlignedBB(this.taskOwner.posX, this.taskOwner.posY, this.taskOwner.posZ, 
+        		this.taskOwner.posX + 1.0D, this.taskOwner.posY + 1.0D, this.taskOwner.posZ + 1.0D).expand(dist, 10.0D, dist);
 
-        for (EntityCreature entitycreature : this.taskOwner.worldObj.getEntitiesWithinAABB(this.taskOwner.getClass(), 
-        		(new AxisAlignedBB(this.taskOwner.posX, this.taskOwner.posY, this.taskOwner.posZ, this.taskOwner.posX + 1.0D, this.taskOwner.posY + 1.0D, this.taskOwner.posZ + 1.0D)).expand(d0, 10.0D, d0)))
+        for (EntityCreature entitycreature : this.taskOwner.worldObj.getEntitiesWithinAABB(this.taskOwner.getClass(), alertBoundary))
         {
-            if (this.taskOwner != entitycreature && entitycreature.getAttackTarget() == null && 
-            		(!(this.taskOwner instanceof EntityTameable) || ((EntityTameable)this.taskOwner).getOwner() == ((EntityTameable)entitycreature).getOwner()) && !entitycreature.isOnSameTeam(this.taskOwner.getAITarget()))
-            {
-                entitycreature.setAttackTarget(this.target);
-            }
+        	// Skip alerting them if they are actually us, or if they are already engaged with someone else.
+            if ((entitycreature == this.taskOwner)  || (entitycreature.getAttackTarget() != null))
+            	continue;
+            
+            // If we are tameable, and this object is not tamed by the same owner, then skip it - we only keep our alert-group to 
+            // entities tamed by the same owner.
+            if ((this.taskOwner instanceof EntityTameable) && 
+            				(((EntityTameable)this.taskOwner).getOwner() != ((EntityTameable)entitycreature).getOwner()))
+            				 continue;
+            	
+            // If they are on the same team, bail.
+            if (entitycreature.isOnSameTeam(this.target)) 
+            	continue;
+            	
+            // If we got this far, alert them by setting their attack target.	
+            entitycreature.setAttackTarget(this.target);
         }
     }
 }
