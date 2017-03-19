@@ -156,6 +156,7 @@ public class EntityAIEnemyFactionDetector extends EntityAITarget {
      * 
      */
     protected void alertOthers() {
+
         double dist = this.getTargetDistance();
         AxisAlignedBB alertBoundary = new AxisAlignedBB(this.taskOwner.posX, this.taskOwner.posY, this.taskOwner.posZ, 
         		this.taskOwner.posX + 1.0D, this.taskOwner.posY + 1.0D, this.taskOwner.posZ + 1.0D).expand(dist, 10.0D, dist);

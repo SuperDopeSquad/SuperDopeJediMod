@@ -12,6 +12,14 @@ import net.minecraft.world.World;
 import superdopesquad.superdopejedimod.MandalorianIron;
 import superdopesquad.superdopejedimod.MandalorianIronIngot;
 import superdopesquad.superdopejedimod.SuperDopeObject;
+import superdopesquad.superdopejedimod.entity.droid.DroidKit;
+import superdopesquad.superdopejedimod.entity.droid.DroidParts;
+import superdopesquad.superdopejedimod.entity.droid.RepublicHunterDroidEntity;
+import superdopesquad.superdopejedimod.entity.droid.RepublicHunterDroidHead;
+import superdopesquad.superdopejedimod.entity.droid.RepublicPatrolDroidEntity;
+import superdopesquad.superdopejedimod.entity.droid.RepublicPatrolDroidHead;
+import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidEntity;
+import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidHead;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotItem;
 
@@ -35,6 +43,7 @@ public class EntityManager {
     public static JawaEntity jawa = new JawaEntity(null);
     public static WookieEntity wookie = new WookieEntity(null);
     public static ImperialProbeDroidEntity imperialProbeDroid = new ImperialProbeDroidEntity(null);
+    public static StormTrooperEntity stormTrooper = new StormTrooperEntity(null);
     
     // Republic Utility Droid objects.
     public static DroidParts droidParts = new DroidParts("droidParts");
@@ -52,7 +61,7 @@ public class EntityManager {
     public static GenericEgg jawaEgg = new GenericEgg("jawaEgg", JawaEntity.class);
     public static GenericEgg wookieEgg = new GenericEgg("wookieEgg", WookieEntity.class);
     public static GenericEgg imperialProbeDroidEgg = new GenericEgg("imperialProbeDroidEgg", ImperialProbeDroidEntity.class);
-      
+    public static GenericEgg stormTrooperEgg = new GenericEgg("stormTrooperEgg", StormTrooperEntity.class);
     
     public EntityManager() {}
     

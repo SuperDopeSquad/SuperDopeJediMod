@@ -8,10 +8,10 @@ import net.minecraft.world.World;
 public class PlasmaShotEntityRed extends PlasmaShotEntityBase {
 
 	
-	 public PlasmaShotEntityRed(World worldIn) {
+	public PlasmaShotEntityRed(World worldIn) {
 	        
 		 super(worldIn);
-	 }
+	}
 	 
 	 
 	public PlasmaShotEntityRed(World worldIn, EntityLivingBase throwerIn, float damageAmount) {
