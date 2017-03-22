@@ -97,18 +97,25 @@ public class StormTrooperEntity extends BaseEntityTameable {
 	   clearAITasks(); // clear any tasks assigned in super classes
 	   
 	   // Set up the ClassInfo array that defines who Wookies attack.
+//<<<<<<< HEAD
+//	   ClassInfo[] classes = new ClassInfo[3];
+//	   classes[0] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.JEDI);
+//	   classes[1] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.SMUGGLER);
+//	   classes[2] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.REPUBLICPILOT);
+//=======
 	   //ClassInfo[] classes = new ClassInfo[3];
 	   //classes[0] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.JEDI);
 	   //classes[1] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.SMUGGLER);
 	   //classes[2] = SuperDopeJediMod.classManager.getClassInfo(SuperDopeJediMod.classManager.REPUBLICPILOT);
 	   FactionInfo factionInfo = SuperDopeJediMod.classManager.getFactionInfo(SuperDopeJediMod.classManager.FACTION_REPUBLIC);
+//>>>>>>> origin/master
 	   
 	   // Main AI task list.
 	   //this.tasks.addTask(1, new EntityAIAttackMeleeClassAware(this, 1.0, false, classes));
 	   this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false, factionInfo));
 	   // tasks.addTask(5, new EntityAIMate(this, 1.0D)); We don't need these guys mating.
 	   //this.tasks.addTask(7, new EntityAIFollowParent(this, 1.25D));
-	   this.tasks.addTask(8, new EntityAIWander(this, 1.0D));
+//	   this.tasks.addTask(8, new EntityAIWander(this, 1.0D));
 	  
 	   // Set up the targetTasks list, which defines who the entity focuses his actions on.
 	   // Priority 0: attack anything that attacked me.

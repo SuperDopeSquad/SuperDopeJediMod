@@ -65,7 +65,7 @@ public class EntityAIHoldAndShoot extends EntityAIBase
         }
         
         // Save who our target is. It might change, but this AI is going to focus on the first guy to mess with us.
-        System.out.println("EntityAIHoldAndShoot: engaging with target=" + favoriteTarget);
+        //System.out.println("EntityAIHoldAndShoot: engaging with target=" + favoriteTarget);
         this.attackTarget = favoriteTarget;
         return true;
     }
@@ -105,7 +105,7 @@ public class EntityAIHoldAndShoot extends EntityAIBase
     @Override
     public void resetTask() {
     	// Clear the state machine.
-    	System.out.println("EntityAIHoldAndShoot: resetting");
+    	//System.out.println("EntityAIHoldAndShoot: resetting");
         this.attackTarget = null;
         this.attackIntervalCounter = 0;
         this.outOfRangeCounter = 0;
