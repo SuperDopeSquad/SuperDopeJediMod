@@ -70,6 +70,7 @@ public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implement
 		
 		// Customize these properties in daughter classes to get different behaviors.
 		this.movementSpeed = 0.0; // This renders this droid unmoveable.
+		this.setEntityInvulnerable(true); // Sentries are unkillable.
 	}
 	
 	
