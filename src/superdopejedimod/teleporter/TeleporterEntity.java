@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity.droid;
+package superdopesquad.superdopejedimod.teleporter;
 
 
 import java.util.Random;
@@ -53,24 +53,26 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.entity.BaseEntityAnimal;
 import superdopesquad.superdopejedimod.entity.EntityRenderFactory;
+import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidModel;
+import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidRender;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
 
 
-public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implements IRangedAttackMob {
+public class TeleporterEntity extends BaseEntityAnimal { // implements IRangedAttackMob {
 		
 	
-	public RepublicSentryDroidEntity(World worldIn) {
+	public TeleporterEntity(World worldIn) {
 		
-		super(worldIn, "republicSentryDroidEntity", "Republic Sentry Droid");
+		super(worldIn, "teleporterEntity", "Teleporter Entity");
 				
 		// This sets the bounding box size, not the actual model that you see rendered.
 		this.setSize(1.0F, 2.0F);
 		
 		// Customize these properties in daughter classes to get different behaviors.
-		this.movementSpeed = 0.0; // This renders this droid unmoveable.
-		this.setEntityInvulnerable(true); // Sentries are unkillable.
+		//this.movementSpeed = 0.0; // This renders this droid unmoveable.
 	}
 	
 	
@@ -85,10 +87,10 @@ public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implement
 	
 	
 	// set up AI tasks
-	@Override
+	// @Override
 	protected void setupAI() {
 			
-		super.setupAI();
+		//super.setupAI();
 	}
 	
 	

@@ -93,7 +93,7 @@ public abstract class RepublicBaseDroidEntity extends BaseDroidEntity implements
 	   // All Republic droids have the following tasks:
 	   
 	   // Priority 1: If you see someone from the Empire, shoot to kill.
-	   this.tasks.addTask(1, new EntityAIAttackRangedFactionAware(this, this.movementSpeed, 1, 3, 10,
+	   this.tasks.addTask(1, new EntityAIAttackRangedFactionAware(this, this.movementSpeed, 1, 3, 20,
 			   SuperDopeJediMod.classManager.getFactionInfo(SuperDopeJediMod.classManager.FACTION_EMPIRE)));
 	
 	   // Priority 2: When not attacking the Empire, stare at the closest person.
