@@ -18,14 +18,32 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 public class TeleporterFinishingKit extends BaseBlock {
 
 	
+	private TeleporterData _teleporterData;
+	
+	
 	public TeleporterFinishingKit(String unlocalizedName) {
 
 		super(Material.IRON, unlocalizedName);
+		
+		
 	}
 	
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {
         
 		return Item.getItemFromBlock(SuperDopeJediMod.teleporterManager.teleporterFinishingKit);
+	}
+	
+	
+	public void setTeleporterData(TeleporterData teleporterData) {
+		
+		this._teleporterData = teleporterData;
+		System.out.println("finishingKit's teleportData set: " + this._teleporterData.getBlockPosThere().toString());
+	}
+	
+	
+	public TeleporterData getTeleporterData() {
+		
+		return this._teleporterData;
 	}
 }
