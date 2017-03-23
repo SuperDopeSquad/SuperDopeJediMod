@@ -20,7 +20,9 @@ public class Credit extends BaseItem {
 		
 		super(unlocalizedName);
 		
-		setCreativeTab(CreativeTabs.MISC);
+		this.setCreativeTab(CreativeTabs.MISC);
+		
+		this.setMaxStackSize(100);
 	}
 	
 	
@@ -30,8 +32,9 @@ public class Credit extends BaseItem {
     	ItemStack spiderEyeStack = new ItemStack(Items.SPIDER_EYE);
     	ItemStack rottenFleshStack = new ItemStack(Items.ROTTEN_FLESH);
     	ItemStack boneStack = new ItemStack(Items.BONE);
+    	ItemStack itemStackCredits = new ItemStack(this, 50);
     	
-    	GameRegistry.addRecipe(new ItemStack(this), 
+    	GameRegistry.addRecipe(itemStackCredits, 
     			"x", 
     			"y", 
     			"z", 

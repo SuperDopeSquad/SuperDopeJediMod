@@ -27,6 +27,8 @@ public class LightSaber extends BaseMeleeWeapon {
 		this.color = colorInput;
 		
 		this.setCreativeTab(CreativeTabs.COMBAT);
+		
+		
 		//this.setMaxStackSize(64);
 		//this.setCreativeTab(CreativeTabs.tabMisc);
 		//this.setUnlocalizedName(unlocalizedName);
@@ -107,7 +109,10 @@ public class LightSaber extends BaseMeleeWeapon {
     		
     		ItemStack lightSaberPurpleStack = new ItemStack(SuperDopeJediMod.lightSaberPurple);
     		GameRegistry.addRecipe(new ItemStack(this), "xxx", "xyx", "xxx", 'x', redstoneStack, 'y', lightSaberPurpleStack);
+    		
 		} 	
+		
+		
 	}
 	
 	@Override
@@ -133,6 +138,14 @@ public class LightSaber extends BaseMeleeWeapon {
 	}
 	
 	
+	//repairs the lightsaber
+	
+//	public void GetItemDurability() {
+//		
+//		this.GetItemDurability();
+//	}
+	
+
 	
 	
 	
