@@ -12,8 +12,16 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import superdopesquad.superdopejedimod.GeometryUtil;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.entity.EntityManager;
+import superdopesquad.superdopejedimod.entity.droid.RepublicBaseDroidEntity;
+import superdopesquad.superdopejedimod.faction.ClassCapability;
+import superdopesquad.superdopejedimod.faction.ClassCapabilityInterface;
+import superdopesquad.superdopejedimod.faction.ClassCapabilityProvider;
+import superdopesquad.superdopejedimod.faction.ClassCapabilityStorage;
+import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
 
 
 
@@ -30,8 +38,19 @@ public class TeleporterManager {
 	public static TeleporterEdgeBlock teleporterEdgeBlock = new TeleporterEdgeBlock("teleporterEdgeBlock");
 	public static TeleporterPortalBlock teleporterPortalBlock = new TeleporterPortalBlock("teleporterPortalBlock");
 
+	  // entities used for teleporters.
+    public static TeleporterEntity teleporterEntity = new TeleporterEntity(null);
+  
+	
 	
 	public TeleporterManager() {}
+	
+	
+	public void preInit() {
+		
+		// Register the 'class' capability.
+		CapabilityManager.INSTANCE.register(TeleporterCapabilityInterface.class, new TeleporterCapabilityStorage(), TeleporterCapability.class);	
+	}
 	
 	
 	public static boolean createTeleporter(EntityPlayer player, World world, BlockPos blockPos, EnumFacing facing, TeleporterSide teleporterSide) {
@@ -51,7 +70,7 @@ public class TeleporterManager {
 		}
 				   
     	IBlockState blockStateTeleporterEdgeBlock = SuperDopeJediMod.teleporterManager.teleporterEdgeBlock.getDefaultState();
-      	IBlockState blockStateTeleporterPortalBlock = SuperDopeJediMod.teleporterManager.teleporterPortalBlock.getDefaultState();
+      	//IBlockState blockStateTeleporterPortalBlock = SuperDopeJediMod.teleporterManager.teleporterPortalBlock.getDefaultState();
       	IBlockState blockStateTeleporterFinishingKit = SuperDopeJediMod.teleporterManager.teleporterFinishingKit.getDefaultState();
       	BlockPos blockPosLeftColumn;
     	BlockPos blockPosRightColumn;
@@ -85,13 +104,16 @@ public class TeleporterManager {
         // Only used in the SIDE_B case.
         TeleporterData teleporterDataFromFinishingKit = null;
         
+        // Only used in the SIDE_A case.
+        TeleporterData teleporterDataIntoFinishingKit = null;
+        
         
         if (teleporterSide == TeleporterSide.SIDE_A) {
         	
             // Let's store critical information in TeleporterData.
             //TeleporterData teleporterDataIntoTeleporterA; // = new TeleporterData();
-            TeleporterData teleporterDataIntoFinishingKit;
-        	
+//            TeleporterData teleporterDataIntoFinishingKit;
+//        	
             //teleporterDataIntoTeleporterA = new TeleporterData();
         	teleporterDataIntoFinishingKit = new TeleporterData();
         	
@@ -106,6 +128,9 @@ public class TeleporterManager {
         	((TeleporterFinishingKitItem)itemStack.getItem()).setTeleporterData(teleporterDataIntoFinishingKit);
         	EntityItem entityItem = new EntityItem(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), itemStack);		
         	boolean success = world.spawnEntityInWorld(entityItem);
+        	
+   
+ 	
         }
         
         else {
@@ -114,7 +139,7 @@ public class TeleporterManager {
             //world.setBlockState(blockPosFinishingKit, blockStateTeleporterFinishingKit);
             
         	
-        	// Useles code except for the ASSERT.
+        	// Useless code except for the ASSERT.
         	Block blockFinishingKit = world.getBlockState(blockPos).getBlock();
             if (!(blockFinishingKit instanceof TeleporterFinishingKit) ){
              	System.out.println("WTF! block i just hit is not TeleporterFinishingKit: " + blockFinishingKit.toString());        	
@@ -152,8 +177,12 @@ public class TeleporterManager {
      	    	
      	// Create the middle column, which includes the portal blocks.
         world.setBlockState(blockPos, blockStateTeleporterEdgeBlock);
-    	List<BlockPos> blockPositions = GeometryUtil.buildColumnDestructive(world, blockPosMiddleColumnBottomPortalBlock, (heightOfPortal - 2), blockStateTeleporterPortalBlock);
+    	//List<BlockPos> blockPositions = GeometryUtil.buildColumnDestructive(world, blockPosMiddleColumnBottomPortalBlock, (heightOfPortal - 2), blockStateTeleporterPortalBlock);
         world.setBlockState(blockPosMiddleColumnTop, blockStateTeleporterEdgeBlock);
+        
+ 		// Create the new entity.
+		TeleporterEntity entity = (TeleporterEntity) EntityManager.createEntity(TeleporterEntity.class, world, blockPosMiddleColumnBottomPortalBlock);
+
         
         // Let's drop the Finishing Kit.
         //TeleporterFinishingKit item = new TeleporterFinishingKit("teleporterFinishingKit");
@@ -177,6 +206,7 @@ public class TeleporterManager {
         
         if (teleporterSide == TeleporterSide.SIDE_A) {
         
+        	teleporterDataIntoFinishingKit.setEntity(entity);
 //        	System.out.println("before i set: " + teleporterDataIntoFinishingKit.getDestination().toString());
 //        
 //        	ItemStack itemStack = new ItemStack(SuperDopeJediMod.teleporterManager.teleporterFinishingKitItem);
@@ -216,6 +246,9 @@ public class TeleporterManager {
             BlockPos blockPosB = blockPos;
             EnumFacing facingB = facing;
             
+            // Set blockPosB correctly, which should be 2 blocks away from the location of EntityB.
+            
+            
             // Let's set up the teleporterData that the first Portal needs.
             TeleporterData teleporterDataForPortalA = new TeleporterData();
             teleporterDataForPortalA.setHere(blockPosA, facingA);
@@ -244,16 +277,30 @@ public class TeleporterManager {
         		return false;
         	}
         	
-        	// Set the first teleporter, and get it to point here.
-        	System.out.println("Do i trust that this is the data for the first one?" + blockPosThere.toString() + " setting there to : " + blockPos.toString());
-        	//TeleporterManager.findAndSetDestination(world, blockPosThere, blockPos, facing);
-        	TeleporterManager.findAndSetTeleporterData(world, blockPosA, teleporterDataForPortalA);
+//        	// Set the first teleporter, and get it to point here.
+//        	System.out.println("Do i trust that this is the data for the first one?" + blockPosThere.toString() + " setting there to : " + blockPos.toString());
+//        	//TeleporterManager.findAndSetDestination(world, blockPosThere, blockPos, facing);
+//        	TeleporterManager.findAndSetTeleporterData(world, blockPosA, teleporterDataForPortalA);
         	
         	
+        	// grab a handle to EntityA, and set it's teleporter data correctly.
+          	TeleporterEntity teleporterEntityA = teleporterDataFromFinishingKit.getEntity(); 
+        	System.out.println("About to set EntityA's teleporterData from:" + teleporterEntityA.getTeleporterDestination().toString() + " to : " + blockPosB.toString());
+         	teleporterEntityA.setTeleporterDestination(TeleporterManager.adjustBlockPos(blockPosB, facingB, 2));
+         	// Future: setTeleporterDirection(facingB);
+        	
+        	// grab a handle to EntityB, and set it's teleporter data correctly.
+         	//if (false) {
+        	TeleporterEntity teleporterEntityB = entity;
+         	System.out.println("About to set EntityB's teleporterData from:" + teleporterEntityB.getTeleporterDestination().toString() + " to : " + blockPosA.toString());
+        	teleporterEntityB.setTeleporterDestination(TeleporterManager.adjustBlockPos(blockPosA, facingA, 2));
+        	// Future: setTeleporterDirection(facingA);
+         	//}
+         	
         	// Set the second teleporter, and get it to point there.
-          	System.out.println("Do i trust that this is the data for the second one?" + blockPos.toString() + " setting there to : " + blockPosThere.toString());
+          	//System.out.println("Do i trust that this is the data for the second one?" + blockPos.toString() + " setting there to : " + blockPosThere.toString());
         	//TeleporterManager.findAndSetDestination(world, blockPos, blockPosThere, enumFacingThere);
-          	TeleporterManager.findAndSetTeleporterData(world, blockPosB, teleporterDataForPortalB);
+          	//TeleporterManager.findAndSetTeleporterData(world, blockPosB, teleporterDataForPortalB);
         }
                 
 		return true;
@@ -291,34 +338,58 @@ public class TeleporterManager {
 //	}
 	
 	
-	public static boolean findAndSetTeleporterData(World world, BlockPos blockPosKeystone, TeleporterData teleporterData) {
+//	public static boolean findAndSetTeleporterData(World world, BlockPos blockPosKeystone, TeleporterData teleporterData) {
+//		
+//		// We assume this initial blockPos is an Edge Block.
+//		Block blockKeystone = world.getBlockState(blockPosKeystone).getBlock();
+//    	if (!(blockKeystone instanceof TeleporterEdgeBlock)) {
+//    		System.out.println("ERROR! bad value found in findAndSetDestination: " + blockKeystone.toString());
+//    		return false;
+//    	}
+// 
+//    	int countOfPortalBlocks = TeleporterManager.TELEPORTER_HEIGHT - 2;
+//    	BlockPos blockPosBottomPortalBlock = blockPosKeystone.up(1);
+//    	
+//    	//TeleporterData teleporterData = new TeleporterData();
+//    	//teleporterData.
+//    	
+//    	for (int i = 0; i < countOfPortalBlocks; i++) {
+//    		
+//    		Block blockPortal = world.getBlockState(blockPosBottomPortalBlock.up(i)).getBlock();
+//        	if (!(blockPortal instanceof TeleporterPortalBlock)) {
+//        		System.out.println("ERROR2! bad value found in findAndSetDestination: " + blockPortal.toString());
+//        		return false;
+//        	}
+//        	
+//        	System.out.println("SUCCESS! good value found in findAndSetDestination: " + blockPortal.toString());
+//        	//((TeleporterPortalBlock)blockPortal).setDestination(blockPosDestination, facingDestination);
+//           	((TeleporterPortalBlock)blockPortal).setTeleporterData(teleporterData); //(blockPosDestination, facingDestination);
+//    	}
+//		
+//		return true;
+//	}
+	
+	
+	
+	public static BlockPos adjustBlockPos(BlockPos blockPosOriginal, EnumFacing facing, int gapDistance) {
 		
-		// We assume this initial blockPos is an Edge Block.
-		Block blockKeystone = world.getBlockState(blockPosKeystone).getBlock();
-    	if (!(blockKeystone instanceof TeleporterEdgeBlock)) {
-    		System.out.println("ERROR! bad value found in findAndSetDestination: " + blockKeystone.toString());
-    		return false;
-    	}
- 
-    	int countOfPortalBlocks = TeleporterManager.TELEPORTER_HEIGHT - 2;
-    	BlockPos blockPosBottomPortalBlock = blockPosKeystone.up(1);
-    	
-    	//TeleporterData teleporterData = new TeleporterData();
-    	//teleporterData.
-    	
-    	for (int i = 0; i < countOfPortalBlocks; i++) {
-    		
-    		Block blockPortal = world.getBlockState(blockPosBottomPortalBlock.up(i)).getBlock();
-        	if (!(blockPortal instanceof TeleporterPortalBlock)) {
-        		System.out.println("ERROR2! bad value found in findAndSetDestination: " + blockPortal.toString());
-        		return false;
-        	}
-        	
-        	System.out.println("SUCCESS! good value found in findAndSetDestination: " + blockPortal.toString());
-        	//((TeleporterPortalBlock)blockPortal).setDestination(blockPosDestination, facingDestination);
-           	((TeleporterPortalBlock)blockPortal).setTeleporterData(teleporterData); //(blockPosDestination, facingDestination);
-    	}
-		
-		return true;
+		if (facing == EnumFacing.NORTH) {
+			return blockPosOriginal.north(gapDistance);
+		}
+		else if (facing == EnumFacing.SOUTH) {
+			return blockPosOriginal.south(gapDistance);
+		}
+		else if (facing == EnumFacing.WEST) {
+			return blockPosOriginal.west(gapDistance);
+		}
+		else if (facing == EnumFacing.EAST) {
+			return blockPosOriginal.east(gapDistance);
+		}
+		else {
+			System.out.println("unexpected value found in TeleporterManager.adjustBlockPos");
+			return blockPosOriginal.north(gapDistance);
+		}
 	}
+	
+	
 }

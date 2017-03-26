@@ -11,12 +11,24 @@ public class TeleporterData {
 	private BlockPos _blockPosThere = null;
 	private EnumFacing _enumFacingThere = null;
 	private TeleporterSide _teleporterSide = null;
+	private TeleporterEntity _entity = null;
 	
 	
 	public TeleporterData() {
 		
 	}
 	
+	
+	public TeleporterEntity getEntity() {
+		
+		return this._entity;
+	}
+	
+	
+	public void setEntity(TeleporterEntity entity) {
+		
+		this._entity = entity;
+	}
 	
 //	public TeleporterData(BlockPos blockPosHere, EnumFacing enumFacingHere, BlockPos blockPosThere, EnumFacing enumFacingThere) {
 //		

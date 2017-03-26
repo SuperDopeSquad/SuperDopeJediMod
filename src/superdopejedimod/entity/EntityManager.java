@@ -20,6 +20,7 @@ import superdopesquad.superdopejedimod.entity.droid.RepublicPatrolDroidEntity;
 import superdopesquad.superdopejedimod.entity.droid.RepublicPatrolDroidHead;
 import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidEntity;
 import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidHead;
+import superdopesquad.superdopejedimod.teleporter.TeleporterEntity;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotItem;
 
@@ -54,7 +55,7 @@ public class EntityManager {
     public static RepublicHunterDroidEntity republicHunterDroid = new RepublicHunterDroidEntity(null);
     public static RepublicPatrolDroidEntity republicPatrolDroid = new RepublicPatrolDroidEntity(null);
     public static RepublicSentryDroidEntity republicSentryDroid = new RepublicSentryDroidEntity(null);
-             
+                  
     // Special eggs that can be used in both creative and survival mode, different from spawn eggs.  More like chicken eggs.
     public static GenericEgg snakeEgg = new GenericEgg("snakeEgg", SnakeEntity.class);
     public static GenericEgg tuskanRaiderEgg = new GenericEgg("tuskanRaiderEgg", TuskanRaiderEntity.class);

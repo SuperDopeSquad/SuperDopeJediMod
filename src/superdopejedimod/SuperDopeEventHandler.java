@@ -28,6 +28,8 @@ import superdopesquad.superdopejedimod.faction.ClassInfo;
 import superdopesquad.superdopejedimod.faction.PacketClientAskingServerAboutClass;
 import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
 import superdopesquad.superdopejedimod.faction.PacketServerPokingClientAboutClass;
+import superdopesquad.superdopejedimod.teleporter.TeleporterCapabilityProvider;
+import superdopesquad.superdopejedimod.teleporter.TeleporterEntity;
 
 
 public class SuperDopeEventHandler {
@@ -79,6 +81,14 @@ public class SuperDopeEventHandler {
 			ResourceLocation classCapabilityId = new ResourceLocation(SuperDopeJediMod.MODID, "classCapability");
 			event.addCapability(classCapabilityId, new ClassCapabilityProvider());
 		}
+		
+		if (event.getObject() instanceof TeleporterEntity) {
+			
+			// Attaching the Teleporter capability to TeleporterEntity.
+			System.out.println("DEBUG: Attaching the Teleporter capability to TeleporterEntity.");
+			ResourceLocation teleporterCapabilityId = new ResourceLocation(SuperDopeJediMod.MODID, "teleporterCapability");
+			event.addCapability(teleporterCapabilityId, new TeleporterCapabilityProvider());
+		}
 	}
 
 	
@@ -109,43 +119,5 @@ public class SuperDopeEventHandler {
 				SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
 			}
 		}
-		
-		
-		
-		
-		
-//		
-//		
-////		Entity entityIn = event.getEntity();
-////		Class entityClass = entityIn.getClass();
-////		Render<? extends Entity> render = Minecraft.getMinecraft().getRenderManager().entityRenderMap.get(entityClass);
-////				
-////		// Debug info.
-////		//String info;
-////		//if (render == null) {
-////		//	info = "Render: NULL; " + entityIn.getName();
-////		//}
-////		//else {
-////		//	info = "Render: " + render.toString() + ", Entity: " + entityIn.getName();;
-////		//}
-////		//System.out.println("DEBUG: onEntityJoined: " + info);
-////		
-////		// Try to add the LayerFactionIndicator if entityRender points to this being a creature.
-////		if (false) {
-////		if (render != null && render instanceof RenderLivingBase) {
-////			
-////			//System.out.println("DEBUG: onEntityJoined: about to add layer to " + info);
-////			LayerRenderer layerRenderer = new LayerFactionIndicator((RenderLivingBase)render);
-////			
-////			try {
-////				((RenderLivingBase)render).addLayer(layerRenderer);
-////			}
-////			catch (Exception e) {
-////				System.out.println("DEBUG: onEntityJoined: failed to add LayerFactionIndicator on " + entityIn.getName() + ": " + e.getMessage());
-////			}
-////		}
-////		}
-//	}
-// }
 	}
 }

@@ -10,6 +10,8 @@ import superdopesquad.superdopejedimod.faction.PacketHandlerPlayerSetClass;
 import superdopesquad.superdopejedimod.faction.PacketHandlerServerPokingClientAboutClass;
 import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
 import superdopesquad.superdopejedimod.faction.PacketServerPokingClientAboutClass;
+import superdopesquad.superdopejedimod.teleporter.PacketHandlerTeleporterSetDestination;
+import superdopesquad.superdopejedimod.teleporter.PacketTeleporterSetDestination;
 
 
 public class SuperDopePacketManager  {
@@ -23,5 +25,7 @@ public class SuperDopePacketManager  {
 		INSTANCE.registerMessage(PacketHandlerPlayerSetClass.class, PacketPlayerSetClass.class, _nextMessageId++, Side.CLIENT);
 		INSTANCE.registerMessage(PacketHandlerClientAskingServerAboutClass.class, PacketClientAskingServerAboutClass.class, _nextMessageId++, Side.SERVER);
 		INSTANCE.registerMessage(PacketHandlerServerPokingClientAboutClass.class, PacketServerPokingClientAboutClass.class, _nextMessageId++, Side.CLIENT);
+		INSTANCE.registerMessage(PacketHandlerTeleporterSetDestination.class, PacketTeleporterSetDestination.class, _nextMessageId++, Side.CLIENT);
+		
 	}
 }

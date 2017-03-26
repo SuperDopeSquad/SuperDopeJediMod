@@ -226,8 +226,8 @@ public class SuperDopeJediMod //Start the class Declaration
     	// Call the pre-init of ClassManager, which needs to do some registration work.
     	this.classManager.preInit();
     	
-//    	// Let's register our eventhandler class.   
-//    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());	   
+    	// Call the pre-init of TeleporterManager, which needs to do some registration work.
+    	this.teleporterManager.preInit(); 
     }
      
      
