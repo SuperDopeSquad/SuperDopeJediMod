@@ -3,7 +3,9 @@
  */
 package superdopesquad.superdopejedimod;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import net.minecraft.block.material.Material;
@@ -63,7 +65,10 @@ public class GeometryUtil {
 	 * @param height The height of the column, including the startPos.
 	 * @param bstate The blockstate to use for new blocks in the column.
 	 */
-	public static void buildColumnDestructive(World world, BlockPos startPos, int height, IBlockState bstate) {
+	public static List<BlockPos> buildColumnDestructive(World world, BlockPos startPos, int height, IBlockState bstate) {
+		
+		 List<BlockPos> blockPositions = new ArrayList();
+		
 		// Sanity check the params.
 		if (height < 0) {
 			throw new IllegalArgumentException("buildColumnDestructive: need a positive height");
@@ -71,8 +76,12 @@ public class GeometryUtil {
 		
 		// Lay down the column.
 		for (int h = 0 ; h < height ; ++h) {
-			world.setBlockState(startPos.up(h), bstate);
+			BlockPos newBlockPos = startPos.up(h);
+			world.setBlockState(newBlockPos, bstate);
+			blockPositions.add(newBlockPos);
 		}
+		
+		return blockPositions;
 	}
 	
 	

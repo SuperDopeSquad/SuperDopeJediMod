@@ -1,10 +1,13 @@
 package superdopesquad.superdopejedimod.entity;
 
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -35,6 +38,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.init.Biomes;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -91,7 +95,7 @@ public class ImperialProbeDroidEntity extends BaseEntityAnimal implements IRange
 		ItemStack stack1 = new ItemStack(Items.IRON_INGOT);	
 		ItemStack stack2 = new ItemStack(Items.REDSTONE);
 		GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.entityManager.imperialProbeDroidEgg, 1), 
-			" x ", "xyx", " x ", 
+			"xx ", " y ", " xx", 
 			'x', stack1, 'y', stack2);
 	}
 	
@@ -112,10 +116,11 @@ public class ImperialProbeDroidEntity extends BaseEntityAnimal implements IRange
 		 // Main AI task list.
 		this.tasks.addTask(0, new EntityAISwimming(this)); // I think this prevents drowning.
 		this.tasks.addTask(0, new EntityAIHoldAndShoot(this, 10, 16.0F));	// Once enemy is identified, hold position and shoot until it goes out of range.
-		this.tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F, 0.02F)); // Turn the head to look and nearest entity.
+		this.tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F, 0.02F)); // Turn the head to look at nearest entity.
 		
-		// If nothing else to do, wander around.
-		this.tasks.addTask(8, new EntityAIWander(this, 1.0D, 50));
+		// Our main job is to follow the markers around.
+		List<Block> tokenMarker = Arrays.asList(Blocks.REDSTONE_TORCH, Blocks.OBSIDIAN, Blocks.STONE);
+		this.tasks.addTask(8, new EntityAIFollowPathMarkers(this, 1.0D, 20, tokenMarker));
 	}
 	
 	
@@ -143,7 +148,7 @@ public class ImperialProbeDroidEntity extends BaseEntityAnimal implements IRange
      */
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
     {
-    	System.out.println("ImperialProbe: attacking with ranged!");
+    	//System.out.println("ImperialProbe: attacking with ranged!");
     	
         float damageAmount = 1;
     	SuperDopeJediMod.weaponManager.ThrowPlasmaShotRed(worldObj, this, target, distanceFactor, damageAmount);
@@ -164,7 +169,6 @@ public class ImperialProbeDroidEntity extends BaseEntityAnimal implements IRange
 	
 	@Override
 	protected void applyEntityAttributes() {
-		
 	   super.applyEntityAttributes(); 
 
 	    // standard attributes registered to EntityLivingBase
@@ -182,5 +186,11 @@ public class ImperialProbeDroidEntity extends BaseEntityAnimal implements IRange
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		this.entityDropItem(new ItemStack(Items.REDSTONE), 0);
+	}
+	
+	// Don't despawn if no players are anywhere near us.
+	@Override
+	protected boolean canDespawn() {
+		return false;
 	}
 }

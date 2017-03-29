@@ -51,22 +51,41 @@ public class TeleporterWrench extends BaseItem {
 		boolean isWorldServer = (!world.isRemote);
 		IBlockState blockStateClicked = world.getBlockState(blockPos);
     	Block blockClicked = blockStateClicked.getBlock();
-    	boolean isTeleporterStarterKit = (blockClicked instanceof TeleporterStartingKit);
-       	boolean isTeleporterKit = (blockClicked instanceof TeleporterFinishingKit);
+    	boolean isTeleporterStartingKit = (blockClicked instanceof TeleporterStartingKit);
+       	boolean isTeleporterFinishingKit = (blockClicked instanceof TeleporterFinishingKit);
            	
     	//System.out.println("DEBUG: inside TeleporterWrench:onItemUse: " + blockClicked.toString() + 
     	//		" : " + hand.name() + " : " + facing.getName() + " : " + (isTeleporterStarterKit) + " : " + (isTeleporterKit));
     	
     	// If we are on the server, and we are being held in the main hand, and this is actually a droidkit , ...
-    	if ((isWorldServer) && (hand == EnumHand.MAIN_HAND) && (isTeleporterStarterKit)) {
-        	    		
-    		// Create a starter teleporter.
-    		if (TeleporterManager.createStarterTeleporter(player, world, blockPos, facing)) {
+    	if ((isWorldServer) && (hand == EnumHand.MAIN_HAND)) {
     		
-    			// Return something relevant.
-    			return EnumActionResult.SUCCESS;
+    		if (isTeleporterStartingKit) {
+    		
+    			System.out.println("about to create a sideA teleporter");
+    			
+    			// Create a starter teleporter.
+    			if (TeleporterManager.createTeleporter(player, world, blockPos, facing, TeleporterSide.SIDE_A)) {
+    		
+    				// Return something relevant.
+    				return EnumActionResult.SUCCESS;
+    			}
+    		}
+    		
+    		if (isTeleporterFinishingKit) {
+   
+    			System.out.println("about to create a sideB teleporter");
+    			
+    			// Create a starter teleporter.
+    			if (TeleporterManager.createTeleporter(player, world, blockPos, facing, TeleporterSide.SIDE_B)) {
+    		
+    				// Return something relevant.
+    				return EnumActionResult.SUCCESS;
+    			}
     		}
     	}
+    	
+    	
    	
     	return EnumActionResult.PASS;
     }
