@@ -37,9 +37,11 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -64,19 +66,24 @@ import superdopesquad.superdopejedimod.faction.ClassCapabilityInterface;
 import superdopesquad.superdopejedimod.faction.ClassCapabilityProvider;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
+import superdopesquad.superdopejedimod.faction.PacketClientAskingServerAboutClass;
 import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
 
 
-public class TeleporterEntity extends BaseEntityAnimal { // implements IRangedAttackMob {
+public class TeleporterEntity extends BaseEntityAnimal {
 		
+	
+	public static BlockPos BLOCKPOS_NULL = new BlockPos(0,0,0);
+	
 	
 	public TeleporterEntity(World worldIn) {
 		
-		super(worldIn, "teleporterEntity", "Teleporter Entity");
+		super(worldIn, "teleporter", "Teleporter Entity");
 				
 		// This sets the bounding box size, not the actual model that you see rendered.
-		this.setSize(1.0F, 2.0F);
+		//this.setSize(1.0F, 2.0F);
+		this.setSize(0.50F, 3.0F);
 		
 		// Customize these properties in daughter classes to get different behaviors.
 		//this.movementSpeed = 0.0; // This renders this droid unmoveable.
@@ -87,8 +94,8 @@ public class TeleporterEntity extends BaseEntityAnimal { // implements IRangedAt
 	@Override
 	public void registerEntityRender() {
 			
-		Class renderBaseClass = RepublicSentryDroidRender.class;
-		Class modelBaseClass = RepublicSentryDroidModel.class;
+		Class renderBaseClass = TeleporterRender.class;
+		Class modelBaseClass = TeleporterModel.class;
 		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, this.shadowSize);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
@@ -103,15 +110,16 @@ public class TeleporterEntity extends BaseEntityAnimal { // implements IRangedAt
     	if (!entityPlayer.worldObj.isRemote) {
     		
     		BlockPos blockPos = this.getTeleporterDestination();
-    		System.out.println("collided with " + entityPlayer.toString() + ", current teleportData: " + blockPos.toString());
+    		//System.out.println("collided with " + entityPlayer.toString() + ", current teleportData: " + blockPos.toString());
     		
     		// if there is a real BlockPos there, teleport!
-    		if (!(blockPos.equals(new BlockPos(0,0,0)))) {
-    	     	System.out.println("about to tell client to teleport from: " + entityPlayer.getPosition().toString() + " to: " + blockPos.toString());	
-    	     	//entityPlayer.moveToBlockPosAndAngles(blockPos, entityPlayer.rotationYaw, entityPlayer.rotationPitch);
+    		//if (!(blockPos.equals(new BlockPos(0,0,0)))) {
+    		if (this.isCorrectlyConfigured()) {
+    	     	
+    			System.out.println("about to tell client to teleport from: " + entityPlayer.getPosition().toString() + " to: " + blockPos.toString());	
     	     	
     	    	// Tell the client what is going on.
-      			PacketTeleporterSetDestination message = new PacketTeleporterSetDestination(this, blockPos);
+      			PacketTeleporterSetDestination message = new PacketTeleporterSetDestination(blockPos);
     			SuperDopeJediMod.packetManager.INSTANCE.sendTo(message, (EntityPlayerMP) entityPlayer);
     			
     	     	
@@ -121,22 +129,32 @@ public class TeleporterEntity extends BaseEntityAnimal { // implements IRangedAt
     		}
     	}
     }
-	
     
+    
+    public boolean isCorrectlyConfigured() {
+    	
+    	BlockPos blockPos = this.getTeleporterDestination();
+    	boolean configured = (!(blockPos.equals(TeleporterEntity.BLOCKPOS_NULL)));
+    	//System.out.println(TeleporterEntity.BLOCKPOS_NULL.toString() + ", " + blockPos.toString() + ", " + (configured));
+    	
+    	return configured;
+    }
+	
     
     @Override
     public void moveEntity(MoverType x, double p_70091_2_, double p_70091_4_, double p_70091_6_)
     {
     	// do nothing.
     }
+    
 	
-	// set up AI tasks
-	// @Override
-	protected void setupAI() {
-			
-		//super.setupAI();
-	}
-	
+//	// set up AI tasks
+//	// @Override
+//	protected void setupAI() {
+//			
+//		//super.setupAI();
+//	}
+//	
 	
 	public BlockPos getTeleporterDestination() {
 		
@@ -145,24 +163,17 @@ public class TeleporterEntity extends BaseEntityAnimal { // implements IRangedAt
 		boolean hasCapability = this.hasCapability(TeleporterCapabilityProvider.TeleporterCapability, null);
 		assert(hasCapability);
 				
-		// Let's get the Faction capability that is set on every player.
+		// Let's get the Teleporter capability that is set on every TeleporterEntity.
 		TeleporterCapabilityInterface teleporterCapability = this.getCapability(TeleporterCapabilityProvider.TeleporterCapability, null);
 		assert(teleporterCapability != null);
 		if (teleporterCapability == null) {
 			System.out.println("Uh oh! Failed to find teleporter capability.");
-			//return (ClassInfo) this._classMap.get(UNAFFILIATED);
-			return new BlockPos(0,0,0);
+			//return new BlockPos(0,0,0);
+			return TeleporterEntity.BLOCKPOS_NULL;
 		}
 		
 		// Extract the name out of factionInfo, now that we have the proper id.
 		return teleporterCapability.getTeleporterDestination();
-		
-		//Integer classId = classCapability.get();
-		//ClassInfo classInfo = (ClassInfo) this._classMap.get(classId);
-
-		//System.out.println("getPlayerFaction: " + player.toString() + ", factionid:" + factionId.toString());
-		
-		//return classInfo;
 	}
 	
 	
@@ -178,6 +189,7 @@ public class TeleporterEntity extends BaseEntityAnimal { // implements IRangedAt
 		// This sets it on the server.
 		boolean setSuccess = teleporterCapability.setTeleporterDestination(blockPos);
 		if (!setSuccess) {
+			System.out.println("failed setting teleporter destination.");
 			return false;
 		}
 		
@@ -190,13 +202,28 @@ public class TeleporterEntity extends BaseEntityAnimal { // implements IRangedAt
 		return true;
 	}
 	
-//	// After it dies, what equipment should it drop?
-//	@Override
-//	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
-//		
-//		super.dropEquipment(wasRecentlyHit, lootingModifier);
-//		
-//		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.droidKit), 0);
-//		this.entityDropItem(new ItemStack(SuperDopeJediMod.entityManager.republicSentryDroidHead), 0);
-//    }
+	
+	public void syncWithServer() {
+				
+		// Ask about teleporter data.
+		int entityId = this.getEntityId();
+		
+		System.out.println("About to create PacketClientAskingServerAboutTeleporterDestination for entityId " + entityId);
+		
+		//PacketClientAskingServerAboutTeleporterDestination packet = new PacketClientAskingServerAboutTeleporterDestination(entityId);
+		PacketClientAskingServerAboutTeleporterDestination packet = new PacketClientAskingServerAboutTeleporterDestination();
+		packet.setTeleporterEntityId(entityId);
+
+		System.out.println("About to send PacketClientAskingServerAboutTeleporterDestination for entityId " + entityId);
+		
+		SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
+	}
+
+
+	@Override
+	public void registerModel() {}
+
+
+	@Override
+	public void registerRecipe() {}
 }

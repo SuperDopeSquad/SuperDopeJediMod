@@ -28,6 +28,7 @@ import superdopesquad.superdopejedimod.faction.ClassInfo;
 import superdopesquad.superdopejedimod.faction.PacketClientAskingServerAboutClass;
 import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
 import superdopesquad.superdopejedimod.faction.PacketServerPokingClientAboutClass;
+//import superdopesquad.superdopejedimod.teleporter.PacketClientAskingServerAboutTeleporterDestination;
 import superdopesquad.superdopejedimod.teleporter.TeleporterCapabilityProvider;
 import superdopesquad.superdopejedimod.teleporter.TeleporterEntity;
 
@@ -85,7 +86,7 @@ public class SuperDopeEventHandler {
 		if (event.getObject() instanceof TeleporterEntity) {
 			
 			// Attaching the Teleporter capability to TeleporterEntity.
-			System.out.println("DEBUG: Attaching the Teleporter capability to TeleporterEntity.");
+			//System.out.println("DEBUG: Attaching the Teleporter capability to TeleporterEntity.");
 			ResourceLocation teleporterCapabilityId = new ResourceLocation(SuperDopeJediMod.MODID, "teleporterCapability");
 			event.addCapability(teleporterCapabilityId, new TeleporterCapabilityProvider());
 		}
@@ -115,9 +116,27 @@ public class SuperDopeEventHandler {
 			//System.out.println("Inside onEntityJoined: " + (event.getWorld().isRemote) + ", ");
 		
 			if (newPlayer.getUniqueID() == (currentPlayer.getUniqueID())) {
+				
+				// Ask about class.
 				PacketClientAskingServerAboutClass packet = new PacketClientAskingServerAboutClass();
 				SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
+				
+//				// Ask about teleporter data.
+//				PacketClientAskingServerAboutTeleporterDestination packet2 = new PacketClientAskingServerAboutTeleporterDestination();
+//				SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet2);
 			}
 		}
+		
+//		// If this is a teleporter, phone home and ask for accurate information on destination.	
+//		if (entity instanceof TeleporterEntity ) {
+//						
+//			TeleporterEntity teleporter = (TeleporterEntity) entity;
+//			System.out.println("Inside onEntityJoined: " + (event.getWorld().isRemote) + ", ");
+//					
+//			//if (teleporter.getUniqueID() == (currentPlayer.getUniqueID())) {
+//			PacketClientAskingServerAboutTeleporterDestination packet = new PacketClientAskingServerAboutTeleporterDestination();
+//			SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
+//			//}
+//		}
 	}
 }

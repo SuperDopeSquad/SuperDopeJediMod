@@ -10,7 +10,11 @@ import superdopesquad.superdopejedimod.faction.PacketHandlerPlayerSetClass;
 import superdopesquad.superdopejedimod.faction.PacketHandlerServerPokingClientAboutClass;
 import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
 import superdopesquad.superdopejedimod.faction.PacketServerPokingClientAboutClass;
+import superdopesquad.superdopejedimod.teleporter.PacketClientAskingServerAboutTeleporterDestination;
+import superdopesquad.superdopejedimod.teleporter.PacketHandlerClientAskingServerAboutTeleporterDestination;
+import superdopesquad.superdopejedimod.teleporter.PacketHandlerServerTellingClientAboutTeleporterInfo;
 import superdopesquad.superdopejedimod.teleporter.PacketHandlerTeleporterSetDestination;
+import superdopesquad.superdopejedimod.teleporter.PacketServerTellingClientAboutTeleporterInfo;
 import superdopesquad.superdopejedimod.teleporter.PacketTeleporterSetDestination;
 
 
@@ -26,6 +30,7 @@ public class SuperDopePacketManager  {
 		INSTANCE.registerMessage(PacketHandlerClientAskingServerAboutClass.class, PacketClientAskingServerAboutClass.class, _nextMessageId++, Side.SERVER);
 		INSTANCE.registerMessage(PacketHandlerServerPokingClientAboutClass.class, PacketServerPokingClientAboutClass.class, _nextMessageId++, Side.CLIENT);
 		INSTANCE.registerMessage(PacketHandlerTeleporterSetDestination.class, PacketTeleporterSetDestination.class, _nextMessageId++, Side.CLIENT);
-		
+		INSTANCE.registerMessage(PacketHandlerClientAskingServerAboutTeleporterDestination.class, PacketClientAskingServerAboutTeleporterDestination.class, _nextMessageId++, Side.SERVER);	
+		INSTANCE.registerMessage(PacketHandlerServerTellingClientAboutTeleporterInfo.class, PacketServerTellingClientAboutTeleporterInfo.class, _nextMessageId++, Side.CLIENT);	
 	}
 }

@@ -20,7 +20,6 @@ public class TeleporterCapabilityProvider  implements ICapabilitySerializable<NB
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 
-		//System.out.println("Inside hasCapability");
 		return capability == TeleporterCapability;
 	}
 	

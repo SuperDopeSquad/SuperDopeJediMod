@@ -15,73 +15,57 @@ public class PacketTeleporterSetDestination implements IMessage {
 
 
 	//private UUID _playerId;
-	private UUID _teleporterEntityUuid;
-	private int _teleporterEntityId;
+	//private UUID _teleporterEntityUuid;
+	//private int _teleporterEntityId;
 	//private int _classId;
 	private BlockPos _blockPos;
+	//private EnumFacing _facing;
 		  
 
 	// A default constructor is always required
 	public PacketTeleporterSetDestination() {}
 
 	  
-	public PacketTeleporterSetDestination(TeleporterEntity teleporterEntity, BlockPos blockPos) {
+	//public PacketTeleporterSetDestination(BlockPos blockPos, EnumFacing facing) {
+	public PacketTeleporterSetDestination(BlockPos blockPos) {
 	    
-			this._teleporterEntityUuid = teleporterEntity.getUniqueID();
-			this._teleporterEntityId = teleporterEntity.getEntityId();
-			
-			EnumFacing facing = teleporterEntity.getHorizontalFacing();
-			
-			this._blockPos = blockPos;
-	}
-
-	
-	public UUID getTeleporterEntityUuid() {
-		return this._teleporterEntityUuid;
-	}
-	
-	
-	public int getTeleporterEntityId() {
-		return this._teleporterEntityId;
+		this._blockPos = blockPos;
+		//this._facing = facing;
 	}
 	
 	
 	public BlockPos getBlockPos() {
+		
 		return this._blockPos;
 	}
 	
 	
+//	public EnumFacing getFacing() {
+//		
+//		return this._facing;
+//	}
+	
+	
 	 @Override
 	 public void fromBytes(ByteBuf buffer) {
-	 
-		 // Get the UUID.
-		 long mostsignificant  = buffer.readLong();
-		 long leastsignificant  = buffer.readLong();
-		 this._teleporterEntityUuid = new UUID(mostsignificant, leastsignificant);
-		 
-		 // Get the Id.
-		 this._teleporterEntityId = buffer.readInt();
 		 
 		 // Get the BlockPos.
 		 int x = buffer.readInt();
 		 int y = buffer.readInt();
 		 int z = buffer.readInt();
 		 this._blockPos = new BlockPos(x, y, z);
-		 //this._classId = buffer.readInt(); 
+		 
+		// this._facing = EnumFacing.getFront(buffer.readInt());
 	 }
 
 	 
 	 @Override
 	 public void toBytes(ByteBuf buffer) {
 	
-		 buffer.writeLong(this._teleporterEntityUuid.getMostSignificantBits());
-		 buffer.writeLong(this._teleporterEntityUuid.getLeastSignificantBits());
-		 
-		 buffer.writeInt(this._teleporterEntityId);
-		 
-		 //buffer.writeInt(this._classId);
 		 buffer.writeInt(this._blockPos.getX());
 		 buffer.writeInt(this._blockPos.getY());
 		 buffer.writeInt(this._blockPos.getZ());
+		 
+		// buffer.writeInt(this._facing.getIndex());
 	 }
 }

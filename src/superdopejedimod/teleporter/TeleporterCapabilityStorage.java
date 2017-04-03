@@ -15,34 +15,10 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 public class TeleporterCapabilityStorage implements IStorage<TeleporterCapabilityInterface> {
 
 
-//	@Override
-//	public NBTBase writeNBT(Capability<ClassCapabilityInterface> capability, ClassCapabilityInterface instance, EnumFacing side) {
-//	
-//		return new NBTTagInt(instance.get());
-//	}
-
-
-//	@Override
-//	public void readNBT(Capability<ClassCapabilityInterface> capability, ClassCapabilityInterface instance, EnumFacing side, NBTBase nbt) {
-//	
-//		// Did we accumulate unexpected crud in there?  Deal with it!  Error handling is your friend.
-//		if (nbt.getClass() != NBTTagInt.class) {
-//			System.out.println("Bad value found via ClassCapabilityStorage:readNBT");
-//			instance.set(0);
-//			return;
-//		}
-//	
-//		instance.set(((NBTTagInt) nbt).getInt());
-//	}
-
-
 	@Override
 	public NBTBase writeNBT(Capability<TeleporterCapabilityInterface> capability, TeleporterCapabilityInterface instance, EnumFacing side) {
 
-		
 		return new NBTTagLong(instance.getTeleporterDestination().toLong());
-
-		//return new NBTTagInt(instance.get());
 	}
 
 
@@ -61,6 +37,5 @@ public class TeleporterCapabilityStorage implements IStorage<TeleporterCapabilit
 		BlockPos blockPos = BlockPos.fromLong(value);
 		
 		instance.setTeleporterDestination(blockPos);
-		//instance.set(((NBTTagInt) nbt).getInt());
 	}
 }

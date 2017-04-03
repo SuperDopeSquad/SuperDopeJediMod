@@ -7,12 +7,13 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-public class EntityRenderFactory implements IRenderFactory<EntityLiving> {
+public class EntityRenderFactory implements IRenderFactory<Entity> {
 
 	
 	private Class _renderClass;
@@ -31,7 +32,7 @@ public class EntityRenderFactory implements IRenderFactory<EntityLiving> {
     
 	
     @Override
-    public Render<? super EntityLiving> createRenderFor(RenderManager manager) {
+    public Render<? super Entity> createRenderFor(RenderManager manager) {
     	   	
     	// Let's create a new model object.  This is simple, since it takes no parameters.
     	// First, grab the constructor.
@@ -73,6 +74,6 @@ public class EntityRenderFactory implements IRenderFactory<EntityLiving> {
     	}
 		
 		// OK, let's return what we got.
-    	return (Render<? super EntityLiving>) renderInstance;
+    	return (Render<? super Entity>) renderInstance;
     }
 }

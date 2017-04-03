@@ -1,6 +1,5 @@
 package superdopesquad.superdopejedimod.teleporter;
 
-import java.util.UUID;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -9,6 +8,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -27,44 +28,25 @@ public class PacketHandlerTeleporterSetDestination implements IMessageHandler<Pa
  			
 		try {
 						
-			UUID teleporterEntityUuid = message.getTeleporterEntityUuid();
-			int teleporterEntityId = message.getTeleporterEntityId();
-			BlockPos blockPos = message.getBlockPos();
-			//System.out.println("DEBUG: RECEIVED PacketPlayerSetClass: " + playerId + ", " + classId);
-			//System.out.println("MINECRAFT:  " + (Minecraft.getMinecraft() != null));
-			//System.out.println("WORLD: " + (Minecraft.getMinecraft().theWorld != null));
-			
-			Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(teleporterEntityId);
-			//Entity entity = Minecraft.getMinecraft().theWorld.getPlayerEntityByUUID(playerId);
-			System.out.println("ENTITY:" + (entity != null));
-			//EntityPlayer player = (EntityPlayer) entity;
-			//System.out.println("PLAYER:" + (player != null));
-			
-			if (entity instanceof TeleporterEntity) {
+			//UUID teleporterEntityUuid = message.getTeleporterEntityUuid();
+			//int teleporterEntityId = message.getTeleporterEntityId();
+			BlockPos blockPos = message.getBlockPos();		
+			//Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(teleporterEntityId);
+			//Entity entity = Minecraft.getMinecraft().theWorld.getPlayerEntityByUUID(playerId);			
 				
-				System.out.println("received teleporter command to move to " + blockPos.toString());
-				
-				
-				EntityPlayer entityPlayer = Minecraft.getMinecraft().thePlayer;
-				//boolean setSuccess = ((TeleporterEntity)entity).setTeleporterDestination(blockPos);
+			EntityPlayer entityPlayer = Minecraft.getMinecraft().thePlayer;	
+			World world = Minecraft.getMinecraft().theWorld;
 		     	
-				
-				//entityPlayer.moveToBlockPosAndAngles(blockPos, entityPlayer.rotationYaw, entityPlayer.rotationPitch);
-				BlockPos blockPos2 = new BlockPos((blockPos.getX() + 5),blockPos.getY(),blockPos.getZ());
-			    entityPlayer.setLocationAndAngles(blockPos2.getX(), blockPos2.getY(), blockPos2.getZ(), entityPlayer.rotationYaw, entityPlayer.rotationPitch);
-
-				
-				
-				//System.out.println("set teleporter on client-side to " + blockPos.toString() + ": " + (setSuccess));
+			// Check to make sure this blockPos is clear.
+			if (!(world.isAirBlock(blockPos))) {
+				entityPlayer.addChatMessage(new TextComponentString("Your destination is blocked!  Teleportation suspended.")); 
+			    return null;
 			}
-			else {
-				System.out.println("entity not instance of TeleporterEntity!");
-			}
-			
-			
-			//boolean setSuccess = SuperDopeJediMod.classManager.setPlayerClassByClientId(player, classId);
-			//System.out.println(setSuccess);
+				
+			// Move the current player.
+			entityPlayer.setLocationAndAngles(blockPos.getX(), blockPos.getY(), blockPos.getZ(), entityPlayer.rotationYaw, entityPlayer.rotationPitch);
 		}
+		
 		catch (Exception exception) {
 			System.out.println("ERROR: unpacking PacketPlayerSetClass: " + exception.getMessage());
 		}

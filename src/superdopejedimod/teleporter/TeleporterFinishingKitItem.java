@@ -15,8 +15,9 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 public class TeleporterFinishingKitItem extends BaseItem {
 
 	
-	private TeleporterData _teleporterData;
-
+	private TeleporterEntity _entityTeleporterA;
+	private EnumFacing _facingTeleporterA;
+	private BlockPos _blockPosTeleporterA;
 
 		
 	public TeleporterFinishingKitItem(String unlocalizedName) {
@@ -39,20 +40,15 @@ public class TeleporterFinishingKitItem extends BaseItem {
 //	}
 	
 	
-	public void setTeleporterData(TeleporterData teleporterData) {
+
+	public void setTeleporterData(EnumFacing facing, BlockPos blockPos, TeleporterEntity entity) {
 		
-		this._teleporterData = teleporterData;
-		System.out.println("finishingKit's teleportData set: " + this._teleporterData.getBlockPosThere().toString());
-	}
-	
-	
-	public TeleporterData getTeleporterData() {
-		
-		return this._teleporterData;
+		this._facingTeleporterA = facing;
+		this._blockPosTeleporterA = blockPos;
+		this._entityTeleporterA = entity;
 	}
 	
 
-	
 	@Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos blockPos, EnumHand hand, EnumFacing facing, 
     		float hitX, float hitY, float hitZ) {
@@ -63,15 +59,15 @@ public class TeleporterFinishingKitItem extends BaseItem {
     	boolean isTeleporterStarterKit = (blockClicked instanceof TeleporterStartingKit);
        	boolean isTeleporterFinishingKit = (blockClicked instanceof TeleporterFinishingKit);
            	
-       	String teleporterDataString;
-       	if (this._teleporterData == null) {
-       		teleporterDataString = "teleporterData is NULL.";
-       	}
-       	else {
-       		teleporterDataString = this._teleporterData.getBlockPosThere().toString();
-       	}
-       	
-       	System.out.println("inside onItemUse: " + teleporterDataString);
+//       	String teleporterDataString;
+//       	if (this._teleporterData == null) {
+//       		teleporterDataString = "teleporterData is NULL.";
+//       	}
+//       	else {
+//       		teleporterDataString = this._teleporterData.getBlockPosThere().toString();
+//       	}
+//       	
+//       	System.out.println("inside onItemUse: " + teleporterDataString);
        	
         //Create the B block.
       	IBlockState blockStateTeleporterFinishingKit = SuperDopeJediMod.teleporterManager.teleporterFinishingKit.getDefaultState();
@@ -82,8 +78,9 @@ public class TeleporterFinishingKitItem extends BaseItem {
       	BlockPos blockPosReal = blockPos.up(1);
         world.setBlockState(blockPosReal, blockStateTeleporterFinishingKit);
         Block block = world.getBlockState(blockPosReal).getBlock();
-        ((TeleporterFinishingKit)block).setTeleporterData(this.getTeleporterData());
-  
+       // ((TeleporterFinishingKit)block).setTeleporterData(this.getTeleporterData());
+        ((TeleporterFinishingKit)block).setTeleporterData(this._facingTeleporterA, this._blockPosTeleporterA, this._entityTeleporterA);
+        
        	
        	
        	//return;
