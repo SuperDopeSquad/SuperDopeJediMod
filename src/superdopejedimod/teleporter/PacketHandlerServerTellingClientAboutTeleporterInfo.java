@@ -31,53 +31,29 @@ public class PacketHandlerServerTellingClientAboutTeleporterInfo implements IMes
  			
 		try {
 						
-			//UUID teleporterEntityUuid = message.getTeleporterEntityUuid();
 			int teleporterEntityId = message.getTeleporterEntityId();
 			BlockPos blockPos = message.getBlockPos();		
-			//EnumFacing facing = message.getFacing();
-			//Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(teleporterEntityId);
-			//Entity entity = Minecraft.getMinecraft().theWorld.getPlayerEntityByUUID(playerId);			
-				
 			EntityPlayer entityPlayer = Minecraft.getMinecraft().thePlayer;	
 			World world = Minecraft.getMinecraft().theWorld;
 		    
-			
-			
-			////
-			
 			// Get a handle to the teleporter entity, and it's info that we want to know about.
-			//int teleporterEntityId = message.getTeleporterEntityId();
 			Entity entity = world.getEntityByID(teleporterEntityId);
 					
-					//server.getEntityFromUuid(teleporterEntityId);
-						if (entity == null) {
-							System.out.println("ERROR! id returns null entity in PacketClientAskingServerAboutTeleporterDestination.");
-							return null;
-						}
-						if (!(entity instanceof TeleporterEntity)) {
-							System.out.println("ERROR! Received bad id in PacketClientAskingServerAboutTeleporterDestination.");
-							return null;
-						}
-						
-						TeleporterEntity teleporterEntity = (TeleporterEntity)entity;
-						teleporterEntity.setTeleporterDestination(blockPos);
-						//teleporterEntity.setTeleporterDirection(facing);
-						//BlockPos blockPos = teleporterEntity.getTeleporterDestination();
-						//EnumFacing facing = teleporterEntity.getTeleportDirection();
-			
-			////
-			
-			
-			
-			
-//			// Check to make sure this blockPos is clear.
-//			if (!(world.isAirBlock(blockPos))) {
-//				entityPlayer.addChatMessage(new TextComponentString("Your destination is blocked!  Teleportation suspended.")); 
-//			    return null;
-//			}
+			if (entity == null) {
 				
-			// Move the current player.
-			//entityPlayer.setLocationAndAngles(blockPos.getX(), blockPos.getY(), blockPos.getZ(), entityPlayer.rotationYaw, entityPlayer.rotationPitch);
+				System.out.println("ERROR! id returns null entity in PacketClientAskingServerAboutTeleporterDestination.");
+				return null;
+			}
+						
+			if (!(entity instanceof TeleporterEntity)) {
+				
+				System.out.println("ERROR! Received bad id in PacketClientAskingServerAboutTeleporterDestination.");
+				return null;
+			}
+						
+			// Actually do the work.
+			TeleporterEntity teleporterEntity = (TeleporterEntity)entity;
+			teleporterEntity.setTeleporterDestination(blockPos);
 		}
 		
 		catch (Exception exception) {

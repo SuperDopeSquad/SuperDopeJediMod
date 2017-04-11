@@ -7,7 +7,6 @@ import net.minecraft.util.math.BlockPos;
 public class TeleporterCapability implements TeleporterCapabilityInterface {
 
 
-	//private BlockPos _blockPos = new BlockPos(0,0,0); // don't let this be null, pain and suffering will follow.
 	private BlockPos _blockPos = TeleporterEntity.BLOCKPOS_NULL; // don't let this be null, pain and suffering will follow.
 
 

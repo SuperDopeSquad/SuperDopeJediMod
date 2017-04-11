@@ -15,7 +15,7 @@ import superdopesquad.superdopejedimod.entity.BaseRenderLiving;
 
 
 @SideOnly(Side.CLIENT)
-public class TeleporterRender extends BaseRenderLiving { // extends BaseRenderLiving {
+public class TeleporterRender extends BaseRenderLiving {
 	
 	
 	public TeleporterRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {

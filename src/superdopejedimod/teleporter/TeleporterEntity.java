@@ -75,14 +75,14 @@ public class TeleporterEntity extends BaseEntityAnimal {
 		
 	
 	public static BlockPos BLOCKPOS_NULL = new BlockPos(0,0,0);
+	private static boolean hasCreativeModeEgg = false;
 	
 	
 	public TeleporterEntity(World worldIn) {
-		
-		super(worldIn, "teleporter", "Teleporter Entity");
+				
+		super(worldIn, "teleporter", "Teleporter Entity", hasCreativeModeEgg);
 				
 		// This sets the bounding box size, not the actual model that you see rendered.
-		//this.setSize(1.0F, 2.0F);
 		this.setSize(0.50F, 3.0F);
 		
 		// Customize these properties in daughter classes to get different behaviors.
@@ -113,10 +113,9 @@ public class TeleporterEntity extends BaseEntityAnimal {
     		//System.out.println("collided with " + entityPlayer.toString() + ", current teleportData: " + blockPos.toString());
     		
     		// if there is a real BlockPos there, teleport!
-    		//if (!(blockPos.equals(new BlockPos(0,0,0)))) {
     		if (this.isCorrectlyConfigured()) {
     	     	
-    			System.out.println("about to tell client to teleport from: " + entityPlayer.getPosition().toString() + " to: " + blockPos.toString());	
+    			//System.out.println("about to tell client to teleport from: " + entityPlayer.getPosition().toString() + " to: " + blockPos.toString());	
     	     	
     	    	// Tell the client what is going on.
       			PacketTeleporterSetDestination message = new PacketTeleporterSetDestination(blockPos);
@@ -148,14 +147,6 @@ public class TeleporterEntity extends BaseEntityAnimal {
     }
     
 	
-//	// set up AI tasks
-//	// @Override
-//	protected void setupAI() {
-//			
-//		//super.setupAI();
-//	}
-//	
-	
 	public BlockPos getTeleporterDestination() {
 		
 		// We should have the Teleporter capability set on every TeleporterEntity.
@@ -168,7 +159,6 @@ public class TeleporterEntity extends BaseEntityAnimal {
 		assert(teleporterCapability != null);
 		if (teleporterCapability == null) {
 			System.out.println("Uh oh! Failed to find teleporter capability.");
-			//return new BlockPos(0,0,0);
 			return TeleporterEntity.BLOCKPOS_NULL;
 		}
 		
@@ -192,13 +182,7 @@ public class TeleporterEntity extends BaseEntityAnimal {
 			System.out.println("failed setting teleporter destination.");
 			return false;
 		}
-		
-//		// Tell the client what is going on.
-//		//PacketPlayerSetClass message = new PacketPlayerSetClass(player, inputClassId);
-//		//SuperDopeJediMod.packetManager.INSTANCE.sendToAll(message);
-//		PacketTeleporterSetDestination message = new PacketTeleporterSetDestination(this, blockPos);
-//		SuperDopeJediMod.packetManager.INSTANCE.sendToAll(message);
-//		
+			
 		return true;
 	}
 	
@@ -208,13 +192,12 @@ public class TeleporterEntity extends BaseEntityAnimal {
 		// Ask about teleporter data.
 		int entityId = this.getEntityId();
 		
-		System.out.println("About to create PacketClientAskingServerAboutTeleporterDestination for entityId " + entityId);
+		//System.out.println("About to create PacketClientAskingServerAboutTeleporterDestination for entityId " + entityId);
 		
-		//PacketClientAskingServerAboutTeleporterDestination packet = new PacketClientAskingServerAboutTeleporterDestination(entityId);
 		PacketClientAskingServerAboutTeleporterDestination packet = new PacketClientAskingServerAboutTeleporterDestination();
 		packet.setTeleporterEntityId(entityId);
 
-		System.out.println("About to send PacketClientAskingServerAboutTeleporterDestination for entityId " + entityId);
+		//System.out.println("About to send PacketClientAskingServerAboutTeleporterDestination for entityId " + entityId);
 		
 		SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
 	}

@@ -28,7 +28,6 @@ public class TeleporterCapabilityStorage implements IStorage<TeleporterCapabilit
 		// Did we accumulate unexpected crud in there?  Deal with it!  Error handling is your friend.
 		if (nbt.getClass() != NBTTagLong.class) {
 			System.out.println("Bad value found via TeleporterCapabilityStorage:readNBT");
-			//instance.set(0);
 			instance.setTeleporterDestination((BlockPos) BlockPos.NULL_VECTOR);
 			return;
 		}

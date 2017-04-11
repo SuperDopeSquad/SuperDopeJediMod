@@ -11,12 +11,6 @@ public class PacketClientAskingServerAboutTeleporterDestination implements IMess
 	private int _teleporterEntityId;
 
 	
-//	public PacketClientAskingServerAboutTeleporterDestination(int teleporterEntityId) {
-//		
-//		this._teleporterEntityId = teleporterEntityId;
-//	}
-	
-	
 	public PacketClientAskingServerAboutTeleporterDestination() {}
 
 	
@@ -35,9 +29,6 @@ public class PacketClientAskingServerAboutTeleporterDestination implements IMess
 	@Override
 	 public void fromBytes(ByteBuf buffer) {
 	 
-		 //long mostsignificant  = buffer.readLong();
-		 //long leastsignificant  = buffer.readLong();
-		 //this._teleporterEntityId = new UUID(mostsignificant, leastsignificant);
 		 this._teleporterEntityId = buffer.readInt();
 	 }
 
@@ -45,8 +36,6 @@ public class PacketClientAskingServerAboutTeleporterDestination implements IMess
 	 @Override
 	 public void toBytes(ByteBuf buffer) {
 	
-		 //buffer.writeLong(this._teleporterEntityId.getMostSignificantBits());
-		 //buffer.writeLong(this._teleporterEntityId.getLeastSignificantBits());
 		 buffer.writeInt(this._teleporterEntityId);
 	 }
 }

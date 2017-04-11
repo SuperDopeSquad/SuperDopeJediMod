@@ -1,7 +1,7 @@
 {    
-    "parent": "superdopejedimod:block/teleporterportalblock",
+    "parent": "item/generated",
     "textures": {
-        "all": "superdopejedimod:blocks/teleporterportalblock"
+        "layer0": "superdopejedimod:items/teleporterstartingkititem"
     },
     "display": {
         "thirdperson_righthand": {

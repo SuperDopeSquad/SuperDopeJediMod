@@ -6,6 +6,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -16,6 +18,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -126,17 +129,5 @@ public class SuperDopeEventHandler {
 //				SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet2);
 			}
 		}
-		
-//		// If this is a teleporter, phone home and ask for accurate information on destination.	
-//		if (entity instanceof TeleporterEntity ) {
-//						
-//			TeleporterEntity teleporter = (TeleporterEntity) entity;
-//			System.out.println("Inside onEntityJoined: " + (event.getWorld().isRemote) + ", ");
-//					
-//			//if (teleporter.getUniqueID() == (currentPlayer.getUniqueID())) {
-//			PacketClientAskingServerAboutTeleporterDestination packet = new PacketClientAskingServerAboutTeleporterDestination();
-//			SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
-//			//}
-//		}
 	}
 }

@@ -25,7 +25,7 @@ public class TeleporterFinishingKit extends BaseBlock {
 	
 	public TeleporterFinishingKit(String unlocalizedName) {
 
-		super(Material.IRON, unlocalizedName);
+		super(Material.IRON, unlocalizedName, false);
 	}
 	
 	

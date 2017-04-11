@@ -60,7 +60,7 @@ public class SuperDopeJediMod //Start the class Declaration
     @SidedProxy(clientSide="superdopesquad.superdopejedimod.SuperDopeClientProxy", serverSide="superdopesquad.superdopejedimod.SuperDopeServerProxy")
     public static SuperDopeCommonProxy superDopeCommonProxy;
     
-    // This is our collection of custom objects we will maintain.
+    // This is our collection of custom objects and custom entities we will maintain.
     public static ArrayList<SuperDopeObject> customObjects = new ArrayList<SuperDopeObject>();
     
     // this is the world generator that adds our custom objects to newly spawned world chunks.
