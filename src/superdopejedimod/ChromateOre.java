@@ -18,7 +18,7 @@ public class ChromateOre extends BaseBlock{
 		
 		super(Material.IRON, unlocalizedName);
 		
-		this.setHardness(15.0F);
+		this.setHardness(7.0F);
 		
 		this.setHarvestLevel("pickaxe", 2);
 		
