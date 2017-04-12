@@ -17,19 +17,30 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public abstract class BaseBlock extends Block implements SuperDopeObjectGeneratable {
 	
+	
 	protected String name = "";
+	private boolean _showUpInCreativeTab = true;
 	
 	
-	public BaseBlock(Material materialIn, String nameInput) {
+	public BaseBlock(Material material, String name) {
+		
+		this(material, name, true);
+	}
+	
+	
+	public BaseBlock(Material material, String name, boolean showUpInCreativeTab) {
 		
 		// Call our super class constructor, "Block".
-		super(materialIn);
+		super(material);
 		
 		// Stash our internal name that we'll use for this block.
-		this.name = nameInput;
+		this.name = name;
 		
 		// I don't know what happens if you don't call this, but it is in every tutorial :-)
 		this.setUnlocalizedName(name);
+		
+		// We'll need to keep this value around.
+		this._showUpInCreativeTab = showUpInCreativeTab;
 		
 		// By default, we'll put all new blocks in the blocks tab.
 		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
@@ -41,17 +52,20 @@ public abstract class BaseBlock extends Block implements SuperDopeObjectGenerata
 	
 	
 	public String getName() { 
-		return name; 
+		return this.name; 
 	}
 	
 	
 	@Override
 	public void registerObject() {
 		
-		// Register the block with the game.
+		// Mandatory: This registers the block, whether or not you want it to show up in the creative tab or not.
 		GameRegistry.register(this.setRegistryName(this.name));
-		GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-		//GameRegistry.registerBlock(this, name);
+			
+		// Optional: This creates a corresponding Item for the block, which shows up in places like the creative tab.
+		if (this._showUpInCreativeTab) {
+			GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		}
 	}
 	
 	

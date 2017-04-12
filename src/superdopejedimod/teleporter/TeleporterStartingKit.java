@@ -3,6 +3,7 @@ package superdopesquad.superdopejedimod.teleporter;
 
 import java.util.Random;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -20,24 +21,12 @@ public class TeleporterStartingKit extends BaseBlock {
 	
 	public TeleporterStartingKit(String unlocalizedName) {
 
-		super(Material.IRON, unlocalizedName);
+		super(Material.IRON, unlocalizedName, false);
 	}
 	
 	
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-        
-		return Item.getItemFromBlock(SuperDopeJediMod.teleporterManager.teleporterStartingKit);
-	}
-	
-	
-	@Override
-	public void registerRecipe() {
-		
-		ItemStack itemStackTeleporterParts = new ItemStack(SuperDopeJediMod.teleporterManager.teleporterParts);
-		ItemStack itemStackTeleporterPartsMany = new ItemStack(SuperDopeJediMod.teleporterManager.teleporterParts, 8);
-		ItemStack itemStackThis = new ItemStack(this);
-		
-		GameRegistry.addRecipe(itemStackThis, "xxx", "x x", "xxx", 'x', itemStackTeleporterParts);
-    	GameRegistry.addRecipe(itemStackTeleporterPartsMany, "x", 'x', itemStackThis);	
+        		
+		return SuperDopeJediMod.teleporterManager.teleporterStartingKitItem;
 	}
 }

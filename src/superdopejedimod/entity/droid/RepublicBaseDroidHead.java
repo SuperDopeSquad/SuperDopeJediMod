@@ -27,6 +27,7 @@ public abstract class RepublicBaseDroidHead extends BaseItem {
 		
         super(unlocalizedName);
         this.setCreativeTab(CreativeTabs.MATERIALS);
+		this.setMaxStackSize(1);
         
         this._classToMake = classToMake;
 	}

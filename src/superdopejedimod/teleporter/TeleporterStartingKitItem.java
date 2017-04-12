@@ -2,7 +2,6 @@ package superdopesquad.superdopejedimod.teleporter;
 
 
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,46 +14,46 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.BaseItem;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-public class TeleporterFinishingKitItem extends BaseItem {
-
-	
-	private TeleporterEntity _entityTeleporterA;
-	private EnumFacing _facingTeleporterA;
-	private BlockPos _blockPosTeleporterA;
+public class TeleporterStartingKitItem extends BaseItem {
 
 		
-	public TeleporterFinishingKitItem(String unlocalizedName) {
+	public TeleporterStartingKitItem(String unlocalizedName) {
 			      
-		super(unlocalizedName, false);
+		super(unlocalizedName);
 		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 		this.setMaxStackSize(1);
 	}
-			
-
-	public void setTeleporterData(EnumFacing facing, BlockPos blockPos, TeleporterEntity entity) {
 		
-		this._facingTeleporterA = facing;
-		this._blockPosTeleporterA = blockPos;
-		this._entityTeleporterA = entity;
-	}
 	
-
 	public Item getItemDropped(int metadata, Random random, int fortune) {
         		
-		return SuperDopeJediMod.teleporterManager.teleporterFinishingKitItem;
+		return SuperDopeJediMod.teleporterManager.teleporterStartingKitItem;
 	}
 	
 	
 	@Override
+	public void registerRecipe() {
+		
+		ItemStack itemStackTeleporterParts = new ItemStack(SuperDopeJediMod.teleporterManager.teleporterParts);
+		ItemStack itemStackTeleporterPartsMany = new ItemStack(SuperDopeJediMod.teleporterManager.teleporterParts, 8);
+		ItemStack itemStackThis = new ItemStack(this);
+		
+		GameRegistry.addRecipe(itemStackThis, "xxx", "x x", "xxx", 'x', itemStackTeleporterParts);
+    	GameRegistry.addRecipe(itemStackTeleporterPartsMany, "x", 'x', itemStackThis);	
+	}
+	
+
+	@Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos blockPos, EnumHand hand, EnumFacing facing, 
     		float hitX, float hitY, float hitZ) {
         
-		//System.out.println("DEBUG: inside TeleporterFinishingKitKitItem:onItemUse");
-		
+		//System.out.println("DEBUG: inside TeleporterStartingKitKitItem:onItemUse");
+			
 		if (hand != EnumHand.MAIN_HAND) {
 			player.addChatMessage(new TextComponentString("Try to use your main hand, not your off-hand."));
 			return EnumActionResult.PASS;
@@ -63,7 +62,7 @@ public class TeleporterFinishingKitItem extends BaseItem {
 		//boolean isWorldServer = (!world.isRemote);
 		IBlockState blockStateClicked = world.getBlockState(blockPos);
     	Block blockClicked = blockStateClicked.getBlock();
-      	
+     	
     	// Destroy the item in hand, which is THIS.  This is somewhat dangerous, so i do a double-check
 		// that the current item actually equals THIS before i do the delete.
     	int index = player.inventory.currentItem;
@@ -76,13 +75,12 @@ public class TeleporterFinishingKitItem extends BaseItem {
 		else {
 			System.out.println("ERROR: current item wasn't what we expected.  Not deleting current item.");
 		}
-           
-		// Create the B block.
-      	IBlockState blockStateTeleporterFinishingKit = SuperDopeJediMod.teleporterManager.teleporterFinishingKit.getDefaultState();
+    	
+        // Create the A block.
+      	IBlockState blockStateTeleporterStartingKit = SuperDopeJediMod.teleporterManager.teleporterStartingKit.getDefaultState();
       	BlockPos blockPosReal = blockPos.up(1);
-        world.setBlockState(blockPosReal, blockStateTeleporterFinishingKit);
+        world.setBlockState(blockPosReal, blockStateTeleporterStartingKit);
         Block block = world.getBlockState(blockPosReal).getBlock();
-        ((TeleporterFinishingKit)block).setTeleporterData(this._facingTeleporterA, this._blockPosTeleporterA, this._entityTeleporterA);
    	
     	return EnumActionResult.PASS;
     }

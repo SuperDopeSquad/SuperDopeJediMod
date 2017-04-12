@@ -1,9 +1,9 @@
 package superdopesquad.superdopejedimod;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -22,10 +23,18 @@ import superdopesquad.superdopejedimod.faction.ClassInfo;
 
 public abstract class BaseItem extends Item implements SuperDopeObject, ClassAwareInterface {
 
-	protected String name = "";
 	
+	protected String name = "";
+	private boolean _showUpInCreativeTab = true;
+
 	
 	public BaseItem(String unlocalizedName) {
+		
+		this(unlocalizedName, true);
+	}
+
+	
+	public BaseItem(String unlocalizedName, boolean showUpInCreativeTab) {
 		
 		super();
 	
@@ -33,6 +42,9 @@ public abstract class BaseItem extends Item implements SuperDopeObject, ClassAwa
 		this.setMaxStackSize(64);
 		this.setUnlocalizedName(unlocalizedName);
 		this.setCreativeTab(CreativeTabs.MISC);
+		
+		// We'll need to keep this value around.
+		this._showUpInCreativeTab = showUpInCreativeTab;
 		
 		// Insert this item into our collection of custom items, so we 
 		// can send separate events to it for lifecycle management.
@@ -48,9 +60,7 @@ public abstract class BaseItem extends Item implements SuperDopeObject, ClassAwa
 	@Override
 	public void registerObject() {
 		
-		// Register the item with the game.
-		//GameRegistry.registerItem(this, name);
-		GameRegistry.register(this.setRegistryName(this.name));
+		 GameRegistry.register(this.setRegistryName(this.name));
 	}
 	
 	
@@ -84,6 +94,13 @@ public abstract class BaseItem extends Item implements SuperDopeObject, ClassAwa
 	    	
 		SuperDopeJediMod.classManager.onUpdateHandlerClassAware(stack, world, entity, itemSlot, isSelected);
 	}
+	
+	
+//	@Override
+//	public Item getItemDropped(int metadata, Random random, int fortune) {
+//        		
+//		return super.getItemDropped(metadata, random, fortune); //SuperDopeJediMod.teleporterManager.teleporterFinishingKitItem;
+//	}
 	
 	
 	@Override

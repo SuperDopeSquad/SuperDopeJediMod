@@ -60,7 +60,7 @@ public class SuperDopeJediMod //Start the class Declaration
     @SidedProxy(clientSide="superdopesquad.superdopejedimod.SuperDopeClientProxy", serverSide="superdopesquad.superdopejedimod.SuperDopeServerProxy")
     public static SuperDopeCommonProxy superDopeCommonProxy;
     
-    // This is our collection of custom objects we will maintain.
+    // This is our collection of custom objects and custom entities we will maintain.
     public static ArrayList<SuperDopeObject> customObjects = new ArrayList<SuperDopeObject>();
     
     // this is the world generator that adds our custom objects to newly spawned world chunks.
@@ -226,8 +226,8 @@ public class SuperDopeJediMod //Start the class Declaration
     	// Call the pre-init of ClassManager, which needs to do some registration work.
     	this.classManager.preInit();
     	
-//    	// Let's register our eventhandler class.   
-//    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());	   
+    	// Call the pre-init of TeleporterManager, which needs to do some registration work.
+    	this.teleporterManager.preInit(); 
     }
      
      
