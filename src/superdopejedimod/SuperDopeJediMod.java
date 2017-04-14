@@ -26,6 +26,7 @@ import superdopesquad.superdopejedimod.weapon.BountyHunterLeaderKnife;
 import superdopesquad.superdopejedimod.weapon.BrynsAwesomeSword;
 import superdopesquad.superdopejedimod.weapon.DoubleLightSaber;
 import superdopesquad.superdopejedimod.ship.BaseMovingVehicle;
+import superdopesquad.superdopejedimod.ship.HangarManager;
 import superdopesquad.superdopejedimod.weapon.GaffiStick;
 import superdopesquad.superdopejedimod.weapon.LightSaber;
 import superdopesquad.superdopejedimod.weapon.MandalorianIronSword;
@@ -210,6 +211,9 @@ public class SuperDopeJediMod //Start the class Declaration
  
     // Teleporters.
     public static TeleporterManager teleporterManager = new TeleporterManager();
+    
+    // Managing ships and general hanger stuff.
+    public static HangarManager hangarManager = new HangarManager();
     
     
     @EventHandler

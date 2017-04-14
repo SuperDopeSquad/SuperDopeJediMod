@@ -109,4 +109,8 @@ entity.republicPatrolDroidEntity.name=Republic Patrol Droid
 entity.superdopejedimod.republicSentryDroidEntity.name=Republic Sentry Droid
 entity.superdopejedimod.republicHunterDroidEntity.name=Republic Hunter Droid
 entity.superdopejedimod.republicPatrolDroidEntity.name=Republic Patrol Droid
-
+tile.testShipKit.name=Test Ship Kit
+tile.hangarPadBlock.name=Hangar Pad Block
+tile.hangarPadKit.name=Hangar Pad Kit
+item.hangarWrench.name=Hangar Wrench
+item.hangarParts.name=Hangar Parts
