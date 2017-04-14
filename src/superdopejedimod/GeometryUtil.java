@@ -208,6 +208,48 @@ public class GeometryUtil {
 	}
 
 	
+	public static boolean checkIfPlaneWouldBeDestructive(World world, BlockPos startPos, int length, int width, EnumFacing lengthSide, EnumFacing widthSide, IBlockState bstate, BlockPos skippablePos) {
+				
+		// Sanity check the params.
+		if (length < 0) {
+			throw new IllegalArgumentException("buildPlaneDestructive: need a positive length");
+		}
+		if (width < 0) {
+			throw new IllegalArgumentException("buildPlaneDestructive: need a positive width");
+		}
+		if ((lengthSide == EnumFacing.UP) || (lengthSide == EnumFacing.DOWN)) {
+			throw new IllegalArgumentException("buildPlaneDestructive: need to supply east, west, north, or south for lengthSide.");
+		}
+		if ((widthSide == EnumFacing.UP) || (widthSide == EnumFacing.DOWN)) {
+			throw new IllegalArgumentException("buildPlaneDestructive: need to supply east, west, north, or south for lengthSide.");
+		}
+		if (widthSide == lengthSide.getOpposite()) {
+			throw new IllegalArgumentException("buildPlaneDestructive: need to supply different axis for length and width sides.");
+		}
+		
+		// Lay down the plane.
+		for (int l = 0; l < length; ++l) {
+			for (int w = 0 ; w < width ; ++w) {
+				
+				BlockPos currentPos = startPos.offset(lengthSide, l).offset(widthSide, w);
+				IBlockState currentState = world.getBlockState(currentPos);
+				boolean isPassableBlock = currentState.getBlock().isPassable(world, currentPos);	
+				
+				if (skippablePos.equals(currentPos)) {
+					System.out.println("DEBUG: Skipping checking " + currentPos.toString() + ", which happens to be " + world.getBlockState(currentPos).toString());
+				}
+				else if (!(isPassableBlock)) {
+					System.out.println("DEBUG: at location " + currentPos.toString() + " found a non-passable block: " + world.getBlockState(currentPos).toString());
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	
+	
 	/**
 	 * Clears a plane-like space and fills it with air.
 	 * 
