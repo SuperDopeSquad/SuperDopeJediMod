@@ -17,6 +17,10 @@ public class TeleporterEdgeBlock extends BaseBlock {
 	
 	public TeleporterEdgeBlock(String name) {
 		
-		super(Material.IRON, name);
+		super(Material.PORTAL, name);
+		
+		// Make it so it can't be broken by anything lower than a diamond pickaxe.
+		this.setHarvestLevel("pickaxe", 3);
 	}
 }
+

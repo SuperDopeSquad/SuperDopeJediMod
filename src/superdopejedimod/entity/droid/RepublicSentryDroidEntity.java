@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -89,6 +90,13 @@ public class RepublicSentryDroidEntity extends RepublicBaseDroidEntity implement
 	protected void setupAI() {
 			
 		super.setupAI();
+	}
+	
+	
+	@Override
+	public void moveEntity(MoverType x, double p_70091_2_, double p_70091_4_, double p_70091_6_) {
+	    	
+		// do nothing.  Sentries don't move.
 	}
 	
 	

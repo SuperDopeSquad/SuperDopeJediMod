@@ -10,11 +10,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.entity.BaseRender;
+import superdopesquad.superdopejedimod.entity.BaseRenderLiving;
 
 
 @SideOnly(Side.CLIENT)
-public class RepublicSentryDroidRender extends BaseRender {
+public class RepublicSentryDroidRender extends BaseRenderLiving {
 	
 	
 	public RepublicSentryDroidRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {

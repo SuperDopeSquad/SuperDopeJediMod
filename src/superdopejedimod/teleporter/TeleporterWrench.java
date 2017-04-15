@@ -28,7 +28,7 @@ public class TeleporterWrench extends BaseItem {
 	public TeleporterWrench(String unlocalizedName) {
 			      
 		super(unlocalizedName);
-		this.setCreativeTab(CreativeTabs.MATERIALS);
+		this.setCreativeTab(CreativeTabs.TOOLS);
 	}
 		
 		

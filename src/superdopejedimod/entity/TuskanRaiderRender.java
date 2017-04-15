@@ -12,7 +12,7 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 @SideOnly(Side.CLIENT)
-public class TuskanRaiderRender extends BaseRender {
+public class TuskanRaiderRender extends BaseRenderLiving {
 	
 	
 	public TuskanRaiderRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {
