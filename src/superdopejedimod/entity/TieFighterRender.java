@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 @SideOnly(Side.CLIENT)
-public class TieFighterRender extends BaseRender {
+public class TieFighterRender extends BaseRenderLiving {
 
 	public TieFighterRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {
         super(renderManager, par1ModelBase, parShadowSize, "tiefighter");   
