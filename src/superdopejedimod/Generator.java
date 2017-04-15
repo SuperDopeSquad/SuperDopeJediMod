@@ -3,12 +3,16 @@ package superdopesquad.superdopejedimod;
 import java.util.Random;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
@@ -18,6 +22,7 @@ public class Generator extends BaseBlock{
 	
 		super(Material.IRON, unlocalizedName);
 		this.setCreativeTab(CreativeTabs.MATERIALS);
+		
 	}
 
 	public Item getItemDropped(int metadata, Random random, int fortune) {
@@ -25,7 +30,7 @@ public class Generator extends BaseBlock{
 		return Item.getItemFromBlock(SuperDopeJediMod.generator);
 	}
 
-	
+
 
 	public void registerRecipe() {
 	
@@ -46,4 +51,7 @@ public class Generator extends BaseBlock{
 			
 		}
 
+	
+
+	
 }
