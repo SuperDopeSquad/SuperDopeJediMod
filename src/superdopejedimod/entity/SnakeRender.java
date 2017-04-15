@@ -13,7 +13,7 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 @SideOnly(Side.CLIENT)
-public class SnakeRender extends BaseRender {
+public class SnakeRender extends BaseRenderLiving {
 
 	//protected ResourceLocation resourceLocationTexture;
 	

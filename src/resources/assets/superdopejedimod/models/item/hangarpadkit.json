@@ -1,7 +1,7 @@
 {    
-    "parent": "superdopejedimod:block/teleporterportalblock",
+    "parent": "superdopejedimod:block/hangarpadkit",
     "textures": {
-        "all": "superdopejedimod:blocks/teleporterportalblock"
+        "all": "superdopejedimod:blocks/hangarpadkit"
     },
     "display": {
         "thirdperson_righthand": {

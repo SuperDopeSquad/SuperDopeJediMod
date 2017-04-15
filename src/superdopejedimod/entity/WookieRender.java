@@ -13,7 +13,7 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 @SideOnly(Side.CLIENT)
-public class WookieRender extends BaseRender {
+public class WookieRender extends BaseRenderLiving {
 	
 	
 	public WookieRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {

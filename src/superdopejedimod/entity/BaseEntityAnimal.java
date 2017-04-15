@@ -1,7 +1,7 @@
 package superdopesquad.superdopejedimod.entity;
 
-import java.util.Random;
 
+import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -45,14 +45,22 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	private String _name = "";
 	private String _displayName = "";
 	protected float shadowSize = 1.0F;
+	private boolean _hasCreativeModeEgg = true;
 	
 	
 	public BaseEntityAnimal(World worldIn, String name, String displayName) {
+		
+		this(worldIn, name, displayName, true);
+	}
+		
+	
+	public BaseEntityAnimal(World worldIn, String name, String displayName, boolean hasCreativeModeEgg) {
 		
 		super(worldIn);
 		
 		this._name = name;
 		this._displayName = displayName;
+		this._hasCreativeModeEgg = hasCreativeModeEgg;
 				
 		// Insert this object into our collection of custom objects, so we 
 		// can send separate events to it for lifecycle management.
@@ -124,9 +132,15 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	public void registerObject() {
 		
 		ResourceLocation resourceLocation = new ResourceLocation(this.getFullName());
-		//System.out.println("registerObject's name: " + this.getName());
-		//System.out.println("resourceLocation: " + resourceLocation.toString());
-	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
+
+		if (this._hasCreativeModeEgg) {
+	  	
+			EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
+		}
+		else {
+			EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true);
+
+		}
 	};
 	
 	

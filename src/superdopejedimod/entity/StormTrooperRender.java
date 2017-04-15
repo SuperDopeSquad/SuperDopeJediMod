@@ -12,7 +12,7 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 @SideOnly(Side.CLIENT)
-public class StormTrooperRender extends BaseRender {
+public class StormTrooperRender extends BaseRenderLiving {
 	
 	
 	public StormTrooperRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {

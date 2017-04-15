@@ -5,6 +5,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.util.math.BlockPos;
@@ -20,6 +21,7 @@ import superdopesquad.superdopejedimod.entity.droid.RepublicPatrolDroidEntity;
 import superdopesquad.superdopejedimod.entity.droid.RepublicPatrolDroidHead;
 import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidEntity;
 import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidHead;
+import superdopesquad.superdopejedimod.teleporter.TeleporterEntity;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotItem;
 
@@ -55,7 +57,7 @@ public class EntityManager {
     public static RepublicHunterDroidEntity republicHunterDroid = new RepublicHunterDroidEntity(null);
     public static RepublicPatrolDroidEntity republicPatrolDroid = new RepublicPatrolDroidEntity(null);
     public static RepublicSentryDroidEntity republicSentryDroid = new RepublicSentryDroidEntity(null);
-             
+                  
     // Special eggs that can be used in both creative and survival mode, different from spawn eggs.  More like chicken eggs.
     public static GenericEgg snakeEgg = new GenericEgg("snakeEgg", SnakeEntity.class);
     public static GenericEgg tuskanRaiderEgg = new GenericEgg("tuskanRaiderEgg", TuskanRaiderEntity.class);
@@ -73,8 +75,9 @@ public class EntityManager {
     }
     
     
-    public static EntityLivingBase createEntity(Class classToMake, World world, BlockPos blockPos) {
-    	
+    //public static EntityLivingBase createEntity(Class classToMake, World world, BlockPos blockPos) {
+    public static Entity createEntity(Class classToMake, World world, BlockPos blockPos) {
+    		      	
     	// Now, on to the Render object;
     	// Create an array that defines the type for each parameter.  That is how we
     	// query for the constructor (we get back the one that matches the parameters we request). 
@@ -97,12 +100,14 @@ public class EntityManager {
     		System.out.println("ERROR! createEntity() failed to create an object.");
     		return null;
     	}
-    	if (!(instance instanceof EntityLivingBase)) {
-    		System.out.println("ERROR! createEntity() created unexpected object.");
+    	//if (!(instance instanceof EntityLivingBase)) {
+    	if (!(instance instanceof Entity)) {
+    	   	    		System.out.println("ERROR! createEntity() created unexpected object.");
     		return null;
     	}
 		
-    	EntityLivingBase entity = (EntityLivingBase) instance; 
+    	//EntityLivingBase entity = (EntityLivingBase) instance; 
+    	Entity entity = (Entity) instance; 
     	
     	// Set the proper location of the entity.
     	if (blockPos != null) {

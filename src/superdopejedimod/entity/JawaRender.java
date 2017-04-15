@@ -13,7 +13,7 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 @SideOnly(Side.CLIENT)
-public class JawaRender extends BaseRender {
+public class JawaRender extends BaseRenderLiving {
 
 		
 	public JawaRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {

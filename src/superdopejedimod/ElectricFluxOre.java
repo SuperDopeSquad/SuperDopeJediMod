@@ -19,7 +19,7 @@ public class ElectricFluxOre extends BaseBlock{
 		
 		super(Material.ROCK, unlocalizedName);
 		
-		this.setHardness(15.0F);
+		this.setHardness(7.0F);
 		
 		this.setHarvestLevel("pickaxe", 2);
 		

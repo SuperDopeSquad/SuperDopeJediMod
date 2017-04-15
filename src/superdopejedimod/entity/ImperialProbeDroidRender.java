@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 @SideOnly(Side.CLIENT)
-public class ImperialProbeDroidRender extends BaseRender {
+public class ImperialProbeDroidRender extends BaseRenderLiving {
 
 	public ImperialProbeDroidRender(RenderManager renderManager, ModelBase par1ModelBase, float parShadowSize) {
         super(renderManager, par1ModelBase, parShadowSize, "imperialprobedroid");   

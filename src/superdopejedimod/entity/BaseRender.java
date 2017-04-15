@@ -1,7 +1,9 @@
 package superdopesquad.superdopejedimod.entity;
 
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.layers.LayerDeadmau5Head;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -21,19 +23,20 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 @SideOnly(Side.CLIENT)
-public abstract class BaseRender extends RenderLiving {
+public abstract class BaseRender extends Render {
 
 	private ResourceLocation _resourceLocationTexture;
 	
 	
 	public BaseRender(RenderManager renderManager, ModelBase modelBase, float shadowSize, String textureFileName) {
 	
-        super(renderManager, modelBase, shadowSize);
+		super(renderManager);
+        //super(renderManager, modelBase, shadowSize);
         
         // This line of code was stolen from RenderBiped, to help me figure out how to render items held in the entity's hand.
         // Note that your code will fail if your model is not a daughter class of ModelBiped and actually has something in-hand.
-        LayerHeldItem layerhelditem = new LayerHeldItem(this);
-        this.addLayer(layerhelditem);
+        //LayerHeldItem layerhelditem = new LayerHeldItem(this);
+        //this.addLayer(layerhelditem);
         
         // **********
         // This code is not necessary any more, since i moved this code to fire at the onEntityJoin event.  But, if I ever
@@ -48,11 +51,11 @@ public abstract class BaseRender extends RenderLiving {
     }
  
 	
-    @Override
-    protected void preRenderCallback(EntityLivingBase entity, float f)
-    {
-        
-    }
+//    @Override
+//    protected void preRenderCallback(EntityLivingBase entity, float f)
+//    {
+//        
+//    }
 
 
 	@Override

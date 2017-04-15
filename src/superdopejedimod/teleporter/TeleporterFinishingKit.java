@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -17,15 +18,14 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 public class TeleporterFinishingKit extends BaseBlock {
 
-	
-	private TeleporterData _teleporterData;
-	
+	private EnumFacing _facingTeleporterA;
+	private BlockPos _blockPosTeleporterA;
+	private TeleporterEntity _entityTeleporterA;
+
 	
 	public TeleporterFinishingKit(String unlocalizedName) {
 
-		super(Material.IRON, unlocalizedName);
-		
-		
+		super(Material.IRON, unlocalizedName, false);
 	}
 	
 	
@@ -35,15 +35,28 @@ public class TeleporterFinishingKit extends BaseBlock {
 	}
 	
 	
-	public void setTeleporterData(TeleporterData teleporterData) {
+	public EnumFacing getFacingForTeleporterA() {
 		
-		this._teleporterData = teleporterData;
-		System.out.println("finishingKit's teleportData set: " + this._teleporterData.getBlockPosThere().toString());
+		return this._facingTeleporterA;
 	}
 	
 	
-	public TeleporterData getTeleporterData() {
+	public BlockPos getBlockPosForTeleporterA() {
 		
-		return this._teleporterData;
+		return this._blockPosTeleporterA;
+	}
+	
+	
+	public TeleporterEntity getEntityForTeleporterA() {
+		
+		return this._entityTeleporterA;
+	}
+	
+	
+	public void setTeleporterData(EnumFacing facing, BlockPos blockPos, TeleporterEntity entity) {
+			
+		this._facingTeleporterA = facing;
+		this._blockPosTeleporterA = blockPos;
+		this._entityTeleporterA = entity;
 	}
 }

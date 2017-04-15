@@ -6,6 +6,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -16,6 +18,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,6 +31,9 @@ import superdopesquad.superdopejedimod.faction.ClassInfo;
 import superdopesquad.superdopejedimod.faction.PacketClientAskingServerAboutClass;
 import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
 import superdopesquad.superdopejedimod.faction.PacketServerPokingClientAboutClass;
+//import superdopesquad.superdopejedimod.teleporter.PacketClientAskingServerAboutTeleporterDestination;
+import superdopesquad.superdopejedimod.teleporter.TeleporterCapabilityProvider;
+import superdopesquad.superdopejedimod.teleporter.TeleporterEntity;
 
 
 public class SuperDopeEventHandler {
@@ -79,6 +85,14 @@ public class SuperDopeEventHandler {
 			ResourceLocation classCapabilityId = new ResourceLocation(SuperDopeJediMod.MODID, "classCapability");
 			event.addCapability(classCapabilityId, new ClassCapabilityProvider());
 		}
+		
+		if (event.getObject() instanceof TeleporterEntity) {
+			
+			// Attaching the Teleporter capability to TeleporterEntity.
+			//System.out.println("DEBUG: Attaching the Teleporter capability to TeleporterEntity.");
+			ResourceLocation teleporterCapabilityId = new ResourceLocation(SuperDopeJediMod.MODID, "teleporterCapability");
+			event.addCapability(teleporterCapabilityId, new TeleporterCapabilityProvider());
+		}
 	}
 
 	
@@ -105,47 +119,15 @@ public class SuperDopeEventHandler {
 			//System.out.println("Inside onEntityJoined: " + (event.getWorld().isRemote) + ", ");
 		
 			if (newPlayer.getUniqueID() == (currentPlayer.getUniqueID())) {
+				
+				// Ask about class.
 				PacketClientAskingServerAboutClass packet = new PacketClientAskingServerAboutClass();
 				SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
+				
+//				// Ask about teleporter data.
+//				PacketClientAskingServerAboutTeleporterDestination packet2 = new PacketClientAskingServerAboutTeleporterDestination();
+//				SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet2);
 			}
 		}
-		
-		
-		
-		
-		
-//		
-//		
-////		Entity entityIn = event.getEntity();
-////		Class entityClass = entityIn.getClass();
-////		Render<? extends Entity> render = Minecraft.getMinecraft().getRenderManager().entityRenderMap.get(entityClass);
-////				
-////		// Debug info.
-////		//String info;
-////		//if (render == null) {
-////		//	info = "Render: NULL; " + entityIn.getName();
-////		//}
-////		//else {
-////		//	info = "Render: " + render.toString() + ", Entity: " + entityIn.getName();;
-////		//}
-////		//System.out.println("DEBUG: onEntityJoined: " + info);
-////		
-////		// Try to add the LayerFactionIndicator if entityRender points to this being a creature.
-////		if (false) {
-////		if (render != null && render instanceof RenderLivingBase) {
-////			
-////			//System.out.println("DEBUG: onEntityJoined: about to add layer to " + info);
-////			LayerRenderer layerRenderer = new LayerFactionIndicator((RenderLivingBase)render);
-////			
-////			try {
-////				((RenderLivingBase)render).addLayer(layerRenderer);
-////			}
-////			catch (Exception e) {
-////				System.out.println("DEBUG: onEntityJoined: failed to add LayerFactionIndicator on " + entityIn.getName() + ": " + e.getMessage());
-////			}
-////		}
-////		}
-//	}
-// }
 	}
 }
