@@ -74,8 +74,8 @@ public class StormTrooperModel extends ModelBiped
         this.arms = (new ModelRenderer(this)).setTextureSize(width, height);
     	//this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_ + 2.0F, 0.0F);
        	this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
-     	this.arms.setTextureOffset(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
-    	this.arms.setTextureOffset(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
+     	this.arms.setTextureOffset(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 6, 12, 4, scale);
+    	this.arms.setTextureOffset(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 12, 4, scale);
     	
     	if (_showClassEmblem) {
     	 this.classEmblem = (new ModelRenderer(this)).setTextureSize(width, height);

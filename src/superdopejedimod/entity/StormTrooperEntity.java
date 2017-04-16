@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -23,6 +24,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Items;
@@ -44,8 +46,9 @@ import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
 
 
-public class StormTrooperEntity extends BaseEntityTameable {
+public class StormTrooperEntity extends BaseEntityTameable implements IRangedAttackMob {
 		
+	protected double movementSpeed;
 		
 	public StormTrooperEntity(World worldIn) {
 		
@@ -60,6 +63,8 @@ public class StormTrooperEntity extends BaseEntityTameable {
 				
 		// Properties that we need to have later.
 		this.shadowSize = 1.0F;
+		
+		this.movementSpeed = 1.0;
 				
 		// Put a iron axe in his mainhand slot.
 		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(SuperDopeJediMod.weaponManager.blasterRifle));
@@ -110,9 +115,18 @@ public class StormTrooperEntity extends BaseEntityTameable {
 	   FactionInfo factionInfo = SuperDopeJediMod.classManager.getFactionInfo(SuperDopeJediMod.classManager.FACTION_REPUBLIC);
 //>>>>>>> origin/master
 	   
+	   this.targetTasks.addTask(1, new EntityAIQuicklyOffended(this, true, false, 
+				SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_EMPIRE)));  
+		this.targetTasks.addTask(2, new EntityAIEnemyFactionDetector(this, true, false, 16.0F, 
+				SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_REPUBLIC))); 
+	   
+	   // Priority 1: If you see someone from the Empire, shoot to kill.
+	   this.tasks.addTask(0, new EntityAIHoldAndShoot(this, 10, 16.0F));	// Once enemy is identified, hold position and shoot until it goes out of range.
+	   this.tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 6.0F, 0.02F));
+	   this.tasks.addTask(0, new EntityAISwimming(this)); 
 	   // Main AI task list.
 	   //this.tasks.addTask(1, new EntityAIAttackMeleeClassAware(this, 1.0, false, classes));
-	   this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false, factionInfo));
+	   //this.tasks.addTask(1, new EntityAIAttackMeleeFactionAware(this, 1.0, false, factionInfo));
 	   // tasks.addTask(5, new EntityAIMate(this, 1.0D)); We don't need these guys mating.
 	   //this.tasks.addTask(7, new EntityAIFollowParent(this, 1.25D));
 //	   this.tasks.addTask(8, new EntityAIWander(this, 1.0D));
@@ -207,5 +221,14 @@ public class StormTrooperEntity extends BaseEntityTameable {
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
 		
 		this.entityDropItem(new ItemStack(Items.QUARTZ), 0);
+    }
+
+
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
+    {
+    	System.out.println("Storm Trooper: attacking with ranged!");
+    	
+        float damageAmount = 1;
+    	SuperDopeJediMod.weaponManager.ThrowPlasmaShotRed(worldObj, this, target, distanceFactor, damageAmount);
     }
 }

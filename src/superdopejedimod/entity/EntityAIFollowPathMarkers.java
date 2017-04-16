@@ -33,7 +33,7 @@ public class EntityAIFollowPathMarkers extends EntityAIBase
 	
 	protected static final int MAX_WAIT_TIME = 1000;
 	protected static final float DIRECTED_SCAN_SPREAD_RATIO = 0.5F;
-	protected static final boolean DebugScan = false;
+	protected static final boolean DebugScan = true;
 	
 	private final EntityLiving 		entityHost;
     private final double 			speed;

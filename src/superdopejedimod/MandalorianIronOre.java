@@ -17,7 +17,7 @@ public class MandalorianIronOre extends BaseBlock {
 
 		super(Material.IRON, unlocalizedName);
 		
-		this.setHardness(10.0F);
+		this.setHardness(5.0F);
 		
 		this.setHarvestLevel("pickaxe", 2);
 	}

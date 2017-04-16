@@ -16,7 +16,7 @@ public class QuadaniumSteelOre extends BaseBlock {
 		
 		super(Material.ROCK, unlocalizedName);
 		
-		this.setHardness(10.0F);
+		this.setHardness(5.0F);
 		
 		this.setHarvestLevel("pickaxe", 2);
 	}
