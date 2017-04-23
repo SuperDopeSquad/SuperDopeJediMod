@@ -29,8 +29,8 @@ import superdopesquad.superdopejedimod.faction.ClassManager;
 public class TieFighterModel extends ModelBase {
 	
 	/* Constants */
-	public static int TEXTURE_WIDTH = 64; // The texture we are importing is a 64x64 PNG
-	public static int TEXTURE_HEIGHT = 64;
+	public static int TEXTURE_WIDTH = 256; 
+	public static int TEXTURE_HEIGHT = 256;
     
 	public ModelRenderer cockpit;
 	public List<ModelRenderer> parts = new ArrayList<ModelRenderer>();
@@ -208,16 +208,20 @@ public class TieFighterModel extends ModelBase {
     	subwing = subpart = new ModelRenderer(this, 0, 0);
     	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
     	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.setTextureOffset((64 + 128), 0);
     	subpart.addBox(xDistance, 
     			yoffset_begin + -(sectionHeight/2), 
     			-(middleWidth / 2), 
-    			wingThickness, sectionHeight, middleWidth);
+    			wingThickness, // 4
+    			sectionHeight, // 32
+    			middleWidth); // 96
         this.parts.add(subpart);
         
         	// up mid
 	        subpart = new ModelRenderer(this, 0, 0);
 	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
 	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+	    	subpart.setTextureOffset(64, 0);
 	    	subpart.addBox(xDistance, 
 	    			yoffset_begin + -(sectionHeight/2) + -sectionHeight, 
 	    			-(quatreWidth / 2), 
@@ -227,6 +231,7 @@ public class TieFighterModel extends ModelBase {
 	    	// top
 	    	subpart = new ModelRenderer(this, 0, 0);
 	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+	    	subpart.setTextureOffset(64, 0);
 	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
 	    	subpart.addBox(xDistance, 
 	    			yoffset_begin + -(sectionHeight/2) + -(sectionHeight * 2), 
@@ -237,6 +242,7 @@ public class TieFighterModel extends ModelBase {
 	    	// top extended
 	    	subpart = new ModelRenderer(this, 0, 0);
 	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+	    	subpart.setTextureOffset(64, 0);
 	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
 	    	subpart.addBox(xDistance, 
 	    			yoffset_begin + -(sectionHeight/2) + -(sectionHeight * 3), 
@@ -247,6 +253,7 @@ public class TieFighterModel extends ModelBase {
 	    	// down mid
 	    	subpart = new ModelRenderer(this, 0, 0);
 	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+	    	subpart.setTextureOffset(64, 0);
 	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
 	    	subpart.addBox(xDistance, 
 	    			yoffset_begin + -(sectionHeight/2) + sectionHeight, 
@@ -257,6 +264,7 @@ public class TieFighterModel extends ModelBase {
 	    	// bottom
 	    	subpart = new ModelRenderer(this, 0, 0);
 	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+	    	subpart.setTextureOffset(64, 0);
 	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
 	    	subpart.addBox(xDistance, 
 	    			yoffset_begin + -(sectionHeight/2) + (sectionHeight * 2), 
@@ -267,6 +275,7 @@ public class TieFighterModel extends ModelBase {
 	    	// bottom extended
 	    	subpart = new ModelRenderer(this, 0, 0);
 	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+	    	subpart.setTextureOffset(64, 0);
 	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
 	    	subpart.addBox(xDistance, 
 	    			yoffset_begin + -(sectionHeight/2) + (sectionHeight * 3), 
