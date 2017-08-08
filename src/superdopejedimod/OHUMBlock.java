@@ -31,18 +31,19 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 /*
- * 		This block summons in a dome made of iron with a iron door ad some buttons. a work in progress. PEACE OUT HOMIES!
+ * 		This block summons in a dome made of obsidian with a iron door ad some buttons. a work in progress. PEACE OUT HOMIES!
 */
 public class OHUMBlock extends BaseBlock 
 {
+	private static final IBlockState SQUARE_BLOCK = null;
 	/**
 	 *  "Blocks" is the database of all blocks that are in the default Minecraft block collection. Here we pick out the one we want to use for
 	 * our column of blocks. 
 	 */
-	protected static IBlockState DOME_BLOCK = Blocks.IRON_BLOCK.getDefaultState();
+	protected static IBlockState DOME_BLOCK = Blocks.OBSIDIAN.getDefaultState();
 	protected static IBlockState MATERIAL_AIR = Blocks.AIR.getDefaultState();
 	protected static IBlockState MATERIAL_DOOR = Blocks.IRON_DOOR.getDefaultState();
-	protected static IBlockState MATERIAL_BUTTON = Blocks.STONE_BUTTON.getDefaultState();
+	protected static IBlockState MATERIAL_BUTTON = Blocks.STONE_BUTTON.getDefaultState(); 
 	
 	/*
 	 * This is the special constructor function that is called on game startup when the first "JediMark" object is created.
