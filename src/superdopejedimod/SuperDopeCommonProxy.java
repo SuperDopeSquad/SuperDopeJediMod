@@ -29,6 +29,12 @@ public class SuperDopeCommonProxy {
 	
 	
 	public void displayClassGui(EntityPlayer player) {}
+	
+	
+//	public World getWorld() {
+//		
+//		return null;
+//	}
 }
 
 

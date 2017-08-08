@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -92,6 +93,13 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
     	
     	Minecraft.getMinecraft().displayGuiScreen(new ClassGUI(player));
     }
+    
+    
+//    @Override
+//    public World getWorld() {
+//    	
+//    	return Minecraft.getMinecraft().theWorld;
+//    }
 }
 
 
