@@ -370,6 +370,29 @@ public class GeometryUtil {
 		}
 	}
 	
+	/**
+	 * Creates a flat circle, optionally filled-in.
+	 * 
+	 * Note that this routine is destructive, and will permanently delete any block in its way. 
+	 * 
+	 * @param world The world to place the new blocks in.
+	 * @param centerPos The position of the center of the sphere. 
+	 * @param radius The number of blocks on each side of the center; for a radius of 5, the sphere will be 11 blocks wide (5 on
+	 * 				each side, plus the center block).
+	 * @param bstate The blockstate to use for the surface of the sphere.
+	 */
+	public static void buildCircleDestructive(World world, BlockPos centerPos, int radius, IBlockState bstate, boolean filledIn) {
+		for (int x = -radius ; x <= radius ; ++x) {
+			for (int z = -radius ; z <= radius ; ++z) {
+				BlockPos currPos = centerPos.add(x, 0, z);
+				int distanceFromCenter = (int) Math.round(distance(currPos, centerPos));
+				if ((distanceFromCenter == radius) || (filledIn && (distanceFromCenter < radius))) {
+					world.setBlockState(currPos, bstate);
+				}
+			}
+		}
+	}
+	
 	
 	/**
 	 * Creates a sphere. This is not the most efficient algorithm, but it works. I iterate over every block in the 
