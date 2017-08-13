@@ -75,14 +75,13 @@ public abstract class BaseItem extends Item implements SuperDopeObject, ClassAwa
 	@Override
     public void registerItems(RegistryEvent.Register<Item> event) {
 		
-		System.out.println("Inside BaseItem:registerItems: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
-		System.out.println("Inside BaseItem:registerItems: this.getFullName(): " + this.getFullName());
-		System.out.println("Inside BaseItem:registerItems: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
+		// System.out.println("Inside BaseItem:registerItems: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
+		// System.out.println("Inside BaseItem:registerItems: this.getFullName(): " + this.getFullName());
+		// System.out.println("Inside BaseItem:registerItems: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
 	
 		event.getRegistry().register(this.setRegistryName(this.getName()));
 		
-		System.out.println("Inside BaseItem:registerItems: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
-		
+		// System.out.println("Inside BaseItem:registerItems: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
 	}
 	
 //	@Override

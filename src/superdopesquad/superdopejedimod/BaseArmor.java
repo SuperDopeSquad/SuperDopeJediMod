@@ -19,14 +19,14 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public abstract class BaseArmor extends ItemArmor implements SuperDopeObject {
 	
+	
+	private String _name = "";
+
 
 	public BaseArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
 		
 		super(materialIn, renderIndexIn, equipmentSlotIn);
 	}
-
-	
-	protected String name = "";
 
 	
 	public BaseArmor(ArmorMaterial materialIn, EntityEquipmentSlot equipmentSlotIn, String nameIn) {
@@ -35,8 +35,8 @@ public abstract class BaseArmor extends ItemArmor implements SuperDopeObject {
 		super(materialIn, -1, equipmentSlotIn);
 			
 		// Set the name.
-		this.name = nameIn;
-		this.setUnlocalizedName(name);
+		this._name = nameIn;
+		this.setUnlocalizedName(this.getName());
 		
 		// Insert this item into our collection of custom items, so we 
 		// can send separate events to it for lifecycle management.
@@ -45,7 +45,13 @@ public abstract class BaseArmor extends ItemArmor implements SuperDopeObject {
 
 	
 	public String getName() { 
-		return this.name; 
+		//return this._name.toLowerCase(); 
+		return this._name;
+	}
+	
+	
+	public String getFullName() {	
+		return SuperDopeJediMod.MODID + ":" + this.getName();
 	}
 	
 	
@@ -58,29 +64,19 @@ public abstract class BaseArmor extends ItemArmor implements SuperDopeObject {
 	@Override
     public void registerItems(RegistryEvent.Register<Item> event) {
 		
-		event.getRegistry().register(this.setRegistryName(name));
+		event.getRegistry().register(this.setRegistryName(this.getName()));
 	}
-
-	
-//	@Override
-//	public void registerObject() {
-//		
-//		//GameRegistry.registerItem(this, this.name);
-//		GameRegistry.register(this.setRegistryName(this.name));
-//	}
 
 	
 	@Override
 	public void registerModel() {
 	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + this.getName(), "inventory"));
+	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(this.getFullName(), "inventory"));
 	}
 
 	
 	@Override
 	public void registerRecipe() {
-		// TODO Auto-generated method stub
-		
 	}
 }

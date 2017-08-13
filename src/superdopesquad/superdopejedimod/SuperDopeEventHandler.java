@@ -44,7 +44,7 @@ public class SuperDopeEventHandler {
 	@SubscribeEvent
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
 
-		System.out.println("Inside SuperDopeJediMod:registerBlocks");
+		// System.out.println("Inside SuperDopeJediMod:registerBlocks");
 
 		// Iterate through all our custom blocks and items, and register them all.
 		for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {

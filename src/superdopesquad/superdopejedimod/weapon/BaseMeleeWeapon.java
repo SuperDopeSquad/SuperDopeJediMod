@@ -26,7 +26,7 @@ import superdopesquad.superdopejedimod.faction.ClassInfo;
 
 public abstract class BaseMeleeWeapon extends ItemSword implements SuperDopeObject, ClassAwareInterface {
 
-	protected String name = "";
+	private String _name = "";
 	
 	
 	public BaseMeleeWeapon(String nameIn, ToolMaterial material) {
@@ -35,8 +35,8 @@ public abstract class BaseMeleeWeapon extends ItemSword implements SuperDopeObje
 		super(material);
 		
 		// Stash our internal name that we'll use for this block.
-		this.name = nameIn;
-		this.setUnlocalizedName(this.name);
+		this._name = nameIn;
+		this.setUnlocalizedName(this.getName());
 						
 		// By default, we'll put all new blocks in the combat tab.
 		this.setCreativeTab(CreativeTabs.COMBAT);
@@ -48,7 +48,12 @@ public abstract class BaseMeleeWeapon extends ItemSword implements SuperDopeObje
 	
 	
 	public String getName() { 
-		return name; 
+		return this._name.toLowerCase(); 
+	}
+	
+	
+	public String getFullName() {	
+		return SuperDopeJediMod.MODID + ":" + this.getName();
 	}
 	
 	
@@ -61,17 +66,8 @@ public abstract class BaseMeleeWeapon extends ItemSword implements SuperDopeObje
 	@Override
     public void registerItems(RegistryEvent.Register<Item> event) {
 		
-		event.getRegistry().register(this.setRegistryName(name));
+		event.getRegistry().register(this.setRegistryName(this.getName()));
 	}
-	
-	
-//	@Override
-//	public void registerObject() {
-//		
-//		// Register the item with the game.
-//		//GameRegistry.registerItem(this, this.name);
-//		GameRegistry.register(this.setRegistryName(this.name));
-//	}
 	
 	
 	@Override
@@ -84,7 +80,8 @@ public abstract class BaseMeleeWeapon extends ItemSword implements SuperDopeObje
 	public void registerModel() {
 	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseMeleeWeapon) this).getName(), "inventory"));
+	    //renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseMeleeWeapon) this).getName(), "inventory"));
+	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(this.getFullName(), "inventory"));
 	}
 	
 	

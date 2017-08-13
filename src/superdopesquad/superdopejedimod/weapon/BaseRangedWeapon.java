@@ -28,7 +28,8 @@ import superdopesquad.superdopejedimod.faction.ClassInfo;
 public abstract class BaseRangedWeapon extends Item implements SuperDopeObject, ClassAwareInterface {
 
 	
-	protected String name = "";
+	private String _name = "";
+	
 	
 	public BaseRangedWeapon(String name) {
 		
@@ -36,10 +37,10 @@ public abstract class BaseRangedWeapon extends Item implements SuperDopeObject, 
 		super();
 				
 		// Stash our internal name that we'll use for this block.
-		this.name = name;
+		this._name = name;
 				
 		// I don't know what happens if you don't call this, but it is in every tutorial :-)
-		this.setUnlocalizedName(this.name);
+		this.setUnlocalizedName(this.getName());
 				
 		// By default, we'll put all new blocks in the combat tab.
 		this.setCreativeTab(CreativeTabs.COMBAT);
@@ -51,7 +52,12 @@ public abstract class BaseRangedWeapon extends Item implements SuperDopeObject, 
 	
 	
 	public String getName() { 
-		return name; 
+		return this._name.toLowerCase(); 
+	}
+	
+	
+	public String getFullName() {	
+		return SuperDopeJediMod.MODID + ":" + this.getName();
 	}
 	
 	
@@ -64,17 +70,8 @@ public abstract class BaseRangedWeapon extends Item implements SuperDopeObject, 
 	@Override
     public void registerItems(RegistryEvent.Register<Item> event) {
 		
-		event.getRegistry().register(this.setRegistryName(name));
+		event.getRegistry().register(this.setRegistryName(this.getName()));
 	}
-	
-	
-//	@Override
-//	public void registerObject() {
-//		
-//		// Register the item with the game.
-//		//GameRegistry.registerItem(this, this.name);
-//		GameRegistry.register(this.setRegistryName(this.name));
-//	}
 	
 	
 	@Override
@@ -87,7 +84,8 @@ public abstract class BaseRangedWeapon extends Item implements SuperDopeObject, 
 	public void registerModel() {
 	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseRangedWeapon) this).getName(), "inventory"));
+	 //   renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseRangedWeapon) this).getName(), "inventory"));
+	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(this.getFullName(), "inventory"));
 	}
 	
 	

@@ -33,7 +33,7 @@ public class MandalorianIron extends BaseBlock {
 		ItemStack mandalorianIronIngotStackNine = new ItemStack(SuperDopeJediMod.mandalorianIronIngot, 9);
 		
 		ResourceLocation registryName = this.getRegistryName();
-		System.out.println("Inside MandalorianIron:registerRecipe:" + (registryName == null ? "null" : registryName.toString()));
+		//System.out.println("Inside MandalorianIron:registerRecipe:" + (registryName == null ? "null" : registryName.toString()));
 		
 		// 9 MandalorianIronIngots will create 1 MandalorianIron
 		//GameRegistry.addRecipe(new ItemStack(this), "xxx", "xxx", "xxx", 'x', mandalorianIronIngotStackSingle);

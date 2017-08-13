@@ -67,31 +67,27 @@ public abstract class BaseBlock extends Block implements SuperDopeObjectGenerata
 	@Override
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
 	
-		System.out.println("Inside BaseBlock:registerBlocks: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
-		System.out.println("Inside BaseBlock:registerBlocks: this.getFullName(): " + this.getFullName());
-		System.out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
+		// System.out.println("Inside BaseBlock:registerBlocks: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
+		// System.out.println("Inside BaseBlock:registerBlocks: this.getFullName(): " + this.getFullName());
+		// System. out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
 		
 		this.setRegistryName(this.getName());
 		
-		//event.getRegistry().register(this.setRegistryName(this.getFullName()));
 		event.getRegistry().register(this);
 		
-		System.out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
+		// System.out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
 	}
 	
 	
 	@Override
     public void registerItems(RegistryEvent.Register<Item> event) {
 		
-		System.out.println("Inside BaseBlock:registerItems: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
-		System.out.println("Inside BaseBlock:registerItems: this.getFullName(): " + this.getFullName());
-		System.out.println("Inside BaseBlock:registerItems: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
-	
+		// System.out.println("Inside BaseBlock:registerItems: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
+		// System.out.println("Inside BaseBlock:registerItems: this.getFullName(): " + this.getFullName());
+		// System.out.println("Inside BaseBlock:registerItems: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
 		
 		event.getRegistry().register(new ItemBlock(this).setRegistryName(this.getName()));
 		//event.getRegistry().register(new ItemBlock(this));
-		//event.getRegistry().register(this.getite));
-
 	}
 	
 	

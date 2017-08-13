@@ -23,7 +23,7 @@ import superdopesquad.superdopejedimod.faction.ClassInfo;
 
 public abstract class BaseItemFood extends ItemFood implements SuperDopeObject, ClassAwareInterface {
 
-	protected String name = "";
+	private String _name = "";
 	
 	
 	public BaseItemFood(String name, int amount, 
@@ -31,9 +31,9 @@ public abstract class BaseItemFood extends ItemFood implements SuperDopeObject, 
 		
 		super(amount, saturation, isWolfFood);
 	
-		this.name = name;
+		this._name = name;
 		this.setMaxStackSize(64);
-		this.setUnlocalizedName(name);
+		this.setUnlocalizedName(this.getName());
 		this.setCreativeTab(CreativeTabs.FOOD);
 		
 		// Insert this item into our collection of custom items, so we 
@@ -43,7 +43,12 @@ public abstract class BaseItemFood extends ItemFood implements SuperDopeObject, 
 	
 	
 	public String getName() { 
-		return name; 
+		return this._name.toLowerCase(); 
+	}
+	
+	
+	public String getFullName() {	
+		return SuperDopeJediMod.MODID + ":" + this.getName();
 	}
 	
 	
@@ -56,16 +61,8 @@ public abstract class BaseItemFood extends ItemFood implements SuperDopeObject, 
 	@Override
     public void registerItems(RegistryEvent.Register<Item> event) {
 		
-		event.getRegistry().register(this.setRegistryName(name));
+		event.getRegistry().register(this.setRegistryName(this.getName()));
 	}
-	
-	
-//	@Override
-//	public void registerObject() {
-//		
-//		// Register the item with the game.
-//		GameRegistry.register(this.setRegistryName(this.name));
-//	}
 	
 	
 	@Override
@@ -88,7 +85,8 @@ public abstract class BaseItemFood extends ItemFood implements SuperDopeObject, 
 	public void registerModel() {
 	    
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseItemFood) this).getName(), "inventory"));
+	    //renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseItemFood) this).getName(), "inventory"));
+	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(this.getFullName(), "inventory"));
 	}
 	
 	
