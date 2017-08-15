@@ -25,136 +25,139 @@ import superdopesquad.superdopejedimod.faction.ClassManager;
 // angles are in radians!
 // addBox: coordinates are 16 to a block
 
+// in y dimension, 0 is 24 off the ground.
+
+
 @SideOnly(Side.CLIENT)
 public class TieFighterModel extends ModelBase {
 	
 	/* Constants */
-	public static int TEXTURE_WIDTH = 256; 
-	public static int TEXTURE_HEIGHT = 256;
+	public static final int TEXTURE_WIDTH = 256; 
+	public static final int TEXTURE_HEIGHT = 256;
     
 	public ModelRenderer cockpit;
 	public List<ModelRenderer> parts = new ArrayList<ModelRenderer>();
 	
-	 // constants
-    float yoffset_begin = 0.0F;
-	int cockpitWidth = 48;
-    int wingThickness = 4;
-    int maxwingwidth = 96;
-    int sectionHeight = 32;
-    float absoluteDistanceFromCenter = 48.0F + 24.0F;
+	 private static final int cockpitWidth = 48;
+   private static final int wingThickness = 4;
+   private static final int maxwingwidth = 96;
+   private static final int sectionHeight = 32;
+   private static final float absoluteDistanceFromCenter = 48.0F + 24.0F;
     
-    int middleWidth = cockpitWidth * 2;
-    int quatreWidth = middleWidth - 6;
-    int cinqWidth = quatreWidth - 6;
-    int capWidth = quatreWidth - 6;
-    
+   private static final int middleWidth = cockpitWidth * 2;
+   private static final int quatreWidth = middleWidth - 6;
+   private static final int cinqWidth = quatreWidth - 6;
+   private static final int capWidth = quatreWidth - 6;
+   private static final float yoffset_begin = -88.0f;
 	
 	/* Constructors */
     public TieFighterModel() {   
     	ModelRenderer subpart;
     	
-    	// cockpit
+    	// main cockpit
+    	this.cockpit = buildCockpit();
+    
+        // struts & wings.
+        this.parts.add(builStrut(false));
+        this.parts.add(builStrut(true));
+        this.parts.add(buildWing(absoluteDistanceFromCenter));
+        this.parts.add(buildWing(-absoluteDistanceFromCenter));
+    }
+
+    /* */
+    private ModelRenderer buildCockpit() {
+    	ModelRenderer mainpart = null, subpart = null;
+    	
+    	// Main cube
+    	mainpart = new ModelRenderer(this, 0, 0);
+    	mainpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	mainpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	mainpart.addBox((float)-(cockpitWidth/2), yoffset_begin + (float)-(cockpitWidth/2), (float)-(cockpitWidth/2), 
+    			cockpitWidth, cockpitWidth, cockpitWidth);
+        
+    	// lid
+        subpart = new ModelRenderer(this, 0, 0);
+    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.addBox(
+    			(float) -(cockpitWidth-6)/2, 
+    			yoffset_begin + (float)((-cockpitWidth/2)-4), 
+    			(float) -(cockpitWidth-6)/2, 
+    			cockpitWidth-6, 
+    			4, 
+    			cockpitWidth-6);
+    	mainpart.addChild(subpart);
+    	
+    	// lid2
     	subpart = new ModelRenderer(this, 0, 0);
     	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
     	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-    	subpart.addBox((float)-(cockpitWidth/2), yoffset_begin + (float)-(cockpitWidth/2), (float)-(cockpitWidth/2), 
-    			cockpitWidth, cockpitWidth, cockpitWidth);
-        this.cockpit = subpart;
-        
-        	// lid
-	        subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.addBox(
-	    			(float) -(cockpitWidth-6)/2, 
-	    			yoffset_begin + (float)((-cockpitWidth/2)-4), 
-	    			(float) -(cockpitWidth-6)/2, 
-	    			cockpitWidth-6, 
-	    			4, 
-	    			cockpitWidth-6);
-	    	this.cockpit.addChild(subpart);
-	    	
-	    	// lid2
-	    	subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.addBox(
-	    			(float) -(cockpitWidth-12)/2, 
-	    			yoffset_begin + (float)((-cockpitWidth/2)-8), 
-	    			(float) -(cockpitWidth-12)/2, 
-	    			cockpitWidth-12, 
-	    			4, 
-	    			cockpitWidth-12);
-	    	this.cockpit.addChild(subpart);
-	    	
-	    	// bottom
-	        subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.addBox(
-	    			(float) -(cockpitWidth-6)/2, 
-	    			yoffset_begin + (float)((cockpitWidth/2)), 
-	    			(float) -(cockpitWidth-6)/2, 
-	    			cockpitWidth-6, 
-	    			4, 
-	    			cockpitWidth-6);
-	    	this.cockpit.addChild(subpart);
-	    	
-	    	// bottom2
-	    	subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.addBox(
-	    			(float) -(cockpitWidth-12)/2, 
-	    			yoffset_begin + (float)((cockpitWidth/2)+4), 
-	    			(float) -(cockpitWidth-12)/2, 
-	    			cockpitWidth-12, 
-	    			4, 
-	    			cockpitWidth-12);
-	    	this.cockpit.addChild(subpart);
-	    	
-	    	
-	    	// back-window
-		    subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.addBox(
-	    			(float) -(cockpitWidth-6)/2, 
-	    			(float)  yoffset_begin + -(cockpitWidth-6)/2, 
-	    			(float) cockpitWidth/2, 
-	    			cockpitWidth-6, 
-	    			cockpitWidth-6,
-	    			4);
-	    	this.cockpit.addChild(subpart);
-	    	
-	    	// front-window
-		    subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.addBox(
-	    			(float) -(cockpitWidth-6)/2, 
-	    			(float)  yoffset_begin + -(cockpitWidth-6)/2, 
-	    			(float) (-cockpitWidth/2)-4, 
-	    			cockpitWidth-6, 
-	    			cockpitWidth-6,
-	    			4);
-	    	this.cockpit.addChild(subpart);
-    
-        // struts
-        subpart =  builStrut(false);
-        this.parts.add(subpart);
-        subpart = builStrut(true);
-        this.parts.add(subpart);
-	        
-        // ... and the wings!
-        subpart = buildWing(absoluteDistanceFromCenter);
-        this.parts.add(subpart);
-        subpart = buildWing(-absoluteDistanceFromCenter);
-        this.parts.add(subpart);
+    	subpart.addBox(
+    			(float) -(cockpitWidth-12)/2, 
+    			yoffset_begin + (float)((-cockpitWidth/2)-8), 
+    			(float) -(cockpitWidth-12)/2, 
+    			cockpitWidth-12, 
+    			4, 
+    			cockpitWidth-12);
+    	mainpart.addChild(subpart);
+    	
+    	// bottom
+        subpart = new ModelRenderer(this, 0, 0);
+    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.addBox(
+    			(float) -(cockpitWidth-6)/2, 
+    			yoffset_begin + (float)((cockpitWidth/2)), 
+    			(float) -(cockpitWidth-6)/2, 
+    			cockpitWidth-6, 
+    			4, 
+    			cockpitWidth-6);
+    	mainpart.addChild(subpart);
+    	
+    	// bottom2
+    	subpart = new ModelRenderer(this, 0, 0);
+    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.addBox(
+    			(float) -(cockpitWidth-12)/2, 
+    			yoffset_begin + (float)((cockpitWidth/2)+4), 
+    			(float) -(cockpitWidth-12)/2, 
+    			cockpitWidth-12, 
+    			4, 
+    			cockpitWidth-12);
+    	mainpart.addChild(subpart);
+    	
+    	// back-window
+	    subpart = new ModelRenderer(this, 0, 0);
+    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.addBox(
+    			(float) -(cockpitWidth-6)/2, 
+    			(float)  yoffset_begin + -(cockpitWidth-6)/2, 
+    			(float) cockpitWidth/2, 
+    			cockpitWidth-6, 
+    			cockpitWidth-6,
+    			4);
+    	mainpart.addChild(subpart);
+    	
+    	// front-window
+	    subpart = new ModelRenderer(this, 0, 0);
+    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.addBox(
+    			(float) -(cockpitWidth-6)/2, 
+    			(float)  yoffset_begin + -(cockpitWidth-6)/2, 
+    			(float) (-cockpitWidth/2)-4, 
+    			cockpitWidth-6, 
+    			cockpitWidth-6,
+    			4);
+    	mainpart.addChild(subpart);
+    	
+    	return mainpart;
     }
-
     
-     /* */
+    
+    /* */
     private ModelRenderer builStrut(boolean reverse) {
     	
     	ModelRenderer subpart, base = null;
@@ -193,95 +196,83 @@ public class TieFighterModel extends ModelBase {
 		
 		return base;
     }
-    
 
     
     /* */
     private ModelRenderer buildWing(float absoluteDistanceFromCenter2) {
-    	
-    	ModelRenderer subwing, subpart;
-    	
+    
+    	ModelRenderer subpart = null;
     	boolean reverse = (absoluteDistanceFromCenter2 < 0.0);
     	float xDistance = reverse ? (absoluteDistanceFromCenter2 - wingThickness) : absoluteDistanceFromCenter2;
     	
-        // left wing - middle part
-    	subwing = subpart = new ModelRenderer(this, 0, 0);
-    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-    	subpart.setTextureOffset((64 + 128), 0);
-    	subpart.addBox(xDistance, 
+        // middle part
+    	ModelRenderer subwing = new ModelRenderer(this, 0, 0);
+    	subwing.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subwing.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subwing.addBox(xDistance, 
     			yoffset_begin + -(sectionHeight/2), 
     			-(middleWidth / 2), 
-    			wingThickness, // 4
-    			sectionHeight, // 32
-    			middleWidth); // 96
-        this.parts.add(subpart);
+    			wingThickness, sectionHeight, middleWidth);
         
-        	// up mid
-	        subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.setTextureOffset(64, 0);
-	    	subpart.addBox(xDistance, 
-	    			yoffset_begin + -(sectionHeight/2) + -sectionHeight, 
-	    			-(quatreWidth / 2), 
-	    			wingThickness, sectionHeight, quatreWidth);
-	    	subwing.addChild(subpart);
-	    	
-	    	// top
-	    	subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setTextureOffset(64, 0);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.addBox(xDistance, 
-	    			yoffset_begin + -(sectionHeight/2) + -(sectionHeight * 2), 
-	    			-(cinqWidth /2 ), 
-	    			wingThickness, sectionHeight, cinqWidth);
-	    	subwing.addChild(subpart);
-	    	
-	    	// top extended
-	    	subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setTextureOffset(64, 0);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.addBox(xDistance, 
-	    			yoffset_begin + -(sectionHeight/2) + -(sectionHeight * 3), 
-	    			-(capWidth /2 ), 
-	    			wingThickness, sectionHeight, capWidth);
-	    	subwing.addChild(subpart);
-	    	
-	    	// down mid
-	    	subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setTextureOffset(64, 0);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.addBox(xDistance, 
-	    			yoffset_begin + -(sectionHeight/2) + sectionHeight, 
-	    			-(quatreWidth / 2), 
-	    			wingThickness, sectionHeight, quatreWidth);
-	    	subwing.addChild(subpart);
-	    	
-	    	// bottom
-	    	subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setTextureOffset(64, 0);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.addBox(xDistance, 
-	    			yoffset_begin + -(sectionHeight/2) + (sectionHeight * 2), 
-	    			-(cinqWidth / 2), 
-	    			wingThickness, sectionHeight, cinqWidth);
-	    	subwing.addChild(subpart);
-	    	
-	    	// bottom extended
-	    	subpart = new ModelRenderer(this, 0, 0);
-	    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-	    	subpart.setTextureOffset(64, 0);
-	    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
-	    	subpart.addBox(xDistance, 
-	    			yoffset_begin + -(sectionHeight/2) + (sectionHeight * 3), 
-	    			-(capWidth /2 ), 
-	    			wingThickness, sectionHeight, capWidth);
-	    	subwing.addChild(subpart);
+    	// up mid
+        subpart = new ModelRenderer(this, 0, 0);
+    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.addBox(xDistance, 
+    			yoffset_begin + -(sectionHeight/2) + -sectionHeight, 
+    			-(quatreWidth / 2), 
+    			wingThickness, sectionHeight, quatreWidth);
+    	subwing.addChild(subpart);
+    	
+    	// top
+    	subpart = new ModelRenderer(this, 0, 0);
+    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.addBox(xDistance, 
+    			yoffset_begin + -(sectionHeight/2) + -(sectionHeight * 2), 
+    			-(cinqWidth /2 ), 
+    			wingThickness, sectionHeight, cinqWidth);
+    	subwing.addChild(subpart);
+    	
+    	// top extended
+    	subpart = new ModelRenderer(this, 0, 0);
+    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.addBox(xDistance, 
+    			yoffset_begin + -(sectionHeight/2) + -(sectionHeight * 3), 
+    			-(capWidth /2 ), 
+    			wingThickness, sectionHeight, capWidth);
+    	subwing.addChild(subpart);
+    	
+    	// down mid
+    	subpart = new ModelRenderer(this, 0, 0);
+    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.addBox(xDistance, 
+    			yoffset_begin + -(sectionHeight/2) + sectionHeight, 
+    			-(quatreWidth / 2), 
+    			wingThickness, sectionHeight, quatreWidth);
+    	subwing.addChild(subpart);
+    	
+    	// bottom
+    	subpart = new ModelRenderer(this, 0, 0);
+    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.addBox(xDistance, 
+    			yoffset_begin + -(sectionHeight/2) + (sectionHeight * 2), 
+    			-(cinqWidth / 2), 
+    			wingThickness, sectionHeight, cinqWidth);
+    	subwing.addChild(subpart);
+    	
+    	// bottom extended
+    	subpart = new ModelRenderer(this, 0, 0);
+    	subpart.setTextureSize(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    	subpart.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	subpart.addBox(xDistance, 
+    			yoffset_begin + -(sectionHeight/2) + (sectionHeight * 3), 
+    			-(capWidth /2 ), 
+    			wingThickness, sectionHeight, capWidth);
+    	subwing.addChild(subpart);
 	    	
 	    return subwing;
     }
@@ -293,7 +284,7 @@ public class TieFighterModel extends ModelBase {
     @Override
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
     	if (this.cockpit != null) {
-    		cockpit.render(scale);
+    		this.cockpit.render(scale);
     	}
     	for (ModelRenderer subpart : parts) {
     		subpart.render(scale);

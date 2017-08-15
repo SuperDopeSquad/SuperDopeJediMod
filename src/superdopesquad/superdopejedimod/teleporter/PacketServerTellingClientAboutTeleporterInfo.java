@@ -22,42 +22,35 @@ public class PacketServerTellingClientAboutTeleporterInfo implements IMessage {
 	// A default constructor is always required
 	public PacketServerTellingClientAboutTeleporterInfo() {}
 
-	  
 	public PacketServerTellingClientAboutTeleporterInfo(EntityPlayer player, int teleporterEntityId, BlockPos blockPos) {
-		    
-		this._playerId = player.getUniqueID();
+	
+		this._playerId = player.getUniqueID();    
 		this._teleporterEntityId = teleporterEntityId;
 		this._blockPos = blockPos;
 	}
 	
-	
-	public UUID getPlayerId() {
-		
-		return this._playerId;
-	}
-	
+	public UUID getPlayerId() {		
+ 		return this._playerId;		
+ 	}
 	
 	public BlockPos getBlockPos() {
-		
 		return this._blockPos;
 	}
 	
 	
 	public int getTeleporterEntityId() {
-		
 		return this._teleporterEntityId;
 	}
 	
 	
 	 @Override
 	 public void fromBytes(ByteBuf buffer) {
-		 
-		 // Get the Player id.
-		 long mostsignificant  = buffer.readLong();
-		 long leastsignificant  = buffer.readLong();
-		 this._playerId = new UUID(mostsignificant, leastsignificant);
-
-		 
+		
+		 // Get the Player id.	
+ 		 long mostsignificant  = buffer.readLong();		
+ 		 long leastsignificant  = buffer.readLong();		
+ 		 this._playerId = new UUID(mostsignificant, leastsignificant);
+ 
 		 // Get the teleporter id.
 		 this._teleporterEntityId = buffer.readInt();
 		 
@@ -73,10 +66,10 @@ public class PacketServerTellingClientAboutTeleporterInfo implements IMessage {
 	 public void toBytes(ByteBuf buffer) {
 	
 		// Write the Player Id.
-		buffer.writeLong(this._playerId.getMostSignificantBits());
-		buffer.writeLong(this._playerId.getLeastSignificantBits());
-				 
-		 // Set the teleporter id.
+ 		buffer.writeLong(this._playerId.getMostSignificantBits());		
+ 		buffer.writeLong(this._playerId.getLeastSignificantBits());
+ 		
+		  // Set the teleporter id.
 		 buffer.writeInt(this._teleporterEntityId);
 		 
 		 // Set the BlockPos.
