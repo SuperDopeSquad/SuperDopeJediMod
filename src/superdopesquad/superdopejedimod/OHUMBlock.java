@@ -31,7 +31,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 /*
- * 		This block summons in a dome made of iron with a iron door ad some buttons. a work in progress. PEACE OUT HOMIES!
+ * 		This block summons in a dome made of obsidian with a iron door ad some buttons. a work in progress. PEACE OUT HOMIES!
 */
 public class OHUMBlock extends BaseBlock 
 {
@@ -39,13 +39,13 @@ public class OHUMBlock extends BaseBlock
 	 *  "Blocks" is the database of all blocks that are in the default Minecraft block collection. Here we pick out the one we want to use for
 	 * our column of blocks. 
 	 */
-	protected static IBlockState DOME_BLOCK = Blocks.IRON_BLOCK.getDefaultState();
+	protected static IBlockState DOME_BLOCK = Blocks.OBSIDIAN.getDefaultState();
 	protected static IBlockState MATERIAL_AIR = Blocks.AIR.getDefaultState();
 	protected static IBlockState MATERIAL_DOOR = Blocks.IRON_DOOR.getDefaultState();
-	protected static IBlockState MATERIAL_BUTTON = Blocks.STONE_BUTTON.getDefaultState();
+	protected static IBlockState MATERIAL_BUTTON = Blocks.STONE_BUTTON.getDefaultState(); 
 	
 	/*
-	 * This is the special constructor function that is called on game startup when the first "JediMark" object is created.
+	 * This is the special constructor function that is called on game startup when the first "OHUMBlock" object is created.
 	*/
 	public OHUMBlock(String localName) {
 		super(Material.IRON, localName);
@@ -58,25 +58,28 @@ public class OHUMBlock extends BaseBlock
 	 */
 	@Override
 	public void registerRecipe() {
-		ItemStack shovelStack = new ItemStack(Items.IRON_SHOVEL);
-		ItemStack appleStack = new ItemStack(Items.APPLE);
-		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "x x", " y ", "x x", 'x', shovelStack, 'y', appleStack);
+		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "   ", " xx"," xx",
+				'x', shovelStack);
 	}
 	
+
 	/**
 	 * 
 	 */
 	protected void buildDomeFort(World worldIn, BlockPos pos, EnumFacing side) {
-		/* Build central dome. */
+		/* Build central dome & floor. */
 		GeometryUtil.buildDomeDestructive(worldIn, pos, 7, DOME_BLOCK);
+		GeometryUtil.buildCircleDestructive(worldIn, pos.down(), 7, DOME_BLOCK, true);
 		
-		/* Build the door. */
+		/* Delete the original block that triggered building the hut, man. */
+		worldIn.setBlockState(pos, MATERIAL_AIR);
+		
+		/* Clear the doorway. */
 		BlockPos doorPos = pos.offset(side, 7);
 		worldIn.setBlockState(doorPos, MATERIAL_AIR);
 		worldIn.setBlockState(doorPos.up(), MATERIAL_AIR);
 		
 		/* Now the door itself. */
-		//doorPos.offset(side, 1);
 		worldIn.setBlockState(doorPos, MATERIAL_DOOR
 				.withProperty(BlockDoor.FACING, side)
 				.withProperty(BlockDoor.OPEN, Boolean.valueOf(false))
@@ -86,13 +89,14 @@ public class OHUMBlock extends BaseBlock
 				.withProperty(BlockDoor.OPEN, Boolean.valueOf(false))
 				.withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER));
 		
-		/* Add the buttons. */
+		/* Add the buttons on either side of the door. */
 		BlockPos buttonPos = doorPos.up().offset(side, 1).offset(side.rotateYCCW(), 1);
 		worldIn.setBlockState(buttonPos, MATERIAL_BUTTON.withProperty(BlockDirectional.FACING, side));
 		buttonPos = doorPos.up().offset(side.getOpposite(), 1).offset(side.rotateY(), 1);
 		worldIn.setBlockState(buttonPos, MATERIAL_BUTTON.withProperty(BlockDirectional.FACING, side.getOpposite()));
 		
-		/* build the tunnel to the basement. */
+		// TODO: rebuild the basement later.
+		/* build the tunnel to the basement. 
 		BlockPos tunnelPos = pos.down(1).north(5).west(4);
 		worldIn.setBlockState(tunnelPos, MATERIAL_AIR);
 		for (int i=0 ; i < 5 ; ++i) {
@@ -102,12 +106,12 @@ public class OHUMBlock extends BaseBlock
 		
 		////bUilD BaSEmENt!!!!!
 		BlockPos basementPos = tunnelPos;
-		GeometryUtil.clearPrism(worldIn, basementPos, 10, 4, 3, EnumFacing.SOUTH, EnumFacing.WEST);
+		GeometryUtil.clearPrism(worldIn, basementPos, 10, 4, 3, EnumFacing.SOUTH, EnumFacing.WEST); */
 	}
 	
 	
 	/**
-	 * This function is automatically called by Minecraft whenever anybody right-mouse-clicks on a JediMark block.
+	 * This function is automatically called by Minecraft whenever anybody right-mouse-clicks on a OHUM block.
      */
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, 
@@ -120,6 +124,7 @@ public class OHUMBlock extends BaseBlock
         
         System.out.println("OHUMBlock: activated, remote=" + worldIn.isRemote + ", pos=" + pos);
         
+        /* If we hit any of the sides (not top or bottom), then build the fort! */
         if ((side == EnumFacing.NORTH) ||
         	(side == EnumFacing.SOUTH) ||
         	(side == EnumFacing.WEST) ||

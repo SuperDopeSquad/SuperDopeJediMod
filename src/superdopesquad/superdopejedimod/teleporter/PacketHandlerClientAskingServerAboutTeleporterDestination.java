@@ -53,7 +53,7 @@ public class PacketHandlerClientAskingServerAboutTeleporterDestination implement
 			BlockPos blockPos = teleporterEntity.getTeleporterDestination();
 			
 			// Let's turn right back around and tell the client what it wants to know.
-			PacketServerTellingClientAboutTeleporterInfo packet = new PacketServerTellingClientAboutTeleporterInfo((EntityPlayer) player, teleporterEntityId, blockPos);
+			PacketServerTellingClientAboutTeleporterInfo packet = new PacketServerTellingClientAboutTeleporterInfo(teleporterEntityId, blockPos);
 			SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, player);
 			
 		}

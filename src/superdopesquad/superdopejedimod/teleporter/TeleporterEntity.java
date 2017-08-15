@@ -118,7 +118,7 @@ public class TeleporterEntity extends BaseEntityAnimal {
     			//System.out.println("about to tell client to teleport from: " + entityPlayer.getPosition().toString() + " to: " + blockPos.toString());	
     	     	
     	    	// Tell the client what is going on.
-      			PacketTeleporterSetDestination message = new PacketTeleporterSetDestination(entityPlayer, blockPos);
+      			PacketTeleporterSetDestination message = new PacketTeleporterSetDestination(blockPos);
     			SuperDopeJediMod.packetManager.INSTANCE.sendTo(message, (EntityPlayerMP) entityPlayer);
     			
     	     	

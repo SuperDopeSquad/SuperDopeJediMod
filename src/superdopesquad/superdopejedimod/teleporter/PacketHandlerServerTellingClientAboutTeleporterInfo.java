@@ -5,6 +5,7 @@ import java.util.UUID;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -14,10 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-
-
 //The params of the IMessageHandler are <REQ, REPLY>
 //This means that the first param is the packet you are receiving, and the second is the packet you are returning.
 //The returned packet can be used as a "response" from a sent packet.

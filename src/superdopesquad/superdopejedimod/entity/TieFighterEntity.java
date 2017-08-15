@@ -48,6 +48,11 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.stats.AchievementList;
 import net.minecraft.client.renderer.entity.RenderChicken;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -70,7 +75,13 @@ import superdopesquad.superdopejedimod.faction.ClassManager;
 
 public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackMob {
 				
+	private static final DataParameter<Boolean> SADDLED = EntityDataManager.<Boolean>createKey(TieFighterEntity.class, DataSerializers.BOOLEAN);
 	
+	
+	/**
+	 * 
+	 * @param worldIn
+	 */
 	public TieFighterEntity(World worldIn) {
 		
 		super(worldIn, "tieFighterEntity", "Tie Fighter");
@@ -90,10 +101,14 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	    this.moveHelper = new TieFighterEntity.MoveHelper(this);
 	}
 	
+	@Override
+	protected void entityInit() {
+        super.entityInit();
+        this.dataManager.register(SADDLED, Boolean.valueOf(false));
+    }
 	
 	@Override
 	public void registerEntityRender() {
-		
 		Class renderBaseClass = TieFighterRender.class;
 		Class modelBaseClass = TieFighterModel.class;
 		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, this.shadowSize);
@@ -105,34 +120,47 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	public void registerRecipe() {
 	}
 	
-	
+    
+	 /**
+	 * Called when the mob's health reaches 0.
+	 */
 	@Override
-	protected void initEntityAI() {
-		// Clear any tasks assigned in super classes
-		clearAITasks(); 
-		
-		// From Ghast
-		//this.tasks.addTask(5, new AIRandomFly(this));
-	    //    this.tasks.addTask(7, new EntityGhast.AILookAround(this));
-	    //    this.tasks.addTask(7, new EntityGhast.AIFireballAttack(this));
-	    //    this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
+	public void onDeath(DamageSource cause) {
+		super.onDeath(cause);
+	
+	    if (!this.worldObj.isRemote) {
+	        /* if (this.getSaddled())
+	        {
+	            this.dropItem(Items.SADDLE, 1);
+	        } */
+	    }
 	}
 	
 	
-	// This is a timer tick called each update cycle
 	@Override
-    protected void updateAITasks() {
-		//System.out.println("ImperialProbe::updateAITasks entityLivingToAttack=" + this.getAITarget() + ", revengeTimer=" + this.getRevengeTimer() +
-		//		", attackTarget=" + this.getAttackTarget());
-		super.updateAITasks();
-    }
-	
-	@Override
-    public void onLivingUpdate()
-    {
+	public void onLivingUpdate() {
 		//System.out.println("ImperialProbe::onLivingUpdate this=" + this + ", entityLivingToAttack=" + this.getAITarget() + ", revengeTimer=" + this.getRevengeTimer() +
 		//		", attackTarget=" + this.getAttackTarget());
-        super.onLivingUpdate();
+	    super.onLivingUpdate();
+	}
+	
+	
+	 /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+	@Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setBoolean("Saddle", this.getSaddled());
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+	@Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        this.setSaddled(compound.getBoolean("Saddle"));
     }
 	
     /**
@@ -146,6 +174,26 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
     }
     
 
+	/**
+     * Returns the Y offset from the entity's position for any entity riding this one.
+     * should return the yoffset of the cockpit area.
+     */
+	@Override
+    public double getMountedYOffset() {
+        return (double) this.height * 0.67D;
+    }
+	
+	@Override
+	public double getYOffset() {
+		return 0.0D;
+	}
+	
+	// Copied from EntityFlying
+	@Override
+	public boolean isOnLadder() {
+		return false;
+	}
+	
 	@Override
 	public void generateSurface(World world, Random random, int i, int j) {
 		/* We do not auto-spawn anywhere. */
@@ -174,7 +222,7 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	}
 	
 	// Don't despawn if no players are anywhere near us.
-	@Override
+	/*@Override
 	protected boolean canDespawn() {
 		return false;
 	}
@@ -188,10 +236,213 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	@Override
 	public boolean isOnLadder() {
 		return false;
-	}
+	} */
 	
     // Copied from EntityFlying
 	@Override
+	
+	/*
+	 * PASSENGER STUFF
+	 */
+	
+	/**
+	 * Update the position/rotation of any passengers. Base class probably does all we need,
+	 *  but other derived classes also tilt the neck and stuff here.
+	 */
+	@Override
+	public void updatePassenger(Entity passenger) {
+		super.updatePassenger(passenger);
+	}
+	
+    /**
+     * For vehicles, the first passenger is generally considered the controller and "drives" the vehicle. For example,
+     * Pigs, Horses, and Boats are generally "steered" by the controlling passenger.
+     */
+	@Override
+    @Nullable
+    public Entity getControllingPassenger() {
+        List<Entity> list = this.getPassengers();
+        return list.isEmpty() ? null : (Entity) list.get(0);
+    }
+	
+	// Do we need to override this? TODO: only empire.
+	@Override
+    public boolean canPassengerSteer() {
+        Entity entity = this.getControllingPassenger();
+        return entity instanceof EntityPlayer ? ((EntityPlayer)entity).isUser() : !this.worldObj.isRemote;
+    }
+	
+    /**
+     * returns true if all the conditions for steering the entity are met. For pigs, this is true if it is being ridden
+     * by a player and the player is holding a carrot-on-a-stick
+     */
+	@Override // EntityLiving
+    public boolean canBeSteered() {
+        return canPassengerSteer();
+    }
+	
+	/**
+     * If the rider should be dismounted from the entity when the entity goes under water
+     *
+     * @param rider The entity that is riding
+     * @return if the entity should be dismounted when under water
+     */
+	@Override
+    public boolean shouldDismountInWater(Entity rider) {
+        return false;
+    }
+	
+	// TODO: change when we determine passnger-list-size.
+	@Override
+    protected boolean canFitPassenger(Entity passenger) {
+        return this.getPassengers().size() < 1;
+    }
+	
+    /**
+     * If a rider of this entity can interact with this entity. Should return true on the
+     * ridden entity if so.
+     *
+     * @return if the entity can be interacted with from a rider
+     */
+	@Override // TODO: this has something to do wih the renderer.
+    public boolean canRiderInteract() {
+        return false;
+    }
+	
+	
+   public boolean processInteract(EntityPlayer player, EnumHand hand) {
+        if (super.processInteract(player, hand)) {
+        	return true;
+        }
+        
+        if (player.isSneaking()) {
+            return false;
+        }
+        
+        ItemStack itemstack = player.getHeldItem(hand);
+        /* if (itemstack.getItem() == Items.NAME_TAG) {
+            itemstack.interactWithEntity(player, this, hand);
+            return true;
+        } */
+        
+        if (/*this.getSaddled() && */ !this.isBeingRidden()) {
+            /*if (!this.worldObj.isRemote) */{
+                player.startRiding(this);
+                System.out.println("RIDING");
+            }
+            return true;
+        }
+        
+       /* if (itemstack.getItem() == Items.SADDLE) {
+            itemstack.interactWithEntity(player, this, hand);
+            return true;
+        } */
+  
+        return false;
+    }
+   
+
+
+	
+	/**
+     * Returns true if the pig is saddled.
+     */
+    public boolean getSaddled() {
+        return ((Boolean)this.dataManager.get(SADDLED)).booleanValue();
+    }
+
+    /**
+     * Set or remove the saddle of the pig.
+     */
+    public void setSaddled(boolean saddled) {
+        if (saddled) {
+            this.dataManager.set(SADDLED, Boolean.valueOf(true));
+        } else {
+            this.dataManager.set(SADDLED, Boolean.valueOf(false));
+        }
+    }
+    
+	// Copied from EntityFlying & EntityPig
+	@Override
+	public void fall(float distance, float damageMultiplier) {
+        super.fall(distance, damageMultiplier);
+
+        if (distance > 5.0F) {
+            for (EntityPlayer entityplayer : this.getRecursivePassengersByType(EntityPlayer.class))
+            {
+                //entityplayer.addStat(AchievementList.FLY_PIG);
+            }
+        }
+    }
+	
+	// Copied from EntityFlying
+	@Override
+    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
+    }
+    
+	
+	
+    /**
+     * Moves the entity based on the specified heading.
+     */
+	@Override
+    public void moveEntityWithHeading(float strafe, float forward) {
+    	
+    	if (this.isInWater())
+        {
+            this.moveRelative(strafe, forward, 0.02F);
+            this.moveEntity(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+            this.motionX *= 0.800000011920929D;
+            this.motionY *= 0.800000011920929D;
+            this.motionZ *= 0.800000011920929D;
+        }
+        else if (this.isInLava())
+        {
+            this.moveRelative(strafe, forward, 0.02F);
+            this.moveEntity(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+            this.motionX *= 0.5D;
+            this.motionY *= 0.5D;
+            this.motionZ *= 0.5D;
+        }
+        else if (this.isBeingRidden() && this.canBeSteered()) {
+        	// Find the captain of the ship.
+            Entity entity = this.getPassengers().isEmpty() ? null : (Entity)this.getPassengers().get(0);
+            
+        	// Copy all the angles from the captain.
+            this.rotationYaw = entity.rotationYaw;
+            this.prevRotationYaw = this.rotationYaw;
+            this.rotationPitch = entity.rotationPitch * 0.5F;
+            this.setRotation(this.rotationYaw, this.rotationPitch);
+            this.renderYawOffset = this.rotationYaw;
+            this.rotationYawHead = this.rotationYaw;
+            this.stepHeight = 1.0F;
+            this.jumpMovementFactor = this.getAIMoveSpeed() * 0.1F;
+
+            if (this.canPassengerSteer()) {
+                float f = (float) this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * 0.225F;
+                this.setAIMoveSpeed(f);
+                super.moveEntityWithHeading(0.0F, 1.0F);
+            } else {
+            	// No pilot, stop the train!
+                this.motionX = 0.0D;
+                this.motionY = 0.0D;
+                this.motionZ = 0.0D;
+            }
+        }
+    }
+    
+       /* {
+            float f = 0.91F;
+
+            if (this.onGround)
+            {
+                f = this.worldObj.getBlockState(new BlockPos(
+                		MathHelper.floor_double(this.posX), 
+                		MathHelper.floor_double(this.getEntityBoundingBox().minY) - 1, 
+                		MathHelper.floor_double(this.posZ))).getBlock().slipperiness * 0.91F;
+            }
+
+
 //    public void moveEntityWithHeading(float strafe, float forward)
 //    {
 //        if (this.isInWater())
@@ -283,10 +534,13 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	            this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, this.onGround ? 0.1F * f1 : 0.02F);
 	            f = 0.91F;
 
-	            if (this.onGround)
-	            {
-	                f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
-	            }
+            if (this.onGround)
+            {
+                f = this.worldObj.getBlockState(new BlockPos(
+                		MathHelper.floor_double(this.posX), 
+                		MathHelper.floor_double(this.getEntityBoundingBox().minY) - 1, 
+                		MathHelper.floor_double(this.posZ))).getBlock().slipperiness * 0.91F;
+            }
 
 	            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 	            this.motionX *= (double)f;
@@ -304,10 +558,10 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	            f2 = 1.0F;
 	        }
 
-	        this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F;
-	        this.limbSwing += this.limbSwingAmount;
+        this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F;
+        this.limbSwing += this.limbSwingAmount;
+        */
 	    }
-	
 	
 	
 	// Copied from EntityFlying
@@ -322,6 +576,31 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
     {
     }
 	
+
+	/* AI */
+	
+	@Override
+	protected void initEntityAI() {
+		// Clear any tasks assigned in super classes
+		clearAITasks(); 
+		
+		// From Ghast
+		//this.tasks.addTask(5, new AIRandomFly(this));
+	    //    this.tasks.addTask(7, new EntityGhast.AILookAround(this));
+	    //    this.tasks.addTask(7, new EntityGhast.AIFireballAttack(this));
+	    //    this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
+	}
+	
+	
+	// This is a timer tick called each update cycle
+	@Override
+    protected void updateAITasks() {
+		//System.out.println("ImperialProbe::updateAITasks entityLivingToAttack=" + this.getAITarget() + ", revengeTimer=" + this.getRevengeTimer() +
+		//		", attackTarget=" + this.getAttackTarget());
+		super.updateAITasks();
+    }
+	
+
 	// Copied from Ghast
 	static class AIRandomFly extends EntityAIBase
     {

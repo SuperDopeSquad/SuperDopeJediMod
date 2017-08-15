@@ -2,8 +2,6 @@ package superdopesquad.superdopejedimod;
 
 
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -28,11 +26,4 @@ public class SuperDopeServerProxy extends SuperDopeCommonProxy {
     public void postInit(FMLPostInitializationEvent e) {
         super.postInit(e);
     }
-    
-    
-//    @Override
-//    public World getWorld() {
-//    	
-//    	return DimensionManager.
-//    }
 }
