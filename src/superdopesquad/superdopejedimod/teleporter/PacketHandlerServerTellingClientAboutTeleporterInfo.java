@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 //The params of the IMessageHandler are <REQ, REPLY>
 //This means that the first param is the packet you are receiving, and the second is the packet you are returning.
@@ -31,23 +32,15 @@ public class PacketHandlerServerTellingClientAboutTeleporterInfo implements IMes
 						
 			int teleporterEntityId = message.getTeleporterEntityId();
 			BlockPos blockPos = message.getBlockPos();	
-			//BC UUID playerId = message.getPlayerId();
+			UUID playerId = message.getPlayerId();
 			
-			//BC EntityPlayer entityPlayer = (EntityPlayer) Minecraft.getMinecraft().world.getPlayerEntityByUUID(playerId);
+			EntityPlayer entityPlayer = (EntityPlayer) Minecraft.getMinecraft().world.getPlayerEntityByUUID(playerId);
 			//System.out.println("ENTITY:" + (entity != null));
 			//EntityPlayer entityPlayer = (EntityPlayer) entity;	
-			// BC World world = entityPlayer.getEntityWorld();
-			
-		/*	World world;
-		if (ctx.side == Side.SERVER) {
-				world = ctx.getServerHandler().playerEntity.worldObj;
-			}
-			else {
-				world = Minecraft.getMinecraft().theWorld;
-			} */
+			World world = entityPlayer.getEntityWorld();
 		    
 			// Get a handle to the teleporter entity, and it's info that we want to know about.
-			/*Entity entity = world.getEntityByID(teleporterEntityId);
+			Entity entity = world.getEntityByID(teleporterEntityId);
 					
 			if (entity == null) {
 				
@@ -63,7 +56,7 @@ public class PacketHandlerServerTellingClientAboutTeleporterInfo implements IMes
 						
 			// Actually do the work.
 			TeleporterEntity teleporterEntity = (TeleporterEntity)entity;
-			teleporterEntity.setTeleporterDestination(blockPos); */
+			teleporterEntity.setTeleporterDestination(blockPos); 
 		}
 		
 		catch (Exception exception) {
