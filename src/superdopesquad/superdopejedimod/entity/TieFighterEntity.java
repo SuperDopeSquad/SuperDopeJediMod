@@ -52,7 +52,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.stats.AchievementList;
+//import net.minecraft.stats.AchievementList;
 import net.minecraft.client.renderer.entity.RenderChicken;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -128,7 +128,7 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	public void onDeath(DamageSource cause) {
 		super.onDeath(cause);
 	
-	    if (!this.worldObj.isRemote) {
+	    if (!this.world.isRemote) {
 	        /* if (this.getSaddled())
 	        {
 	            this.dropItem(Items.SADDLE, 1);
@@ -238,8 +238,6 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 		return false;
 	} */
 	
-    // Copied from EntityFlying
-	@Override
 	
 	/*
 	 * PASSENGER STUFF
@@ -269,7 +267,7 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	@Override
     public boolean canPassengerSteer() {
         Entity entity = this.getControllingPassenger();
-        return entity instanceof EntityPlayer ? ((EntityPlayer)entity).isUser() : !this.worldObj.isRemote;
+        return entity instanceof EntityPlayer ? ((EntityPlayer)entity).isUser() : !this.world.isRemote;
     }
 	
     /**
@@ -292,7 +290,7 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
         return false;
     }
 	
-	// TODO: change when we determine passnger-list-size.
+	// TODO: change when we determine passenger-list-size.
 	@Override
     protected boolean canFitPassenger(Entity passenger) {
         return this.getPassengers().size() < 1;
@@ -361,30 +359,12 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
             this.dataManager.set(SADDLED, Boolean.valueOf(false));
         }
     }
-    
-	// Copied from EntityFlying & EntityPig
-	@Override
-	public void fall(float distance, float damageMultiplier) {
-        super.fall(distance, damageMultiplier);
-
-        if (distance > 5.0F) {
-            for (EntityPlayer entityplayer : this.getRecursivePassengersByType(EntityPlayer.class))
-            {
-                //entityplayer.addStat(AchievementList.FLY_PIG);
-            }
-        }
-    }
-	
-	// Copied from EntityFlying
-	@Override
-    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
-    }
-    
+ 
 	
 	
     /**
      * Moves the entity based on the specified heading.
-     */
+     
 	@Override
     public void moveEntityWithHeading(float strafe, float forward) {
     	
@@ -429,7 +409,21 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
                 this.motionZ = 0.0D;
             }
         }
+    } */
+	
+	
+	// Copied from EntityFlying
+	@Override
+	public void fall(float distance, float damageMultiplier)
+    {
     }
+
+	// Copied from EntityFlying
+	@Override
+    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos)
+    {
+    }
+	
     
        /* {
             float f = 0.91F;
@@ -561,20 +555,9 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
         this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F;
         this.limbSwing += this.limbSwingAmount;
         */
-	    }
+	   // }
 	
-	
-	// Copied from EntityFlying
-	@Override
-	public void fall(float distance, float damageMultiplier)
-    {
-    }
 
-	// Copied from EntityFlying
-	@Override
-    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos)
-    {
-    }
 	
 
 	/* AI */

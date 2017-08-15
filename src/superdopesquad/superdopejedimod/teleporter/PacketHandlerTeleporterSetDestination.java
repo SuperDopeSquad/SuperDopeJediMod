@@ -1,5 +1,7 @@
 package superdopesquad.superdopejedimod.teleporter;
 
+import java.util.UUID;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,27 +46,7 @@ public class PacketHandlerTeleporterSetDestination implements IMessageHandler<Pa
 		     	
 			boolean success = TeleporterManager.teleportSomeoneSomewhere(world, blockPos, entityPlayer);
 			
-			return null;
-			
-//			// Check to make sure this blockPos is clear.
-//			if (blockPos == null) {
-//				System.out.println("ERROR: Sent a null blockpos in a PacketTeleporterSetDestination.");
-//				return null;		
-//			}
-//			
-//			// We are cool with these type of blocks.
-//			boolean isAirBlock = world.isAirBlock(blockPos);
-//			boolean isPassableBlock = world.getBlockState(blockPos).getBlock().isPassable(world, blockPos);		
-//			if (!(isAirBlock || isPassableBlock)) {
-//				entityPlayer.addChatMessage(new TextComponentString("Your destination is blocked!  Teleportation suspended.")); 
-//			    return null;
-//			}
-//			
-//			// Move the current player.
-//			double x = blockPos.getX() + 0.5;
-//    		double y = blockPos.getY();
-//    		double z = blockPos.getZ() + 0.5;
-//     		entityPlayer.setLocationAndAngles(x, y, z, 0.0F, 0.0F);
+			return null; 
 		}
 		
 		catch (Exception exception) {

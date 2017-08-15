@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 //The params of the IMessageHandler are <REQ, REPLY>
 //This means that the first param is the packet you are receiving, and the second is the packet you are returning.
@@ -37,14 +38,6 @@ public class PacketHandlerServerTellingClientAboutTeleporterInfo implements IMes
 			//System.out.println("ENTITY:" + (entity != null));
 			//EntityPlayer entityPlayer = (EntityPlayer) entity;	
 			World world = entityPlayer.getEntityWorld();
-			
-//			World world;
-//			if (ctx.side == Side.SERVER) {
-//				world = ctx.getServerHandler().playerEntity.worldObj;
-//			}
-//			else {
-//				world = Minecraft.getMinecraft().theWorld;
-//			}
 		    
 			// Get a handle to the teleporter entity, and it's info that we want to know about.
 			Entity entity = world.getEntityByID(teleporterEntityId);
@@ -63,7 +56,7 @@ public class PacketHandlerServerTellingClientAboutTeleporterInfo implements IMes
 						
 			// Actually do the work.
 			TeleporterEntity teleporterEntity = (TeleporterEntity)entity;
-			teleporterEntity.setTeleporterDestination(blockPos);
+			teleporterEntity.setTeleporterDestination(blockPos); 
 		}
 		
 		catch (Exception exception) {

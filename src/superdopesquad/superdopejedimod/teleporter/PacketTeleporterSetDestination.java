@@ -14,11 +14,13 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 public class PacketTeleporterSetDestination implements IMessage {
   
 	private BlockPos _blockPos;
+	private UUID _playerId;
   
 	// A default constructor is always required
 	public PacketTeleporterSetDestination() {}
 
-	public PacketTeleporterSetDestination(BlockPos blockPos) {
+	public PacketTeleporterSetDestination(EntityPlayer player, BlockPos blockPos) {
+	this._playerId = player.getUniqueID();
 		this._blockPos = blockPos;
 	}
 
@@ -26,8 +28,18 @@ public class PacketTeleporterSetDestination implements IMessage {
 		return this._blockPos;
 	}
 	
+	public UUID getPlayerId() {		
+ 		return this._playerId;		
+ 	}
+	
 	 @Override
 	 public void fromBytes(ByteBuf buffer) {
+	 
+	  // Get the Player id.		
+ 	 long mostsignificant  = buffer.readLong();		
+ 		 long leastsignificant  = buffer.readLong();		
+ 		 this._playerId = new UUID(mostsignificant, leastsignificant);
+ 
 		 // Get the BlockPos.
 		 int x = buffer.readInt();
 		 int y = buffer.readInt();
@@ -37,6 +49,11 @@ public class PacketTeleporterSetDestination implements IMessage {
 
 	 @Override
 	 public void toBytes(ByteBuf buffer) {
+	 
+	  // Write the Player Id.		
+ 		 buffer.writeLong(this._playerId.getMostSignificantBits());		
+ 		 buffer.writeLong(this._playerId.getLeastSignificantBits());
+ 
 		 buffer.writeInt(this._blockPos.getX());
 		 buffer.writeInt(this._blockPos.getY());
 		 buffer.writeInt(this._blockPos.getZ());
