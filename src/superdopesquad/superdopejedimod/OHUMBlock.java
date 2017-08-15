@@ -34,7 +34,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * 		This block summons in a dome made of obsidian with a iron door ad some buttons. a work in progress. PEACE OUT HOMIES!
 */
 public class OHUMBlock extends BaseBlock 
-{	
+{
 	/**
 	 *  "Blocks" is the database of all blocks that are in the default Minecraft block collection. Here we pick out the one we want to use for
 	 * our column of blocks. 
@@ -62,7 +62,7 @@ public class OHUMBlock extends BaseBlock
 				'x', shovelStack);
 	}
 	
-	
+
 	/**
 	 * 
 	 */

@@ -21,29 +21,25 @@ public class PacketServerTellingClientAboutTeleporterInfo implements IMessage {
 	// A default constructor is always required
 	public PacketServerTellingClientAboutTeleporterInfo() {}
 
-	  
 	public PacketServerTellingClientAboutTeleporterInfo(int teleporterEntityId, BlockPos blockPos) {
 		    
 		this._teleporterEntityId = teleporterEntityId;
 		this._blockPos = blockPos;
 	}
 	
-	
 	public BlockPos getBlockPos() {
-		
 		return this._blockPos;
 	}
 	
 	
 	public int getTeleporterEntityId() {
-		
 		return this._teleporterEntityId;
 	}
 	
 	
 	 @Override
 	 public void fromBytes(ByteBuf buffer) {
-		 
+		
 		 // Get the id.
 		 this._teleporterEntityId = buffer.readInt();
 		 

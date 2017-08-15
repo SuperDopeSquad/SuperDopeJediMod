@@ -27,29 +27,28 @@ import superdopesquad.superdopejedimod.faction.ClassManager;
 
 // in y dimension, 0 is 24 off the ground.
 
+
 @SideOnly(Side.CLIENT)
 public class TieFighterModel extends ModelBase {
 	
 	/* Constants */
-	public static final int TEXTURE_WIDTH = 64; // The texture we are importing is a 64x64 PNG
-	public static final int TEXTURE_HEIGHT = 64;
-	
+	public static final int TEXTURE_WIDTH = 256; 
+	public static final int TEXTURE_HEIGHT = 256;
     
-    private static final int cockpitWidth = 48;
-    private static final int wingThickness = 4;
-    private static final int maxwingwidth = 96;
-    private static final int sectionHeight = 32;
-    private static final float absoluteDistanceFromCenter = 48.0F + 24.0F;
-    
-    private static final int middleWidth = cockpitWidth * 2;
-    private static final int quatreWidth = middleWidth - 6;
-    private static final int cinqWidth = quatreWidth - 6;
-    private static final int capWidth = quatreWidth - 6;
-    private static final float yoffset_begin = -88.0f;
-    
-    /* Instance Members */
-    public ModelRenderer cockpit;
+	public ModelRenderer cockpit;
 	public List<ModelRenderer> parts = new ArrayList<ModelRenderer>();
+	
+	 private static final int cockpitWidth = 48;
+   private static final int wingThickness = 4;
+   private static final int maxwingwidth = 96;
+   private static final int sectionHeight = 32;
+   private static final float absoluteDistanceFromCenter = 48.0F + 24.0F;
+    
+   private static final int middleWidth = cockpitWidth * 2;
+   private static final int quatreWidth = middleWidth - 6;
+   private static final int cinqWidth = quatreWidth - 6;
+   private static final int capWidth = quatreWidth - 6;
+   private static final float yoffset_begin = -88.0f;
 	
 	/* Constructors */
     public TieFighterModel() {   
@@ -201,7 +200,7 @@ public class TieFighterModel extends ModelBase {
     
     /* */
     private ModelRenderer buildWing(float absoluteDistanceFromCenter2) {
-    	
+    
     	ModelRenderer subpart = null;
     	boolean reverse = (absoluteDistanceFromCenter2 < 0.0);
     	float xDistance = reverse ? (absoluteDistanceFromCenter2 - wingThickness) : absoluteDistanceFromCenter2;

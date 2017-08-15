@@ -12,30 +12,22 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 
 public class PacketTeleporterSetDestination implements IMessage {
-
-
+  
 	private BlockPos _blockPos;
-		  
-
+  
 	// A default constructor is always required
 	public PacketTeleporterSetDestination() {}
 
-	  
 	public PacketTeleporterSetDestination(BlockPos blockPos) {
-	    
 		this._blockPos = blockPos;
 	}
-	
-	
+
 	public BlockPos getBlockPos() {
-		
 		return this._blockPos;
 	}
 	
-	
 	 @Override
 	 public void fromBytes(ByteBuf buffer) {
-		 
 		 // Get the BlockPos.
 		 int x = buffer.readInt();
 		 int y = buffer.readInt();
@@ -43,10 +35,8 @@ public class PacketTeleporterSetDestination implements IMessage {
 		 this._blockPos = new BlockPos(x, y, z);
 	 }
 
-	 
 	 @Override
 	 public void toBytes(ByteBuf buffer) {
-	
 		 buffer.writeInt(this._blockPos.getX());
 		 buffer.writeInt(this._blockPos.getY());
 		 buffer.writeInt(this._blockPos.getZ());

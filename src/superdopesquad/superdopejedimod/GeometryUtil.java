@@ -370,6 +370,7 @@ public class GeometryUtil {
 		}
 	}
 	
+
 	/**
 	 * Creates a flat circle, optionally filled-in.
 	 * 
@@ -392,7 +393,7 @@ public class GeometryUtil {
 			}
 		}
 	}
-	
+
 	
 	/**
 	 * Creates a sphere. This is not the most efficient algorithm, but it works. I iterate over every block in the 

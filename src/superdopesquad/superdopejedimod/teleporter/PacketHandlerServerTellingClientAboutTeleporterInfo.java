@@ -2,7 +2,6 @@ package superdopesquad.superdopejedimod.teleporter;
 
 
 import java.util.UUID;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +16,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-
 //The params of the IMessageHandler are <REQ, REPLY>
 //This means that the first param is the packet you are receiving, and the second is the packet you are returning.
 //The returned packet can be used as a "response" from a sent packet.
@@ -32,7 +30,6 @@ public class PacketHandlerServerTellingClientAboutTeleporterInfo implements IMes
 		try {
 						
 			int teleporterEntityId = message.getTeleporterEntityId();
-
 			BlockPos blockPos = message.getBlockPos();	
 			UUID playerId = message.getPlayerId();
 			

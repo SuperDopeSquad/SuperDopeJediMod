@@ -1,6 +1,5 @@
 package superdopesquad.superdopejedimod.teleporter;
 
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +27,6 @@ public class PacketHandlerTeleporterSetDestination implements IMessageHandler<Pa
 	public IMessage onMessage(PacketTeleporterSetDestination message, MessageContext ctx) {
  			
 		try {
-
 			BlockPos blockPos = message.getBlockPos();					
 			UUID playerId = message.getPlayerId();
 

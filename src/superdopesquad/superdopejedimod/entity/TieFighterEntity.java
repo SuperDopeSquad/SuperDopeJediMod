@@ -162,9 +162,6 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
         super.readEntityFromNBT(compound);
         this.setSaddled(compound.getBoolean("Saddle"));
     }
-    
-	
-    
 	
     /**
      * Attack the specified entity using a ranged attack.
@@ -176,12 +173,6 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
     	SuperDopeJediMod.weaponManager.ThrowPlasmaShotRed(world, this, target, distanceFactor, damageAmount);
     }
     
-
-	
-	
-	
-	
-	
 
 	/**
      * Returns the Y offset from the entity's position for any entity riding this one.
@@ -203,7 +194,6 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 		return false;
 	}
 	
-
 	@Override
 	public void generateSurface(World world, Random random, int i, int j) {
 		/* We do not auto-spawn anywhere. */
@@ -232,12 +222,24 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	}
 	
 	// Don't despawn if no players are anywhere near us.
-	@Override
+	/*@Override
 	protected boolean canDespawn() {
 		return false;
 	}
 	
+	@Override
+	public double getYOffset() {
+		return 0.0D;
+	}
 	
+	// Copied from EntityFlying
+	@Override
+	public boolean isOnLadder() {
+		return false;
+	} */
+	
+    // Copied from EntityFlying
+	@Override
 	
 	/*
 	 * PASSENGER STUFF
@@ -384,7 +386,6 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
      * Moves the entity based on the specified heading.
      */
 	@Override
-<<<<<<< HEAD:src/superdopejedimod/entity/TieFighterEntity.java
     public void moveEntityWithHeading(float strafe, float forward) {
     	
     	if (this.isInWater())
@@ -440,7 +441,8 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
                 		MathHelper.floor_double(this.getEntityBoundingBox().minY) - 1, 
                 		MathHelper.floor_double(this.posZ))).getBlock().slipperiness * 0.91F;
             }
-=======
+
+
 //    public void moveEntityWithHeading(float strafe, float forward)
 //    {
 //        if (this.isInWater())
@@ -527,13 +529,11 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	            {
 	                f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
 	            }
->>>>>>> d05854b046bcb175d86ba2c7d3db4c18e931da85:src/superdopesquad/superdopejedimod/entity/TieFighterEntity.java
 
 	            float f1 = 0.16277136F / (f * f * f);
 	            this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, this.onGround ? 0.1F * f1 : 0.02F);
 	            f = 0.91F;
 
-<<<<<<< HEAD:src/superdopejedimod/entity/TieFighterEntity.java
             if (this.onGround)
             {
                 f = this.worldObj.getBlockState(new BlockPos(
@@ -541,12 +541,6 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
                 		MathHelper.floor_double(this.getEntityBoundingBox().minY) - 1, 
                 		MathHelper.floor_double(this.posZ))).getBlock().slipperiness * 0.91F;
             }
-=======
-	            if (this.onGround)
-	            {
-	                f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
-	            }
->>>>>>> d05854b046bcb175d86ba2c7d3db4c18e931da85:src/superdopesquad/superdopejedimod/entity/TieFighterEntity.java
 
 	            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 	            this.motionX *= (double)f;
@@ -564,17 +558,23 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	            f2 = 1.0F;
 	        }
 
-<<<<<<< HEAD:src/superdopejedimod/entity/TieFighterEntity.java
         this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F;
         this.limbSwing += this.limbSwingAmount;
         */
-=======
-	        this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F;
-	        this.limbSwing += this.limbSwingAmount;
 	    }
 	
 	
->>>>>>> d05854b046bcb175d86ba2c7d3db4c18e931da85:src/superdopesquad/superdopejedimod/entity/TieFighterEntity.java
+	// Copied from EntityFlying
+	@Override
+	public void fall(float distance, float damageMultiplier)
+    {
+    }
+
+	// Copied from EntityFlying
+	@Override
+    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos)
+    {
+    }
 	
 
 	/* AI */
@@ -601,8 +601,6 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
     }
 	
 
-
-	
 	// Copied from Ghast
 	static class AIRandomFly extends EntityAIBase
     {
