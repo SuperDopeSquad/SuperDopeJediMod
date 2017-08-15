@@ -59,9 +59,9 @@ public class OHUMBlock extends BaseBlock
 	 */
 	@Override
 	public void registerRecipe() {
-		ItemStack shovelStack = new ItemStack(Items.IRON_SHOVEL);
-		ItemStack appleStack = new ItemStack(Items.APPLE);
-		GameRegistry.addRecipe(new ItemStack(this), "x x", " y ", "x x", 'x', shovelStack, 'y', appleStack);
+		ItemStack shovelStack = new ItemStack(Blocks.DIRT);
+		GameRegistry.addRecipe(new ItemStack(this), "   ", " xx"," xx",
+				'x', shovelStack);
 	}
 	
 	/**
