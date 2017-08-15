@@ -31,23 +31,23 @@ public class PacketHandlerServerTellingClientAboutTeleporterInfo implements IMes
 						
 			int teleporterEntityId = message.getTeleporterEntityId();
 			BlockPos blockPos = message.getBlockPos();	
-			UUID playerId = message.getPlayerId();
+			//BC UUID playerId = message.getPlayerId();
 			
-			EntityPlayer entityPlayer = (EntityPlayer) Minecraft.getMinecraft().world.getPlayerEntityByUUID(playerId);
+			//BC EntityPlayer entityPlayer = (EntityPlayer) Minecraft.getMinecraft().world.getPlayerEntityByUUID(playerId);
 			//System.out.println("ENTITY:" + (entity != null));
 			//EntityPlayer entityPlayer = (EntityPlayer) entity;	
-			World world = entityPlayer.getEntityWorld();
+			// BC World world = entityPlayer.getEntityWorld();
 			
-//			World world;
-//			if (ctx.side == Side.SERVER) {
-//				world = ctx.getServerHandler().playerEntity.worldObj;
-//			}
-//			else {
-//				world = Minecraft.getMinecraft().theWorld;
-//			}
+		/*	World world;
+		if (ctx.side == Side.SERVER) {
+				world = ctx.getServerHandler().playerEntity.worldObj;
+			}
+			else {
+				world = Minecraft.getMinecraft().theWorld;
+			} */
 		    
 			// Get a handle to the teleporter entity, and it's info that we want to know about.
-			Entity entity = world.getEntityByID(teleporterEntityId);
+			/*Entity entity = world.getEntityByID(teleporterEntityId);
 					
 			if (entity == null) {
 				
@@ -63,7 +63,7 @@ public class PacketHandlerServerTellingClientAboutTeleporterInfo implements IMes
 						
 			// Actually do the work.
 			TeleporterEntity teleporterEntity = (TeleporterEntity)entity;
-			teleporterEntity.setTeleporterDestination(blockPos);
+			teleporterEntity.setTeleporterDestination(blockPos); */
 		}
 		
 		catch (Exception exception) {

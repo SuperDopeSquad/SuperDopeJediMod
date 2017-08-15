@@ -1,5 +1,7 @@
 package superdopesquad.superdopejedimod.teleporter;
 
+import java.util.UUID;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +30,7 @@ public class PacketHandlerTeleporterSetDestination implements IMessageHandler<Pa
  			
 		try {
 			BlockPos blockPos = message.getBlockPos();					
-			UUID playerId = message.getPlayerId();
+			/*UUID playerId = message.getPlayerId();
 
 			//System.out.println("DEBUG: RECEIVED PacketPlayerSetClass: " + playerId + ", " + classId);
 			//System.out.println("MINECRAFT:  " + (Minecraft.getMinecraft() != null));
@@ -43,8 +45,8 @@ public class PacketHandlerTeleporterSetDestination implements IMessageHandler<Pa
 			//World world = Minecraft.getMinecraft().theWorld;
 		     	
 			boolean success = TeleporterManager.teleportSomeoneSomewhere(world, blockPos, entityPlayer);
-			
-			return null;
+			*/
+			return null; 
 			
 //			// Check to make sure this blockPos is clear.
 //			if (blockPos == null) {

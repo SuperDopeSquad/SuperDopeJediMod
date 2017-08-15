@@ -58,8 +58,9 @@ public class OHUMBlock extends BaseBlock
 	 */
 	@Override
 	public void registerRecipe() {
+		ItemStack dirtStack = new ItemStack(Blocks.DIRT);
 		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "   ", " xx"," xx",
-				'x', shovelStack);
+				'x', dirtStack);
 	}
 	
 
