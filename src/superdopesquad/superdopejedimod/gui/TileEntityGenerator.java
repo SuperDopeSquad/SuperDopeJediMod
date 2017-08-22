@@ -28,7 +28,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
-public class TileEntityGenerator extends TileEntity implements ITickable, ICapabilityProvider {
+public class TileEntityGenerator extends TileEntity implements ICapabilityProvider {
 
 	private ItemStackHandler handler;
 	
@@ -55,10 +55,7 @@ public class TileEntityGenerator extends TileEntity implements ITickable, ICapab
     	return super.writeToNBT(nbt);
     }
 
-	@Override
-	public void update() {
-		
-	}
+	
 	
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
@@ -71,7 +68,7 @@ public class TileEntityGenerator extends TileEntity implements ITickable, ICapab
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
 		this.readFromNBT(pkt.getNbtCompound());
-	}
+	}	
 
 	@Override
 	public NBTTagCompound getUpdateTag() {

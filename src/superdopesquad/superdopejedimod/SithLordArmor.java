@@ -6,6 +6,7 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class SithLordArmor extends BaseArmor{
+	
 	public SithLordArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
 		
 		super(materialIn, renderIndexIn, equipmentSlotIn);

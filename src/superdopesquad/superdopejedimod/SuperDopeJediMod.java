@@ -237,6 +237,7 @@ public class SuperDopeJediMod //Start the class Declaration
     	
     	// Call our proxy for any side-specific work.
     	superDopeCommonProxy.preInit(event);
+    	superDopeCommonProxy.registerTileEntities();
     	
 //    	// Iterate through all our custom blocks and items, and register them all.
 //    	for (SuperDopeObject superDopeObject : this.customObjects) {

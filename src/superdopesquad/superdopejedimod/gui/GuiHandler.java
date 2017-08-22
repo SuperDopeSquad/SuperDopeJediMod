@@ -18,7 +18,7 @@ public class GuiHandler implements IGuiHandler {
 		
 		if (ID == GENERATOR_GUI) {
 			
-			return new GeneratorGUI(player.inventory, (TileEntityGenerator) world.getTileEntity(new BlockPos(x, y, z)));
+			return new ContainerGenerator(player.inventory, (TileEntityGenerator) world.getTileEntity(new BlockPos(x, y, z)));
 			
 		}
 		return null;
