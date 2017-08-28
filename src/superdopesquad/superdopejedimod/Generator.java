@@ -104,7 +104,9 @@ public class Generator extends BaseBlock implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing heldItem, float side, float hitX, float hitY) {
-		if(!worldIn.isRemote) {
+		System.out.println("Inside Generator:onBlockActivated");
+		if(worldIn.isRemote) {
+			System.out.println("Inside Generator:onBlockActivated: Client Only");
 			playerIn.openGui(SuperDopeJediMod.instance, GuiHandler.GENERATOR_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
