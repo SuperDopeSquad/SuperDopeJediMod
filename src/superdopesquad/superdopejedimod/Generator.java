@@ -19,6 +19,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -61,8 +62,20 @@ public class Generator extends BaseBlock implements ITileEntityProvider {
 			
 		}
 
+	
+	@Override
+	public void blockBreakEvent(BreakEvent e)
+	{
+		System.out.println("Inside Generator:blockBreakEvent");
+		return;
+	}
+	
+	
 	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		
+		System.out.println("Inside Generator:breakBlock");
+		
 		TileEntityGenerator te = (TileEntityGenerator) world.getTileEntity(pos);
 		IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		for(int slot = 0; slot < handler.getSlots(); slot++) {
