@@ -18,19 +18,17 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public abstract class BaseBlock extends Block implements SuperDopeObjectGeneratable {
 	
-	
+	// Instance Members
 	private String _name = "";
 	private boolean _showUpInCreativeTab = true;
 	
 	
 	public BaseBlock(Material material, String name) {
-		
 		this(material, name, true);
 	}
 	
 	
 	public BaseBlock(Material material, String name, boolean showUpInCreativeTab) {
-		
 		// Call our super class constructor, "Block".
 		super(material);
 		
@@ -51,37 +49,32 @@ public abstract class BaseBlock extends Block implements SuperDopeObjectGenerata
 		SuperDopeJediMod.customObjects.add(this);
 	}
 	
-	
+	@Override // from SuperDopeObject
 	public String getName() { 
-		
 		return this._name.toLowerCase(); 
 	}
 	
-	
+	@Override // from SuperDopeObject
 	public String getFullName() {
-		
 		return SuperDopeJediMod.MODID + ":" + this.getName();
 	}
 	
 	
-	@Override
+	@Override // from SuperDopeObject
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
-	
 		// System.out.println("Inside BaseBlock:registerBlocks: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
 		// System.out.println("Inside BaseBlock:registerBlocks: this.getFullName(): " + this.getFullName());
 		// System. out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
 		
 		this.setRegistryName(this.getName());
-		
 		event.getRegistry().register(this);
 		
 		// System.out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
 	}
 	
 	
-	@Override
+	@Override // from SuperDopeObject
     public void registerItems(RegistryEvent.Register<Item> event) {
-		
 		// System.out.println("Inside BaseBlock:registerItems: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
 		// System.out.println("Inside BaseBlock:registerItems: this.getFullName(): " + this.getFullName());
 		// System.out.println("Inside BaseBlock:registerItems: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
@@ -90,56 +83,13 @@ public abstract class BaseBlock extends Block implements SuperDopeObjectGenerata
 		//event.getRegistry().register(new ItemBlock(this));
 	}
 	
-	
-//	@Override
-//	public void registerObject() {
-//		
-//		
-//		
-//		// Mandatory: This registers the block, whether or not you want it to show up in the creative tab or not.
-//		GameRegistry.register(this.setRegistryName(this.name));
-//			
-//		// Optional: This creates a corresponding Item for the block, which shows up in places like the creative tab.
-//		if (this._showUpInCreativeTab) {
-//			
-//			GameRegistry.findRegistry(Block.class)
-//			
-//			GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-//		}
-//	}
-	
-	
-	@Override
-	public void registerRecipe() {
-		return;
-	}
-	
-	
-	@Override
+
+	@Override // from SuperDopeObject
 	public void registerModel() {
-		
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		String location = SuperDopeJediMod.MODID + ":" + ((BaseBlock) this).getName();
 		//System.out.println("SuperDopeSquad: registering block: " + location);
 	    //renderItem.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new ModelResourceLocation(location, "inventory"));
 	    renderItem.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new ModelResourceLocation(location));
-	}
-    
-	
-	@Override
-	public void generateEnd(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	@Override
-	public void generateSurface(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	@Override
-	public void generateNether(World world, Random random, int i, int j) {
-		return;
 	}
 }

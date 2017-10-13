@@ -42,8 +42,6 @@ import superdopesquad.superdopejedimod.SuperDopeObjectGeneratable;
 // EntityAgeable is an EntityCreature that can come in various sizes/ages. 
 // EntityAnimal is an EntityAgeable that enables breeding by implementing IAnimal.
 // EntityTameable is EntityAnimal that implement IEntityOwnable 
-
-
 public abstract class BaseEntityTameable extends EntityTameable implements SuperDopeEntity, SuperDopeObjectGeneratable {
 
 	
@@ -67,13 +65,11 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 	
 	@Override
 	public String getName() {
-		
 		return this._name;
 	}
 	
 	
 	public String getFullName() {
-		
 		return SuperDopeJediMod.MODID + ":" + this.getName();
 	}
 	
@@ -125,10 +121,6 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 	}
 	
 	
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
-		
-	}
-	
 	
     public void registerItems(RegistryEvent.Register<Item> event) {
     	
@@ -138,51 +130,6 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
     }
 	
-    
-//	@Override
-//	public void registerObject() {
-//		
-//		ResourceLocation resourceLocation = new ResourceLocation(this.getFullName());
-//		//System.out.println("registerObject's name: " + this.getName());
-//		//System.out.println("resourceLocation: " + resourceLocation.toString());
-//	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-//	};
-	
-	
-	@Override
-	public void registerRecipe() {
-		return;
-	}
-	
-	
-	@Override
-	public void registerModel() {
-	    return;
-	}
-	
-	
-	@Override
-	public void registerEntityRender() {
-		return;
-	}
-	
-	
-	@Override
-	public void generateEnd(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	@Override
-	public void generateSurface(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	@Override
-	public void generateNether(World world, Random random, int i, int j) {
-		return;
-	}
 	
 	
 	// Copied from EntityMob.
