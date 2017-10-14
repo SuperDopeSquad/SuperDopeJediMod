@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": { "model": "superdopejedimod:hangarpadblock" },
+         "edge": { "model": "superdopejedimod:hangarpadblockedge" }
+    }
+}
+
