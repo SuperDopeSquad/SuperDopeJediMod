@@ -8,6 +8,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
@@ -27,6 +29,10 @@ public class LightSaber extends BaseMeleeWeapon {
 		this.color = colorInput;
 		
 		this.setCreativeTab(CreativeTabs.COMBAT);
+		
+		this.isRepairable();
+		
+		
 		
 		
 		//this.setMaxStackSize(64);
@@ -144,8 +150,6 @@ public class LightSaber extends BaseMeleeWeapon {
 //		
 //		this.GetItemDurability();
 //	}
-	
-
 	
 	
 	
