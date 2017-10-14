@@ -24,6 +24,7 @@ import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.faction.ClassItem;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.teleporter.TeleporterManager;
+import superdopesquad.superdopejedimod.tinkertable.TinkerTable;
 import superdopesquad.superdopejedimod.weapon.BountyHunterLeaderKnife;
 import superdopesquad.superdopejedimod.weapon.BrynsAwesomeSword;
 import superdopesquad.superdopejedimod.weapon.DoubleLightSaber;
@@ -144,7 +145,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static ChromateIngot chromateIngot = new ChromateIngot("chromateIngot");
     public static CompressedMetalPlate compressedMetalPlate = new CompressedMetalPlate("compressedMetalPlate");
     public static CompressedMetalBits compressedMetalBits = new CompressedMetalBits("compressedMetalBits");
-    public static Generator generator = new Generator("generator");
+    public static TinkerTable tinkerTable = new TinkerTable("tinkerTable");
     public static ChromateShard chromateShard = new ChromateShard("chromateShard");
     public static ElectricTransmitter electricTransmitter = new ElectricTransmitter("electricTransmitter");
     public static ElectricFluxIngot electricFluxIngot = new ElectricFluxIngot("electricFluxIngot");
@@ -262,6 +263,9 @@ public class SuperDopeJediMod //Start the class Declaration
 
     		superDopeObject.registerBlocks(event);
     	}
+    	
+    	// MC: hack: placing this here for now.
+        //GameRegistry.registerTileEntity(GeneratorTileEntity.class, "TileEntityGenerator");
     }
     
      
@@ -304,6 +308,7 @@ public class SuperDopeJediMod //Start the class Declaration
     	
     	// Register our custom world generator, so our ore gets generated.
     	GameRegistry.registerWorldGenerator(SuperDopeJediMod.superDopeWorldGenerator, 0);
+   
     	
 //    	// Let's register our eventhandler class.   
 //    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());	   

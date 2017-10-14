@@ -72,8 +72,7 @@ public class SuperDopeEventHandler {
 	@SubscribeEvent
 	public void blockBreakEvent(BreakEvent e)
 	{
-		
-		System.out.println("Inside blockBreakEvent");
+		// System.out.println("Inside blockBreakEvent");
 		
 		IBlockState blockState = e.getState();
 		Block block = blockState.getBlock();

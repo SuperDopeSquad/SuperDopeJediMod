@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "superdopejedimod:blocks/generator"
+        "all": "superdopejedimod:blocks/tinkertable"
     }
 }
