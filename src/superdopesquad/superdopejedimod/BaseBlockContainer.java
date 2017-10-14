@@ -1,36 +1,47 @@
 package superdopesquad.superdopejedimod;
 
 import java.util.Random;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import superdopesquad.superdopejedimod.tinkertable.TinkerTableTileEntity;
 
 
-public abstract class BaseBlock extends Block implements SuperDopeObjectGeneratable {
+public abstract class BaseBlockContainer extends BlockContainer implements SuperDopeObjectGeneratable {
 	
-	// Instance Members
+	
+//	protected BaseBlockContainer(Material material, String name) {
+//		
+//		super(material);
+//		// TODO Auto-generated constructor stub
+//	}
+
+
 	private String _name = "";
 	private boolean _showUpInCreativeTab = true;
 	
 	
-	public BaseBlock(Material material, String name) {
+	public BaseBlockContainer(Material material, String name) {
+		
 		this(material, name, true);
 	}
 	
 	
-	public BaseBlock(Material material, String name, boolean showUpInCreativeTab) {
+	public BaseBlockContainer(Material material, String name, boolean showUpInCreativeTab) {
+		
 		// Call our super class constructor, "Block".
 		super(material);
 		
@@ -51,45 +62,43 @@ public abstract class BaseBlock extends Block implements SuperDopeObjectGenerata
 		SuperDopeJediMod.customObjects.add(this);
 	}
 	
-
-	@Override // from SuperDopeObject
+	
+	  @Override
+	    public TileEntity createNewTileEntity(World worldIn, int meta) {
+	        return new TinkerTableTileEntity();
+	    }
+	
+	
+	@Override
 	public String getName() { 
+		
 		return this._name.toLowerCase(); 
 	}
 	
-
-	@Override // from SuperDopeObject
+	
+	@Override
 	public String getFullName() {
+		
 		return SuperDopeJediMod.MODID + ":" + this.getName();
 	}
 	
 	
-	@Override // from SuperDopeObject
+	@Override
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
-    
-		// System.out.println("Inside BaseBlock:registerBlocks: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
-		// System.out.println("Inside BaseBlock:registerBlocks: this.getFullName(): " + this.getFullName());
-		// System. out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
-		
+			
 		this.setRegistryName(this.getName());
-		event.getRegistry().register(this);
-		
-		// System.out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
+		event.getRegistry().register(this);		
 	}
 	
 	
-	@Override // from SuperDopeObject
+	@Override
     public void registerItems(RegistryEvent.Register<Item> event) {
-
-		// System.out.println("Inside BaseBlock:registerItems: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
-		// System.out.println("Inside BaseBlock:registerItems: this.getFullName(): " + this.getFullName());
-		// System.out.println("Inside BaseBlock:registerItems: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
-		
+				
 		event.getRegistry().register(new ItemBlock(this).setRegistryName(this.getName()));
 	}
 
 	
-	@Override // from SuperDopeObject
+
 	public void blockBreakEvent(BreakEvent e)
 	{
 		//System.out.println("Inside BaseBlock:blockBreakEvent");
@@ -105,8 +114,27 @@ public abstract class BaseBlock extends Block implements SuperDopeObjectGenerata
 	
 	@Override
 	public void registerModel() {
+		
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		String location = SuperDopeJediMod.MODID + ":" + ((BaseBlock) this).getName();
+		String location = SuperDopeJediMod.MODID + ":" + ((BaseBlockContainer) this).getName();
 	    renderItem.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new ModelResourceLocation(location));
+	}
+    
+	
+	@Override
+	public void generateEnd(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	@Override
+	public void generateSurface(World world, Random random, int i, int j) {
+		return;
+	}
+	
+	
+	@Override
+	public void generateNether(World world, Random random, int i, int j) {
+		return;
 	}
 }

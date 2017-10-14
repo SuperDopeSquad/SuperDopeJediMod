@@ -18,12 +18,18 @@ public class SuperDopeServerProxy extends SuperDopeCommonProxy {
 	
 	@Override
 	public void init(FMLInitializationEvent e){
-	    super.init(e);
+		
+		super.init(e);
+		
+		System.out.println("I'm on the server!  init event.");
 	}
 
 	
     @Override
     public void postInit(FMLPostInitializationEvent e) {
-        super.postInit(e);
+        
+    	super.postInit(e);
+        
+     	System.out.println("I'm in the server proxy! post init event.");
     }
 }
