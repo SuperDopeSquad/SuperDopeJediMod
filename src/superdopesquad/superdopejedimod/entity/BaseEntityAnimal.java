@@ -44,7 +44,7 @@ import superdopesquad.superdopejedimod.SuperDopeObjectGeneratable;
 // EntityTameable is EntityAnimal that implement IEntityOwnable 
 public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDopeEntity, SuperDopeObjectGeneratable {
 
-	
+	// Instance Members
 	private String _name = "";
 	private String _displayName = "";
 	protected float shadowSize = 1.0F;
@@ -52,13 +52,11 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	
 	
 	public BaseEntityAnimal(World worldIn, String name, String displayName) {
-		
 		this(worldIn, name, displayName, true);
 	}
 		
 	
 	public BaseEntityAnimal(World worldIn, String name, String displayName, boolean hasCreativeModeEgg) {
-		
 		super(worldIn);
 		
 		this._name = name;
@@ -71,22 +69,20 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	}
 	
 	
-	@Override
+	@Override // from SuperDopeObject
 	public String getName() {
-		
 		return this._name;
 	}
 	
 	
+	@Override // from SuperDopeObject
 	public String getFullName() {
-		
 		return SuperDopeJediMod.MODID + ":" + this.getName();
 	}
 	
 
-	@Override
+	@Override // from Entity
 	public ITextComponent getDisplayName() {
-		
         TextComponentString textcomponentstring = new TextComponentString(this._displayName);
         return textcomponentstring;
 	}
@@ -100,7 +96,7 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 
 
 	// you don't have to call this as it is called automatically during EntityLiving subclass creation
-	@Override
+	@Override // from EntityLivingBase
 	protected void applyEntityAttributes()
 	{
 	    super.applyEntityAttributes(); 
@@ -125,86 +121,28 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 //	}
 	
 	
-	@Override
+	@Override // from EntityAgeable
 	public EntityAgeable createChild(EntityAgeable ageable) {
 		return null;
 	}
 	
 	
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
-		
-	}
-	
-	
+	@Override // from SuperDopeObject interface
     public void registerItems(RegistryEvent.Register<Item> event) {
-    	
     	ResourceLocation resourceLocation = new ResourceLocation(this.getFullName());
 
 		if (this._hasCreativeModeEgg) {
-	  	
-			EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-		}
-		else {
-			EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true);
-
+			EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), 
+					SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
+		} else {
+			EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), 
+					SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true);
 		}    
 	}
     
 	
-    
-//	@Override
-//	public void registerObject() {
-//		
-//		ResourceLocation resourceLocation = new ResourceLocation(this.getFullName());
-//
-//		if (this._hasCreativeModeEgg) {
-//	  	
-//			EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-//		}
-//		else {
-//			EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true);
-//
-//		}
-//	};
-	
-	
-	@Override
-	public void registerRecipe() {
-		return;
-	}
-	
-	
-	@Override
-	public void registerModel() {
-	    return;
-	}
-	
-	
-	@Override
-	public void registerEntityRender() {
-		return;
-	}
-	
-	
-	@Override
-	public void generateEnd(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	@Override
-	public void generateSurface(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
-	@Override
-	public void generateNether(World world, Random random, int i, int j) {
-		return;
-	}
-	
-	
 	// Copied from EntityMob.
+	 @Override // from EntityLivingBase
 	 public boolean attackEntityAsMob(Entity entityIn) {
 		 
 		 float f = (float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
@@ -343,38 +281,33 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements SuperDope
 	        }
 	    }
 		
-	    
-		// Copied from EntityMob.
-		 /**
-	     * Checks if the entity's current position is a valid location to spawn this entity.
+	   
+		/**
+	     * Checks if the entity's current position is a valid location to spawn this entity. Copied from EntityMob.
 	     */
-		@Override
-	    public boolean getCanSpawnHere()
-	    {
+		@Override // from EntityLiving
+	    public boolean getCanSpawnHere() {
 	        //return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere();
 			return ((this.isValidLightLevel()) && (super.getCanSpawnHere()));
 	    }
 		
 		
 		// Copied from EntityMob.
-		@Override
+		@Override // from Entity
 		public boolean attackEntityFrom(DamageSource source, float amount) {
-		        
 			return this.isEntityInvulnerable(source) ? false : super.attackEntityFrom(source, amount);
 		}
 		
 		 
 	    // Entity won't drop items or experience points if this returns false
-		@Override
+		@Override // from EntityLivingBase
 	    protected boolean canDropLoot() {
-	        
 			return true;
 	    }
 		
 		
-		@Override
+		@Override // from EntityLiving
 		protected boolean canDespawn() {
-			
 			return true;
 		}
 }

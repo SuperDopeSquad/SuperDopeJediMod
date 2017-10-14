@@ -7,7 +7,12 @@ import net.minecraft.world.World;
 
 public interface SuperDopeObjectGeneratable extends SuperDopeObject {
 
-	public void generateEnd(World world, Random random, int i, int j);
-	public void generateSurface(World world, Random random, int i, int j);
-	public void generateNether(World world, Random random, int i, int j);
+	default public void generateEnd(World world, Random random, int i, int j) {
+	}
+	
+	default public void generateSurface(World world, Random random, int i, int j) {
+	}
+	
+	default public void generateNether(World world, Random random, int i, int j) {
+	}
 }
