@@ -1,12 +1,9 @@
 package superdopesquad.superdopejedimod.entity;
 
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
 import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.model.ModelBiped;
@@ -52,7 +49,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-//import net.minecraft.stats.AchievementList;
 import net.minecraft.client.renderer.entity.RenderChicken;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -60,6 +56,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -72,18 +69,15 @@ import superdopesquad.superdopejedimod.faction.FactionInfo;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 
 
-
-public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackMob {
-				
-	private static final DataParameter<Boolean> SADDLED = EntityDataManager.<Boolean>createKey(TieFighterEntity.class, DataSerializers.BOOLEAN);
-	
+/**
+ * No AI: only moves when there is a passenger.
+ */
+public class TieFighterEntity extends BaseEntityAnimal {	
 	
 	/**
-	 * 
-	 * @param worldIn
+	 * constructor
 	 */
 	public TieFighterEntity(World worldIn) {
-		
 		super(worldIn, "tieFighterEntity", "Tie Fighter");
 		
 		// This sets the bounding box size, not the actual model that you see rendered.
@@ -95,19 +89,15 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 		// Properties that we need to have later.
 		this.shadowSize = 0.5F;
 		
-		// this.setSize(4.0F, 4.0F);
-	    //    this.isImmuneToFire = true;
-	    //    this.experienceValue = 5;
-	    this.moveHelper = new TieFighterEntity.MoveHelper(this);
+		// prevent motiony degrade
+		this.setNoGravity(true);
 	}
 	
-	@Override
-	protected void entityInit() {
-        super.entityInit();
-        this.dataManager.register(SADDLED, Boolean.valueOf(false));
-    }
 	
-	@Override
+	/**
+	 * Called during startup, so the engine knows about our custom rendering (drawing) code.
+	 */
+	@Override // from SuperDopeEntity
 	public void registerEntityRender() {
 		Class renderBaseClass = TieFighterRender.class;
 		Class modelBaseClass = TieFighterModel.class;
@@ -116,96 +106,114 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	}
 	
 	
-	@Override
-	public void registerRecipe() {
-	}
-	
-    
-	 /**
-	 * Called when the mob's health reaches 0.
+	/**
+	 * Called every couple ticks to update animation. 
+	 * Here, we use this callback to transfer forward-signals from the driver to the ship. The player entity will automatically have
+	 * its moveForward and moveStrafe properties set when they press w/a/s/z. We only respond to the w key for now 
+	 * (tie fighters only go forward).
 	 */
-	@Override
-	public void onDeath(DamageSource cause) {
-		super.onDeath(cause);
-	
-	    if (!this.world.isRemote) {
-	        /* if (this.getSaddled())
-	        {
-	            this.dropItem(Items.SADDLE, 1);
-	        } */
-	    }
-	}
-	
-	
-	@Override
+	@Override // from EntityLivingBase
 	public void onLivingUpdate() {
-		//System.out.println("ImperialProbe::onLivingUpdate this=" + this + ", entityLivingToAttack=" + this.getAITarget() + ", revengeTimer=" + this.getRevengeTimer() +
-		//		", attackTarget=" + this.getAttackTarget());
+		EntityLivingBase driver = getControllingLivingPassenger();
+		if (driver != null) {
+			// Copy over our forward movement, dropping moveStrafing and moveVertical. 
+			if (driver.moveForward >= 0.0) {
+				this.setMoveForward(driver.moveForward);
+			}
+			
+			// Record the direction we are facing. pitch=up and down angle, yaw=left and right
+			this.prevRotationYaw = this.rotationYaw;
+		    this.rotationYaw = driver.rotationYaw;
+		    this.prevRotationPitch = this.rotationPitch;
+		    this.rotationPitch = driver.rotationPitch /** 0.5F */;
+		    this.setRotation(this.rotationYaw, this.rotationPitch);
+		    
+		    // Do I need this?
+		    this.rotationYawHead = this.rotationYaw;
+		    this.renderYawOffset = this.rotationYaw;
+	    }
+		
+		// Continue to do all the updates in the parent class.
 	    super.onLivingUpdate();
 	}
 	
 	
-	 /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-	@Override
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-        compound.setBoolean("Saddle", this.getSaddled());
-    }
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-	@Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        this.setSaddled(compound.getBoolean("Saddle"));
-    }
+	/**
+	 * Called when the mob's health reaches 0. Not currently doing anything, but perhaps in the future 
+	 * this ship should explode in a firey explosion.
+	 */
+	@Override // from EntityLivingBase
+	public void onDeath(DamageSource cause) {
+		 // TODO: Explode!
+		super.onDeath(cause);
+	}
 	
-    /**
-     * Attack the specified entity using a ranged attack.
-     *  
-     * @param distanceFactor How far the target is, normalized and clamped between 0.1 and 1.0
-     */
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
-        float damageAmount = 1;
-    	SuperDopeJediMod.weaponManager.ThrowPlasmaShotRed(world, this, target, distanceFactor, damageAmount);
-    }
-    
+	
+	/**
+	 * Called by onLivingUpdate() to translate the direction controls (moveForward, moveStrafing, moveVertical) 
+	 * to actual movement (motionX, motionY, motionZ), and then a call to the system move() routine.
+	 */
+	@Override // from EntityLivingBase
+	public void travel(float inMoveStrafing, float inMoveVertical, float inMoveForward) {
+	   
+	    if (this.isBeingRidden() && this.canBeSteered() && this.canPassengerSteer() && (inMoveForward != 0.0)) {
+	    	
+        	// Calculate velocity.
+            float v = (float) this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
+            v *= 10.0f;
+	        
+            // Map the forward velocity to its individual x, y, and z components according to the direction we are looking
+            // (using a little trigonometry).
+            Vec3d vec3d = this.getLookVec();
+            this.motionX = v * vec3d.x;
+            this.motionY = v * vec3d.y;
+            this.motionZ = v * vec3d.z;
+            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+	    } else {
+	    	
+	    	// We have no body on us. TODO: we need to fall to the ground.
+	    	//this.onGround = true;
+	    	this.motionX = 0.0D;
+            this.motionY = 0.0D;
+            this.motionZ = 0.0D;
+	        super.travel(inMoveStrafing, inMoveVertical, inMoveForward);
+	    }
+	}
+	
 
 	/**
      * Returns the Y offset from the entity's position for any entity riding this one.
      * should return the yoffset of the cockpit area.
-     */
-	@Override
+     */	
+	@Override // from Entity
     public double getMountedYOffset() {
-        return (double) this.height * 0.67D;
+	  // TODO: this is hard coded to sit on top of the cockpit, so you can see, Lower once i figure out how to have 
+	  // transparent pixels in the cockpit window.
+	  return 9.0;
     }
 	
-	@Override
+	/**
+	 * EntityAnimal overrides this, so back to default of 0.
+	 */
+	@Override // from Entity
 	public double getYOffset() {
 		return 0.0D;
 	}
 	
-	// Copied from EntityFlying
-	@Override
+	/**
+	 *  Copied from EntityFlying; do we need this?
+	 */
+	@Override // from EntityLivingBase
 	public boolean isOnLadder() {
 		return false;
 	}
 	
-	@Override
-	public void generateSurface(World world, Random random, int i, int j) {
-		/* We do not auto-spawn anywhere. */
-	}
-	
-	
-	@Override
+	@Override // EntityLivingBase
 	protected void applyEntityAttributes() {
 	   super.applyEntityAttributes(); 
 
 	    // standard attributes registered to EntityLivingBase
-	   getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+	   getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
 	   getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);	
 	   getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
 	   getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
@@ -215,63 +223,64 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
 	   getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
 	}
 	
-	// After it dies, what equipment should it drop?
-	@Override
-	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
-		//this.entityDropItem(new ItemStack(Items.REDSTONE), 0);
-	}
-	
-	// Don't despawn if no players are anywhere near us.
-	/*@Override
-	protected boolean canDespawn() {
-		return false;
-	}
-	
-	@Override
-	public double getYOffset() {
-		return 0.0D;
-	}
-	
-	// Copied from EntityFlying
-	@Override
-	public boolean isOnLadder() {
-		return false;
-	} */
-	
 	
 	/*
-	 * PASSENGER STUFF
+	 * PASSENGER STUFF: some of this code could go to a generic vehicle class.
 	 */
 	
 	/**
-	 * Update the position/rotation of any passengers. Base class probably does all we need,
-	 *  but other derived classes also tilt the neck and stuff here.
+	 * NOTE: To dismount, we can:
+	 * 	(a) manually call dismountRidingEntity() here in this class.
+	 *  (b) If the user hits left-shift, there is code in EntityPlayer::updateRidden() that detects this (isSneaking)
+	 *      and calls dismountRidingEntity() for us.
 	 */
-	@Override
-	public void updatePassenger(Entity passenger) {
-		super.updatePassenger(passenger);
+	@Override // from EntityLiving
+    public boolean processInteract(EntityPlayer player, EnumHand hand) {
+	   
+		if (!this.isBeingRidden()) {
+			player.startRiding(this);
+			this.onGround = false;
+			return true;
+		}
+		
+		/* otherwise, let the system handle the interaction. */
+	    return super.processInteract(player, hand);
 	}
+	
 	
     /**
      * For vehicles, the first passenger is generally considered the controller and "drives" the vehicle. For example,
      * Pigs, Horses, and Boats are generally "steered" by the controlling passenger.
      */
-	@Override
+	@Override // from Entity
     @Nullable
     public Entity getControllingPassenger() {
         List<Entity> list = this.getPassengers();
-        return list.isEmpty() ? null : (Entity) list.get(0);
+        if (list.isEmpty()) {
+        	return null;
+        }
+        
+        return (Entity) list.get(0);
     }
 	
-	// Do we need to override this? TODO: only empire.
-	@Override
+	@Nullable
+    public EntityLivingBase getControllingLivingPassenger() {
+	    Entity driver = getControllingPassenger();   
+		return (driver instanceof EntityLivingBase) ? (EntityLivingBase) driver : null;
+    }
+	
+	
+	/**
+	 * TODO: only empire can drive this thing.
+	 */
+	@Override // for Entity
     public boolean canPassengerSteer() {
-        Entity entity = this.getControllingPassenger();
+		EntityLivingBase entity = this.getControllingLivingPassenger();
         return entity instanceof EntityPlayer ? ((EntityPlayer)entity).isUser() : !this.world.isRemote;
     }
 	
     /**
-     * returns true if all the conditions for steering the entity are met. For pigs, this is true if it is being ridden
+     * Returns true if all the conditions for steering the entity are met. For pigs, this is true if it is being ridden
      * by a player and the player is holding a carrot-on-a-stick
      */
 	@Override // EntityLiving
@@ -285,13 +294,12 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
      * @param rider The entity that is riding
      * @return if the entity should be dismounted when under water
      */
-	@Override
+	@Override // for Entity
     public boolean shouldDismountInWater(Entity rider) {
         return false;
     }
 	
-	// TODO: change when we determine passenger-list-size.
-	@Override
+	@Override // for Entity
     protected boolean canFitPassenger(Entity passenger) {
         return this.getPassengers().size() < 1;
     }
@@ -302,402 +310,22 @@ public class TieFighterEntity extends BaseEntityAnimal implements IRangedAttackM
      *
      * @return if the entity can be interacted with from a rider
      */
-	@Override // TODO: this has something to do wih the renderer.
+	@Override
     public boolean canRiderInteract() {
         return false;
     }
-	
-	
-   public boolean processInteract(EntityPlayer player, EnumHand hand) {
-        if (super.processInteract(player, hand)) {
-        	return true;
-        }
-        
-        if (player.isSneaking()) {
-            return false;
-        }
-        
-        ItemStack itemstack = player.getHeldItem(hand);
-        /* if (itemstack.getItem() == Items.NAME_TAG) {
-            itemstack.interactWithEntity(player, this, hand);
-            return true;
-        } */
-        
-        if (/*this.getSaddled() && */ !this.isBeingRidden()) {
-            /*if (!this.worldObj.isRemote) */{
-                player.startRiding(this);
-                System.out.println("RIDING");
-            }
-            return true;
-        }
-        
-       /* if (itemstack.getItem() == Items.SADDLE) {
-            itemstack.interactWithEntity(player, this, hand);
-            return true;
-        } */
-  
-        return false;
-    }
-   
 
-
-	
 	/**
-     * Returns true if the pig is saddled.
-     */
-    public boolean getSaddled() {
-        return ((Boolean)this.dataManager.get(SADDLED)).booleanValue();
+	 *  do we need this?
+	 */
+	@Override // from Entity
+	public void fall(float distance, float damageMultiplier) {
     }
 
-    /**
-     * Set or remove the saddle of the pig.
-     */
-    public void setSaddled(boolean saddled) {
-        if (saddled) {
-            this.dataManager.set(SADDLED, Boolean.valueOf(true));
-        } else {
-            this.dataManager.set(SADDLED, Boolean.valueOf(false));
-        }
+	/**
+	 * do we need this?
+	 */
+	@Override // from Entity
+    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
     }
- 
-	
-	
-    /**
-     * Moves the entity based on the specified heading.
-     
-	@Override
-    public void moveEntityWithHeading(float strafe, float forward) {
-    	
-    	if (this.isInWater())
-        {
-            this.moveRelative(strafe, forward, 0.02F);
-            this.moveEntity(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            this.motionX *= 0.800000011920929D;
-            this.motionY *= 0.800000011920929D;
-            this.motionZ *= 0.800000011920929D;
-        }
-        else if (this.isInLava())
-        {
-            this.moveRelative(strafe, forward, 0.02F);
-            this.moveEntity(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            this.motionX *= 0.5D;
-            this.motionY *= 0.5D;
-            this.motionZ *= 0.5D;
-        }
-        else if (this.isBeingRidden() && this.canBeSteered()) {
-        	// Find the captain of the ship.
-            Entity entity = this.getPassengers().isEmpty() ? null : (Entity)this.getPassengers().get(0);
-            
-        	// Copy all the angles from the captain.
-            this.rotationYaw = entity.rotationYaw;
-            this.prevRotationYaw = this.rotationYaw;
-            this.rotationPitch = entity.rotationPitch * 0.5F;
-            this.setRotation(this.rotationYaw, this.rotationPitch);
-            this.renderYawOffset = this.rotationYaw;
-            this.rotationYawHead = this.rotationYaw;
-            this.stepHeight = 1.0F;
-            this.jumpMovementFactor = this.getAIMoveSpeed() * 0.1F;
-
-            if (this.canPassengerSteer()) {
-                float f = (float) this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * 0.225F;
-                this.setAIMoveSpeed(f);
-                super.moveEntityWithHeading(0.0F, 1.0F);
-            } else {
-            	// No pilot, stop the train!
-                this.motionX = 0.0D;
-                this.motionY = 0.0D;
-                this.motionZ = 0.0D;
-            }
-        }
-    } */
-	
-	
-	// Copied from EntityFlying
-	@Override
-	public void fall(float distance, float damageMultiplier)
-    {
-    }
-
-	// Copied from EntityFlying
-	@Override
-    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos)
-    {
-    }
-	
-    
-       /* {
-            float f = 0.91F;
-
-            if (this.onGround)
-            {
-                f = this.worldObj.getBlockState(new BlockPos(
-                		MathHelper.floor_double(this.posX), 
-                		MathHelper.floor_double(this.getEntityBoundingBox().minY) - 1, 
-                		MathHelper.floor_double(this.posZ))).getBlock().slipperiness * 0.91F;
-            }
-
-
-//    public void moveEntityWithHeading(float strafe, float forward)
-//    {
-//        if (this.isInWater())
-//        {
-//            //this.moveRelative(strafe, forward, 0.02F);
-//            this.moveRelative(strafe, 0, forward, 0.02F);
-//            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-//            this.motionX *= 0.800000011920929D;
-//            this.motionY *= 0.800000011920929D;
-//            this.motionZ *= 0.800000011920929D;
-//        }
-//        else if (this.isInLava())
-//        {
-//            //this.moveRelative(strafe, forward, 0.02F);
-//            this.moveRelative(strafe, 0, forward, 0.02F);
-//            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-//            this.motionX *= 0.5D;
-//            this.motionY *= 0.5D;
-//            this.motionZ *= 0.5D;
-//        }
-//        else
-//        {
-//            float f = 0.91F;
-//
-//            if (this.onGround)
-//            {
-//                f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
-//            }
-//
-//            float f1 = 0.16277136F / (f * f * f);
-//            
-//            //public void moveRelative(float strafe, float up, float forward, float friction)  
-//            //this.moveRelative(strafe, forward, this.onGround ? 0.1F * f1 : 0.02F);
-//            this.moveRelative(strafe, 0, forward, this.onGround ? 0.1F * f1 : 0.02F);
-//            f = 0.91F;
-//
-//            if (this.onGround)
-//            {
-//                f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
-//            }
-//
-//            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-//            this.motionX *= (double)f;
-//            this.motionY *= (double)f;
-//            this.motionZ *= (double)f;
-//        }
-//
-//        this.prevLimbSwingAmount = this.limbSwingAmount;
-//        double d1 = this.posX - this.prevPosX;
-//        double d0 = this.posZ - this.prevPosZ;
-//        float f2 = MathHelper.sqrt(d1 * d1 + d0 * d0) * 4.0F;
-//
-//        if (f2 > 1.0F)
-//        {
-//            f2 = 1.0F;
-//        }
-//
-//        this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F;
-//        this.limbSwing += this.limbSwingAmount;
-//    }
-	 public void travel(float p_191986_1_, float p_191986_2_, float p_191986_3_)
-	    {
-	        if (this.isInWater())
-	        {
-	            this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, 0.02F);
-	            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-	            this.motionX *= 0.800000011920929D;
-	            this.motionY *= 0.800000011920929D;
-	            this.motionZ *= 0.800000011920929D;
-	        }
-	        else if (this.isInLava())
-	        {
-	            this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, 0.02F);
-	            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-	            this.motionX *= 0.5D;
-	            this.motionY *= 0.5D;
-	            this.motionZ *= 0.5D;
-	        }
-	        else
-	        {
-	            float f = 0.91F;
-
-	            if (this.onGround)
-	            {
-	                f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
-	            }
-
-	            float f1 = 0.16277136F / (f * f * f);
-	            this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, this.onGround ? 0.1F * f1 : 0.02F);
-	            f = 0.91F;
-
-            if (this.onGround)
-            {
-                f = this.worldObj.getBlockState(new BlockPos(
-                		MathHelper.floor_double(this.posX), 
-                		MathHelper.floor_double(this.getEntityBoundingBox().minY) - 1, 
-                		MathHelper.floor_double(this.posZ))).getBlock().slipperiness * 0.91F;
-            }
-
-	            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-	            this.motionX *= (double)f;
-	            this.motionY *= (double)f;
-	            this.motionZ *= (double)f;
-	        }
-
-	        this.prevLimbSwingAmount = this.limbSwingAmount;
-	        double d1 = this.posX - this.prevPosX;
-	        double d0 = this.posZ - this.prevPosZ;
-	        float f2 = MathHelper.sqrt(d1 * d1 + d0 * d0) * 4.0F;
-
-	        if (f2 > 1.0F)
-	        {
-	            f2 = 1.0F;
-	        }
-
-        this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F;
-        this.limbSwing += this.limbSwingAmount;
-        */
-	   // }
-	
-
-	
-
-	/* AI */
-	
-	@Override
-	protected void initEntityAI() {
-		// Clear any tasks assigned in super classes
-		clearAITasks(); 
-		
-		// From Ghast
-		//this.tasks.addTask(5, new AIRandomFly(this));
-	    //    this.tasks.addTask(7, new EntityGhast.AILookAround(this));
-	    //    this.tasks.addTask(7, new EntityGhast.AIFireballAttack(this));
-	    //    this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
-	}
-	
-	
-	// This is a timer tick called each update cycle
-	@Override
-    protected void updateAITasks() {
-		//System.out.println("ImperialProbe::updateAITasks entityLivingToAttack=" + this.getAITarget() + ", revengeTimer=" + this.getRevengeTimer() +
-		//		", attackTarget=" + this.getAttackTarget());
-		super.updateAITasks();
-    }
-	
-
-	// Copied from Ghast
-	static class AIRandomFly extends EntityAIBase
-    {
-        private final TieFighterEntity parentEntity;
-
-        
-        public AIRandomFly(TieFighterEntity tieFighter)
-        {
-            this.parentEntity = tieFighter;
-            this.setMutexBits(1);
-        }
-
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
-        @Override
-        public boolean shouldExecute() {
-        	// If we are not currently moving somewhere, feel free to jump in.
-            EntityMoveHelper mh = this.parentEntity.getMoveHelper();
-            if (!mh.isUpdating()) {
-                return true;
-            }
-           
-			// Otherwise, if we are very close to the destination, or very far away, then feel free to kick in.
-			double d0 = mh.getX() - this.parentEntity.posX;
-			double d1 = mh.getY() - this.parentEntity.posY;
-			double d2 = mh.getZ() - this.parentEntity.posZ;
-			double dist = d0 * d0 + d1 * d1 + d2 * d2;
-			return dist < 1.0D || dist > 3600.0D;
-        }
-
-        // Find a random spot from 1-16 blocks away on each axis, and start moving there.
-        @Override
-        public void startExecuting() {
-            Random random = this.parentEntity.getRNG();
-            double d0 = this.parentEntity.posX + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            double d1 = this.parentEntity.posY + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            double d2 = this.parentEntity.posZ + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            this.parentEntity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
-        }
-        
-        
-         //We always execute for one tick to set the move instruction, then we can disengage.
-         @Override
-         public boolean shouldContinueExecuting() {
-        	return false;
-         }
-    }
-
-	static class MoveHelper extends EntityMoveHelper
-    {
-        private final TieFighterEntity parentEntity;
-        private int courseChangeCooldown;
-
-        public MoveHelper(TieFighterEntity tieFighter)
-        {
-            super(tieFighter);
-            this.parentEntity = tieFighter;
-        }
-
-        public void onUpdateMoveHelper()
-        {
-            if (this.action == EntityMoveHelper.Action.MOVE_TO)
-            {
-                double d0 = this.posX - this.parentEntity.posX;
-                double d1 = this.posY - this.parentEntity.posY;
-                double d2 = this.posZ - this.parentEntity.posZ;
-                double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-
-                if (this.courseChangeCooldown-- <= 0)
-                {
-                    this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
-                    d3 = (double)MathHelper.sqrt(d3);
-
-                    if (this.isNotColliding(this.posX, this.posY, this.posZ, d3))
-                    {
-                        this.parentEntity.motionX += d0 / d3 * 0.1D;
-                        this.parentEntity.motionY += d1 / d3 * 0.1D;
-                        this.parentEntity.motionZ += d2 / d3 * 0.1D;
-                    }
-                    else
-                    {
-                        this.action = EntityMoveHelper.Action.WAIT;
-                    }
-                }
-            }
-        }
-
-        /**
-         * Checks if entity bounding box is not colliding with terrain
-         */
-        private boolean isNotColliding(double x, double y, double z, double p_179926_7_) {
-            double d0 = (x - this.parentEntity.posX) / p_179926_7_;
-            double d1 = (y - this.parentEntity.posY) / p_179926_7_;
-            double d2 = (z - this.parentEntity.posZ) / p_179926_7_;
-            AxisAlignedBB axisalignedbb = this.parentEntity.getEntityBoundingBox();
-
-            for (int i = 1; (double)i < p_179926_7_; ++i)
-            {
-                axisalignedbb = axisalignedbb.offset(d0, d1, d2);
-
-                if (!this.parentEntity.world.getCollisionBoxes(this.parentEntity, axisalignedbb).isEmpty())
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    }
-
-	@Override
-	public void setSwingingArms(boolean swingingArms) {
-		// TODO Auto-generated method stub
-		
-	}
 }
