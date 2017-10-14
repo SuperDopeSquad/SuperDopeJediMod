@@ -24,11 +24,8 @@ import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.faction.ClassItem;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.teleporter.TeleporterManager;
-<<<<<<< HEAD
 import superdopesquad.superdopejedimod.tinkertable.TinkerTable;
-=======
 import superdopesquad.superdopejedimod.tools.Drill;
->>>>>>> 308584047ed160f9caddf07287b43f858345fdd7
 import superdopesquad.superdopejedimod.weapon.BountyHunterLeaderKnife;
 import superdopesquad.superdopejedimod.weapon.BrynsAwesomeSword;
 import superdopesquad.superdopejedimod.weapon.DoubleLightSaber;
