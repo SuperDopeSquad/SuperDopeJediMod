@@ -3,6 +3,7 @@ package superdopesquad.superdopejedimod;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 
 // When we upgraded to forge version 1.12 - 14.21.1.2387, we replace "registerObject" with 
 // two new methods: registerBlocks and registerItems.
@@ -23,5 +24,10 @@ public interface SuperDopeObject {
 	}
 	
 	default public void registerRecipe() {
+	}
+	
+	default public void blockBreakEvent(BreakEvent e) {
+		//System.out.println("Inside BaseBlock:blockBreakEvent");
+		return;
 	}
 }

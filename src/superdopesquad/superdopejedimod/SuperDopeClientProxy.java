@@ -50,13 +50,15 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
 	public void init(FMLInitializationEvent e){
 	    
 		super.init(e);
-	      
+		
+		System.out.println("I'm on the client!  init event.");
+		  
     	// Iterate through all our custom objects, and see if we have any models to render.
         for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
         	superDopeObject.registerModel();
         }
         
-        // Should classess come with capes?  I think so!
+        // Should classes come with capes?  I think so!
         // For now, also including the more experimental ClassIndictor.
         
         // This sets our additional layers on the "default" player model, also known as Steve.
@@ -76,7 +78,10 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
 	
     @Override
     public void postInit(FMLPostInitializationEvent e) {
-        super.postInit(e);
+        
+    	super.postInit(e);
+        
+     	System.out.println("I'm in the client proxy! post init event.");
     }
     
     

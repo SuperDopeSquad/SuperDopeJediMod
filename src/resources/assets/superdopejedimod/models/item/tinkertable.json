@@ -1,5 +1,5 @@
 {
-    "parent": "superdopejedimod:block/generator",
+    "parent": "superdopejedimod:block/tinkertable",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

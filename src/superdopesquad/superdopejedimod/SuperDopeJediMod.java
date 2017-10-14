@@ -24,6 +24,8 @@ import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.faction.ClassItem;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.teleporter.TeleporterManager;
+import superdopesquad.superdopejedimod.tinkertable.TinkerTable;
+import superdopesquad.superdopejedimod.tools.Drill;
 import superdopesquad.superdopejedimod.weapon.BountyHunterLeaderKnife;
 import superdopesquad.superdopejedimod.weapon.BrynsAwesomeSword;
 import superdopesquad.superdopejedimod.weapon.DoubleLightSaber;
@@ -73,13 +75,14 @@ public class SuperDopeJediMod //Start the class Declaration
     // The order of those #'s at the end: harvestLevel, durability, miningSpeed, damageVsEntities, enchantability
     // http://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-7/custom-tools-swords/
 	public static ToolMaterial gaffiStickMaterial = EnumHelper.addToolMaterial("GaffiStickMaterial", 3, 1000, 15.0F, 4.0F, 30);
-	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 2000, 0.0F, 9.0F, 0);
-	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 2500, 0.0F, 12.0F, 0);
+	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 5000, 0.0F, 9.0F, 0);
+	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 10000, 0.0F, 12.0F, 0);
 	public static ToolMaterial brynsAwesomeSwordMaterial = EnumHelper.addToolMaterial("BrynsAwesomeSwordMaterial", 3, 2000, 0.0F, 8.0F, 30);
 	public static ToolMaterial mandalorianIronToolMaterial = EnumHelper.addToolMaterial("MandalorianIronToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
 	public static ToolMaterial quadaniumSteelToolMaterial = EnumHelper.addToolMaterial("QuadaniumSteelToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
 	public static ToolMaterial blasterMaterial = EnumHelper.addToolMaterial("BlasterMaterial", 3, 1000, 0.0F, 7.0F, 30);
 	public static ToolMaterial lightSaberKnifeMaterial = EnumHelper.addToolMaterial("LightSaberKnifeMaterial", 3, 1000, 0.0F, 6.0F, 0);
+	public static ToolMaterial drillMaterial = EnumHelper.addToolMaterial("DrillMaterial", 3, 10000, 25.0F, 0.0F, 10);
 	
 	// Custom ArmorMaterial's.  
 	// EnumHelper.addArmorMaterial("NAME", textureName, durability, reductionAmounts, enchantability, soundOnEquip, toughness)
@@ -144,7 +147,7 @@ public class SuperDopeJediMod //Start the class Declaration
     public static ChromateIngot chromateIngot = new ChromateIngot("chromateIngot");
     public static CompressedMetalPlate compressedMetalPlate = new CompressedMetalPlate("compressedMetalPlate");
     public static CompressedMetalBits compressedMetalBits = new CompressedMetalBits("compressedMetalBits");
-    public static Generator generator = new Generator("generator");
+    public static TinkerTable tinkerTable = new TinkerTable("tinkerTable");
     public static ChromateShard chromateShard = new ChromateShard("chromateShard");
     public static ElectricTransmitter electricTransmitter = new ElectricTransmitter("electricTransmitter");
     public static ElectricFluxIngot electricFluxIngot = new ElectricFluxIngot("electricFluxIngot");
@@ -201,6 +204,9 @@ public class SuperDopeJediMod //Start the class Declaration
     // Peoples Custom Items
     public static BrynsAwesomeSword brynsAwesomeSword = new BrynsAwesomeSword("brynsAwesomeSword");
     
+    //drills + other tools
+    public static Drill drill = new Drill("drill");
+    
     //Items for Custom Items
     public static Ruby ruby = new Ruby("ruby");
     public static RubyOre rubyOre = new RubyOre("rubyOre");
@@ -237,6 +243,7 @@ public class SuperDopeJediMod //Start the class Declaration
     	
     	// Call our proxy for any side-specific work.
     	superDopeCommonProxy.preInit(event);
+    	superDopeCommonProxy.registerTileEntities();
     	
 //    	// Iterate through all our custom blocks and items, and register them all.
 //    	for (SuperDopeObject superDopeObject : this.customObjects) {
@@ -261,6 +268,9 @@ public class SuperDopeJediMod //Start the class Declaration
 
     		superDopeObject.registerBlocks(event);
     	}
+    	
+    	// MC: hack: placing this here for now.
+        //GameRegistry.registerTileEntity(GeneratorTileEntity.class, "TileEntityGenerator");
     }
     
      
@@ -303,6 +313,7 @@ public class SuperDopeJediMod //Start the class Declaration
     	
     	// Register our custom world generator, so our ore gets generated.
     	GameRegistry.registerWorldGenerator(SuperDopeJediMod.superDopeWorldGenerator, 0);
+   
     	
 //    	// Let's register our eventhandler class.   
 //    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());	   

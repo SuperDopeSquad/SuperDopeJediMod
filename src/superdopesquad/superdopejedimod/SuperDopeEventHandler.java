@@ -2,6 +2,7 @@ package superdopesquad.superdopejedimod;
 
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,7 +11,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -21,6 +24,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -63,6 +67,25 @@ public class SuperDopeEventHandler {
 			superDopeObject.registerItems(event);
 		}  
 	}
+	
+	
+	@SubscribeEvent
+	public void blockBreakEvent(BreakEvent e)
+	{
+		// System.out.println("Inside blockBreakEvent");
+		
+		IBlockState blockState = e.getState();
+		Block block = blockState.getBlock();
+		
+		if (block instanceof BaseBlock) {
+			((BaseBlock)block).blockBreakEvent(e);
+			return;
+		}
+		
+//	    if (e.getWorld().isRemote)
+//	        return;
+	}
+	
 
 
 	@SubscribeEvent
