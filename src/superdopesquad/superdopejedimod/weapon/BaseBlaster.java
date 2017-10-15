@@ -45,13 +45,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
 import superdopesquad.superdopejedimod.faction.*;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 
 
 public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDopeObject, ClassAwareInterface {
 
 	
 	protected boolean isInstantWeapon = true;
-	protected float damageAmount = 2.0F;
+	protected PowerLevel powerLevel = PowerLevel.STANDARD;
 	protected float range = 10.0F;
 	
 	
@@ -140,7 +141,7 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 	                	  
 	                	  
 	                     // this.shootBlasterRound(worldIn, entityplayer, timeLeft);
-	                	  SuperDopeJediMod.weaponManager.ThrowPlasmaShotAtDirection(worldIn, entityplayer, this.damageAmount, 0);
+	                	  SuperDopeJediMod.weaponManager.ThrowPlasmaShotAtDirection(worldIn, entityplayer, this.powerLevel, 0);
 	                      
 //	                      if (!worldIn.isRemote)
 //	                      {
@@ -246,7 +247,7 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 	    	  if (this.isInstantWeapon) {
 	    		  
 		  		  int timeLeft = 0;
-	    		  SuperDopeJediMod.weaponManager.ThrowPlasmaShotAtDirection(world, player, this.damageAmount, 0);
+	    		  SuperDopeJediMod.weaponManager.ThrowPlasmaShotAtDirection(world, player, this.powerLevel, 0);
 	    		 
 	    		  return new ActionResult(EnumActionResult.SUCCESS, itemstack);
 	    	  }
