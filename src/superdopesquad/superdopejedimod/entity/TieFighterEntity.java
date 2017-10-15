@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.model.ModelBiped;
@@ -66,7 +67,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 import superdopesquad.superdopejedimod.faction.ClassManager;
+import java.util.Optional;
 
 
 /**
@@ -74,6 +77,8 @@ import superdopesquad.superdopejedimod.faction.ClassManager;
  */
 public class TieFighterEntity extends BaseEntityAnimal {	
 	
+	 private static final float DEGREES2RADIANS = 0.017453292F;
+	 
 	/**
 	 * constructor
 	 */
@@ -131,6 +136,24 @@ public class TieFighterEntity extends BaseEntityAnimal {
 		    // Do I need this?
 		    this.rotationYawHead = this.rotationYaw;
 		    this.renderYawOffset = this.rotationYaw;
+		    
+		    // Hitting the "a" key shoots the primary weapon.
+		    if (driver.moveStrafing > 0.0f) {
+		    	float offset_vertical = 6.0f; // middle of cockpit
+				float offset_forward = 3.0f; // directly forward of cockpit
+		    	float pitch = this.rotationPitch;
+				float yaw = this.rotationYaw;
+		    	float xvector = -MathHelper.sin(yaw * DEGREES2RADIANS) * MathHelper.cos(pitch * DEGREES2RADIANS);
+			    float yvector = -MathHelper.sin(pitch * DEGREES2RADIANS);
+			    float zvector = MathHelper.cos(yaw * DEGREES2RADIANS) * MathHelper.cos(pitch * DEGREES2RADIANS);
+			    float deltax = (xvector * offset_forward);
+			    float deltay = (yvector * offset_forward);
+			    float deltaz = (zvector * offset_forward);
+			    
+			    //System.out.println("TF: shooting vehicle=" +this.posX + ", " + this.posY + ", " + this.posZ);
+		    	Vec3d startPos = new Vec3d(this.posX + deltax, this.posY + deltay + offset_vertical, this.posZ + deltaz);
+		    	SuperDopeJediMod.weaponManager.ThrowForwardPlasmaShotRed(world, this, PowerLevel.HEAVY, Optional.of(startPos));
+		    }
 	    }
 		
 		// Continue to do all the updates in the parent class.

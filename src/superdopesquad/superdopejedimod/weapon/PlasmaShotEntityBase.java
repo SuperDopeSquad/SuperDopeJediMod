@@ -29,60 +29,82 @@ import superdopesquad.superdopejedimod.entity.EntityRenderFactory;
 import superdopesquad.superdopejedimod.entity.JawaModel;
 import superdopesquad.superdopejedimod.entity.JawaRender;
 import superdopesquad.superdopejedimod.entity.SuperDopeRenderManager;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 
 	
 public abstract class PlasmaShotEntityBase extends BaseEntityProjectile {
 	
+	public enum PowerLevel {
+	  STANDARD(2.0D, 1.6D, 12.0D),
+	  RIFLE(4.0D, 1.6D, 12.0D),
+	  CANNON(6.0D, 1.6D, 12.0D),
+	  HEAVY(25.0D, 5.0D, 5.0D);
+	  
+	  private final double damage;
+	  private final double velocity;
+	  private final double accuracy;
+	  
+	  public double damage() { return damage; }
+	  public double velocity() { return velocity; }
+	  public double accuracy() { return accuracy; }
+	  
+	  PowerLevel(double damage, double velocity, double accuracy) {
+		  this.damage = damage;
+		  this.velocity = velocity;
+		  this.accuracy = accuracy;
+	  }
+	}
+      
+	// Instance Members
+	private PowerLevel _powerLevel;
 	
-	    public PlasmaShotEntityBase(World worldIn) {
-	        
-	    	super(worldIn);
-	    }
+	
+	/**
+	 * constructor
+	 */
+	public PlasmaShotEntityBase(World worldIn) {
+		super(worldIn, (float) PowerLevel.STANDARD.damage());
+		this._powerLevel = PowerLevel.STANDARD;
+	}
+
+	/**
+	 * constructor
+	 */
+	public PlasmaShotEntityBase(World worldIn, EntityLivingBase throwerIn, PowerLevel pl) {
+		super(worldIn, throwerIn, (float) pl.damage());
+		this._powerLevel = pl;
+	}
+   
+    @Override
+	public String getName() {
+		return "plasmaShotEntity";
+	}
 
 	    
-	    public PlasmaShotEntityBase(World worldIn, EntityLivingBase throwerIn, float damageAmount) {
-	        
-	    	super(worldIn, throwerIn, damageAmount);
-	    }
-
-	    
-	    public PlasmaShotEntityBase(World worldIn, double x, double y, double z) {
-	        
-	    	super(worldIn, x, y, z);
-	    }
-
-	    
-	    @Override
-		public String getName() {
-			
-			return "plasmaShotEntity";
-		}
-
-	    
-	    @SideOnly(Side.CLIENT)
-	    @Override
-	    public void handleStatusUpdate(byte id) {
-	    	
-	    	//System.out.println("inside handleStatusUpdate: " + id);
-	    	
-	        if (id == 3)
-	        {
-	            for (int i = 0; i < 8; ++i)
-	            {
-	                this.world.spawnParticle(EnumParticleTypes.CLOUD, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D, new int[0]);
-	            }
-	        }
-	    }
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void handleStatusUpdate(byte id) {
+    	
+    	//System.out.println("inside handleStatusUpdate: " + id);
+    	
+        if (id == 3)
+        {
+            for (int i = 0; i < 8; ++i)
+            {
+                this.world.spawnParticle(EnumParticleTypes.CLOUD, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D, new int[0]);
+            }
+        }
+    }
 
 	 
-	    protected void onImpact(RayTraceResult result) {
-	    	 
-	    	// Bail on this 'impact' if it is with the thrower.
-	    	if ((result.entityHit != null) && (result.entityHit.isEntityEqual(this.getThrower()))) {
-	    		//System.out.println("Inside onImpact: bailing, entityHit == this.getThrower()");
-	    		return;
-	    	}
-	    	
+    protected void onImpact(RayTraceResult result) {
+    	 
+    	// Bail on this 'impact' if it is with the thrower.
+    	if ((result.entityHit != null) && (result.entityHit.isEntityEqual(this.getThrower()))) {
+    		//System.out.println("Inside onImpact: bailing, entityHit == this.getThrower()");
+    		return;
+    	}
+    	
 //	    	// Debug info.
 //	    	BlockPos blockPos = result.getBlockPos();
 //	    	Object hitInfo = result.hitInfo;
@@ -101,46 +123,34 @@ public abstract class PlasmaShotEntityBase extends BaseEntityProjectile {
 //	    	if (hitInfo != null) {
 //	    		System.out.println("hitInfo:" + hitInfo.toString());
 //	    	}
-	    	
-	        // If we are on the server, update state information to kill this projectile.
-	        if (!this.world.isRemote)
-	        {       	
-	        	// if we hit an entity, let's do some damage.
-		        if (result.entityHit != null) {
-			    	//System.out.println("Inside onImpact: entityHit:" + result.entityHit.toString());
-		            result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)this._damageAmount);
-		        }
-	        	
-	            this.world.setEntityState(this, (byte)3);
-	            this.setDead();
+    	
+        // If we are on the server, update state information to kill this projectile.
+        if (!this.world.isRemote)
+        {       	
+        	// if we hit an entity, let's do some damage.
+	        if (result.entityHit != null) {
+		    	//System.out.println("Inside onImpact: entityHit:" + result.entityHit.toString());
+	            result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) this.getDamage());
 	        }
-	    }
+        	
+            this.world.setEntityState(this, (byte)3);
+            this.setDead();
+        }
+    }
 	    
 	    
-	    public void setAim(Entity shooter, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy)
-	    {
-	        float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
-	        float f1 = -MathHelper.sin(pitch * 0.017453292F);
-	        float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
-	        this.setThrowableHeading((double)f, (double)f1, (double)f2, velocity, inaccuracy);
-	        this.motionX += shooter.motionX;
-	        this.motionZ += shooter.motionZ;
+    public void setAim(Entity shooter, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy)
+    {
+        float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+        float f1 = -MathHelper.sin(pitch * 0.017453292F);
+        float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+        this.setThrowableHeading((double)f, (double)f1, (double)f2, velocity, inaccuracy);
+        this.motionX += shooter.motionX;
+        this.motionZ += shooter.motionZ;
 
-	        if (!shooter.onGround) {
-	        	
-	            this.motionY += shooter.motionY;
-	        }
-	    }
-	    
-
-	    public void setDamage(double damageIn) {
-	    	
-	        this._damageAmount = (float) damageIn;
-	    }
-
-	    
-	    public double getDamage() {
-	    	
-	        return this._damageAmount;
-	    }
-	}
+        if (!shooter.onGround) {
+        	
+            this.motionY += shooter.motionY;
+        }
+    }
+}
