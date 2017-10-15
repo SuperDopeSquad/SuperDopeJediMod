@@ -56,6 +56,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 
 
@@ -146,12 +147,10 @@ public class ImperialProbeDroidEntity extends BaseEntityAnimal implements IRange
      *  
      * @param distanceFactor How far the target is, normalized and clamped between 0.1 and 1.0
      */
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
-    {
+	@Override // for IRangedAttackMob
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
     	//System.out.println("ImperialProbe: attacking with ranged!");
-    	
-        float damageAmount = 1;
-    	SuperDopeJediMod.weaponManager.ThrowPlasmaShotRed(world, this, target, distanceFactor, damageAmount);
+    	SuperDopeJediMod.weaponManager.ThrowPlasmaShotRed(world, this, target, PowerLevel.STANDARD);
     }
     
 
@@ -195,7 +194,7 @@ public class ImperialProbeDroidEntity extends BaseEntityAnimal implements IRange
 	}
 	
 	
-	@Override
+	@Override // for IRangedAttackMob
 	public void setSwingingArms(boolean swingingArms) {
 		// TODO Auto-generated method stub
 		

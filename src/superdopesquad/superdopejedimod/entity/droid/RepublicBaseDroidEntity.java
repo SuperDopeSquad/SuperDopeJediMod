@@ -54,6 +54,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.entity.BaseEntityAnimal;
 import superdopesquad.superdopejedimod.entity.EntityAIAttackRangedFactionAware;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 
 
 public abstract class RepublicBaseDroidEntity extends BaseDroidEntity implements IRangedAttackMob {
@@ -141,9 +142,7 @@ public abstract class RepublicBaseDroidEntity extends BaseDroidEntity implements
     // Attack the specified entity using a ranged attack.
     // @param distanceFactor How far the target is, normalized and clamped between 0.1 and 1.
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
-    	
-    	float damageAmount = 2;
-    	SuperDopeJediMod.weaponManager.ThrowPlasmaShotBlue(world, this, target, distanceFactor, damageAmount);
+    	SuperDopeJediMod.weaponManager.ThrowPlasmaShotBlue(world, this, target, PowerLevel.STANDARD);
     }
 
     

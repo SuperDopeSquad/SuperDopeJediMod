@@ -4,6 +4,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 
 public class BlasterPistol extends BaseBlaster {
 
@@ -14,7 +15,7 @@ public class BlasterPistol extends BaseBlaster {
 		
 		// Unique style of this type of blaster:
 		this.isInstantWeapon = true;
-		this.damageAmount = 2.0F;
+		this.powerLevel = PowerLevel.STANDARD;
 		this.range = 10.0F;
 	}
 

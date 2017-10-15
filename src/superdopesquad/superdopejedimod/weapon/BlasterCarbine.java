@@ -3,6 +3,7 @@ package superdopesquad.superdopejedimod.weapon;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 
 public class BlasterCarbine extends BaseBlaster {
 
@@ -13,7 +14,7 @@ public class BlasterCarbine extends BaseBlaster {
 
 		// Unique style of this type of blaster:
 		this.isInstantWeapon = true;
-		this.damageAmount = 4.0F;
+		this.powerLevel = PowerLevel.RIFLE;
 		this.range = 10.0F;
 	}
 

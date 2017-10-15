@@ -44,6 +44,7 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 
 
 public class StormTrooperEntity extends BaseEntityTameable implements IRangedAttackMob {
@@ -219,23 +220,19 @@ public class StormTrooperEntity extends BaseEntityTameable implements IRangedAtt
 	// After it dies, what equipment should it drop?
 	@Override
 	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
-		
 		this.entityDropItem(new ItemStack(Items.QUARTZ), 0);
     }
 
 
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
-    {
+	@Override // for IRangedAttackMob
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
     	System.out.println("Storm Trooper: attacking with ranged!");
-    	
-        float damageAmount = 1;
-    	SuperDopeJediMod.weaponManager.ThrowPlasmaShotRed(world, this, target, distanceFactor, damageAmount);
+    	SuperDopeJediMod.weaponManager.ThrowPlasmaShotRed(world, this, target, PowerLevel.STANDARD);
     }
 
 
-	@Override
+	@Override // for IRangedAttackMob
 	public void setSwingingArms(boolean swingingArms) {
 		// TODO Auto-generated method stub
-		
 	}
 }

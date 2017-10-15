@@ -1,6 +1,8 @@
 package superdopesquad.superdopejedimod.weapon;
 
 
+import java.util.Optional;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -10,8 +12,10 @@ import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import superdopesquad.superdopejedimod.weapon.GaffiStick;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.entity.droid.DroidParts;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
@@ -21,6 +25,10 @@ import superdopesquad.superdopejedimod.faction.FactionInfo;
 
 public class WeaponManager {
 	
+	/** Constants */
+    private static final float DEGREES2RADIANS = 0.017453292F;
+    
+    
 	// BlasterParts is a basic build block for blasters and other weapons.
 	public static BlasterParts blasterParts = new BlasterParts("blasterParts");
 
@@ -75,68 +83,13 @@ public class WeaponManager {
     }
 
     
-    public void ThrowPlasmaShot(World world, EntityLivingBase thrower, FactionInfo throwerFactionInfo, EntityLivingBase target, float distanceFactor, float damageAmount) {
-
-    	EntityThrowable entityThrowable = this.createPlasmaShotEntity(world, thrower, throwerFactionInfo, damageAmount);
-    	this.ThrowSomething(entityThrowable, world, thrower, target, distanceFactor, damageAmount);
-    }
-    
-    
-    public void ThrowPlasmaShotBlue(World world, EntityLivingBase thrower, EntityLivingBase target, float distanceFactor, float damageAmount) {
-
-    	this.ThrowPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_REPUBLIC), target, distanceFactor, damageAmount);
-    }
-    
-	
-    public void ThrowPlasmaShotRed(World world, EntityLivingBase thrower, EntityLivingBase target, float distanceFactor, float damageAmount) {
-
-       	this.ThrowPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_EMPIRE), target, distanceFactor, damageAmount);
-    }
-    
-    
-    public static float getArrowVelocity(int charge)
-    {
-        float f = (float)charge / 20.0F;
-        f = (f * f + f * 2.0F) / 3.0F;
-
-        if (f > 1.0F)
-        {
-            f = 1.0F;
-        }
-
-        return f;
-    }
-    
-    
-    private PlasmaShotEntityBase createPlasmaShotEntity(World world, EntityLivingBase thrower, FactionInfo throwerFactionInfo, float damageAmount) {
-     
- 	   // Create an entity based on factioninfo.
- 	   if ((throwerFactionInfo == null) || (throwerFactionInfo.getId() == SuperDopeJediMod.classManager.FACTION_REPUBLIC)) {
- 		   return new PlasmaShotEntityBlue(world, thrower, damageAmount);
- 	   }
- 	   else {
- 		  return new PlasmaShotEntityRed(world, thrower, damageAmount);
- 	   }
-    }
- 
-    
-    private PlasmaShotEntityBase createPlasmaShotEntity(World world, EntityPlayer thrower, float damageAmount) {
-    	
-    	// What color should we be using?
- 	   ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(thrower);
- 	   FactionInfo factionInfo = classInfo.getFaction();
- 	   
- 	   return this.createPlasmaShotEntity(world, thrower, factionInfo, damageAmount);
-    }
-    
-    
-    public void ThrowPlasmaShotAtDirection(World world, EntityPlayer thrower, float damageAmount, int timeLeft) {
+    public void ThrowPlasmaShotAtDirection(World world, EntityPlayer thrower, PowerLevel powerLevel, int timeLeft) {
    
 	    //int i = this.getMaxItemUseDuration(null) - timeLeft;
     	int i = 72000 - timeLeft;
     	float f = getArrowVelocity(i);
 	    
-       PlasmaShotEntityBase plasmaShotEntity =  this.createPlasmaShotEntity(world, thrower, damageAmount); 
+       PlasmaShotEntityBase plasmaShotEntity =  this.createPlasmaShotEntity(world, thrower, powerLevel, Optional.empty()); 
        plasmaShotEntity.setAim(thrower, thrower.rotationPitch, thrower.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 
        //if (f == 1.0F)
@@ -172,30 +125,146 @@ public class WeaponManager {
 //       }
 
        //world.spawnEntityInWorld(plasmaShotEntity);
-       world.spawnEntity(plasmaShotEntity);
+       boolean success = world.spawnEntity(plasmaShotEntity);
+       if (!success) {
+			System.out.println("Failed to spawn an EntityThrowable!");
+		}
     }
     
     
-	private void ThrowSomething(EntityThrowable entityThrowable, World world, EntityLivingBase thrower, EntityLivingBase target, float distanceFactor, float damageAmount) {
-		    	
-		//System.out.println("DEBUG: inside ThrowPlasmaShot");
-		         	
-		// Some complicated math to figure out what direction to throw.   
-		double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;      
-		double d1 = target.posX - thrower.posX;      
-		double d2 = d0 - entityThrowable.posY;     
-		double d3 = target.posZ - thrower.posZ;      
-		float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
-		entityThrowable.setThrowableHeading(d1, d2 + (double)f, d3, 1.6F, 12.0F);
-		        
-		//this.playSound(SoundEvents.ENTITY_SNOWMAN_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-		       
-		// Actually throw!
-//		boolean success = world.spawnEntityInWorld(entityThrowable);
-		boolean success = world.spawnEntity(entityThrowable);
+    public void ThrowPlasmaShotBlue(World world, EntityLivingBase thrower, EntityLivingBase target, PowerLevel powerLevel) {
+    	this.ThrowAtTargetPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_REPUBLIC), 
+    			target, powerLevel, Optional.empty());
+    }
+    
+    public void ThrowForwardPlasmaShotBlue(World world, EntityLivingBase thrower, PowerLevel powerLevel) {
+       	this.ThrowForwardPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_REPUBLIC), 
+       			powerLevel, Optional.empty());
+    }
+    
+    public void ThrowForwardPlasmaShotBlue(World world, EntityLivingBase thrower, PowerLevel powerLevel, Optional<Vec3d> startPos) {
+       	this.ThrowForwardPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_REPUBLIC), 
+       			powerLevel, startPos);
+    }
+    
+	
+    public void ThrowPlasmaShotRed(World world, EntityLivingBase thrower, EntityLivingBase target, PowerLevel powerLevel) {
+       	this.ThrowAtTargetPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_EMPIRE), 
+       			target, powerLevel, Optional.empty());
+    }
+    
+    public void ThrowForwardPlasmaShotRed(World world, EntityLivingBase thrower, PowerLevel powerLevel) {
+       	this.ThrowForwardPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_EMPIRE), 
+       			powerLevel, Optional.empty());
+    }
+    
+    public void ThrowForwardPlasmaShotRed(World world, EntityLivingBase thrower, PowerLevel powerLevel, Optional<Vec3d> startPos) {
+       	this.ThrowForwardPlasmaShot(world, thrower, SuperDopeJediMod.classManager.getFactionInfo(ClassManager.FACTION_EMPIRE), 
+       			powerLevel, startPos);
+    }
+    
+    
+    private void ThrowAtTargetPlasmaShot(World world, EntityLivingBase thrower, FactionInfo factionInfo, EntityLivingBase target, 
+    		PowerLevel powerLevel, Optional<Vec3d> startPos) {
+    	EntityThrowable entityThrowable = this.createPlasmaShotEntity(world, thrower, factionInfo, powerLevel, startPos);
+    	this.ThrowSomethingAtTarget(entityThrowable, world, thrower, target, powerLevel);
+    }
+    
+    
+    private void ThrowForwardPlasmaShot(World world, EntityLivingBase thrower, FactionInfo factionInfo, 
+    		PowerLevel powerLevel, Optional<Vec3d> startPos) {
+    	EntityThrowable entityThrowable = this.createPlasmaShotEntity(world, thrower, factionInfo, powerLevel, startPos);
+    	this.ThrowSomethingForward(entityThrowable, world, thrower, powerLevel);
+    }
+    
 
+	private void ThrowSomethingAtTarget(EntityThrowable entityThrowable, World world, EntityLivingBase thrower, EntityLivingBase target, PowerLevel powerLevel) {    	
+		// Some complicated math to figure out what direction to throw.   
+		double deltax = target.posX - entityThrowable.posX; 
+		double deltay =  (target.posY + (double) target.getEyeHeight() - 1.1D) - entityThrowable.posY; 
+		double deltaz = target.posZ - entityThrowable.posZ;       
+		float f = MathHelper.sqrt(deltax * deltax + deltaz * deltaz) * 0.2F;
+		entityThrowable.setThrowableHeading(deltax, deltay + (double)f, deltaz, 
+				(float) powerLevel.velocity(), (float) powerLevel.accuracy());
+		        
+		ThrowSomethingFinish(entityThrowable, world, thrower);
+	}
+	
+	private void ThrowSomethingForward(EntityThrowable entityThrowable, World world, EntityLivingBase thrower, PowerLevel powerLevel) {
+		// 3 dimensional trigonometry to covert the angle we are pointing in, to its x,y,and z vectors.
+		float pitch = thrower.rotationPitch;
+		float yaw = thrower.rotationYaw;
+		float xvector = -MathHelper.sin(yaw * DEGREES2RADIANS) * MathHelper.cos(pitch * DEGREES2RADIANS);
+	    float yvector = -MathHelper.sin(pitch * DEGREES2RADIANS);
+	    float zvector = MathHelper.cos(yaw * DEGREES2RADIANS) * MathHelper.cos(pitch * DEGREES2RADIANS);
+	    entityThrowable.setThrowableHeading((double) xvector, (double) yvector, (double) zvector, 
+	    		(float) powerLevel.velocity(), (float) powerLevel.accuracy());
+	    
+	    ThrowSomethingFinish(entityThrowable, world, thrower);
+	}
+	
+	private void ThrowSomethingFinish(EntityThrowable entityThrowable, World world, EntityLivingBase thrower) {
+		// Add in the thrower's own velocity,.
+		entityThrowable.motionX += thrower.motionX;
+		entityThrowable.motionZ += thrower.motionZ;
+		if (!thrower.onGround) {
+			entityThrowable.motionY += thrower.motionY;
+		}
+			        
+		//this.playSound(SoundEvents.ENTITY_SNOWMAN_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+			       
+		// Actually throw!
+		boolean success = world.spawnEntity(entityThrowable);
 		if (!success) {
 			System.out.println("Failed to spawn an EntityThrowable!");
 		}
 	}
+	
+	
+	/** 
+	 * Factory for standard plasma shots. Color chosen by the passed in faction. 
+	 */
+	private PlasmaShotEntityBase createPlasmaShotEntity(World world, EntityLivingBase thrower, FactionInfo factionInfo, 
+			PowerLevel powerLevel, Optional<Vec3d> startPos) {
+ 	   // Create an entity based on factioninfo.
+	  PlasmaShotEntityBase ret = null;
+ 	  if ((factionInfo == null) || (factionInfo.getId() == SuperDopeJediMod.classManager.FACTION_REPUBLIC)) {
+ 		  ret = new PlasmaShotEntityBlue(world, thrower, powerLevel);
+ 	  } else {
+ 		  ret = new PlasmaShotEntityRed(world, thrower, powerLevel);
+ 	  }
+ 	   
+ 	  if (startPos.isPresent()) {
+ 		 ret.setPosition(startPos.get().x, startPos.get().y, startPos.get().z);
+ 	  }
+ 	  System.out.println("TF: shooting startPos=" +ret.posX + ", " + ret.posY + ", " + ret.posZ);
+ 	  return ret;
+    }
+ 
+	
+	/** 
+	 * Factory for standard plasma shots. Color chosen by the faction of the shooter. 
+	 */
+    private PlasmaShotEntityBase createPlasmaShotEntity(World world, EntityPlayer thrower, 
+    		PowerLevel powerLevel, Optional<Vec3d> startPos) {
+ 	   return this.createPlasmaShotEntity(world, thrower, SuperDopeJediMod.classManager.getPlayerClass(thrower).getFaction(), 
+ 			  powerLevel, startPos);
+    }
+    
+
+    /**
+     * 
+     */
+    public static float getArrowVelocity(int charge)
+    {
+        float f = (float)charge / 20.0F;
+        f = (f * f + f * 2.0F) / 3.0F;
+
+        if (f > 1.0F)
+        {
+            f = 1.0F;
+        }
+
+        return f;
+    }
 }
