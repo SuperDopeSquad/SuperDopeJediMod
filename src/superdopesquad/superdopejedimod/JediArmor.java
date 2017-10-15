@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class JediArmor extends BaseArmor{
 
-public JediArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+	public JediArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
 		
 		super(materialIn, renderIndexIn, equipmentSlotIn);
 
@@ -17,7 +17,7 @@ public JediArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlo
 		super(SuperDopeJediMod.jediArmorMaterial, equipmentSlotIn, nameInput);
 	}
 	
-public void registerRecipe() {
+	public void registerRecipe() {
 		
 		ItemStack saphireStack = new ItemStack(SuperDopeJediMod.saphire);
 		
