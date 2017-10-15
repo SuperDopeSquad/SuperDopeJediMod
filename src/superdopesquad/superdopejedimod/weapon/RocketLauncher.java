@@ -3,17 +3,17 @@ package superdopesquad.superdopejedimod.weapon;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 
 public class RocketLauncher extends BaseBlaster {
 
 	
 	public RocketLauncher(String unlocalizedName) {
-		
 		super(unlocalizedName);
 		
 		// Unique style of this type of blaster:
 		this.isInstantWeapon = true;
-		this.damageAmount = 4.0F;
+		this.powerLevel = PowerLevel.RIFLE;
 		this.range = 20.0F;
 	}
 
