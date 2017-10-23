@@ -21,6 +21,9 @@ import superdopesquad.superdopejedimod.entity.droid.RepublicPatrolDroidEntity;
 import superdopesquad.superdopejedimod.entity.droid.RepublicPatrolDroidHead;
 import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidEntity;
 import superdopesquad.superdopejedimod.entity.droid.RepublicSentryDroidHead;
+import superdopesquad.superdopejedimod.entity.ship.ShuttleEntity;
+import superdopesquad.superdopejedimod.entity.ship.TieFighterEntity;
+import superdopesquad.superdopejedimod.entity.ship.XWingFighterEntity;
 import superdopesquad.superdopejedimod.teleporter.TeleporterEntity;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotItem;
@@ -45,8 +48,12 @@ public class EntityManager {
     public static JawaEntity jawa = new JawaEntity(null);
     public static WookieEntity wookie = new WookieEntity(null);
     public static ImperialProbeDroidEntity imperialProbeDroid = new ImperialProbeDroidEntity(null);
-    public static TieFighterEntity tieFighter = new TieFighterEntity(null);
     public static StormTrooperEntity stormTrooper = new StormTrooperEntity(null);
+    
+    // Ships!
+    public static TieFighterEntity tieFighter = new TieFighterEntity(null);
+    public static XWingFighterEntity xWingFighter = new XWingFighterEntity(null);
+    public static ShuttleEntity shuttle = new ShuttleEntity(null);
     
     // Republic Utility Droid objects.
     public static DroidParts droidParts = new DroidParts("droidParts");
