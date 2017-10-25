@@ -60,24 +60,20 @@ public class HangarWrench extends BaseItem {
     	// If we are on the server, and we are being held in the main hand ...
     	if ((isWorldServer) && (hand == EnumHand.MAIN_HAND)) {
     		
-    		if (isHangerPadKit) {
-    		
-    			//System.out.println("about to create a hanger.");
-    			
+    		if (isHangerPadKit) {	  			
      			if (HangarManager.createHangerPad(player, world, blockPos, facing, (HangarPadKit) blockClicked)) {
-    		
     				return EnumActionResult.SUCCESS;
     			}
+     			
+     			return EnumActionResult.FAIL;
     		}
     		
-    		if (isShipKit) {
-   
-    			//System.out.println("about to create a ship.");
-    			
-    			if (HangarManager.createShip(player, world, blockPos, facing)) {
-    	    		
+    		if (isShipKit) {  			
+    			if (HangarManager.createShip(player, world, blockPos, facing)) {	
     				return EnumActionResult.SUCCESS;
     			}
+    			
+    			return EnumActionResult.FAIL;
     		}
     	}
    	   	

@@ -37,22 +37,21 @@ public class HangarPadKit extends BaseBlock implements FactionAwareInterface {
 	
 	
 	public HangarPadKit(String unlocalizedName, HangarPadBlock hangarPadBlock, Item recipeCenterSquare) {
-
-		this(unlocalizedName, hangarPadBlock, recipeCenterSquare, new ArrayList<FactionInfo>(), 
-				new ArrayList<FactionInfo>(), false, false, HangarManager.HANGARPAD_DEFAULT_WIDTH);
+		this(unlocalizedName, hangarPadBlock, recipeCenterSquare, new ArrayList<FactionInfo>(),
+				HangarManager.HANGARPAD_DEFAULT_WIDTH);
 	}
 	
 	
 	public HangarPadKit(String unlocalizedName, HangarPadBlock hangarPadBlock, Item recipeCenterSquare,
-				List<FactionInfo> friendlyFactions, List<FactionInfo> unfriendlyFactions, boolean isUseFriendlyOnly,
-				boolean isUseUnfriendlyBanned, int hangarDiameter) {
+			List<FactionInfo> friendlyFactions, int hangarDiameter) {
 
 		super(Material.IRON, unlocalizedName);
-		
+
 		this._friendlyFactions = friendlyFactions;
-		this._unfriendlyFactions = unfriendlyFactions;
-		this._isUseFriendlyOnly = isUseFriendlyOnly;
-		this._isUseUnfriendlyBanned = isUseUnfriendlyBanned;
+		this._unfriendlyFactions = new ArrayList<FactionInfo>();
+		this._isUseFriendlyOnly = (this._friendlyFactions.size() > 0);
+		this._isUseUnfriendlyBanned = false;
+
 		this._hangarDiameter = hangarDiameter;
 		this._hangarPadBlock = hangarPadBlock;
 		this._recipeCenterSquare = recipeCenterSquare;

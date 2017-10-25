@@ -71,7 +71,6 @@ public class EntityManager {
     public static GenericEgg jawaEgg = new GenericEgg("jawaEgg", JawaEntity.class);
     public static GenericEgg wookieEgg = new GenericEgg("wookieEgg", WookieEntity.class);
     public static GenericEgg imperialProbeDroidEgg = new GenericEgg("imperialProbeDroidEgg", ImperialProbeDroidEntity.class);
-    public static GenericEgg tieFighterEgg = new GenericEgg("tieFighterEgg", TieFighterEntity.class);
     public static GenericEgg stormTrooperEgg = new GenericEgg("stormTrooperEgg", StormTrooperEntity.class);
     
     public EntityManager() {}
