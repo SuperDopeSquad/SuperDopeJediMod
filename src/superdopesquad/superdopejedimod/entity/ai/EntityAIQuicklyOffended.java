@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.ai;
 
 import javax.annotation.Nullable;
 import net.minecraft.entity.EntityCreature;

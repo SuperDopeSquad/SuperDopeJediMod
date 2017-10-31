@@ -1,8 +1,9 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.ai;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import superdopesquad.superdopejedimod.entity.BaseEntityAnimal;
 
 
 
