@@ -18,7 +18,7 @@ public class EntityAICustomWander extends EntityAIBase {
 	   setMutexBits(1);
 
 	    // DEBUG
-	    System.out.println("EntityAIWander constructor()");
+	    //System.out.println("EntityAIWander constructor()");
 	}
 	
 	
@@ -48,7 +48,7 @@ public class EntityAICustomWander extends EntityAIBase {
 	public void startExecuting()
 	{
 	   // DEBUG
-	   System.out.println("EntityAIWander startExecute()");
+	   //System.out.println("EntityAIWander startExecute()");
 	}
 	
 	
@@ -65,7 +65,7 @@ public class EntityAICustomWander extends EntityAIBase {
 	      this._entity.setAttackTarget(this._entity.getAttackingEntity()); 
 	   }
 	   // DEBUG
-	   System.out.println("EntityAIWander continueExecuting =" +shouldContinueExecuting);
+	   //System.out.println("EntityAIWander continueExecuting =" +shouldContinueExecuting);
 	   return (shouldContinueExecuting);
 	}
 }
