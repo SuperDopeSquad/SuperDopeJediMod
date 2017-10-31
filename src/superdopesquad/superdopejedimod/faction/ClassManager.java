@@ -121,10 +121,50 @@ public class ClassManager {
 	}
 	
 	
+	public boolean canPlayerUse(EntityPlayer player, FactionAwareInterface object) {
+		
+		FactionInfo factionInfo = this.getPlayerFaction(player);
+					
+		// is this object set to be only used by friendly factions, and is this object not in that friendly list?
+		if (object.IsUseFriendlyOnly() && (!(object.GetFriendlyFactions().contains(factionInfo)))) {
+			//System.out.println("failed due to lock down on IsUseFriendly and failed being included in GetFriendlyFactions.");
+			return false;
+		}
+			
+		// is this object set to be banned by unfriendly factions, and is this object in that unfriendly list?
+		if (object.IsUseUnfriendlyBanned() && (object.GetUnfriendlyFactions().contains(factionInfo))) {
+			//System.out.println("failed due to lock down on IsUseUnFriendlyBanned and failed being included in GetUnFriendlyFactions.");
+			return false;
+		}
+				
+		// Otherwise, we all good here.
+		return true;
+	}
+	
+	
 	public ArrayList<ClassInfo> getForceWieldingClasses() {
 		
 		return this._forceWieldingClasses;
 	}
+	
+	
+	public ArrayList<FactionInfo> getRepublicFactions() {
+		
+		ArrayList<FactionInfo> list = new ArrayList<FactionInfo>();
+		list.add(this.getFactionInfo(FACTION_REPUBLIC));
+		return list;
+	}
+	
+	
+	public ArrayList<FactionInfo> getImperialFactions() {
+		
+		ArrayList<FactionInfo> list = new ArrayList<FactionInfo>();
+		list.add(this.getFactionInfo(FACTION_EMPIRE));
+		return list;
+	}
+	
+	
+	
 	
 	
     public void onUpdateHandlerClassAware(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
@@ -242,7 +282,7 @@ public class ClassManager {
 	
 	public ClassInfo getPlayerClass(EntityPlayer player) {
 		
-		// We should have the Faction capability set on every player.
+		// We should have the Class capability set on every player.
 		// DEBUG CODE ONLY.  Let's verify that fact.
 		boolean hasCapability = player.hasCapability(ClassCapabilityProvider.ClassCapability, null);
 		assert(hasCapability);
@@ -262,6 +302,18 @@ public class ClassManager {
 		//System.out.println("getPlayerFaction: " + player.toString() + ", factionid:" + factionId.toString());
 		
 		return classInfo;
+	}
+	
+	
+	public FactionInfo getPlayerFaction(EntityPlayer player) {
+	
+		ClassInfo classInfo = this.getPlayerClass(player);
+		if (classInfo == null) {
+			System.out.println("ERROR! Should track this down.  ClassInfo was null for player '" + player.getName() + "'");
+			return null;
+		}
+		
+		return classInfo.getFaction();
 	}
 	
 
