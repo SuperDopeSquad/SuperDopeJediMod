@@ -180,7 +180,7 @@ public class ImperialProbeDroidModel extends ModelBase {
     {
     	// We allow the head to move left and right, but not up-and-down (this probe does not have a neck)
     	if (this.head != null) {
-    		this.head.rotateAngleY = netHeadYaw * 0.017453292F;
+    		this.head.rotateAngleY = netHeadYaw * 0.017453292F; // degrees to radians
     	}					
        
        int i = 0;
