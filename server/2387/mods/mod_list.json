@@ -1,0 +1,6 @@
+{
+    "repositoryRoot": "C:/dev/SuperDopeJediMod-mc/server/libraries",
+    "modRef": [
+        "net.minecraftforge:MercuriusUpdater:1.12"
+    ]
+}

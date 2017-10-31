@@ -1,0 +1,4 @@
+Creative Server:
+		192.169.44.18
+Survival Server:
+		192.169.44.8:25609
