@@ -39,6 +39,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.entity.ai.EntityAIAttackMeleeFactionAware;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.faction.FactionInfo;

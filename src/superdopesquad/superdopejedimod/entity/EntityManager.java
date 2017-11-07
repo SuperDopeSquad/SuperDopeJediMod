@@ -15,6 +15,7 @@ import superdopesquad.superdopejedimod.MandalorianIronIngot;
 import superdopesquad.superdopejedimod.SuperDopeObject;
 import superdopesquad.superdopejedimod.entity.droid.DroidKit;
 import superdopesquad.superdopejedimod.entity.droid.DroidParts;
+import superdopesquad.superdopejedimod.entity.droid.ImperialProbeDroidEntity;
 import superdopesquad.superdopejedimod.entity.droid.RepublicHunterDroidEntity;
 import superdopesquad.superdopejedimod.entity.droid.RepublicHunterDroidHead;
 import superdopesquad.superdopejedimod.entity.droid.RepublicPatrolDroidEntity;

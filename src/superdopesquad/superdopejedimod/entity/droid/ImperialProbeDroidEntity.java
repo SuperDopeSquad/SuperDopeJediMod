@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.droid;
 
 
 import java.util.Arrays;
@@ -55,6 +55,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.entity.BaseEntityAnimal;
+import superdopesquad.superdopejedimod.entity.EntityRenderFactory;
+import superdopesquad.superdopejedimod.entity.ai.EntityAIEnemyFactionDetector;
+import superdopesquad.superdopejedimod.entity.ai.EntityAIFollowPathMarkers;
+import superdopesquad.superdopejedimod.entity.ai.EntityAIHoldAndShoot;
+import superdopesquad.superdopejedimod.entity.ai.EntityAIQuicklyOffended;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 import superdopesquad.superdopejedimod.faction.ClassManager;

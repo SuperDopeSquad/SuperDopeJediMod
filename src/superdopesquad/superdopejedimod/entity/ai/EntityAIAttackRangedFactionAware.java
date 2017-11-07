@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.ai;
 
 
 import net.minecraft.entity.EntityLiving;
