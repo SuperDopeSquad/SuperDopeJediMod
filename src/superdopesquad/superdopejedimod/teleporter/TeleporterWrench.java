@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -20,6 +21,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.BaseItem;
 import superdopesquad.superdopejedimod.GeometryUtil;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.Utilities;
 
 	
 public class TeleporterWrench extends BaseItem {
@@ -40,7 +42,9 @@ public class TeleporterWrench extends BaseItem {
 		ItemStack itemStackTeleporterPartsMany = new ItemStack(SuperDopeJediMod.teleporterManager.teleporterParts, 3);
 		
     	GameRegistry.addShapedRecipe(this.getRegistryName(), null, itemStackThis, " x ", " x ", " x ", 'x', itemStackTeleporterParts);	
-    	GameRegistry.addShapedRecipe(this.getRegistryName(), null, itemStackTeleporterPartsMany, "x", 'x', itemStackThis);	
+    	
+      	// The recipe to recycle this item and return it's ingredients.
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameRecycler(this), null, itemStackTeleporterPartsMany, "x", 'x', itemStackThis);	
 	}
 
 	

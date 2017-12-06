@@ -24,15 +24,12 @@ public StormTrooperArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEqui
 		ItemStack chromateStack = new ItemStack(SuperDopeJediMod.chromateIngot);
 		
 		// Helmet.
-    	GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(SuperDopeJediMod.stormTrooperHelmet), "xxx", "y y", 'x', quartzStack, 'y', chromateStack);		
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameHelmet(this), null, new ItemStack(SuperDopeJediMod.stormTrooperHelmet), "xxx", "y y", 'x', quartzStack, 'y', chromateStack);		
 		// Chest.
-    	GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(SuperDopeJediMod.stormTrooperChestplate), "x x", "yxy", "xyx", 'x', quartzStack, 'y', chromateStack);
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameChestplate(this), null, new ItemStack(SuperDopeJediMod.stormTrooperChestplate), "x x", "yxy", "xyx", 'x', quartzStack, 'y', chromateStack);
     	// Leggings.
-    	GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(SuperDopeJediMod.stormTrooperLeggings), "yxy", "x x", "y y", 'x', quartzStack, 'y', chromateStack);
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameLeggings(this), null, new ItemStack(SuperDopeJediMod.stormTrooperLeggings), "yxy", "x x", "y y", 'x', quartzStack, 'y', chromateStack);
     	// Boots.
-    	GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(SuperDopeJediMod.stormTrooperBoots), "x x", "y y", 'x', quartzStack, 'y', chromateStack);
-    	// Shield.
-    	//GameRegistry.addRecipe(new ItemStack(SuperDopeJediMod.mandalorianIronShield), "xxx", "xxx", " x ", 'x', mandalorianIronIngotStack);
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameBoots(this), null, new ItemStack(SuperDopeJediMod.stormTrooperBoots), "x x", "y y", 'x', quartzStack, 'y', chromateStack);
 	}
-	
 }

@@ -18,46 +18,6 @@ public class ChromateShard extends BaseItem{
 	}
 
 	public void registerRecipe() {
-		
-//		// Recipe for creating a Chromate Shard.
-//		ItemStack compressedMetalBitsStack = new ItemStack(SuperDopeJediMod.compressedMetalBits);
-//		
-//		GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(this, 1), 
-//				"***", 
-//				"*A*", 
-//				"*A*", 
-//				'A', compressedMetalBitsStack);
-//			
-//		GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(this, 1), 
-//				"***", 
-//				"**A", 
-//				"**A", 
-//				'A', compressedMetalBitsStack);
-//		
-//		GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(this, 1), 
-//				"*A*", 
-//				"*A*", 
-//				"***", 
-//				'A', compressedMetalBitsStack);
-//		
-//		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this, 1), 
-//				"**A", 
-//				"**A", 
-//				"***", 
-//				'A', compressedMetalBitsStack);
-//		
-//		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this, 1), 
-//				"A**", 
-//				"A**", 
-//				"***", 
-//				'A', compressedMetalBitsStack);
-//		
-//		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this, 1), 
-//				"***", 
-//				"A**", 
-//				"A**", 
-//				'A', compressedMetalBitsStack);
-//		
 	}	
 	
 }
