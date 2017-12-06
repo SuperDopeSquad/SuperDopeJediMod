@@ -32,11 +32,11 @@ public class QuadaniumSteel extends BaseBlock {
 		ItemStack quadaniumSteelIngotStackSingle = new ItemStack(SuperDopeJediMod.quadaniumSteelIngot);
 		ItemStack quadaniumSteelIngotStackNine = new ItemStack(SuperDopeJediMod.quadaniumSteelIngot, 9);
 		
-		// 9 MandalorianIronIngots will create 1 MandalorianIron
+		// 9 QuadaniumSteelIngots will create 1 QuadaniumSteel
 		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "xxx", "xxx", "xxx", 'x', quadaniumSteelIngotStackSingle);
 	
 		// 1 QuadaniumSteel will create 9 QuadaniumSteelIngots.
-		GameRegistry.addShapelessRecipe(this.getRegistryName(), null, quadaniumSteelIngotStackNine, Ingredient.fromStacks(new ItemStack(this)));
+		GameRegistry.addShapelessRecipe(Utilities.GetRegistryNameRecycler(this), null, quadaniumSteelIngotStackNine, Ingredient.fromStacks(new ItemStack(this)));
 			
 		// Smelting a QuadaniumSteelOre will create 1 QuadaniumSteelIngot
 		GameRegistry.addSmelting(SuperDopeJediMod.quadaniumSteelOre, quadaniumSteelIngotStackSingle, 1.0F);		
@@ -44,6 +44,6 @@ public class QuadaniumSteel extends BaseBlock {
 		// 8 Iron Ingots and an Ink Sac will create 9 Quadanium Steel Ingots.
     	ItemStack inkSacStack = new ItemStack(Items.DYE, 1, 0);
     	ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
-    	GameRegistry.addShapedRecipe(this.getRegistryName(), null, quadaniumSteelIngotStackNine, "xxx", "xyx", "xxx", 'x', ironIngotStack, 'y', inkSacStack);
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameBackdoor(this), null, quadaniumSteelIngotStackNine, "xxx", "xyx", "xxx", 'x', ironIngotStack, 'y', inkSacStack);
 	}
 }

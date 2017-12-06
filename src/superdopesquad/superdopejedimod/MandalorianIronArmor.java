@@ -29,12 +29,12 @@ public class MandalorianIronArmor extends BaseArmor {
 		ItemStack mandalorianIronIngotStack = new ItemStack(SuperDopeJediMod.mandalorianIronIngot);
 		
 		// Helmet.
-    	GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(SuperDopeJediMod.mandalorianIronHelmet), "xxx", "x x", 'x', mandalorianIronIngotStack);		
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameHelmet(this), null, new ItemStack(SuperDopeJediMod.mandalorianIronHelmet), "xxx", "x x", 'x', mandalorianIronIngotStack);		
 		// Chest.
-    	GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(SuperDopeJediMod.mandalorianIronChestplate), "x x", "xxx", "xxx", 'x', mandalorianIronIngotStack);
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameChestplate(this), null, new ItemStack(SuperDopeJediMod.mandalorianIronChestplate), "x x", "xxx", "xxx", 'x', mandalorianIronIngotStack);
     	// Leggings.
-    	GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(SuperDopeJediMod.mandalorianIronLeggings), "xxx", "x x", "x x", 'x', mandalorianIronIngotStack);
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameLeggings(this), null, new ItemStack(SuperDopeJediMod.mandalorianIronLeggings), "xxx", "x x", "x x", 'x', mandalorianIronIngotStack);
     	// Boots.
-    	GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(SuperDopeJediMod.mandalorianIronBoots), "x x", "x x", 'x', mandalorianIronIngotStack);
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameBoots(this), null, new ItemStack(SuperDopeJediMod.mandalorianIronBoots), "x x", "x x", 'x', mandalorianIronIngotStack);
 	}	
 }

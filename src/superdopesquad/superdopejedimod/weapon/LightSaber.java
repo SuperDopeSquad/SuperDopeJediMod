@@ -13,6 +13,7 @@ import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.Utilities;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
 
 public class LightSaber extends BaseMeleeWeapon {
@@ -31,15 +32,6 @@ public class LightSaber extends BaseMeleeWeapon {
 		this.setCreativeTab(CreativeTabs.COMBAT);
 		
 		this.isRepairable();
-		
-		
-		
-		
-		//this.setMaxStackSize(64);
-		//this.setCreativeTab(CreativeTabs.tabMisc);
-		//this.setUnlocalizedName(unlocalizedName);
-		
-		
 	}
 	
 	
@@ -52,73 +44,72 @@ public class LightSaber extends BaseMeleeWeapon {
 			ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
     		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     		ItemStack stoneButtonStack = new ItemStack(Blocks.STONE_BUTTON);
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "x", "y", "z", 'x', redPowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_red"), null, new ItemStack(this), "x", "y", "z", 'x', redPowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
     		
 		} 
 		
-		if (this.color == "Blue") {
+		else if (this.color == "Blue") {
 			
 			// Recipe for creating a blueLightSaber.
 			ItemStack bluePowerCrystalStack = new ItemStack(SuperDopeJediMod.bluePowerCrystal);
     		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     		ItemStack stoneButtonStack = new ItemStack(Blocks.STONE_BUTTON);
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "x", "y", "z", 'x', bluePowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_blue"), null, new ItemStack(this), "x", "y", "z", 'x', bluePowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
 		}
 		
-		if (this.color == "Green") {
+		else if (this.color == "Green") {
 			
 			// Recipe for creating a greenLightSaber.
 			ItemStack greenPowerCrystalStack = new ItemStack(SuperDopeJediMod.greenPowerCrystal);
     		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     		ItemStack stoneButtonStack = new ItemStack(Blocks.STONE_BUTTON);
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "x", "y", "z", 'x', greenPowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_green"), null, new ItemStack(this), "x", "y", "z", 'x', greenPowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
     		
 		}
 		
-		if (this.color == "Purple") {
+		else if (this.color == "Purple") {
 			
 			// Recipe for creating a purpleLightSaber.
 			ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
     		ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
     		ItemStack stoneButtonStack = new ItemStack(Blocks.STONE_BUTTON);
-    		GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(this), "x", "y", "z", 'x', purplePowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_purple"), null, new ItemStack(this), "x", "y", "z", 'x', purplePowerCrystalStack, 'y', stoneButtonStack, 'z', ironIngotStack);
     		
 		} 
-		if (this.color == "Red") {
-			
-			// Recipe for creating a new redLightSaber.
-			ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
-    		
-    		ItemStack lightSaberRedStack = new ItemStack(SuperDopeJediMod.lightSaberRed);
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "xxx", "xyx", "xxx", 'x', redstoneStack, 'y', lightSaberRedStack);
-		} 
-		if (this.color == "Blue") {
-			
-			// Recipe for creating a new blueLightSaber.
-			ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
-    		
-    		ItemStack lightSaberBlueStack = new ItemStack(SuperDopeJediMod.lightSaberBlue);
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "xxx", "xyx", "xxx", 'x', redstoneStack, 'y', lightSaberBlueStack);
-		} 
-		if (this.color == "Green") {
-	
-			// Recipe for creating a new greenLightSaber.
-			ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
-    		
-    		ItemStack lightSaberGreenStack = new ItemStack(SuperDopeJediMod.lightSaberGreen);
-    		GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(this), "xxx", "xyx", "xxx", 'x', redstoneStack, 'y', lightSaberGreenStack);
-		} 
-		if (this.color == "Purple") {
-			
-			// Recipe for creating a new PurpleLightSaber.
-			ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
-    		
-    		ItemStack lightSaberPurpleStack = new ItemStack(SuperDopeJediMod.lightSaberPurple);
-    		GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(this), "xxx", "xyx", "xxx", 'x', redstoneStack, 'y', lightSaberPurpleStack);
-    		
-		} 	
 		
-		
+//		if (this.color == "Red") {
+//			
+//			// Recipe for creating a new redLightSaber.
+//			ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
+//    		
+//    		ItemStack lightSaberRedStack = new ItemStack(SuperDopeJediMod.lightSaberRed);
+//    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "xxx", "xyx", "xxx", 'x', redstoneStack, 'y', lightSaberRedStack);
+//		} 
+//		if (this.color == "Blue") {
+//			
+//			// Recipe for creating a new blueLightSaber.
+//			ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
+//    		
+//    		ItemStack lightSaberBlueStack = new ItemStack(SuperDopeJediMod.lightSaberBlue);
+//    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "xxx", "xyx", "xxx", 'x', redstoneStack, 'y', lightSaberBlueStack);
+//		} 
+//		if (this.color == "Green") {
+//	
+//			// Recipe for creating a new greenLightSaber.
+//			ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
+//    		
+//    		ItemStack lightSaberGreenStack = new ItemStack(SuperDopeJediMod.lightSaberGreen);
+//    		GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(this), "xxx", "xyx", "xxx", 'x', redstoneStack, 'y', lightSaberGreenStack);
+//		} 
+//		if (this.color == "Purple") {
+//			
+//			// Recipe for creating a new PurpleLightSaber.
+//			ItemStack redstoneStack = new ItemStack(Items.REDSTONE);
+//    		
+//    		ItemStack lightSaberPurpleStack = new ItemStack(SuperDopeJediMod.lightSaberPurple);
+//    		GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(this), "xxx", "xyx", "xxx", 'x', redstoneStack, 'y', lightSaberPurpleStack);
+//    		
+//		} 		
 	}
 	
 	@Override

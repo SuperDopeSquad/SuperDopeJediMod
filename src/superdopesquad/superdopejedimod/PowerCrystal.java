@@ -40,11 +40,9 @@ public class PowerCrystal extends BaseItem {
     		ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
     		ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
 
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', bluePowerCrystalStack, 'y', redstoneStack);
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', greenPowerCrystalStack, 'y', redstoneStack);
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', purplePowerCrystalStack, 'y', redstoneStack);
-
-    		
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_red1"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', bluePowerCrystalStack, 'y', redstoneStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_red2"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', greenPowerCrystalStack, 'y', redstoneStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_red3"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', purplePowerCrystalStack, 'y', redstoneStack);	
 		} 
 	
 		if (this.color == "Blue") {
@@ -59,13 +57,10 @@ public class PowerCrystal extends BaseItem {
     		ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
     		ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
 
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', redPowerCrystalStack, 'y', diamondStack);
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', greenPowerCrystalStack, 'y', diamondStack);
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', purplePowerCrystalStack, 'y', diamondStack);
-
-    		
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_blue1"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', redPowerCrystalStack, 'y', diamondStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_blue2"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', greenPowerCrystalStack, 'y', diamondStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_blue3"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', purplePowerCrystalStack, 'y', diamondStack);
 		} 
-	
 		
 		if (this.color == "Green") {
 			
@@ -79,13 +74,10 @@ public class PowerCrystal extends BaseItem {
     		ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
     		ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
 
-    		GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', bluePowerCrystalStack, 'y', slimeballStack);
-    		GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', redPowerCrystalStack, 'y', slimeballStack);
-    		GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', purplePowerCrystalStack, 'y', slimeballStack);
-
-    		
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_green1"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', bluePowerCrystalStack, 'y', slimeballStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_green2"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', redPowerCrystalStack, 'y', slimeballStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_green3"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', purplePowerCrystalStack, 'y', slimeballStack);
 		} 
-		
 		
 		if (this.color == "Purple") {
 			
@@ -99,13 +91,9 @@ public class PowerCrystal extends BaseItem {
     		ItemStack purplePowerCrystalStack = new ItemStack(SuperDopeJediMod.purplePowerCrystal);
     		ItemStack redPowerCrystalStack = new ItemStack(SuperDopeJediMod.redPowerCrystal);
 
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', bluePowerCrystalStack, 'y', bookStack);
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', greenPowerCrystalStack, 'y', bookStack);
-    		GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', redPowerCrystalStack, 'y', bookStack);
-
-    		
-		} 
-		
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_purple1"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', bluePowerCrystalStack, 'y', bookStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_purple2"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', greenPowerCrystalStack, 'y', bookStack);
+    		GameRegistry.addShapedRecipe(Utilities.GetRegistryNameModified(this, "_purple3"), null, new ItemStack(this), "yyy", "yxy", "yyy", 'x', redPowerCrystalStack, 'y', bookStack);    		
+		} 	
 	}
-
 }
