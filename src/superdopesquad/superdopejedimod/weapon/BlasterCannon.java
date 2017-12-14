@@ -3,6 +3,7 @@ package superdopesquad.superdopejedimod.weapon;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.Utilities;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 
 public class BlasterCannon extends BaseBlaster {
@@ -29,6 +30,6 @@ public class BlasterCannon extends BaseBlaster {
     	GameRegistry.addShapedRecipe(getRegistryName(), null, itemStackMe, "xxx", "xxx", "x  ", 'x', itemStackBlasterPartsOne);
     	
     	// This weapon can be broken down into many Blaster Parts.
-    	GameRegistry.addShapedRecipe(getRegistryName(), null, itemStackBlasterPartsMany, "x", 'x', itemStackMe);
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameRecycler(this), null, itemStackBlasterPartsMany, "x", 'x', itemStackMe);
 	}
 }

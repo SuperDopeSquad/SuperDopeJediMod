@@ -23,13 +23,13 @@ public class QuadaniumSteelArmor extends BaseArmor {
 		ItemStack quadaniumSteelIngotStack = new ItemStack(SuperDopeJediMod.quadaniumSteelIngot);
 		
 		// Helmet.
-    	GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(SuperDopeJediMod.quadaniumSteelHelmet), "xxx", "x x", 'x', quadaniumSteelIngotStack);		
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameHelmet(this), null, new ItemStack(SuperDopeJediMod.quadaniumSteelHelmet), "xxx", "x x", 'x', quadaniumSteelIngotStack);		
 		// Chest.
-    	GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(SuperDopeJediMod.quadaniumSteelChestplate), "x x", "xxx", "xxx", 'x', quadaniumSteelIngotStack);
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameChestplate(this), null, new ItemStack(SuperDopeJediMod.quadaniumSteelChestplate), "x x", "xxx", "xxx", 'x', quadaniumSteelIngotStack);
     	// Leggings.
-    	GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(SuperDopeJediMod.quadaniumSteelLeggings), "xxx", "x x", "x x", 'x', quadaniumSteelIngotStack);
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameLeggings(this), null, new ItemStack(SuperDopeJediMod.quadaniumSteelLeggings), "xxx", "x x", "x x", 'x', quadaniumSteelIngotStack);
     	// Boots.
-    	GameRegistry.addShapedRecipe(getRegistryName(), null, new ItemStack(SuperDopeJediMod.quadaniumSteelBoots), "x x", "x x", 'x', quadaniumSteelIngotStack);
+    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameBoots(this), null, new ItemStack(SuperDopeJediMod.quadaniumSteelBoots), "x x", "x x", 'x', quadaniumSteelIngotStack);
 	}
 }
 	
