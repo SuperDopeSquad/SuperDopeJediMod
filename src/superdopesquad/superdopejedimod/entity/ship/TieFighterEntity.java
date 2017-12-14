@@ -488,4 +488,10 @@ public class TieFighterEntity extends BaseEntityAnimal {
 	protected boolean detectOnGround() {
 		return !this.world.isAirBlock(this.getPosition().down());
 	}
+	
+	
+	@Override // from EntityLiving
+	protected boolean canDespawn() {
+		return false;
+	}
 }
