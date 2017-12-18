@@ -40,7 +40,8 @@ public class TinkerTable extends BaseBlockContainer {
 		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 		
 		// MC: I added this.
-		//this.isBlockContainer = true;
+		this.isBlockContainer = true;
+	    GameRegistry.registerTileEntity(TinkerTableTileEntity.class, "tinkerTableTileEntity");
 	}
 
 	public Item getItemDropped(int metadata, Random random, int fortune) {
@@ -153,6 +154,11 @@ public class TinkerTable extends BaseBlockContainer {
 			//playerIn.openGui(SuperDopeJediMod.instance, GuiHandler.GENERATOR_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return new TinkerTableTileEntity();
 	}
 	
 	

@@ -77,15 +77,15 @@ import java.util.Optional;
 /**
  * No AI: only moves when there is a passenger.
  */
-public class XWingFighterEntity extends BaseEntityShip {	
+public class ImperialShuttleEntity extends BaseEntityShip {	
 	
 	 private static final float DEGREES2RADIANS = 0.017453292F;
 	 
 	/**
 	 * constructor
 	 */
-	public XWingFighterEntity(World worldIn) {
-		super(worldIn, "XWingFighterEntity", "X-Wing Fighter");
+	public ImperialShuttleEntity(World worldIn) {
+		super(worldIn, "imperialShuttleEntity", "imperialShuttle");
 		
 		// This sets the bounding box size, not the actual model that you see rendered.
 		this.setSize(0.6F, 2.0F);
@@ -106,8 +106,8 @@ public class XWingFighterEntity extends BaseEntityShip {
 	 */
 	@Override // from SuperDopeEntity
 	public void registerEntityRender() {
-		Class renderBaseClass = TieFighterRender.class;
-		Class modelBaseClass = TieFighterModel.class;
+		Class renderBaseClass = ImperialShuttleRender.class;
+		Class modelBaseClass = ImperialShuttleModel.class;
 		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, this.shadowSize);
 		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}

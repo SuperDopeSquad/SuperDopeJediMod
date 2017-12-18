@@ -114,6 +114,7 @@ tile.testShipKit.name=Test Ship Kit
 tile.xWingFighterKit.name=X-Wing Fighter Kit
 tile.tieFighterKit.name=Tie Fighter Kit
 tile.shuttleKit.name=Shuttle Kit
+tile.imperialShuttleKit.name=Imperial Shuttle Kit
 tile.hangarPadBlock.name=Hangar Pad Block
 tile.hangarPadKit.name=Hangar Pad Kit
 tile.republicHangarPadBlock.name=Republic Hangar Pad Block
