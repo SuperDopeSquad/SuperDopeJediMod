@@ -53,7 +53,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.entity.BaseEntityAnimal;
-import superdopesquad.superdopejedimod.entity.EntityAIAttackRangedFactionAware;
+import superdopesquad.superdopejedimod.entity.ai.EntityAIAttackRangedFactionAware;
 import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 
 

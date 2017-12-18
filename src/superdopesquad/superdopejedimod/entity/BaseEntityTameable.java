@@ -127,7 +127,8 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 		ResourceLocation resourceLocation = new ResourceLocation(this.getFullName());
 		//System.out.println("registerObject's name: " + this.getName());
 		//System.out.println("resourceLocation: " + resourceLocation.toString());
-	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
+	  	EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), 
+	  			SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
     }
 	
 	
@@ -280,8 +281,8 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 		    {
 		        //return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere();
 				
-				//return ((this.isValidLightLevel()) && (super.getCanSpawnHere()));
-				return super.getCanSpawnHere();
+				return ((this.isValidLightLevel()) && (super.getCanSpawnHere()));
+				//return super.getCanSpawnHere();
 		    }
 			
 			
@@ -307,4 +308,32 @@ public abstract class BaseEntityTameable extends EntityTameable implements Super
 		
 		return true;
 	}
+	
+	// Copied from EntityMob.
+	/**
+     * Checks to make sure the light is not too bright where the mob is spawning
+     */
+    protected boolean isValidLightLevel()
+    {
+        BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
+
+        if (this.world.getLightFor(EnumSkyBlock.SKY, blockpos) > this.rand.nextInt(32))
+        {
+            return false;
+        }
+        else
+        {
+            int i = this.world.getLightFromNeighbors(blockpos);
+
+            if (this.world.isThundering())
+            {
+                int j = this.world.getSkylightSubtracted();
+                this.world.setSkylightSubtracted(10);
+                i = this.world.getLightFromNeighbors(blockpos);
+                this.world.setSkylightSubtracted(j);
+            }
+
+            return i <= this.rand.nextInt(8);
+        }
+    }
 }

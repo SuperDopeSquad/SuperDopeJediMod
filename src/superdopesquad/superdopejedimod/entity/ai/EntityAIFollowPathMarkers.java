@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.ai;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class EntityAIFollowPathMarkers extends EntityAIBase
 	
 	protected static final int MAX_WAIT_TIME = 1000;
 	protected static final float DIRECTED_SCAN_SPREAD_RATIO = 0.5F;
-	protected static final boolean DebugScan = true;
+	protected static final boolean DebugScan = false;
 	
 	private final EntityLiving 		entityHost;
     private final double 			speed;
