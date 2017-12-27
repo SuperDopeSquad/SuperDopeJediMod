@@ -51,7 +51,7 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
 	    
 		super.init(e);
 		
-		System.out.println("I'm on the client!  init event.");
+		//System.out.println("I'm on the client!  init event.");
 		  
     	// Iterate through all our custom objects, and see if we have any models to render.
         for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
@@ -81,7 +81,7 @@ public class SuperDopeClientProxy extends SuperDopeCommonProxy {
         
     	super.postInit(e);
         
-     	System.out.println("I'm in the client proxy! post init event.");
+     	//System.out.println("I'm in the client proxy! post init event.");
     }
     
     

@@ -21,7 +21,7 @@ public class SuperDopeServerProxy extends SuperDopeCommonProxy {
 		
 		super.init(e);
 		
-		System.out.println("I'm on the server!  init event.");
+		//System.out.println("I'm on the server!  init event.");
 	}
 
 	
@@ -30,6 +30,6 @@ public class SuperDopeServerProxy extends SuperDopeCommonProxy {
         
     	super.postInit(e);
         
-     	System.out.println("I'm in the server proxy! post init event.");
+     	//System.out.println("I'm in the server proxy! post init event.");
     }
 }
