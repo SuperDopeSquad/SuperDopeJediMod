@@ -26,6 +26,7 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.entity.droid.DroidKit;
 import superdopesquad.superdopejedimod.entity.droid.RepublicBaseDroidEntity;
+import superdopesquad.superdopejedimod.entity.ship.ImperialShuttleEntity;
 import superdopesquad.superdopejedimod.entity.ship.ShuttleEntity;
 import superdopesquad.superdopejedimod.entity.ship.TieFighterEntity;
 import superdopesquad.superdopejedimod.entity.ship.XWingFighterEntity;
@@ -66,7 +67,8 @@ public class HangarManager {
 	public static ShipKit shuttleKit = new ShipKit("shuttleKit", ShuttleEntity.class, Items.COAL);
 	public static ShipKit tieFighterKit = new ShipKit("tieFighterKit", TieFighterEntity.class, Items.FLINT, SuperDopeJediMod.classManager.getImperialFactions());
 	public static ShipKit xWingFighterKit = new ShipKit("xWingFighterKit", XWingFighterEntity.class, Items.WHEAT, SuperDopeJediMod.classManager.getRepublicFactions());
-	  
+	public static ShipKit imperialShuttleKit = new ShipKit("imperialShuttleKit", ImperialShuttleEntity.class, Items.APPLE, SuperDopeJediMod.classManager.getImperialFactions());
+
 	
 	public HangarManager() {}
 	

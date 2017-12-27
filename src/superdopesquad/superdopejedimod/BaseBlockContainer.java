@@ -63,10 +63,10 @@ public abstract class BaseBlockContainer extends BlockContainer implements Super
 	}
 	
 	
-	  @Override
-	    public TileEntity createNewTileEntity(World worldIn, int meta) {
-	        return new TinkerTableTileEntity();
-	    }
+//	  @Override
+//	    public TileEntity createNewTileEntity(World worldIn, int meta) {
+//	        return new TinkerTableTileEntity();
+//	    }
 	
 	
 	@Override

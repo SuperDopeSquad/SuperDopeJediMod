@@ -77,7 +77,7 @@ import java.util.Optional;
 /**
  * No AI: only moves when there is a passenger.
  */
-public class ShuttleEntity extends BaseEntityAnimal {	
+public class ShuttleEntity extends BaseEntityShip {	
 	
 	 private static final float DEGREES2RADIANS = 0.017453292F;
 	 

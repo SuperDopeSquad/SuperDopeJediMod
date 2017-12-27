@@ -77,7 +77,7 @@ import java.util.Optional;
 /**
  * No AI: only moves when there is a passenger.
  */
-public class TieFighterEntity extends BaseEntityAnimal {	
+public class TieFighterEntity extends BaseEntityShip {	
 	
 	// Constants
 	private static final float DEGREES2RADIANS = 0.017453292F;
@@ -490,8 +490,8 @@ public class TieFighterEntity extends BaseEntityAnimal {
 	}
 	
 	
-	@Override // from EntityLiving
-	protected boolean canDespawn() {
-		return false;
-	}
+//	@Override // from EntityLiving
+//	protected boolean canDespawn() {
+//		return false;
+//	}
 }
