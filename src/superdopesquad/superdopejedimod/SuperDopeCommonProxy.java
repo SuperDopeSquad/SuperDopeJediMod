@@ -28,7 +28,7 @@ public class SuperDopeCommonProxy {
 	
     public void init(FMLInitializationEvent e) {
     	
-    	System.out.println("I'm in the common proxy! init event.");
+    	//System.out.println("I'm in the common proxy! init event.");
     	
     	NetworkRegistry.INSTANCE.registerGuiHandler(SuperDopeJediMod.instance, new GuiHandler());  
     }

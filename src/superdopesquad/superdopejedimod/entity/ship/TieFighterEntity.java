@@ -100,7 +100,7 @@ public class TieFighterEntity extends BaseEntityShip {
 	 * constructor
 	 */
 	public TieFighterEntity(World worldIn) {
-		super(worldIn, "tieFighterEntity", "Tie Fighter");
+		super(worldIn, "tieFighterEntity", "Tie Fighter", TieFighterRender.class, TieFighterModel.class);
 		vehicleId = getNextId();
 		
 		// This sets the bounding box size, not the actual model that you see rendered.
@@ -124,18 +124,6 @@ public class TieFighterEntity extends BaseEntityShip {
 	 */
 	protected static synchronized int getNextId() {
 		return ++s_vehicleId;
-	}
-	
-	
-	/**
-	 * Called during startup, so the engine knows about our custom rendering (drawing) code.
-	 */
-	@Override // from SuperDopeEntity
-	public void registerEntityRender() {
-		Class renderBaseClass = TieFighterRender.class;
-		Class modelBaseClass = TieFighterModel.class;
-		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, this.shadowSize);
-		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
 	}
 	
 	
@@ -271,17 +259,6 @@ public class TieFighterEntity extends BaseEntityShip {
 	}
 	
 	
-	/**
-	 * Called when the mob's health reaches 0. Not currently doing anything, but perhaps in the future 
-	 * this ship should explode in a firey explosion.
-	 */
-	@Override // from EntityLivingBase
-	public void onDeath(DamageSource cause) {
-		 // TODO: Explode!
-		// System.out.println("TF (" + vehicleId + "): onDeath");
-		super.onDeath(cause);
-	}
-	
 	
 	/**
 	 * Called by onLivingUpdate() to translate the direction controls (moveForward, moveStrafing, moveVertical) 
@@ -367,131 +344,4 @@ public class TieFighterEntity extends BaseEntityShip {
 	public double getYOffset() {
 		return 0.0D;
 	}
-	
-	/**
-	 *  Copied from EntityFlying; do we need this?
-	 */
-	@Override // from EntityLivingBase
-	public boolean isOnLadder() {
-		return false;
-	}
-	
-	@Override // EntityLivingBase
-	protected void applyEntityAttributes() {
-	   super.applyEntityAttributes(); 
-
-	    // standard attributes registered to EntityLivingBase
-	   getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
-	   getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);	
-	   getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
-	   getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
-
-	   // need to register any additional attributes
-	   getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-	   getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
-	}
-	
-	
-	/*
-	 * PASSENGER STUFF: todo: some of this code could go to a generic vehicle class.
-	 */
-	
-    /**
-     * For vehicles, the first passenger is generally considered the controller and "drives" the vehicle. For example,
-     * Pigs, Horses, and Boats are generally "steered" by the controlling passenger.
-     */
-	@Override // from Entity
-    @Nullable
-    public Entity getControllingPassenger() {
-        List<Entity> list = this.getPassengers();
-        if (list.isEmpty()) {
-        	return null;
-        }
-        
-        return (Entity) list.get(0);
-    }
-	
-	@Nullable
-    public EntityLivingBase getControllingLivingPassenger() {
-	    Entity driver = getControllingPassenger();   
-		return (driver instanceof EntityLivingBase) ? (EntityLivingBase) driver : null;
-    }
-	
-	
-	/**
-	 * TODO: only empire can drive this thing.
-	 */
-	@Override // for Entity
-    public boolean canPassengerSteer() {
-		EntityLivingBase entity = this.getControllingLivingPassenger();
-        return entity instanceof EntityPlayer ? ((EntityPlayer)entity).isUser() : !this.world.isRemote;
-    }
-	
-    /**
-     * Returns true if all the conditions for steering the entity are met. For pigs, this is true if it is being ridden
-     * by a player and the player is holding a carrot-on-a-stick
-     */
-	@Override // EntityLiving
-    public boolean canBeSteered() {
-        return canPassengerSteer();
-    }
-	
-	/**
-     * If the rider should be dismounted from the entity when the entity goes under water
-     *
-     * @param rider The entity that is riding
-     * @return if the entity should be dismounted when under water
-     */
-	@Override // for Entity
-    public boolean shouldDismountInWater(Entity rider) {
-        return false;
-    }
-	
-	@Override // for Entity
-    protected boolean canFitPassenger(Entity passenger) {
-        return this.getPassengers().size() < 1;
-    }
-	
-    /**
-     * If a rider of this entity can interact with this entity. Should return true on the
-     * ridden entity if so.
-     *
-     * @return if the entity can be interacted with from a rider
-     */
-	@Override
-    public boolean canRiderInteract() {
-        return false;
-    }
-
-	/**
-	 *  do we need this?
-	 */
-	@Override // from Entity
-	public void fall(float distance, float damageMultiplier) {
-		// System.out.println("TF (" + vehicleId + "): FALL, DISTANCE=" + distance + ", damage=" + damageMultiplier);
-    }
-
-	/**
-	 * do we need this?
-	 */
-	@Override // from Entity
-    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
-		//System.out.println("TF (" + vehicleId + "): updateFallState, y=" + y + ", onGroundIn=" + onGroundIn + ", pos=" + pos +
-		//		", motion=" + this.motionX + ", " + this.motionY + ", " + this.motionZ);
-		
-    }
-	
-	/**
-	 * are we on the ground?
-	 * todo: move to base class
-	 */
-	protected boolean detectOnGround() {
-		return !this.world.isAirBlock(this.getPosition().down());
-	}
-	
-	
-//	@Override // from EntityLiving
-//	protected boolean canDespawn() {
-//		return false;
-//	}
 }
